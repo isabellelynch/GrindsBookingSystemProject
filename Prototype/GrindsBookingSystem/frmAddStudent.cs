@@ -16,7 +16,6 @@ namespace GrindsBookingSystem
 {
     public partial class frmAddStudent : Form
     {
-        String validMessage = "";
         public frmAddStudent()
         {
             InitializeComponent();
@@ -32,7 +31,7 @@ namespace GrindsBookingSystem
             if (result == DialogResult.Yes)
             {
                 Student s = new Student(Student.GetNextStudentID(), txtStudentName.Text, txtStudentSurname.Text, txtStudentEmail.Text, txtStudentPhone.Text);
-                MessageBox.Show(s.toString());
+
                 s.AddStudent();
 
                 MessageBox.Show("Student " + txtStudentName.Text + txtStudentSurname.Text + "has been succesfully added to the system.",
@@ -75,7 +74,7 @@ namespace GrindsBookingSystem
             txtStudentSurname.Clear();
             txtStudentEmail.Clear();
             txtStudentPhone.Clear();
-            validMessage = "";
+
         }
         public void goHome()
         {
