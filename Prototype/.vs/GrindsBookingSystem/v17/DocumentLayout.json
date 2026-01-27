@@ -1,0 +1,142 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\StudentIsabelleLynch\\source\\repos\\isabellelynch\\GrindsBookingSystemProject\\Prototype\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{71D485C1-C4F0-4179-AB41-7576201A6579}|GrindsBookingSystem\\GrindsBookingSystem.csproj|C:\\Users\\StudentIsabelleLynch\\source\\repos\\isabellelynch\\GrindsBookingSystemProject\\Prototype\\grindsbookingsystem\\frmaddstudent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{71D485C1-C4F0-4179-AB41-7576201A6579}|GrindsBookingSystem\\GrindsBookingSystem.csproj|solutionrelative:grindsbookingsystem\\frmaddstudent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71D485C1-C4F0-4179-AB41-7576201A6579}|GrindsBookingSystem\\GrindsBookingSystem.csproj|c:\\users\\studentisabellelynch\\source\\repos\\isabellelynch\\grindsbookingsystemproject\\prototype\\grindsbookingsystem\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{71D485C1-C4F0-4179-AB41-7576201A6579}|GrindsBookingSystem\\GrindsBookingSystem.csproj|solutionrelative:grindsbookingsystem\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71D485C1-C4F0-4179-AB41-7576201A6579}|GrindsBookingSystem\\GrindsBookingSystem.csproj|C:\\Users\\StudentIsabelleLynch\\source\\repos\\isabellelynch\\GrindsBookingSystemProject\\Prototype\\grindsbookingsystem\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{71D485C1-C4F0-4179-AB41-7576201A6579}|GrindsBookingSystem\\GrindsBookingSystem.csproj|solutionrelative:grindsbookingsystem\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71D485C1-C4F0-4179-AB41-7576201A6579}|GrindsBookingSystem\\GrindsBookingSystem.csproj|C:\\Users\\StudentIsabelleLynch\\source\\repos\\isabellelynch\\GrindsBookingSystemProject\\Prototype\\grindsbookingsystem\\frmhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{71D485C1-C4F0-4179-AB41-7576201A6579}|GrindsBookingSystem\\GrindsBookingSystem.csproj|solutionrelative:grindsbookingsystem\\frmhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71D485C1-C4F0-4179-AB41-7576201A6579}|GrindsBookingSystem\\GrindsBookingSystem.csproj|c:\\users\\studentisabellelynch\\source\\repos\\isabellelynch\\grindsbookingsystemproject\\prototype\\grindsbookingsystem\\frmdbconnectiontest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{71D485C1-C4F0-4179-AB41-7576201A6579}|GrindsBookingSystem\\GrindsBookingSystem.csproj|solutionrelative:grindsbookingsystem\\frmdbconnectiontest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71D485C1-C4F0-4179-AB41-7576201A6579}|GrindsBookingSystem\\GrindsBookingSystem.csproj|c:\\users\\studentisabellelynch\\source\\repos\\isabellelynch\\grindsbookingsystemproject\\prototype\\grindsbookingsystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{71D485C1-C4F0-4179-AB41-7576201A6579}|GrindsBookingSystem\\GrindsBookingSystem.csproj|solutionrelative:grindsbookingsystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71D485C1-C4F0-4179-AB41-7576201A6579}|GrindsBookingSystem\\GrindsBookingSystem.csproj|c:\\users\\studentisabellelynch\\source\\repos\\isabellelynch\\grindsbookingsystemproject\\prototype\\grindsbookingsystem\\frmdbconnectiontest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{71D485C1-C4F0-4179-AB41-7576201A6579}|GrindsBookingSystem\\GrindsBookingSystem.csproj|solutionrelative:grindsbookingsystem\\frmdbconnectiontest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "frmHome.cs",
+              "DocumentMoniker": "C:\\Users\\StudentIsabelleLynch\\source\\repos\\isabellelynch\\GrindsBookingSystemProject\\Prototype\\GrindsBookingSystem\\frmHome.cs",
+              "RelativeDocumentMoniker": "GrindsBookingSystem\\frmHome.cs",
+              "ToolTip": "C:\\Users\\StudentIsabelleLynch\\source\\repos\\isabellelynch\\GrindsBookingSystemProject\\Prototype\\GrindsBookingSystem\\frmHome.cs",
+              "RelativeToolTip": "GrindsBookingSystem\\frmHome.cs",
+              "ViewState": "AgIAAAoBAAAAAAAAAAA2wN8AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T12:50:06.476Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "frmAddStudent.cs",
+              "DocumentMoniker": "C:\\Users\\StudentIsabelleLynch\\source\\repos\\isabellelynch\\GrindsBookingSystemProject\\Prototype\\GrindsBookingSystem\\frmAddStudent.cs",
+              "RelativeDocumentMoniker": "GrindsBookingSystem\\frmAddStudent.cs",
+              "ToolTip": "C:\\Users\\StudentIsabelleLynch\\source\\repos\\isabellelynch\\GrindsBookingSystemProject\\Prototype\\GrindsBookingSystem\\frmAddStudent.cs",
+              "RelativeToolTip": "GrindsBookingSystem\\frmAddStudent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T13:24:56.137Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Student.cs",
+              "DocumentMoniker": "C:\\Users\\StudentIsabelleLynch\\source\\repos\\isabellelynch\\GrindsBookingSystemProject\\Prototype\\GrindsBookingSystem\\Student.cs",
+              "RelativeDocumentMoniker": "GrindsBookingSystem\\Student.cs",
+              "ToolTip": "C:\\Users\\StudentIsabelleLynch\\source\\repos\\isabellelynch\\GrindsBookingSystemProject\\Prototype\\GrindsBookingSystem\\Student.cs",
+              "RelativeToolTip": "GrindsBookingSystem\\Student.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAA7wEEAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-20T15:45:52.451Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Database.cs",
+              "DocumentMoniker": "C:\\Users\\StudentIsabelleLynch\\source\\repos\\isabellelynch\\GrindsBookingSystemProject\\Prototype\\GrindsBookingSystem\\Database.cs",
+              "RelativeDocumentMoniker": "GrindsBookingSystem\\Database.cs",
+              "ToolTip": "C:\\Users\\StudentIsabelleLynch\\source\\repos\\isabellelynch\\GrindsBookingSystemProject\\Prototype\\GrindsBookingSystem\\Database.cs",
+              "RelativeToolTip": "GrindsBookingSystem\\Database.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-19T12:22:48.038Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\StudentIsabelleLynch\\source\\repos\\isabellelynch\\GrindsBookingSystemProject\\Prototype\\GrindsBookingSystem\\Program.cs",
+              "RelativeDocumentMoniker": "GrindsBookingSystem\\Program.cs",
+              "ToolTip": "C:\\Users\\StudentIsabelleLynch\\source\\repos\\isabellelynch\\GrindsBookingSystemProject\\Prototype\\GrindsBookingSystem\\Program.cs",
+              "RelativeToolTip": "GrindsBookingSystem\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-27T12:05:50.642Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "frmDBconnectionTest.cs",
+              "DocumentMoniker": "C:\\Users\\StudentIsabelleLynch\\source\\repos\\isabellelynch\\GrindsBookingSystemProject\\Prototype\\GrindsBookingSystem\\frmDBconnectionTest.cs",
+              "RelativeDocumentMoniker": "GrindsBookingSystem\\frmDBconnectionTest.cs",
+              "ToolTip": "C:\\Users\\StudentIsabelleLynch\\source\\repos\\isabellelynch\\GrindsBookingSystemProject\\Prototype\\GrindsBookingSystem\\frmDBconnectionTest.cs",
+              "RelativeToolTip": "GrindsBookingSystem\\frmDBconnectionTest.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAABAAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-27T12:03:10.166Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "frmDBconnectionTest.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\StudentIsabelleLynch\\source\\repos\\isabellelynch\\GrindsBookingSystemProject\\Prototype\\GrindsBookingSystem\\frmDBconnectionTest.cs",
+              "RelativeDocumentMoniker": "GrindsBookingSystem\\frmDBconnectionTest.cs",
+              "ToolTip": "C:\\Users\\StudentIsabelleLynch\\source\\repos\\isabellelynch\\GrindsBookingSystemProject\\Prototype\\GrindsBookingSystem\\frmDBconnectionTest.cs [Design]",
+              "RelativeToolTip": "GrindsBookingSystem\\frmDBconnectionTest.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-27T12:02:43.712Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
