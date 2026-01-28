@@ -23,11 +23,11 @@ namespace GrindsBookingSystem
         private void frmRemoveTutor_Load(object sender, EventArgs e)
         {
             dgvRemoveTutor.DataSource = Tutor.GetAllTutors().Tables[0];
+
             formatGridView(dgvRemoveTutor);
 
-            loadFirstNames();
-            loadSurnames();
-            loadTutorIDs();
+            Tutor.loadTutorComboBoxes(cboTutID, cboNames, cboSurnames);
+            
 
         }
 
@@ -50,50 +50,6 @@ namespace GrindsBookingSystem
 
         }
 
-        public void loadTutorIDs()
-        {
-            cboTutID.Items.Clear();
-
-            String sql = "SELECT TutorID FROM Tutors";
-
-            DataSet ds = Database.ExecuteMultiRowQuery(sql);
-
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-            {
-                cboTutID.Items.Add(ds.Tables[0].Rows[i][0].ToString());
-            }
-
-        }
-
-        public void loadFirstNames()
-        {
-            cboNames.Items.Clear();
-
-            String sql = "SELECT FirstName FROM Tutors";
-
-            DataSet ds = Database.ExecuteMultiRowQuery(sql);
-
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-            {
-                cboNames.Items.Add(ds.Tables[0].Rows[i][0]);
-            }
-
-        }
-        public void loadSurnames()
-        {
-            cboSurnames.Items.Clear();
-
-            String sql = "SELECT Surname FROM Tutors";
-
-            DataSet ds = Database.ExecuteMultiRowQuery(sql);
-
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-            {
-                cboSurnames.Items.Add(ds.Tables[0].Rows[i][0]);
-            }
-
-        }
-
         public static void formatGridView(DataGridView grid)
         {
             grid.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -107,7 +63,7 @@ namespace GrindsBookingSystem
             grid.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
         }
 
-
+       
 
 
     }

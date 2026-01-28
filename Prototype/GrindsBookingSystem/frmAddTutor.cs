@@ -19,6 +19,8 @@ namespace GrindsBookingSystem
         public frmAddTutor()
         {
             InitializeComponent();
+            Tutor.loadRateCodes(cboTutorRates);
+            Tutor.loadSubjects(cboTutorSubjects);
         }
         private void btnAddTutor_Click(object sender, EventArgs e)
         {
@@ -75,32 +77,9 @@ namespace GrindsBookingSystem
             Owner.Show();
             this.Hide();
         }
-        public void loadRateCodes()
-        {
-            cboTutorRates.Items.Clear();
+        
 
-            String sql = "SELECT RateCode, Description FROM TutorRates ORDER BY RateCode";
-
-            DataSet ds = Database.ExecuteMultiRowQuery(sql);
-
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-            {
-                cboTutorRates.Items.Add(ds.Tables[0].Rows[i][0] + " - " + ds.Tables[0].Rows[i][1]);
-            }
-        }
-
-        public void loadSubjects()
-        {
-            cboTutorSubjects.Items.Clear();
-
-            String sql = "SELECT SubjectCode, Description FROM Subjects ORDER BY SubjectCode";
-            DataSet ds = Database.ExecuteMultiRowQuery(sql);
-
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-            {
-                cboTutorSubjects.Items.Add(ds.Tables[0].Rows[i][0] + " - " + ds.Tables[0].Rows[i][1]);
-            }
-        }
+        
 
 
         public void clearUI()
@@ -113,12 +92,6 @@ namespace GrindsBookingSystem
             cboTutorSubjects.Items.Clear();
         }
 
-        private void frmAddTutor_Load(object sender, EventArgs e)
-        {
-            loadRateCodes();
-            loadSubjects();
-        }
-   
 
         private void btnBack_Click(object sender, EventArgs e)
         {
