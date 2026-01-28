@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,6 +19,7 @@ namespace GrindsBookingSystem
         public frmViewStudentDetails()
         {
             InitializeComponent();
+            loadComboBoxes.IDFirstnameSurname(cboStudentID, cboFirstName, cboLastName);
         }
 
         private void frmViewStudentDetails_Load(object sender, EventArgs e)
@@ -25,6 +27,7 @@ namespace GrindsBookingSystem
 
         }
 
+        
  
         private void btnBack_Click(object sender, EventArgs e)
         {
@@ -44,6 +47,36 @@ namespace GrindsBookingSystem
             }
         }
 
+        private void cboStudentID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadComboBoxes.ApplyFilters(cboStudentID.Text, "StudentID", "Student", cboStudentID, cboFirstName, cboLastName);
+        }
 
+        private void cboFirstName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadComboBoxes.ApplyFilters(cboFirstName.Text, "FirstName", "Student", cboStudentID, cboFirstName, cboLastName);
+        }
+
+        private void cboLastName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadComboBoxes.ApplyFilters(cboLastName.Text, "Surname", "Student", cboStudentID, cboFirstName, cboLastName);
+        }
+
+        private void btnShowDetails_Click(object sender, EventArgs e)
+        {
+            cboStudentID.SelectedIndex = 0;
+
+            String sql = "SELECT * FROM Tutors WHERE TutorID = " + cboStudentID.Text;
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            dr.Read();
+
+            if (dr != null)
+            {
+                MessageBox.Show("The selected Students deatils are as follows\n\nStudent ID: " + dr.GetInt32(0).ToString() + "\nFirst Name: " +
+                                dr.GetString(1) + "\nSurname: " + dr.GetString(2) + "\nPhone Number: " + dr.GetString(3) + "\nEmail Address: " +
+                                dr.GetString(4), "Tutor Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
     }
 }

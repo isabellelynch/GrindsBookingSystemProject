@@ -20,6 +20,8 @@ namespace GrindsBookingSystem
         public frmUpdateStudent()
         {
             InitializeComponent();
+
+            loadComboBoxes.IDFirstnameSurname(cboStudentID, cboNames, cboSurnames);
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -43,20 +45,10 @@ namespace GrindsBookingSystem
         {
             this.Hide();
             Owner.Show();
-            cboNames.Enabled = true;
-            cboSurnames.Enabled = true;
-            cboStudentID.Enabled = true;
         }
         public void reset()
         {
 
-            cboNames.Enabled = true;
-            cboSurnames.Enabled = true;
-            cboStudentID.Enabled = true;
-
-            txtEmail.Text = string.Empty;
-            txtPhone.Text = string.Empty;
-            grpStudentDetails.Visible = false;
         }
 
         private void frmUpdateStudent_Load_1(object sender, EventArgs e)

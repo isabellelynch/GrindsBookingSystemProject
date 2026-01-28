@@ -26,7 +26,7 @@ namespace GrindsBookingSystem
 
             formatGridView(dgvRemoveTutor);
 
-            Tutor.loadTutorComboBoxes(cboTutID, cboNames, cboSurnames);
+            loadComboBoxes.IDFirstnameSurname(cboTutID, cboNames, cboSurnames);
             
 
         }

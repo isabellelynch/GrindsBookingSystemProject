@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,6 +19,7 @@ namespace GrindsBookingSystem
         public frmViewTutorDetails()
         {
             InitializeComponent();
+            loadComboBoxes.IDFirstnameSurname(cboTutorID, cboName, cboLastName);
         }
 
 
@@ -39,7 +41,38 @@ namespace GrindsBookingSystem
             }
         }
 
+        private void cboTutorID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadComboBoxes.ApplyFilters(cboTutorID.Text, "TutorID", "Tutor", cboTutorID, cboName, cboLastName);
+        }
 
+        private void cboName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadComboBoxes.ApplyFilters(cboName.Text, "FirstName", "Tutor", cboTutorID, cboName, cboLastName);
+        }
+
+        private void cboLastName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadComboBoxes.ApplyFilters(cboLastName.Text, "Surname", "Tutor", cboTutorID, cboName, cboLastName);
+        }
+
+        private void btnShowDetails_Click(object sender, EventArgs e)
+        {
+            cboTutorID.SelectedIndex = 0;
+
+            String sql = "SELECT * FROM Tutors WHERE TutorID = " + cboTutorID.Text;
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            dr.Read();
+
+            if (dr != null)
+            {
+                MessageBox.Show("The selected Tutors deatils are as follows\n\nTutor ID: " + dr.GetInt32(0).ToString() + "\nFirst Name: " +
+                                dr.GetString(1) + "\nSurname: " + dr.GetString(2) + "\nRate Code: " + dr.GetString(3) + "\nSubject: " +
+                                dr.GetString(4) + "\nPhone Number: " + dr.GetString(5) + "\nEmail Address: " + dr.GetString(6), "Tutor Details",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
     }
     
 }

@@ -226,7 +226,6 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmAddTutor";
             this.Text = "Grinds Booking System - Add Tutor";
-            this.Load += new System.EventHandler(this.frmAddTutor_Load);
             this.grpAddTutor.ResumeLayout(false);
             this.grpAddTutor.PerformLayout();
             this.menuStrip1.ResumeLayout(false);

@@ -20,12 +20,12 @@ namespace GrindsBookingSystem
         {
             InitializeComponent();
 
-            Tutor.loadTutorComboBoxes(cboTutID, cboNames, cboSurnames);
+            loadComboBoxes.IDFirstnameSurname(cboTutID, cboNames, cboSurnames);
 
             grpTutorDetails.Visible = false;
 
-            Tutor.loadRateCodes(cboRates);
-            Tutor.loadSubjects(cboSubjects);
+            loadComboBoxes.RateCodes(cboRates);
+            loadComboBoxes.Subjects(cboSubjects);
         }
 
         private void btnBack_Click(object sender, EventArgs e)

@@ -19,8 +19,8 @@ namespace GrindsBookingSystem
         public frmAddTutor()
         {
             InitializeComponent();
-            Tutor.loadRateCodes(cboTutorRates);
-            Tutor.loadSubjects(cboTutorSubjects);
+            loadComboBoxes.RateCodes(cboTutorRates);
+            loadComboBoxes.Subjects(cboTutorSubjects);
         }
         private void btnAddTutor_Click(object sender, EventArgs e)
         {
