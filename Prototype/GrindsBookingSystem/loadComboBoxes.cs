@@ -11,13 +11,13 @@ namespace GrindsBookingSystem
     internal class loadComboBoxes
     {
 
-        public static void IDFirstnameSurname(ComboBox c1, ComboBox c2, ComboBox c3)
+        public static void IDFirstnameSurname(ComboBox c1, ComboBox c2, ComboBox c3, String location)
         {
             c1.Items.Clear();
             c2.Items.Clear();
             c3.Items.Clear();
 
-            String sql = "SELECT TutorID, FirstName, Surname FROM Tutors";
+            String sql = "SELECT " + location + "ID, FirstName, Surname FROM " + location + "s";
 
             DataSet ds = Database.ExecuteMultiRowQuery(sql);
 

@@ -21,7 +21,7 @@ namespace GrindsBookingSystem
         {
             InitializeComponent();
 
-            loadComboBoxes.IDFirstnameSurname(cboStudentID, cboNames, cboSurnames);
+            loadComboBoxes.IDFirstnameSurname(cboStudentID, cboNames, cboSurnames, "Student");
         }
 
         private void btnBack_Click(object sender, EventArgs e)

@@ -17,12 +17,10 @@ namespace GrindsBookingSystem
     public partial class frmViewTutorDetails : Form
     {
         private bool updating = false;
-
-        
         public frmViewTutorDetails()
         {
             InitializeComponent();
-            loadComboBoxes.IDFirstnameSurname(cboTutorID, cboName, cboLastName);
+            loadComboBoxes.IDFirstnameSurname(cboTutorID, cboName, cboLastName, "Tutor");
             
             cboTutorID.SelectedIndexChanged += ComboBoxChange;
             cboName.SelectedIndexChanged += ComboBoxChange;
@@ -91,7 +89,8 @@ namespace GrindsBookingSystem
                 cboName.Items.Add(ds.Tables[0].Rows[i][1]);
                 cboLastName.Items.Add(ds.Tables[0].Rows[i][2]);
             }
-            if (cboTutorID.Items.Count > 0)
+
+            if (cboTutorID.Items.Count > 1)
             {
                 if(column == "FirstName")
                 {
@@ -110,9 +109,9 @@ namespace GrindsBookingSystem
             }
             else
             {
-                cboTutorID.SelectedIndex = 1;
-                cboName.SelectedIndex = 1;
-                cboLastName.SelectedIndex = 1;
+                cboTutorID.SelectedIndex = 0;
+                cboName.SelectedIndex = 0;
+                cboLastName.SelectedIndex = 0;
             }
                 updating = false;
         }

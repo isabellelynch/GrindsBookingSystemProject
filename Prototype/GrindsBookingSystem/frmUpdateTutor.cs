@@ -20,7 +20,7 @@ namespace GrindsBookingSystem
         {
             InitializeComponent();
 
-            loadComboBoxes.IDFirstnameSurname(cboTutID, cboNames, cboSurnames);
+            loadComboBoxes.IDFirstnameSurname(cboTutID, cboNames, cboSurnames, "Tutor");
 
             grpTutorDetails.Visible = false;
 

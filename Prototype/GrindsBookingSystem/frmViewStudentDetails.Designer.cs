@@ -153,7 +153,6 @@
             this.Controls.Add(this.mnuViewStudentDetails);
             this.Name = "frmViewStudentDetails";
             this.Text = "Grinds Booking System - View Student Details";
-            this.Load += new System.EventHandler(this.frmViewStudentDetails_Load);
             this.mnuViewStudentDetails.ResumeLayout(false);
             this.mnuViewStudentDetails.PerformLayout();
             this.ResumeLayout(false);
