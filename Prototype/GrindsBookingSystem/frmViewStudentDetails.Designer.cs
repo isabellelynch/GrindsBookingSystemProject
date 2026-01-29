@@ -111,7 +111,6 @@
             this.cboStudentID.Name = "cboStudentID";
             this.cboStudentID.Size = new System.Drawing.Size(121, 21);
             this.cboStudentID.TabIndex = 20;
-            this.cboStudentID.SelectedIndexChanged += new System.EventHandler(this.cboStudentID_SelectedIndexChanged);
             // 
             // cboFirstName
             // 
@@ -120,7 +119,6 @@
             this.cboFirstName.Name = "cboFirstName";
             this.cboFirstName.Size = new System.Drawing.Size(121, 21);
             this.cboFirstName.TabIndex = 21;
-            this.cboFirstName.SelectedIndexChanged += new System.EventHandler(this.cboFirstName_SelectedIndexChanged);
             // 
             // cboLastName
             // 
@@ -129,7 +127,6 @@
             this.cboLastName.Name = "cboLastName";
             this.cboLastName.Size = new System.Drawing.Size(121, 21);
             this.cboLastName.TabIndex = 22;
-            this.cboLastName.SelectedIndexChanged += new System.EventHandler(this.cboLastName_SelectedIndexChanged);
             // 
             // btnShowDetails
             // 

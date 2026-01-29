@@ -111,7 +111,6 @@
             this.cboTutorID.Name = "cboTutorID";
             this.cboTutorID.Size = new System.Drawing.Size(121, 21);
             this.cboTutorID.TabIndex = 21;
-            this.cboTutorID.SelectedIndexChanged += new System.EventHandler(this.cboTutorID_SelectedIndexChanged);
             // 
             // cboName
             // 
@@ -120,7 +119,7 @@
             this.cboName.Name = "cboName";
             this.cboName.Size = new System.Drawing.Size(121, 21);
             this.cboName.TabIndex = 22;
-            this.cboName.SelectedIndexChanged += new System.EventHandler(this.cboName_SelectedIndexChanged);
+
             // 
             // cboLastName
             // 
@@ -129,7 +128,6 @@
             this.cboLastName.Name = "cboLastName";
             this.cboLastName.Size = new System.Drawing.Size(121, 21);
             this.cboLastName.TabIndex = 23;
-            this.cboLastName.SelectedIndexChanged += new System.EventHandler(this.cboLastName_SelectedIndexChanged);
             // 
             // btnShowDetails
             // 

@@ -47,20 +47,7 @@ namespace GrindsBookingSystem
             }
         }
 
-        private void cboStudentID_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            loadComboBoxes.ApplyFilters(cboStudentID.Text, "StudentID", "Student", cboStudentID, cboFirstName, cboLastName);
-        }
-
-        private void cboFirstName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            loadComboBoxes.ApplyFilters(cboFirstName.Text, "FirstName", "Student", cboStudentID, cboFirstName, cboLastName);
-        }
-
-        private void cboLastName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            loadComboBoxes.ApplyFilters(cboLastName.Text, "Surname", "Student", cboStudentID, cboFirstName, cboLastName);
-        }
+      
 
         private void btnShowDetails_Click(object sender, EventArgs e)
         {

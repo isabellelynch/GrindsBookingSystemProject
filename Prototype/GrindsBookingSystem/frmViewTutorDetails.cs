@@ -16,10 +16,17 @@ namespace GrindsBookingSystem
 {
     public partial class frmViewTutorDetails : Form
     {
+        private bool updating = false;
+
+        
         public frmViewTutorDetails()
         {
             InitializeComponent();
             loadComboBoxes.IDFirstnameSurname(cboTutorID, cboName, cboLastName);
+            
+            cboTutorID.SelectedIndexChanged += ComboBoxChange;
+            cboName.SelectedIndexChanged += ComboBoxChange;
+            cboLastName.SelectedIndexChanged += ComboBoxChange;
         }
 
 
@@ -41,21 +48,75 @@ namespace GrindsBookingSystem
             }
         }
 
-        private void cboTutorID_SelectedIndexChanged(object sender, EventArgs e)
+        public void ComboBoxChange(object sender, EventArgs e)
         {
-            loadComboBoxes.ApplyFilters(cboTutorID.Text, "TutorID", "Tutor", cboTutorID, cboName, cboLastName);
-        }
+            if (updating) return;
 
-        private void cboName_SelectedIndexChanged(object sender, EventArgs e)
+            ComboBox cbo = sender as ComboBox;
+
+            if (cbo == null || cbo.SelectedItem == null)
+            {
+                return;
+            }
+
+
+            if (cbo == cboTutorID)
+            {
+                ApplyFilters(cboTutorID.Text, "TutorID");
+            }
+            else if (cbo == cboName)
+            {
+                ApplyFilters("'" + cboName.Text + "'", "FirstName");
+            }
+            else if (cbo == cboLastName) 
+            {
+                ApplyFilters("'" + cboLastName.Text + "'", "Surname");
+            }
+
+        }
+        public void ApplyFilters(String value, String column)
         {
-            loadComboBoxes.ApplyFilters(cboName.Text, "FirstName", "Tutor", cboTutorID, cboName, cboLastName);
-        }
+            updating = true;
 
-        private void cboLastName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            loadComboBoxes.ApplyFilters(cboLastName.Text, "Surname", "Tutor", cboTutorID, cboName, cboLastName);
-        }
+            String sql = "SELECT TutorID, FirstName, Surname FROM Tutors WHERE " + column + " = " + value;
+            DataSet ds = Database.ExecuteMultiRowQuery(sql);
 
+            cboTutorID.Items.Clear();
+            cboName.Items.Clear();
+            cboLastName.Items.Clear();
+
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                cboTutorID.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+                cboName.Items.Add(ds.Tables[0].Rows[i][1]);
+                cboLastName.Items.Add(ds.Tables[0].Rows[i][2]);
+            }
+            if (cboTutorID.Items.Count > 0)
+            {
+                if(column == "FirstName")
+                {
+                    cboName.SelectedIndex = cboName.Items.IndexOf(value);
+                    cboTutorID.SelectedIndex = -1;
+                    cboLastName.SelectedIndex = -1;
+
+                }
+                else if (column == "Surname")
+                {
+                    cboName.SelectedIndex = -1;
+                    cboTutorID.SelectedIndex = -1;
+                    cboLastName.SelectedIndex = cboLastName.Items.IndexOf(value);
+
+                }
+            }
+            else
+            {
+                cboTutorID.SelectedIndex = 1;
+                cboName.SelectedIndex = 1;
+                cboLastName.SelectedIndex = 1;
+            }
+                updating = false;
+        }
+       
         private void btnShowDetails_Click(object sender, EventArgs e)
         {
             cboTutorID.SelectedIndex = 0;
