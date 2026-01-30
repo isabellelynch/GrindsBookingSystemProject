@@ -44,6 +44,7 @@ namespace GrindsBookingSystem
             {
                 c.Items.Add(ds.Tables[0].Rows[i][0] + " - " + ds.Tables[0].Rows[i][1]);
             }
+            c.SelectedIndex = 0;
         }
 
         public static void Subjects(ComboBox c)
@@ -57,6 +58,7 @@ namespace GrindsBookingSystem
             {
                 c.Items.Add(ds.Tables[0].Rows[i][0] + " - " + ds.Tables[0].Rows[i][1]);
             }
+            c.SelectedIndex = 0;
         }
 
         public static List<ComboBox> CreateComboList(ComboBox c1, ComboBox c2, ComboBox c3) { 
@@ -105,6 +107,22 @@ namespace GrindsBookingSystem
                     {
                         cb.SelectedIndex = -1;
                     }
+                }
+            }
+        }
+
+        public static void ClearControls(Control.ControlCollection Controls)
+        {
+            foreach (Control c in Controls)
+            {
+                if (c is ComboBox cb)
+                {
+                    cb.Items.Clear();
+                    cb.Text = "";
+                }
+                else if(c is TextBox t)
+                {
+                    t.Text = "";
                 }
             }
         }

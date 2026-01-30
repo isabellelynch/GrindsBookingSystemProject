@@ -135,6 +135,38 @@ namespace GrindsBookingSystem
             
              
         }
+
+        public static String IsValidTutor(Tutor t)
+        {
+            if (!Validation.Name(t.FirstName))
+            {
+                return "First Name not in the correct format.";
+            }
+            else if(!Validation.Name(t.Surname))
+            {
+                return "Surname not in the correct format.";
+            }
+            else if (!Validation.Email(t.Email))
+            {
+                return "Email not in the correct format.";
+            }
+            else if (!Validation.Phone(t.Phone))
+            {
+                return "Phone Number not in the correct format, must be XXX-XXXXXXX.";
+            }
+            else if (string.IsNullOrWhiteSpace(t.RateCode))
+            {
+                return "Rate Code must be selected";
+            }
+            else if (string.IsNullOrWhiteSpace(t.Subject))
+            {
+                return "Subject must be selected";
+            }
+            else
+            {
+                return "Valid";
+            }
+        }
     } 
 }
 

@@ -20,16 +20,8 @@ namespace GrindsBookingSystem
         public frmUpdateTutor()
         {
             InitializeComponent();
-
-            comboBoxes = loadComboBoxes.CreateComboList(cboTutID, cboNames, cboSurnames);
-
-            loadComboBoxes.IDFirstnameSurname(comboBoxes, "Tutor");
-            loadComboBoxes.RateCodes(cboRates);
-            loadComboBoxes.Subjects(cboSubjects);
-
-            grpTutorDetails.Visible = false;
-
-            
+            comboBoxes = loadComboBoxes.CreateComboList(cboTutorID, cboNames, cboSurnames);
+            ClearUI();
 
             foreach (var c in comboBoxes)
             {
@@ -69,9 +61,9 @@ namespace GrindsBookingSystem
 
             updating = true;
 
-            if (cbo == cboTutID)
+            if (cbo == cboTutorID)
             {
-                loadComboBoxes.ApplyFilters("'" + cboTutID.Text + "'", "TutorID", "Tutor", comboBoxes, cbo);
+                loadComboBoxes.ApplyFilters("'" + cboTutorID.Text + "'", "TutorID", "Tutor", comboBoxes, cbo);
             }
             else if (cbo == cboNames)
             {
@@ -90,19 +82,19 @@ namespace GrindsBookingSystem
         {
             grpTutorDetails.Visible = true;
 
-            if (cboTutID.Items.Count > 1) 
+            if (cboTutorID.Items.Count > 1) 
             {
                 return;
             }
 
-            Tutor t = Tutor.GetTutor(Convert.ToInt32(cboTutID.Items[0]));
+            Tutor t = Tutor.GetTutor(Convert.ToInt32(cboTutorID.Items[0]));
 
             cboRates.Text = t.RateCode;
             cboSubjects.Text = t.Subject;
             txtEmail.Text = t.Email;
             txtPhone.Text = t.Phone;
 
-            cboTutID.Enabled = false;
+            cboTutorID.Enabled = false;
             cboNames.Enabled = false;
             cboSurnames.Enabled = false;
             
@@ -110,10 +102,10 @@ namespace GrindsBookingSystem
 
         private void btnUpdateTutor_Click(object sender, EventArgs e)
         {
-            Tutor.UpdateTutor(Convert.ToInt32(cboTutID.Text), cboRates.Text.Substring(0, 3),
+            Tutor.UpdateTutor(Convert.ToInt32(cboTutorID.Text), cboRates.Text.Substring(0, 3),
                 cboSubjects.Text.Substring(0, 3), txtPhone.Text, txtEmail.Text);
 
-            String details = Tutor.GetTutorDetails(Convert.ToInt32(cboTutID.Items[0]));
+            String details = Tutor.GetTutorDetails(Convert.ToInt32(cboTutorID.Items[0]));
 
             if (details != null)
             {
@@ -127,12 +119,24 @@ namespace GrindsBookingSystem
                     "Tutor Details", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            ResetPage();
+            ClearUI();
         }
 
-        private void ResetPage()
+        private void ClearUI()
         {
-            
+            loadComboBoxes.ClearControls(this.Controls);
+
+            grpTutorDetails.Visible = false;
+
+            cboTutorID.Enabled = true;
+            cboNames.Enabled = true;
+            cboSurnames.Enabled = true;
+
+            loadComboBoxes.IDFirstnameSurname(comboBoxes, "Tutor");
+            loadComboBoxes.RateCodes(cboRates);
+            loadComboBoxes.Subjects(cboSubjects);
         }
+
+     
     }
 }

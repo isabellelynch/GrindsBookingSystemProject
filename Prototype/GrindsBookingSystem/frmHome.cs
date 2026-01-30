@@ -142,128 +142,6 @@ namespace GrindsBookingSystem
                 }
             }
         }
-        public static String ValidateInput(String Firstname, String Lastname, String Email, String Phone, String StudentTutor, int tutorRateIndex, int tutorSubjectIndex)
-        {
-            if (Firstname.Equals(""))
-            {
-                return StudentTutor + " First Name field must not be empty.";
-            }
-            else if (!Regex.IsMatch(Firstname, @"^[a-zA-Z\s]+$"))
-            {
-                return StudentTutor + " First Name field must only contain letters.";
-            }
-
-
-            else if (Lastname.Equals(""))
-            {
-                return StudentTutor + " Surname field must not be empty.";
-            }
-            else if (!Regex.IsMatch(Lastname, @"^[a-zA-Z\s]+$"))
-            {
-                return StudentTutor + " Surname field must only contain letters.";
-            }
-
-            else if (Email.Equals(""))
-            {
-                return StudentTutor + " Email field must not be empty.";
-            }
-            else if (!Regex.IsMatch(Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
-            {
-                return StudentTutor + " Email field must be in the correct format, example : isabelle@gmail.com";
-            }
-            else if (Phone.Equals(""))
-            {
-                return StudentTutor + " Phone Number field must not be empty.";
-            }
-            else if (!Regex.IsMatch(Phone, @"\d{3}-\d{7}$"))
-            {
-                return StudentTutor + " Phone Number field must be in the format XXX-XXXXXXX.";
-            }
-            else if (StudentTutor.Equals("Tutor") && tutorRateIndex == -1)
-            {
-                return "Tutor Rate Code must be selected.";
-            }
-            else if (StudentTutor.Equals("Tutor") && tutorSubjectIndex == -1)
-            {
-                return "Tutor Subject must be selected.";
-            }
-            
-
-            else
-            {
-                return "valid";
-            }
-        }
-
-        public static void UpdateComboS<T>(ComboBox combo, IEnumerable<T> values)
-        {
-            string current = combo.Text;
-            combo.Items.Clear();
-            foreach (var v in values)
-                combo.Items.Add(v);
-            if (string.IsNullOrWhiteSpace(current))
-            {
-                combo.SelectedIndex = -1;
-                return;
-            }
-            try
-            {
-                T converted = (T)Convert.ChangeType(current, typeof(T));
-                if (values.Contains(converted))
-                    combo.Text = current;
-                else
-                    combo.SelectedIndex = -1;
-            }
-            catch
-            {
-                combo.SelectedIndex = -1;
-            }
-        }
-
-        public static void UpdateComboBoxesS(
-            IEnumerable<Student> filtered,
-            ComboBox cboStudentID,
-            ComboBox cboNames,
-            ComboBox cboSurnames,
-            EventHandler idChanged,
-            EventHandler nameChanged,
-            EventHandler surnameChanged)
-        {
-            cboStudentID.SelectedIndexChanged -= idChanged;
-            cboNames.SelectedIndexChanged -= nameChanged;
-            cboSurnames.SelectedIndexChanged -= surnameChanged;
-
-            UpdateComboS(cboStudentID, filtered.Select(s => s.StudentID).Distinct());
-            UpdateComboS(cboNames, filtered.Select(s => s.FirstName).Distinct());
-            UpdateComboS(cboSurnames, filtered.Select(s => s.Surname).Distinct());
-
-            cboStudentID.SelectedIndexChanged += idChanged;
-            cboNames.SelectedIndexChanged += nameChanged;
-            cboSurnames.SelectedIndexChanged += surnameChanged;
-        }
-
-        public static void UpdateComboBoxesT(
-            IEnumerable<Tutor> filtered,
-            ComboBox cboTutorID,
-            ComboBox cboNames,
-            ComboBox cboSurnames,
-            EventHandler idChanged,
-            EventHandler nameChanged,
-            EventHandler surnameChanged)
-        {
-            cboTutorID.SelectedIndexChanged -= idChanged;
-            cboNames.SelectedIndexChanged -= nameChanged;
-            cboSurnames.SelectedIndexChanged -= surnameChanged;
-
-            UpdateComboS(cboTutorID, filtered.Select(T => T.TutorID).Distinct());
-            UpdateComboS(cboNames, filtered.Select(T => T.FirstName).Distinct());
-            UpdateComboS(cboSurnames, filtered.Select(T => T.Surname).Distinct());
-
-            cboTutorID.SelectedIndexChanged += idChanged;
-            cboNames.SelectedIndexChanged += nameChanged;
-            cboSurnames.SelectedIndexChanged += surnameChanged;
-        }
-
         public class DateTimeListViewComparer : IComparer
         {
             private readonly int dateColumnIndex;
@@ -297,9 +175,6 @@ namespace GrindsBookingSystem
             }
         }
 
-        private void adminToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
 
         private void tutorEarningsAnalysisToolStripMenuItem_Click(object sender, EventArgs e)
         {

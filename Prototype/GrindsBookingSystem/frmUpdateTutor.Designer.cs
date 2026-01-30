@@ -35,7 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.cboTutID = new System.Windows.Forms.ComboBox();
+            this.cboTutorID = new System.Windows.Forms.ComboBox();
             this.cboNames = new System.Windows.Forms.ComboBox();
             this.cboSurnames = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -117,11 +117,11 @@
             // 
             // cboTutID
             // 
-            this.cboTutID.FormattingEnabled = true;
-            this.cboTutID.Location = new System.Drawing.Point(392, 32);
-            this.cboTutID.Name = "cboTutID";
-            this.cboTutID.Size = new System.Drawing.Size(121, 21);
-            this.cboTutID.TabIndex = 20;
+            this.cboTutorID.FormattingEnabled = true;
+            this.cboTutorID.Location = new System.Drawing.Point(392, 32);
+            this.cboTutorID.Name = "cboTutID";
+            this.cboTutorID.Size = new System.Drawing.Size(121, 21);
+            this.cboTutorID.TabIndex = 20;
             // 
             // cboNames
             // 
@@ -252,7 +252,7 @@
             this.Controls.Add(this.grpTutorDetails);
             this.Controls.Add(this.cboSurnames);
             this.Controls.Add(this.cboNames);
-            this.Controls.Add(this.cboTutID);
+            this.Controls.Add(this.cboTutorID);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -277,7 +277,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cboTutID;
+        private System.Windows.Forms.ComboBox cboTutorID;
         private System.Windows.Forms.ComboBox cboNames;
         private System.Windows.Forms.ComboBox cboSurnames;
         private System.Windows.Forms.Label label4;

@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using static GrindsBookingSystem.frmAddStudent;
 using static GrindsBookingSystem.frmHome;
 
@@ -19,84 +20,56 @@ namespace GrindsBookingSystem
         public frmAddTutor()
         {
             InitializeComponent();
-            loadComboBoxes.RateCodes(cboTutorRates);
-            loadComboBoxes.Subjects(cboTutorSubjects);
+            ClearUI();
         }
         private void btnAddTutor_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Before we add " + txtTutorName.Text + " " +
-                                                    txtTutorSurname.Text + " to the system, have they supplied proof of their Garda Vetting" +
-                                                    "information?",
-                                                    "Please Confirm",
-                                                    MessageBoxButtons.YesNo,
-                                                    MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
+            String rate = cboTutorRates.Text.Substring(0,3);
+            String subject = cboTutorSubjects.Text.Substring(0,3);
+
+            Tutor t = new Tutor(Tutor.GetNextTutorID(), txtTutorName.Text, txtTutorSurname.Text, rate, subject, txtTutorPhone.Text, txtTutorEmail.Text);
+            if(Tutor.IsValidTutor(t) == "Valid")
             {
-                
-
-                String rate = cboTutorRates.Text.Substring(0,3);
-                String subject = cboTutorSubjects.Text.Substring(0,3);
-
-                Tutor t = new Tutor(Tutor.GetNextTutorID(), txtTutorName.Text, txtTutorSurname.Text, rate, subject, txtTutorPhone.Text, txtTutorEmail.Text);
                 t.AddTutor();
-                MessageBox.Show("Tutor " + txtTutorName.Text + " " + txtTutorSurname.Text + " has been succesfully added to the system.",
-                                "Success",
-                                 MessageBoxButtons.OK,
-                                 MessageBoxIcon.Information);
 
-                DialogResult addAnother = MessageBox.Show("Would you like to add another Tutor?",
-                                                        "Please Confirm",
-                                                        MessageBoxButtons.YesNo,
-                                                        MessageBoxIcon.Question);
+                DialogResult addAnother = MessageBox.Show("Tutor " + txtTutorName.Text + " " + txtTutorSurname.Text + " has been succesfully added to the system. Would you like to add another Tutor?",
+                                                            "Success",
+                                                            MessageBoxButtons.YesNo,
+                                                            MessageBoxIcon.Question);
                 if (addAnother == DialogResult.Yes)
                 {
-                    clearUI();
+                    ClearUI();
                 }
                 else
                 {
-                    goHome();
+                    GoHome();
                 }
-
-                return;
             }
             else
             {
-                MessageBox.Show("Adding Tutor Function Cancelled, Tutor must be Garda Vetted before being added to the system",
-                                "Cancelled",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Warning);
-
-                clearUI();
-                return;
+                MessageBox.Show("Invalid Entry, " + Tutor.IsValidTutor(t), "Invalid!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
         
-        public void goHome()
+        public void GoHome()
         {
-            clearUI();
+            ClearUI();
             Owner.Show();
             this.Hide();
         }
         
 
-        
-
-
-        public void clearUI()
+        public void ClearUI()
         {
-            txtTutorName.Clear();
-            txtTutorSurname.Clear();
-            txtTutorEmail.Clear();
-            txtTutorPhone.Clear();
-            cboTutorRates.Items.Clear();
-            cboTutorSubjects.Items.Clear();
+            loadComboBoxes.ClearControls(this.Controls);
+            loadComboBoxes.RateCodes(cboTutorRates);
+            loadComboBoxes.Subjects(cboTutorSubjects);
         }
 
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            Owner.Show();
-            this.Hide();
+            GoHome();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -113,7 +86,7 @@ namespace GrindsBookingSystem
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            clearUI();
+            ClearUI();
         }
     }
 }

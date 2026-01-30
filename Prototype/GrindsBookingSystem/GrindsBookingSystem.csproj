@@ -201,6 +201,7 @@
     <Compile Include="Schedule.cs" />
     <Compile Include="Student.cs" />
     <Compile Include="Tutor.cs" />
+    <Compile Include="Validation.cs" />
     <EmbeddedResource Include="frmAddBooking.resx">
       <DependentUpon>frmAddBooking.cs</DependentUpon>
     </EmbeddedResource>
