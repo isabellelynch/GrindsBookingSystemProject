@@ -13,7 +13,9 @@ namespace GrindsBookingSystem
         {
             InitializeComponent();
 
-            loadComboBoxes.IDFirstnameSurname(cboStudentID, cboName, cboSName, "Student");
+            List<ComboBox> comboBoxes = loadComboBoxes.CreateComboList(cboStudentID, cboName, cboSName);
+
+            loadComboBoxes.IDFirstnameSurname(comboBoxes, "Student");
 
             lvRemoveStudent.Columns.Clear();
 

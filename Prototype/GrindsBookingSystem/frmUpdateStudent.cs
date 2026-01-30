@@ -16,12 +16,13 @@ namespace GrindsBookingSystem
 {
     public partial class frmUpdateStudent : Form
     {
-
         public frmUpdateStudent()
         {
             InitializeComponent();
 
-            loadComboBoxes.IDFirstnameSurname(cboStudentID, cboNames, cboSurnames, "Student");
+            List<ComboBox> comboBoxes = loadComboBoxes.CreateComboList(cboStudentID, cboNames, cboSurnames);
+
+            loadComboBoxes.IDFirstnameSurname(comboBoxes, "Student");
         }
 
         private void btnBack_Click(object sender, EventArgs e)

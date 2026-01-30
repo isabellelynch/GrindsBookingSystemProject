@@ -174,7 +174,6 @@
             this.Controls.Add(this.menuStrip1);
             this.Name = "frmRemoveTutor";
             this.Text = "Grinds Booking System - Remove Tutor";
-            this.Load += new System.EventHandler(this.frmRemoveTutor_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRemoveTutor)).EndInit();

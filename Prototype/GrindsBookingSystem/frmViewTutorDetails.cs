@@ -20,11 +20,15 @@ namespace GrindsBookingSystem
         public frmViewTutorDetails()
         {
             InitializeComponent();
-            loadComboBoxes.IDFirstnameSurname(cboTutorID, cboName, cboLastName, "Tutor");
+
+            List<ComboBox> comboBoxes = loadComboBoxes.CreateComboList(cboTutorID, cboName, cboLastName);
+
+            loadComboBoxes.IDFirstnameSurname(comboBoxes, "Tutor");
             
-            cboTutorID.SelectedIndexChanged += ComboBoxChange;
-            cboName.SelectedIndexChanged += ComboBoxChange;
-            cboLastName.SelectedIndexChanged += ComboBoxChange;
+            foreach(ComboBox cb  in comboBoxes)
+            {
+                cb.SelectedIndexChanged += ComboBoxChange;
+            }
         }
 
 

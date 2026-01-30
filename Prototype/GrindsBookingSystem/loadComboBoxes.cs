@@ -11,11 +11,12 @@ namespace GrindsBookingSystem
     internal class loadComboBoxes
     {
 
-        public static void IDFirstnameSurname(ComboBox c1, ComboBox c2, ComboBox c3, String location)
+        public static void IDFirstnameSurname(List<ComboBox> c, String location)
         {
-            c1.Items.Clear();
-            c2.Items.Clear();
-            c3.Items.Clear();
+            foreach(ComboBox cb in c)
+            {
+                cb.Items.Clear();
+            }
 
             String sql = "SELECT " + location + "ID, FirstName, Surname FROM " + location + "s";
 
@@ -23,9 +24,9 @@ namespace GrindsBookingSystem
 
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
-                c1.Items.Add(ds.Tables[0].Rows[i][0].ToString());
-                c2.Items.Add(ds.Tables[0].Rows[i][1]);
-                c3.Items.Add(ds.Tables[0].Rows[i][2]);
+                c[0].Items.Add(ds.Tables[0].Rows[i][0].ToString());
+                c[1].Items.Add(ds.Tables[0].Rows[i][1]);
+                c[2].Items.Add(ds.Tables[0].Rows[i][2]);
             }
 
         }
@@ -56,6 +57,13 @@ namespace GrindsBookingSystem
                 c.Items.Add(ds.Tables[0].Rows[i][0] + " - " + ds.Tables[0].Rows[i][1]);
             }
         }
-        
+
+        public static List<ComboBox> CreateComboList(ComboBox c1, ComboBox c2, ComboBox c3) { 
+            List<ComboBox> list = new List<ComboBox>();
+            list.Add(c1);
+            list.Add(c2);
+            list.Add(c3);
+            return list;
+        }
     }
 }

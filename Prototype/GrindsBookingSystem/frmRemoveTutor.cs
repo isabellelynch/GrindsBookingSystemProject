@@ -13,23 +13,22 @@ using static GrindsBookingSystem.frmHome;
 
 namespace GrindsBookingSystem
 {
+
     public partial class frmRemoveTutor : Form
     {
         public frmRemoveTutor()
         {
             InitializeComponent();
-        }
 
-        private void frmRemoveTutor_Load(object sender, EventArgs e)
-        {
+            List<ComboBox> comboBoxes = loadComboBoxes.CreateComboList(cboTutID, cboNames, cboSurnames);
+
             dgvRemoveTutor.DataSource = Tutor.GetAllTutors().Tables[0];
 
             formatGridView(dgvRemoveTutor);
 
-            loadComboBoxes.IDFirstnameSurname(cboTutID, cboNames, cboSurnames, "Tutor");
-            
-
+            loadComboBoxes.IDFirstnameSurname(comboBoxes, "Tutor");
         }
+
 
         private void btnBack_Click(object sender, EventArgs e)
         {

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,17 +17,23 @@ namespace GrindsBookingSystem
 {
     public partial class frmViewStudentDetails : Form
     {
-
         private bool updating = false;
         public frmViewStudentDetails()
         {
             InitializeComponent();
-            loadComboBoxes.IDFirstnameSurname(cboStudentID, cboFirstName, cboLastName, "Student");
 
-            cboStudentID.SelectedIndexChanged += ComboBoxChange;
-            cboFirstName.SelectedIndexChanged += ComboBoxChange;
-            cboLastName.SelectedIndexChanged += ComboBoxChange;
+            List<ComboBox> comboBoxes = loadComboBoxes.CreateComboList(cboStudentID, cboFirstName, cboLastName);
+
+            loadComboBoxes.IDFirstnameSurname(comboBoxes, "Student");
+
+            foreach(ComboBox cb in comboBoxes)
+            {
+                cb.SelectedIndexChanged += ComboBoxChange;
+            }
         }
+        
+        
+            
         private void btnBack_Click(object sender, EventArgs e)
         {
             Owner.Show();
@@ -69,17 +76,11 @@ namespace GrindsBookingSystem
             if (updating) return;
 
             ComboBox cbo = sender as ComboBox;
-            List<ComboBox> comboBoxes = this.Controls.OfType<ComboBox>().ToList();
-
-
-            MessageBox.Show(comboBoxes.ToString());
 
             if (cbo == null || cbo.SelectedItem == null)
             {
                 return;
             }
-
-            
 
             if (cbo == cboStudentID)
             {
@@ -109,22 +110,12 @@ namespace GrindsBookingSystem
 
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
-                foreach(var cb in c)
-                {
-                    var item = ds.Tables[0].Rows[i][c.IndexOf(cb)];
-
-                    if (item is int)
-                    {
-                        cb.Items.Add(item.ToString());
-                    }
-                    else if (item is string)
-                    {
-                        cb.Items.Add(item);
-                    }
-                    
-                }   
-
+                c[0].Items.Add(ds.Tables[0].Rows[i][location + "ID"].ToString());
+                c[1].Items.Add(ds.Tables[0].Rows[i]["FirstName"].ToString());
+                c[2].Items.Add(ds.Tables[0].Rows[i]["Surname"].ToString());
             }
+
+
             if (c[0].Items.Count > 1)
             {
                 foreach (var cb in c)
@@ -136,7 +127,7 @@ namespace GrindsBookingSystem
             {
                 foreach (var cb in c)
                 {
-                    if (cb == send)
+                    if (cb.Items.Count == 1)
                     {
                         cb.SelectedIndex = 0;
                     }
@@ -146,7 +137,6 @@ namespace GrindsBookingSystem
                     }
                 }
             }
-                
             updating = false;
         }
     }
