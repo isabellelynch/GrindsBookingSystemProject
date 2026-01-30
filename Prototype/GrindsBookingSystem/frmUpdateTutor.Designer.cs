@@ -45,10 +45,10 @@
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtPhone = new System.Windows.Forms.TextBox();
             this.grpTutorDetails = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
             this.cboSubjects = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.btnUpdateTutor = new System.Windows.Forms.Button();
+            this.btnFindTutor = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.grpTutorDetails.SuspendLayout();
             this.SuspendLayout();
@@ -192,7 +192,7 @@
             // 
             this.grpTutorDetails.Controls.Add(this.cboSubjects);
             this.grpTutorDetails.Controls.Add(this.label7);
-            this.grpTutorDetails.Controls.Add(this.button2);
+            this.grpTutorDetails.Controls.Add(this.btnUpdateTutor);
             this.grpTutorDetails.Controls.Add(this.txtPhone);
             this.grpTutorDetails.Controls.Add(this.txtEmail);
             this.grpTutorDetails.Controls.Add(this.cboRates);
@@ -206,23 +206,13 @@
             this.grpTutorDetails.TabStop = false;
             this.grpTutorDetails.Text = "Extra Details";
             // 
-            // button2
+            // cboSubjects
             // 
-            this.button2.Location = new System.Drawing.Point(125, 169);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(143, 23);
-            this.button2.TabIndex = 29;
-            this.button2.Text = "Update Tutor Details";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(334, 172);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 30;
-            this.button1.Text = "Find Tutor";
-            this.button1.UseVisualStyleBackColor = true;
+            this.cboSubjects.FormattingEnabled = true;
+            this.cboSubjects.Location = new System.Drawing.Point(211, 128);
+            this.cboSubjects.Name = "cboSubjects";
+            this.cboSubjects.Size = new System.Drawing.Size(121, 21);
+            this.cboSubjects.TabIndex = 31;
             // 
             // label7
             // 
@@ -233,20 +223,32 @@
             this.label7.TabIndex = 30;
             this.label7.Text = "Subject";
             // 
-            // cboSubjects
+            // btnUpdateTutor
             // 
-            this.cboSubjects.FormattingEnabled = true;
-            this.cboSubjects.Location = new System.Drawing.Point(211, 128);
-            this.cboSubjects.Name = "cboSubjects";
-            this.cboSubjects.Size = new System.Drawing.Size(121, 21);
-            this.cboSubjects.TabIndex = 31;
+            this.btnUpdateTutor.Location = new System.Drawing.Point(125, 169);
+            this.btnUpdateTutor.Name = "btnUpdateTutor";
+            this.btnUpdateTutor.Size = new System.Drawing.Size(143, 23);
+            this.btnUpdateTutor.TabIndex = 29;
+            this.btnUpdateTutor.Text = "Update Tutor Details";
+            this.btnUpdateTutor.UseVisualStyleBackColor = true;
+            this.btnUpdateTutor.Click += new System.EventHandler(this.btnUpdateTutor_Click);
+            // 
+            // btnFindTutor
+            // 
+            this.btnFindTutor.Location = new System.Drawing.Point(334, 172);
+            this.btnFindTutor.Name = "btnFindTutor";
+            this.btnFindTutor.Size = new System.Drawing.Size(75, 23);
+            this.btnFindTutor.TabIndex = 30;
+            this.btnFindTutor.Text = "Find Tutor";
+            this.btnFindTutor.UseVisualStyleBackColor = true;
+            this.btnFindTutor.Click += new System.EventHandler(this.btnFindTutor_Click);
             // 
             // frmUpdateTutor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnFindTutor);
             this.Controls.Add(this.grpTutorDetails);
             this.Controls.Add(this.cboSurnames);
             this.Controls.Add(this.cboNames);
@@ -285,8 +287,8 @@
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.GroupBox grpTutorDetails;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnUpdateTutor;
+        private System.Windows.Forms.Button btnFindTutor;
         private System.Windows.Forms.ComboBox cboSubjects;
         private System.Windows.Forms.Label label7;
     }

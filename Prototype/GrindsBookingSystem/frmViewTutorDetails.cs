@@ -8,20 +8,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static GrindsBookingSystem.frmAddStudent;
-using static GrindsBookingSystem.frmAddTutor;
-using static GrindsBookingSystem.frmHome;
 
 namespace GrindsBookingSystem
 {
     public partial class frmViewTutorDetails : Form
     {
+        List<ComboBox> comboBoxes;
         private bool updating = false;
         public frmViewTutorDetails()
         {
             InitializeComponent();
 
-            List<ComboBox> comboBoxes = loadComboBoxes.CreateComboList(cboTutorID, cboName, cboLastName);
+            comboBoxes = loadComboBoxes.CreateComboList(cboTutorID, cboName, cboLastName);
 
             loadComboBoxes.IDFirstnameSurname(comboBoxes, "Tutor");
             
@@ -61,80 +59,39 @@ namespace GrindsBookingSystem
                 return;
             }
 
+            updating = true;
 
             if (cbo == cboTutorID)
             {
-                ApplyFilters(cboTutorID.Text, "TutorID");
+                loadComboBoxes.ApplyFilters("'" + cboTutorID.Text + "'", "TutorID", "Tutor", comboBoxes, cbo);
             }
             else if (cbo == cboName)
             {
-                ApplyFilters("'" + cboName.Text + "'", "FirstName");
+                loadComboBoxes.ApplyFilters("'" + cboName.Text + "'", "FirstName", "Tutor", comboBoxes, cbo);
             }
             else if (cbo == cboLastName) 
             {
-                ApplyFilters("'" + cboLastName.Text + "'", "Surname");
+                loadComboBoxes.ApplyFilters("'" + cboLastName.Text + "'", "Surname", "Tutor", comboBoxes, cbo);
             }
 
+            updating = false;
         }
-        public void ApplyFilters(String value, String column)
+        
+
+
+        private void btnShowDetails_Click(object sender, EventArgs e)
         {
-            updating = true;
+            String details = Tutor.GetTutorDetails(Convert.ToInt32(cboTutorID.Items[0]));
 
-            String sql = "SELECT TutorID, FirstName, Surname FROM Tutors WHERE " + column + " = " + value;
-            DataSet ds = Database.ExecuteMultiRowQuery(sql);
-
-            cboTutorID.Items.Clear();
-            cboName.Items.Clear();
-            cboLastName.Items.Clear();
-
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            if (details != null)
             {
-                cboTutorID.Items.Add(ds.Tables[0].Rows[i][0].ToString());
-                cboName.Items.Add(ds.Tables[0].Rows[i][1]);
-                cboLastName.Items.Add(ds.Tables[0].Rows[i][2]);
-            }
-
-            if (cboTutorID.Items.Count > 1)
-            {
-                if(column == "FirstName")
-                {
-                    cboName.SelectedIndex = cboName.Items.IndexOf(value);
-                    cboTutorID.SelectedIndex = -1;
-                    cboLastName.SelectedIndex = -1;
-
-                }
-                else if (column == "Surname")
-                {
-                    cboName.SelectedIndex = -1;
-                    cboTutorID.SelectedIndex = -1;
-                    cboLastName.SelectedIndex = cboLastName.Items.IndexOf(value);
-
-                }
+                MessageBox.Show("The selected Tutors details are \n\n" + details,
+                    "Tutor Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                cboTutorID.SelectedIndex = 0;
-                cboName.SelectedIndex = 0;
-                cboLastName.SelectedIndex = 0;
-            }
-                updating = false;
-        }
-       
-        private void btnShowDetails_Click(object sender, EventArgs e)
-        {
-            cboTutorID.SelectedIndex = 0;
-
-            String sql = "SELECT * FROM Tutors WHERE TutorID = " + cboTutorID.Text;
-
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
-            dr.Read();
-
-            if (dr != null)
-            {
-                MessageBox.Show("The selected Tutors deatils are as follows\n\nTutor ID: " + dr.GetInt32(0).ToString() + "\nFirst Name: " +
-                                dr.GetString(1) + "\nSurname: " + dr.GetString(2) + "\nRate Code: " + dr.GetString(3) + "\nSubject: " +
-                                dr.GetString(4) + "\nPhone Number: " + dr.GetString(5) + "\nEmail Address: " + dr.GetString(6), "Tutor Details",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("The selected Tutor could not be found.",
+                    "Tutor Details", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

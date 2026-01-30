@@ -9,20 +9,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static GrindsBookingSystem.frmAddStudent;
-using static GrindsBookingSystem.frmHome;
 
 
 namespace GrindsBookingSystem
 {
     public partial class frmViewStudentDetails : Form
     {
+        List<ComboBox> comboBoxes;
+
         private bool updating = false;
         public frmViewStudentDetails()
         {
             InitializeComponent();
 
-            List<ComboBox> comboBoxes = loadComboBoxes.CreateComboList(cboStudentID, cboFirstName, cboLastName);
+            comboBoxes = loadComboBoxes.CreateComboList(cboStudentID, cboFirstName, cboLastName);
 
             loadComboBoxes.IDFirstnameSurname(comboBoxes, "Student");
 
@@ -56,7 +56,6 @@ namespace GrindsBookingSystem
 
         private void btnShowDetails_Click(object sender, EventArgs e)
         {
-            cboStudentID.SelectedIndex = 0;
 
             String sql = "SELECT * FROM Students WHERE StudentID = " + cboStudentID.Text;
 
@@ -82,62 +81,24 @@ namespace GrindsBookingSystem
                 return;
             }
 
+            updating = true;
+
             if (cbo == cboStudentID)
             {
-                ApplyFilters(cboStudentID.Text, "StudentID", "Student", comboBoxes, cbo);
+                loadComboBoxes.ApplyFilters("'" + cboStudentID.Text + "'", "StudentID", "Student", comboBoxes, cbo);
             }
             else if (cbo == cboFirstName)
             {
-                ApplyFilters("'" + cboFirstName.Text + "'", "FirstName", "Student", comboBoxes, cbo);
+                loadComboBoxes.ApplyFilters("'" + cboFirstName.Text + "'", "FirstName", "Student", comboBoxes, cbo);
             }
             else if (cbo == cboLastName)
             {
-                ApplyFilters("'" + cboLastName.Text + "'", "Surname", "Student", comboBoxes, cbo);
+                loadComboBoxes.ApplyFilters("'" + cboLastName.Text + "'", "Surname", "Student", comboBoxes, cbo);
             }
 
-        }
-        public void ApplyFilters(String value, String column, String location, List<ComboBox> c, ComboBox send)
-        {
-            updating = true;
-
-            String sql = "SELECT " + location + "ID, FirstName, Surname FROM " + location + "s WHERE " + column + " = " + value;
-            DataSet ds = Database.ExecuteMultiRowQuery(sql);
-
-            foreach (var cb in c)
-            {
-                cb.Items.Clear();
-            }
-
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-            {
-                c[0].Items.Add(ds.Tables[0].Rows[i][location + "ID"].ToString());
-                c[1].Items.Add(ds.Tables[0].Rows[i]["FirstName"].ToString());
-                c[2].Items.Add(ds.Tables[0].Rows[i]["Surname"].ToString());
-            }
-
-
-            if (c[0].Items.Count > 1)
-            {
-                foreach (var cb in c)
-                {
-                    cb.SelectedIndex = -1;
-                }
-            }
-            else
-            {
-                foreach (var cb in c)
-                {
-                    if (cb.Items.Count == 1)
-                    {
-                        cb.SelectedIndex = 0;
-                    }
-                    else
-                    {
-                        cb.SelectedIndex = -1;
-                    }
-                }
-            }
             updating = false;
+
         }
+       
     }
 }

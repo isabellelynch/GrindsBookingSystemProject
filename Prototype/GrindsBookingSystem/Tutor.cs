@@ -22,7 +22,7 @@ namespace GrindsBookingSystem
         public string Email { get; set; }
 
 
-        public Tutor() : this(0, "", "", "", "","","") { }
+        public Tutor() : this(0, "", "", "", "", "", "") { }
 
         public Tutor(int id, string name, string sname, string rate, string sub, string phoneNo, string emailAddress)
         {
@@ -85,8 +85,56 @@ namespace GrindsBookingSystem
             return Database.ExecuteMultiRowQuery(sql);
         }
 
-      
-       
-    }
+        public static Tutor GetTutor(int id)
+        {
+            String sql = "SELECT * FROM Tutors WHERE TutorID = " + id;
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+
+            dr.Read();
+
+            Tutor t = new Tutor(dr.GetInt32(0), dr.GetString(1), dr.GetString(2), dr.GetString(3), dr.GetString(4), dr.GetString(5), dr.GetString(6));
+
+            return t;
+
+        }
+
+        public static void UpdateTutor(int id, String rate, String sub, String email, String phone)
+        {
+            String sql = "UPDATE Tutors SET RateCode = '" + rate + "', SubjectCode = '" + sub +
+                "', Email = '" + email + "', PhoneNo = '" + phone + "' WHERE TutorID = " + id;
+            try
+            {
+                Database.ExecuteNonQuery(sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        public static String GetTutorDetails(int id)
+        {
+            try 
+            { 
+                String sql = "SELECT * FROM Tutors WHERE TutorID = " + id;
+
+                OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+                dr.Read();
+
+            
+                return "Tutor ID: " + dr.GetInt32(0).ToString() + "\nFirst Name: " + dr.GetString(1) + "\nSurname: " + 
+                        dr.GetString(2) + "\nRate Code: " + dr.GetString(3) + "\nSubject: " +
+                        dr.GetString(4) + "\nPhone Number: " + dr.GetString(5) + "\nEmail Address: " + dr.GetString(6);
+            }
+            catch 
+            {
+                return "";
+            }
+            
+             
+        }
+    } 
 }
 

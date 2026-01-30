@@ -15,18 +15,26 @@ namespace GrindsBookingSystem
 {
     public partial class frmUpdateTutor : Form
     {
+        List<ComboBox> comboBoxes;
+        private bool updating = false;
         public frmUpdateTutor()
         {
             InitializeComponent();
 
-            List<ComboBox> comboBoxes = loadComboBoxes.CreateComboList(cboTutID, cboNames, cboSurnames);
+            comboBoxes = loadComboBoxes.CreateComboList(cboTutID, cboNames, cboSurnames);
 
             loadComboBoxes.IDFirstnameSurname(comboBoxes, "Tutor");
+            loadComboBoxes.RateCodes(cboRates);
+            loadComboBoxes.Subjects(cboSubjects);
 
             grpTutorDetails.Visible = false;
 
-            loadComboBoxes.RateCodes(cboRates);
-            loadComboBoxes.Subjects(cboSubjects);
+            
+
+            foreach (var c in comboBoxes)
+            {
+                c.SelectedIndexChanged += ComboBoxChange;
+            }
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -46,15 +54,85 @@ namespace GrindsBookingSystem
                 Application.Exit();
             }
         }
-        public void goHome()
+
+
+        public void ComboBoxChange(object sender, EventArgs e)
         {
-            this.Hide();
-            Owner.Show();
+            if (updating) return;
+
+            ComboBox cbo = sender as ComboBox;
+
+            if (cbo == null || cbo.SelectedItem == null)
+            {
+                return;
+            }
+
+            updating = true;
+
+            if (cbo == cboTutID)
+            {
+                loadComboBoxes.ApplyFilters("'" + cboTutID.Text + "'", "TutorID", "Tutor", comboBoxes, cbo);
+            }
+            else if (cbo == cboNames)
+            {
+                loadComboBoxes.ApplyFilters("'" + cboNames.Text + "'", "FirstName", "Tutor", comboBoxes, cbo);
+            }
+            else if (cbo == cboSurnames)
+            {
+                loadComboBoxes.ApplyFilters("'" + cboSurnames.Text + "'", "Surname", "Tutor", comboBoxes, cbo);
+            }
+
+            updating = false;
+
         }
 
-        public void reset()
+        private void btnFindTutor_Click(object sender, EventArgs e)
         {
+            grpTutorDetails.Visible = true;
 
+            if (cboTutID.Items.Count > 1) 
+            {
+                return;
+            }
+
+            Tutor t = Tutor.GetTutor(Convert.ToInt32(cboTutID.Items[0]));
+
+            cboRates.Text = t.RateCode;
+            cboSubjects.Text = t.Subject;
+            txtEmail.Text = t.Email;
+            txtPhone.Text = t.Phone;
+
+            cboTutID.Enabled = false;
+            cboNames.Enabled = false;
+            cboSurnames.Enabled = false;
+            
+        }
+
+        private void btnUpdateTutor_Click(object sender, EventArgs e)
+        {
+            Tutor.UpdateTutor(Convert.ToInt32(cboTutID.Text), cboRates.Text.Substring(0, 3),
+                cboSubjects.Text.Substring(0, 3), txtPhone.Text, txtEmail.Text);
+
+            String details = Tutor.GetTutorDetails(Convert.ToInt32(cboTutID.Items[0]));
+
+            if (details != null)
+            {
+                MessageBox.Show("The selected Tutor has been updated and their details are now as follows\n\n" +
+                    details, "Tutor Updated Successfully",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("The selected Tutor could not be found.",
+                    "Tutor Details", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            ResetPage();
+        }
+
+        private void ResetPage()
+        {
+            
         }
     }
 }
