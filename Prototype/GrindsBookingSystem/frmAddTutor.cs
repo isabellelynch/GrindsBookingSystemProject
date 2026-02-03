@@ -24,10 +24,18 @@ namespace GrindsBookingSystem
         }
         private void btnAddTutor_Click(object sender, EventArgs e)
         {
+            if(!Validation.ComboSelected(cboTutorRates) || !Validation.ComboSelected(cboTutorSubjects))
+            {
+                MessageBox.Show("Tutor Rate and Subject must be selected, please try again.",
+                    "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             String rate = cboTutorRates.Text.Substring(0,3);
+            
             String subject = cboTutorSubjects.Text.Substring(0,3);
 
             Tutor t = new Tutor(Tutor.GetNextTutorID(), txtTutorName.Text, txtTutorSurname.Text, rate, subject, txtTutorPhone.Text, txtTutorEmail.Text);
+
             if(Tutor.IsValidTutor(t) == "Valid")
             {
                 t.AddTutor();

@@ -132,8 +132,6 @@ namespace GrindsBookingSystem
             {
                 return "";
             }
-            
-             
         }
 
         public static String IsValidTutor(Tutor t)
@@ -150,7 +148,7 @@ namespace GrindsBookingSystem
             {
                 return "Email not in the correct format.";
             }
-            else if (!Validation.Phone(t.Phone))
+            else if (!Validation.IrishPhoneNumber(t.Phone))
             {
                 return "Phone Number not in the correct format, must be XXX-XXXXXXX.";
             }
