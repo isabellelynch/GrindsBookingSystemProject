@@ -36,7 +36,7 @@ namespace GrindsBookingSystem
 
             Tutor t = new Tutor(Tutor.GetNextTutorID(), txtTutorName.Text, txtTutorSurname.Text, rate, subject, txtTutorPhone.Text, txtTutorEmail.Text);
 
-            if(Tutor.IsValidTutor(t) == "Valid")
+            if(Tutor.IsValidPerson(t) == "Valid")
             {
                 t.AddTutor();
 
@@ -55,7 +55,7 @@ namespace GrindsBookingSystem
             }
             else
             {
-                MessageBox.Show("Invalid Entry, " + Tutor.IsValidTutor(t), "Invalid!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Invalid Entry, " + Tutor.IsValidPerson(t), "Invalid!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
         

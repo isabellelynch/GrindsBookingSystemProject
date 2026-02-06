@@ -23,6 +23,15 @@ namespace GrindsBookingSystem
 
         private void btnAddStudent_Click(object sender, EventArgs e)
         {
+            Student s = new Student(Person.GetNextID(), txtStudentName.Text, txtStudentSurname.Text, txtStudentEmail.Text, txtStudentPhone.Text);
+
+            if (Person.IsValidPerson(s) != "Valid")
+            {
+                MessageBox.Show(Person.IsValidPerson(s) + "\nPlease make the necessary changes to the information and try again",
+                    "Invalid!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             DialogResult result = MessageBox.Show("Are you sure you wish to add student " + txtStudentName.Text + " " +
                                                     txtStudentSurname.Text + "to the system ?",
                                                     "Please Confirm",
@@ -30,9 +39,7 @@ namespace GrindsBookingSystem
                                                     MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                Student s = new Student(Student.GetNextStudentID(), txtStudentName.Text, txtStudentSurname.Text, txtStudentEmail.Text, txtStudentPhone.Text);
-
-                s.AddStudent();
+                s.AddStudent(s);
 
                 MessageBox.Show("Student " + txtStudentName.Text + txtStudentSurname.Text + "has been succesfully added to the system.",
                                 "Success",
@@ -43,27 +50,20 @@ namespace GrindsBookingSystem
                                                         "Please Confirm",
                                                         MessageBoxButtons.YesNo,
                                                         MessageBoxIcon.Question);
-                if (addAnother == DialogResult.Yes)
-                {
-                    clearUI();
-                }
-                else
+                if (addAnother == DialogResult.No)
                 {
                     goHome();
                 }
-
-                return;
             }
             else
             {
                 MessageBox.Show("Adding Student Function Cancelled",
                                 "Cancelled",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Warning);
-
-                clearUI();
-                return;
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Warning);
             }
+            clearUI();
+            return;
         }
 
 
@@ -78,11 +78,8 @@ namespace GrindsBookingSystem
         }
         public void goHome()
         {
-            clearUI();
-            frmHome home = new frmHome();
-            home.Show();
+            Owner.Show();
             this.Close();
-
         }
 
 
@@ -100,8 +97,7 @@ namespace GrindsBookingSystem
 
         private void backBtnAddStudent_Click(object sender, EventArgs e)
         {
-            Owner.Show();
-            this.Hide();
+            goHome();
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)

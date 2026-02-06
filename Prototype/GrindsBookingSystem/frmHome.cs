@@ -26,9 +26,9 @@ namespace GrindsBookingSystem
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new frmAddTutor();
-            form.Owner = this;
-            form.Show();
+            Form f = new frmAddTutor();
+            f.Owner = this;
+            f.Show();
             this.Hide();
         }
 

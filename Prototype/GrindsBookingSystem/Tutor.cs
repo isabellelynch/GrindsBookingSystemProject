@@ -11,83 +11,48 @@ using System.Xml.Linq;
 
 namespace GrindsBookingSystem
 {
-    public class Tutor
+    public class Tutor : Person
     {
-        public int TutorID { get; set; }
-        public string FirstName { get; set; }
-        public string Surname { get; set; }
         public string RateCode { get; set; }
         public string Subject { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
 
 
-        public Tutor() : this(0, "", "", "", "", "", "") { }
-
-        public Tutor(int id, string name, string sname, string rate, string sub, string phoneNo, string emailAddress)
+        public Tutor(int id, string name, string sname, string rate, string sub, string phoneNo, string emailAddress) 
+            : base(id, name, sname, phoneNo, emailAddress)
         {
-            TutorID = id;
-            FirstName = name;
-            Surname = sname;
             RateCode = rate;
             Subject = sub;
-            Phone = phoneNo;
-            Email = emailAddress;
         }
 
-        public String toString()
+        public override String ToString()
         {
-            return "Tutor ID : " + TutorID + ", " + FirstName + ", " + Surname;
-        }
-
-        public static int GetNextTutorID()
-        {
-            string sqlQuery = "SELECT TutorID_SEQ.NEXTVAL FROM DUAL";
-
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sqlQuery);
-
-            dr.Read();
-
-            int nextIDnum;
-            if (dr.IsDBNull(0))
-            {
-                nextIDnum = 1;
-            }
-            else
-            {
-                nextIDnum = dr.GetInt32(0);
-            }
-
-
-            dr.Close();
-            return nextIDnum;
+            return base.ToString() + "\nRate Code : " + RateCode +
+                "\nSubject Code : " + Subject;
         }
 
         public void AddTutor()
         {
+            AddPerson(this);
+
             Debug.WriteLine(this);
 
             string sql = "INSERT INTO Tutors VALUES (" +
-                TutorID + ",'" +
-                FirstName + "','" +
-                Surname + "','" +
+                base.PersonID + ",'" +
                 RateCode + "','" +
-                Subject + "','" +
-                Email + "','" +
-                Phone + "')";
+                Subject + "','";
 
             Database.ExecuteNonQuery(sql);
         }
 
         public static DataSet GetAllTutors()
         {
-            String sql = "SELECT TutorID, FirstName, Surname FROM Tutors ORDER BY TutorID";
+            String sql = "SELECT t.TutorID, p.FirstName, p.Surname FROM People p JOIN Tutors t ON t.TutorID = p.PersonID ORDER BY TutorID";
             return Database.ExecuteMultiRowQuery(sql);
         }
 
         public static Tutor GetTutor(int id)
         {
-            String sql = "SELECT * FROM Tutors WHERE TutorID = " + id;
+            String sql = "SELECT * FROM People WHERE PersonID = " + id;
 
             OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
 
@@ -96,16 +61,16 @@ namespace GrindsBookingSystem
             Tutor t = new Tutor(dr.GetInt32(0), dr.GetString(1), dr.GetString(2), dr.GetString(3), dr.GetString(4), dr.GetString(5), dr.GetString(6));
 
             return t;
-
         }
 
-        public static void UpdateTutor(int id, String rate, String sub, String email, String phone)
+        public static void UpdateTutor(Tutor t)
         {
-            String sql = "UPDATE Tutors SET RateCode = '" + rate + "', SubjectCode = '" + sub +
-                "', Email = '" + email + "', PhoneNo = '" + phone + "' WHERE TutorID = " + id;
+            String sql = "UPDATE People SET Email = '" + t.Email + "', PhoneNo = '" + t.Phone + "' WHERE TutorID = " + t.PersonID;
+            String sql2 = "UPDATE Tutors SET RateCode = '" + t.RateCode + "', SubjectCode = '" + t.Subject;
             try
             {
                 Database.ExecuteNonQuery(sql);
+                Database.ExecuteNonQuery(sql2);
             }
             catch (Exception ex)
             {
@@ -131,38 +96,6 @@ namespace GrindsBookingSystem
             catch 
             {
                 return "";
-            }
-        }
-
-        public static String IsValidTutor(Tutor t)
-        {
-            if (!Validation.Name(t.FirstName))
-            {
-                return "First Name not in the correct format.";
-            }
-            else if(!Validation.Name(t.Surname))
-            {
-                return "Surname not in the correct format.";
-            }
-            else if (!Validation.Email(t.Email))
-            {
-                return "Email not in the correct format.";
-            }
-            else if (!Validation.IrishPhoneNumber(t.Phone))
-            {
-                return "Phone Number not in the correct format, must be XXX-XXXXXXX.";
-            }
-            else if (string.IsNullOrWhiteSpace(t.RateCode))
-            {
-                return "Rate Code must be selected";
-            }
-            else if (string.IsNullOrWhiteSpace(t.Subject))
-            {
-                return "Subject must be selected";
-            }
-            else
-            {
-                return "Valid";
             }
         }
     } 

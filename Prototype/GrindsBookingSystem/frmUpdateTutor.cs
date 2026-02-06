@@ -102,10 +102,26 @@ namespace GrindsBookingSystem
 
         private void btnUpdateTutor_Click(object sender, EventArgs e)
         {
-            Tutor.UpdateTutor(Convert.ToInt32(cboTutorID.Text), cboRates.Text.Substring(0, 3),
+            Tutor t = new Tutor(Convert.ToInt32(cboTutorID.Text),cboNames.Text, cboSurnames.Text, cboRates.Text.Substring(0, 3),
                 cboSubjects.Text.Substring(0, 3), txtPhone.Text, txtEmail.Text);
 
-            String details = Tutor.GetTutorDetails(Convert.ToInt32(cboTutorID.Items[0]));
+            if (Tutor.IsValidPerson(t) != "Valid")
+            {
+                return;
+            }
+
+            Tutor t2 = Tutor.GetTutor(t.PersonID);
+
+            if (t2 == null) { return; }
+
+            t2.RateCode = t.RateCode;
+            t2.Subject = t.Subject;
+            t2.Email = t.Email;
+            t2.Phone = t.Phone;
+
+            Tutor.UpdateTutor(t2);
+
+            String details = Tutor.GetTutorDetails(t2.PersonID);
 
             if (details != null)
             {
