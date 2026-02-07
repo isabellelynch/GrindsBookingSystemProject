@@ -34,11 +34,11 @@ namespace GrindsBookingSystem
             
             String subject = cboTutorSubjects.Text.Substring(0,3);
 
-            Tutor t = new Tutor(Tutor.GetNextTutorID(), txtTutorName.Text, txtTutorSurname.Text, rate, subject, txtTutorPhone.Text, txtTutorEmail.Text);
+            Tutor t = new Tutor(Person.GetNextID(), txtTutorName.Text, txtTutorSurname.Text, rate, subject, txtTutorEmail.Text, txtTutorPhone.Text);
 
             if(Tutor.IsValidPerson(t) == "Valid")
             {
-                t.AddTutor();
+                t.AddTutor(t);
 
                 DialogResult addAnother = MessageBox.Show("Tutor " + txtTutorName.Text + " " + txtTutorSurname.Text + " has been succesfully added to the system. Would you like to add another Tutor?",
                                                             "Success",
@@ -69,9 +69,8 @@ namespace GrindsBookingSystem
 
         public void ClearUI()
         {
-            loadComboBoxes.ClearControls(this.Controls);
-            loadComboBoxes.RateCodes(cboTutorRates);
-            loadComboBoxes.Subjects(cboTutorSubjects);
+            ControlFunctions.FillRatesAndSubjects(cboTutorRates, cboTutorSubjects);
+            ControlFunctions.ClearTextBoxes(txtTutorName, txtTutorSurname, txtTutorEmail, txtTutorPhone);
         }
 
 

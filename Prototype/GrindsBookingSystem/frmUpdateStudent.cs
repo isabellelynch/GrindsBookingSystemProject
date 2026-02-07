@@ -19,10 +19,7 @@ namespace GrindsBookingSystem
         public frmUpdateStudent()
         {
             InitializeComponent();
-
-            List<ComboBox> comboBoxes = loadComboBoxes.CreateComboList(cboStudentID, cboNames, cboSurnames);
-
-            loadComboBoxes.IDFirstnameSurname(comboBoxes, "Student");
+            ControlFunctions.FillBoxes("Students", cboStudentID, cboNames, cboSurnames);
         }
 
         private void btnBack_Click(object sender, EventArgs e)

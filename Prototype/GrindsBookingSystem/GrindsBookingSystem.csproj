@@ -194,7 +194,7 @@
     <Compile Include="frmRemoveTutor.Designer.cs">
       <DependentUpon>frmRemoveTutor.cs</DependentUpon>
     </Compile>
-    <Compile Include="loadComboBoxes.cs" />
+    <Compile Include="ControlFunctions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Refund.cs" />

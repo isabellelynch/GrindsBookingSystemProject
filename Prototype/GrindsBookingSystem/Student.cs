@@ -23,12 +23,14 @@ namespace GrindsBookingSystem
 
         public void AddStudent(Student s)
         {
-            AddPerson(s);
+            Person p = s;
+
+            AddPerson(p);
 
             Debug.WriteLine(this);
 
             string sql = "INSERT INTO Students VALUES (" +
-                base.PersonID;
+                p.PersonID;
 
             Database.ExecuteNonQuery(sql);
         }

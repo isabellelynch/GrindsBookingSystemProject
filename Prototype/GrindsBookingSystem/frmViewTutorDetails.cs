@@ -19,9 +19,9 @@ namespace GrindsBookingSystem
         {
             InitializeComponent();
 
-            comboBoxes = loadComboBoxes.CreateComboList(cboTutorID, cboName, cboLastName);
+            ControlFunctions.FillBoxes("Tutors", cboTutorID, cboName, cboLastName);
 
-            loadComboBoxes.IDFirstnameSurname(comboBoxes, "Tutor");
+            comboBoxes = ControlFunctions.CreateComboList(cboTutorID, cboName, cboLastName);
             
             foreach(ComboBox cb  in comboBoxes)
             {
@@ -63,20 +63,21 @@ namespace GrindsBookingSystem
 
             if (cbo == cboTutorID)
             {
-                loadComboBoxes.ApplyFilters("'" + cboTutorID.Text + "'", "TutorID", "Tutor", comboBoxes, cbo);
+                ControlFunctions.ApplyFilters("'" + cboTutorID.Text + "'", "TutorID", "Tutors", cboTutorID, cboName, cboLastName);
             }
             else if (cbo == cboName)
             {
-                loadComboBoxes.ApplyFilters("'" + cboName.Text + "'", "FirstName", "Tutor", comboBoxes, cbo);
+                ControlFunctions.ApplyFilters("'" + cboName.Text + "'", "FirstName", "Tutors", cboTutorID, cboName, cboLastName);
             }
-            else if (cbo == cboLastName) 
+            else if (cbo == cboLastName)
             {
-                loadComboBoxes.ApplyFilters("'" + cboLastName.Text + "'", "Surname", "Tutor", comboBoxes, cbo);
+                ControlFunctions.ApplyFilters("'" + cboLastName.Text + "'", "Surname", "Tutors", cboTutorID, cboName, cboLastName);
             }
 
             updating = false;
+
         }
-        
+
 
 
         private void btnShowDetails_Click(object sender, EventArgs e)

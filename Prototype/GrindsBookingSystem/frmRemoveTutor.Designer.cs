@@ -33,11 +33,11 @@
             this.btnBack = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
-            this.cboTutID = new System.Windows.Forms.ComboBox();
+            this.cboTutorID = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.cboNames = new System.Windows.Forms.ComboBox();
-            this.cboSurnames = new System.Windows.Forms.ComboBox();
+            this.cboFirstName = new System.Windows.Forms.ComboBox();
+            this.cboSurname = new System.Windows.Forms.ComboBox();
             this.btnRemoveTutor = new System.Windows.Forms.Button();
             this.btnResetFilters = new System.Windows.Forms.Button();
             this.dgvRemoveTutor = new System.Windows.Forms.DataGridView();
@@ -89,13 +89,13 @@
             this.label1.TabIndex = 15;
             this.label1.Text = "Tutor ID";
             // 
-            // cboTutID
+            // cboTutorID
             // 
-            this.cboTutID.FormattingEnabled = true;
-            this.cboTutID.Location = new System.Drawing.Point(369, 32);
-            this.cboTutID.Name = "cboTutID";
-            this.cboTutID.Size = new System.Drawing.Size(121, 21);
-            this.cboTutID.TabIndex = 16;
+            this.cboTutorID.FormattingEnabled = true;
+            this.cboTutorID.Location = new System.Drawing.Point(369, 32);
+            this.cboTutorID.Name = "cboTutorID";
+            this.cboTutorID.Size = new System.Drawing.Size(121, 21);
+            this.cboTutorID.TabIndex = 16;
             // 
             // label2
             // 
@@ -115,21 +115,21 @@
             this.label3.TabIndex = 18;
             this.label3.Text = "Surname";
             // 
-            // cboNames
+            // cboFirstName
             // 
-            this.cboNames.FormattingEnabled = true;
-            this.cboNames.Location = new System.Drawing.Point(369, 62);
-            this.cboNames.Name = "cboNames";
-            this.cboNames.Size = new System.Drawing.Size(121, 21);
-            this.cboNames.TabIndex = 20;
+            this.cboFirstName.FormattingEnabled = true;
+            this.cboFirstName.Location = new System.Drawing.Point(369, 62);
+            this.cboFirstName.Name = "cboFirstName";
+            this.cboFirstName.Size = new System.Drawing.Size(121, 21);
+            this.cboFirstName.TabIndex = 20;
             // 
-            // cboSurnames
+            // cboSurname
             // 
-            this.cboSurnames.FormattingEnabled = true;
-            this.cboSurnames.Location = new System.Drawing.Point(369, 92);
-            this.cboSurnames.Name = "cboSurnames";
-            this.cboSurnames.Size = new System.Drawing.Size(121, 21);
-            this.cboSurnames.TabIndex = 21;
+            this.cboSurname.FormattingEnabled = true;
+            this.cboSurname.Location = new System.Drawing.Point(369, 92);
+            this.cboSurname.Name = "cboSurname";
+            this.cboSurname.Size = new System.Drawing.Size(121, 21);
+            this.cboSurname.TabIndex = 21;
             // 
             // btnRemoveTutor
             // 
@@ -165,11 +165,11 @@
             this.Controls.Add(this.dgvRemoveTutor);
             this.Controls.Add(this.btnResetFilters);
             this.Controls.Add(this.btnRemoveTutor);
-            this.Controls.Add(this.cboSurnames);
-            this.Controls.Add(this.cboNames);
+            this.Controls.Add(this.cboSurname);
+            this.Controls.Add(this.cboFirstName);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.cboTutID);
+            this.Controls.Add(this.cboTutorID);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.Name = "frmRemoveTutor";
@@ -189,11 +189,11 @@
         private System.Windows.Forms.ToolStripMenuItem btnBack;
         private System.Windows.Forms.ToolStripMenuItem btnRefresh;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cboTutID;
+        private System.Windows.Forms.ComboBox cboTutorID;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cboNames;
-        private System.Windows.Forms.ComboBox cboSurnames;
+        private System.Windows.Forms.ComboBox cboFirstName;
+        private System.Windows.Forms.ComboBox cboSurname;
         private System.Windows.Forms.Button btnRemoveTutor;
         private System.Windows.Forms.Button btnResetFilters;
         private System.Windows.Forms.DataGridView dgvRemoveTutor;

@@ -22,9 +22,9 @@ namespace GrindsBookingSystem
         {
             InitializeComponent();
 
-            comboBoxes = loadComboBoxes.CreateComboList(cboStudentID, cboFirstName, cboLastName);
+            ControlFunctions.FillBoxes("Students", cboStudentID, cboFirstName, cboLastName);
 
-            loadComboBoxes.IDFirstnameSurname(comboBoxes, "Student");
+            comboBoxes = ControlFunctions.CreateComboList(cboStudentID, cboFirstName, cboLastName);
 
             foreach(ComboBox cb in comboBoxes)
             {
@@ -85,15 +85,15 @@ namespace GrindsBookingSystem
 
             if (cbo == cboStudentID)
             {
-                loadComboBoxes.ApplyFilters("'" + cboStudentID.Text + "'", "StudentID", "Student", comboBoxes, cbo);
+                ControlFunctions.ApplyFilters("'" + cboStudentID.Text + "'", "StudentID", "Student", cboStudentID, cboFirstName, cboLastName);
             }
             else if (cbo == cboFirstName)
             {
-                loadComboBoxes.ApplyFilters("'" + cboFirstName.Text + "'", "FirstName", "Student", comboBoxes, cbo);
+                ControlFunctions.ApplyFilters("'" + cboFirstName.Text + "'", "FirstName", "Student", cboStudentID, cboFirstName, cboLastName);
             }
             else if (cbo == cboLastName)
             {
-                loadComboBoxes.ApplyFilters("'" + cboLastName.Text + "'", "Surname", "Student", comboBoxes, cbo);
+                ControlFunctions.ApplyFilters("'" + cboLastName.Text + "'", "Surname", "Student", cboStudentID, cboFirstName, cboLastName);
             }
 
             updating = false;

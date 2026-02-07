@@ -10,23 +10,32 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static GrindsBookingSystem.frmAddTutor;
 using static GrindsBookingSystem.frmHome;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using ComboBox = System.Windows.Forms.ComboBox;
 
 namespace GrindsBookingSystem
 {
 
     public partial class frmRemoveTutor : Form
     {
+        List<ComboBox> comboBoxes;
+        private bool updating = false;
         public frmRemoveTutor()
         {
             InitializeComponent();
-
-            List<ComboBox> comboBoxes = loadComboBoxes.CreateComboList(cboTutID, cboNames, cboSurnames);
 
             dgvRemoveTutor.DataSource = Tutor.GetAllTutors().Tables[0];
 
             formatGridView(dgvRemoveTutor);
 
-            loadComboBoxes.IDFirstnameSurname(comboBoxes, "Tutor");
+            ControlFunctions.FillBoxes("Tutors", cboTutorID, cboFirstName, cboSurname);
+
+            comboBoxes = ControlFunctions.CreateComboList(cboTutorID, cboFirstName, cboSurname);
+
+            foreach (ComboBox cb in comboBoxes)
+            {
+                cb.SelectedIndexChanged += ComboBoxChange;
+            }
         }
 
 
@@ -61,8 +70,38 @@ namespace GrindsBookingSystem
             grid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             grid.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
         }
+        public void ComboBoxChange(object sender, EventArgs e)
+        {
+            if (updating) return;
 
-       
+            ComboBox cbo = sender as ComboBox;
+
+            if (cbo == null || cbo.SelectedItem == null)
+            {
+                return;
+            }
+
+            updating = true;
+
+            if (cbo == cboTutorID)
+            {
+                ControlFunctions.ApplyFilters("'" + cboTutorID.Text + "'", "TutorID", "Tutors", cboTutorID, cboFirstName, cboSurname);
+            }
+            else if (cbo == cboFirstName)
+            {
+                ControlFunctions.ApplyFilters("'" + cboFirstName.Text + "'", "FirstName", "Tutors", cboTutorID, cboFirstName, cboSurname);
+            }
+            else if (cbo == cboSurname)
+            {
+                ControlFunctions.ApplyFilters("'" + cboSurname.Text + "'", "Surname", "Tutors", cboTutorID, cboFirstName, cboSurname);
+            }
+
+            dgvRemoveTutor.DataSource = Tutor.GetSpecificTutors(cboTutorID).Tables[0];
+
+            updating = false;
+
+        }
+
 
 
     }

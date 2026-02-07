@@ -20,7 +20,7 @@ namespace GrindsBookingSystem
         public frmUpdateTutor()
         {
             InitializeComponent();
-            comboBoxes = loadComboBoxes.CreateComboList(cboTutorID, cboNames, cboSurnames);
+            comboBoxes = ControlFunctions.CreateComboList(cboTutorID, cboNames, cboSurnames);
             ClearUI();
 
             foreach (var c in comboBoxes)
@@ -63,15 +63,15 @@ namespace GrindsBookingSystem
 
             if (cbo == cboTutorID)
             {
-                loadComboBoxes.ApplyFilters("'" + cboTutorID.Text + "'", "TutorID", "Tutor", comboBoxes, cbo);
+                ControlFunctions.ApplyFilters("'" + cboTutorID.Text + "'", "TutorID", "Tutors", cboTutorID, cboNames, cboSurnames);
             }
             else if (cbo == cboNames)
             {
-                loadComboBoxes.ApplyFilters("'" + cboNames.Text + "'", "FirstName", "Tutor", comboBoxes, cbo);
+                ControlFunctions.ApplyFilters("'" + cboNames.Text + "'", "FirstName", "Tutors", cboTutorID, cboNames, cboSurnames);
             }
             else if (cbo == cboSurnames)
             {
-                loadComboBoxes.ApplyFilters("'" + cboSurnames.Text + "'", "Surname", "Tutor", comboBoxes, cbo);
+                ControlFunctions.ApplyFilters("'" + cboSurnames.Text + "'", "Surname", "Tutors", cboTutorID, cboNames, cboSurnames);
             }
 
             updating = false;
@@ -103,7 +103,7 @@ namespace GrindsBookingSystem
         private void btnUpdateTutor_Click(object sender, EventArgs e)
         {
             Tutor t = new Tutor(Convert.ToInt32(cboTutorID.Text),cboNames.Text, cboSurnames.Text, cboRates.Text.Substring(0, 3),
-                cboSubjects.Text.Substring(0, 3), txtPhone.Text, txtEmail.Text);
+                cboSubjects.Text.Substring(0, 3), txtEmail.Text, txtPhone.Text);
 
             if (Tutor.IsValidPerson(t) != "Valid")
             {
@@ -140,7 +140,8 @@ namespace GrindsBookingSystem
 
         private void ClearUI()
         {
-            loadComboBoxes.ClearControls(this.Controls);
+            ControlFunctions.ClearCombos(cboTutorID, cboNames, cboSurnames, cboRates, cboSubjects);
+            ControlFunctions.ClearTextBoxes(txtEmail, txtPhone);
 
             grpTutorDetails.Visible = false;
 
@@ -148,9 +149,8 @@ namespace GrindsBookingSystem
             cboNames.Enabled = true;
             cboSurnames.Enabled = true;
 
-            loadComboBoxes.IDFirstnameSurname(comboBoxes, "Tutor");
-            loadComboBoxes.RateCodes(cboRates);
-            loadComboBoxes.Subjects(cboSubjects);
+            ControlFunctions.FillRatesAndSubjects(cboRates, cboSubjects);
+            ControlFunctions.FillBoxes("Tutors", cboTutorID, cboNames, cboSurnames);
         }
 
      
