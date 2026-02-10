@@ -23,11 +23,11 @@ namespace GrindsBookingSystem
 
         private void btnAddStudent_Click(object sender, EventArgs e)
         {
-            Student s = new Student(Person.GetNextID(), txtStudentName.Text, txtStudentSurname.Text, txtStudentEmail.Text, txtStudentPhone.Text);
+            Student s = new Student(Student.GetNextID(), txtStudentName.Text, txtStudentSurname.Text, txtStudentEmail.Text, txtStudentPhone.Text, "A");
 
-            if (Person.IsValidPerson(s) != "Valid")
+            if (s.IsValid() != "Valid")
             {
-                MessageBox.Show(Person.IsValidPerson(s) + "\nPlease make the necessary changes to the information and try again",
+                MessageBox.Show(s.IsValid() + "\nPlease make the necessary changes to the information and try again",
                     "Invalid!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -39,7 +39,7 @@ namespace GrindsBookingSystem
                                                     MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                s.AddStudent(s);
+                s.Add();
 
                 MessageBox.Show("Student " + txtStudentName.Text + txtStudentSurname.Text + "has been succesfully added to the system.",
                                 "Success",
@@ -70,11 +70,7 @@ namespace GrindsBookingSystem
 
         public void clearUI()
         {
-            txtStudentName.Clear();
-            txtStudentSurname.Clear();
-            txtStudentEmail.Clear();
-            txtStudentPhone.Clear();
-
+            ControlFunctions.ClearTextBoxes(txtStudentName, txtStudentSurname, txtStudentEmail, txtStudentPhone);
         }
         public void goHome()
         {
@@ -95,10 +91,6 @@ namespace GrindsBookingSystem
             }
         }
 
-        private void backBtnAddStudent_Click(object sender, EventArgs e)
-        {
-            goHome();
-        }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {

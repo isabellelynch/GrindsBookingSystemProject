@@ -26,6 +26,10 @@ namespace GrindsBookingSystem
 
         public static bool Email(String e)
         {
+            // Email validation pattern inspired by RFC 5322.
+            // Full RFC-compliant validation is complex and intentionally relaxed here
+            // to balance correctness and usability.
+
             if (e.Length >= 255) { return false; }
 
             int index = e.IndexOf("@");
@@ -97,11 +101,19 @@ namespace GrindsBookingSystem
 
         public static bool IrishPhoneNumber(String p)
         {
-            if(p.Length != 11)
+            // Validates a simplified Irish mobile phone number format (08X-XXXXXXX).
+            // Based on the Irish National Numbering Plan (ComReg, Ireland)
+            // and ITU-T Recommendation E.164.
+            // Note: This validation enforces a local-format pattern and does not
+            // support international (+353) representations.
+
+            String validThirdChars = "35679";
+
+            if (p.Length != 11)
             {
                 return false;
             }
-            if (p[0] != '0' || p[1] != '8' || p[3] != '-')
+            if (p[0] != '0' || p[1] != '8' || p[3] != '-' || !validThirdChars.Contains(p[2]))
             {
                 return false;
             }

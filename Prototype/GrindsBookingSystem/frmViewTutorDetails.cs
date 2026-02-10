@@ -82,7 +82,8 @@ namespace GrindsBookingSystem
 
         private void btnShowDetails_Click(object sender, EventArgs e)
         {
-            String details = Tutor.GetTutorDetails(Convert.ToInt32(cboTutorID.Items[0]));
+            Tutor t = Tutor.GetTutor(Convert.ToInt32(cboTutorID.Items[0]));
+            String details = t.View(t.PersonID);
 
             if (details != null)
             {

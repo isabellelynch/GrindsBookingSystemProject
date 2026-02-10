@@ -24,7 +24,7 @@ namespace GrindsBookingSystem
         {
             InitializeComponent();
 
-            dgvRemoveTutor.DataSource = Tutor.GetAllTutors().Tables[0];
+            //dgvRemoveTutor.DataSource = Tutor.RetrieveAll().Tables[0];
 
             formatGridView(dgvRemoveTutor);
 

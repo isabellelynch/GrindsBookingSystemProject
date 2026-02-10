@@ -23,24 +23,8 @@ namespace GrindsBookingSystem
 
         private void frmAddGrind_Load(object sender, EventArgs e)
         {
-
-            LoadRooms();
+            ControlFunctions.FillSingleBox(cboRooms, "R302", "S302", "T302", "R300", "S304", "S306", "R200", "S300");
             SetDateTimeFormat();
-        }
-
-
-        public void LoadRooms()
-        {
-            cboRooms.Items.Clear();
-            cboRooms.Items.Add("R302");
-            cboRooms.Items.Add("S302");
-            cboRooms.Items.Add("T302");
-            cboRooms.Items.Add("R300");
-            cboRooms.Items.Add("S304");
-            cboRooms.Items.Add("S306");
-            cboRooms.Items.Add("R200");
-            cboRooms.Items.Add("S300");
-
         }
 
         public void SetDateTimeFormat()
@@ -103,9 +87,9 @@ namespace GrindsBookingSystem
         {
             pickDate.Value = DateTime.Now;
             pickTime.Value = DateTime.Now;
-            txtAttendance.Text = "";
-            cboRooms.SelectedIndex = -1;
-            cboTutors.SelectedIndex = -1;
+
+            ControlFunctions.DeselectAll(cboRooms, cboTutors);
+            ControlFunctions.ClearTextBoxes(txtAttendance);
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)

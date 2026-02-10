@@ -43,6 +43,14 @@ namespace GrindsBookingSystem
 
         }
 
+        public static void FillSingleBox(ComboBox cb, params String[] s)
+        {
+            foreach(String item in s)
+            {
+                cb.Items.Add(item);
+            }
+        }
+
         public static void FillRatesAndSubjects(ComboBox cb, ComboBox cb1)
         {
             ClearCombos(cb);
@@ -172,6 +180,22 @@ namespace GrindsBookingSystem
             foreach(ComboBox c in cb)
             {
                 c.SelectedIndex = -1;
+            }
+        }
+
+        public static void EnableBoxes(params ComboBox[] cb)
+        {
+            foreach(ComboBox c in cb)
+            {
+                c.Enabled = true;
+            }
+        }
+
+        public static void DisableBoxes(params ComboBox[] cb)
+        {
+            foreach (ComboBox c in cb)
+            {
+                c.Enabled = false;
             }
         }
 

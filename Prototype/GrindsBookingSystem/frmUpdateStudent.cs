@@ -19,6 +19,7 @@ namespace GrindsBookingSystem
         public frmUpdateStudent()
         {
             InitializeComponent();
+            grpStudentDetails.Visible = false;
             ControlFunctions.FillBoxes("Students", cboStudentID, cboNames, cboSurnames);
         }
 
@@ -44,18 +45,6 @@ namespace GrindsBookingSystem
             this.Hide();
             Owner.Show();
         }
-        public void reset()
-        {
-
-        }
-
-        private void frmUpdateStudent_Load_1(object sender, EventArgs e)
-        {
-
-            grpStudentDetails.Visible = false;
-        }
-
-
 
         private void btnBack_Click_1(object sender, EventArgs e)
         {

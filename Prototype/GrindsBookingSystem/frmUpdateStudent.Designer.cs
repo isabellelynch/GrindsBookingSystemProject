@@ -255,7 +255,6 @@
             this.Controls.Add(this.label1);
             this.Name = "frmUpdateStudent";
             this.Text = "Grinds Booking System - Update Student Details";
-            this.Load += new System.EventHandler(this.frmUpdateStudent_Load_1);
             this.grpStudentDetails.ResumeLayout(false);
             this.grpStudentDetails.PerformLayout();
             this.menuStrip1.ResumeLayout(false);

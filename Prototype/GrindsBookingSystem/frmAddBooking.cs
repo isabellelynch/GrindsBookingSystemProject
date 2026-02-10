@@ -21,19 +21,19 @@ namespace GrindsBookingSystem
         {
             InitializeComponent();
             grpMakeBooking.Visible = false;
+
         }
 
        
         public void reset()
         {
-            cboStudentID.Items.Clear();
-            cboFirstName.Items.Clear();
-            cboLastName.Items.Clear();
+            ControlFunctions.DeselectAll(cboFirstName, cboLastName, cboStudentID);
+            ControlFunctions.EnableBoxes(cboFirstName, cboLastName, cboStudentID);
+            ControlFunctions.FillBoxes("Students", cboStudentID, cboFirstName, cboLastName);
+
             lvSchedule.Items.Clear();
             grpMakeBooking.Visible = false;
-            cboStudentID.Enabled = true;
-            cboFirstName.Enabled = true;
-            cboLastName.Enabled = true;
+            
         }
 
         private void btnContinue_Click(object sender, EventArgs e)
@@ -55,9 +55,7 @@ namespace GrindsBookingSystem
                 return;
             }
             grpMakeBooking.Visible = true;
-            cboFirstName.Enabled = false;
-            cboLastName.Enabled = false;
-            cboStudentID.Enabled = false;
+            ControlFunctions.DisableBoxes(cboFirstName, cboLastName, cboStudentID);
 
             if (lvSchedule.Columns.Count == 0)
             {
