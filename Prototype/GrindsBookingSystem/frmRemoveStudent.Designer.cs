@@ -38,10 +38,11 @@
             this.cboStudentID = new System.Windows.Forms.ComboBox();
             this.cboName = new System.Windows.Forms.ComboBox();
             this.cboSName = new System.Windows.Forms.ComboBox();
-            this.lvRemoveStudent = new System.Windows.Forms.ListView();
             this.btnResetFilters = new System.Windows.Forms.Button();
             this.btnRemoveStudent = new System.Windows.Forms.Button();
+            this.dgvRemoveStudent = new System.Windows.Forms.DataGridView();
             this.mnuRemoveStudent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRemoveStudent)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -130,15 +131,6 @@
             this.cboSName.Size = new System.Drawing.Size(121, 21);
             this.cboSName.TabIndex = 18;
             // 
-            // lvRemoveStudent
-            // 
-            this.lvRemoveStudent.HideSelection = false;
-            this.lvRemoveStudent.Location = new System.Drawing.Point(129, 157);
-            this.lvRemoveStudent.Name = "lvRemoveStudent";
-            this.lvRemoveStudent.Size = new System.Drawing.Size(568, 227);
-            this.lvRemoveStudent.TabIndex = 23;
-            this.lvRemoveStudent.UseCompatibleStateImageBehavior = false;
-            // 
             // btnResetFilters
             // 
             this.btnResetFilters.Location = new System.Drawing.Point(253, 399);
@@ -156,15 +148,24 @@
             this.btnRemoveStudent.TabIndex = 26;
             this.btnRemoveStudent.Text = "Remove Selected Student";
             this.btnRemoveStudent.UseVisualStyleBackColor = true;
+            this.btnRemoveStudent.Click += new System.EventHandler(this.btnRemoveStudent_Click);
+            // 
+            // dgvRemoveStudent
+            // 
+            this.dgvRemoveStudent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvRemoveStudent.Location = new System.Drawing.Point(204, 149);
+            this.dgvRemoveStudent.Name = "dgvRemoveStudent";
+            this.dgvRemoveStudent.Size = new System.Drawing.Size(387, 207);
+            this.dgvRemoveStudent.TabIndex = 27;
             // 
             // frmRemoveStudent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.dgvRemoveStudent);
             this.Controls.Add(this.btnRemoveStudent);
             this.Controls.Add(this.btnResetFilters);
-            this.Controls.Add(this.lvRemoveStudent);
             this.Controls.Add(this.cboSName);
             this.Controls.Add(this.cboName);
             this.Controls.Add(this.cboStudentID);
@@ -176,6 +177,7 @@
             this.Text = "Grinds Booking System - Remove Student";
             this.mnuRemoveStudent.ResumeLayout(false);
             this.mnuRemoveStudent.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRemoveStudent)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -193,8 +195,8 @@
         private System.Windows.Forms.ComboBox cboStudentID;
         private System.Windows.Forms.ComboBox cboName;
         private System.Windows.Forms.ComboBox cboSName;
-        private System.Windows.Forms.ListView lvRemoveStudent;
         private System.Windows.Forms.Button btnResetFilters;
         private System.Windows.Forms.Button btnRemoveStudent;
+        private System.Windows.Forms.DataGridView dgvRemoveStudent;
     }
 }

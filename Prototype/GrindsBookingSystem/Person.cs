@@ -13,30 +13,29 @@ namespace GrindsBookingSystem
 {
     public abstract class Person
     {
-        public int PersonID { get; set; }
+        public string PersonID { get;private set; }
         public string FirstName { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public string Status { get; set; }
 
-        protected Person() : this(0, "", "", "", "", "") { }
+        protected Person() : this("", "", "", "") { }
 
-        protected Person(int id, string name, string sname, string email, string phoneNo, String status)
+        protected Person(string name, string sname, string email, string phoneNo)
         {
-            PersonID = id;
             FirstName = name;
             Surname = sname;
             Email = email;
             Phone = phoneNo;
-            Status = "A";
         }
-
+        public void SetID(string id)
+        {
+            PersonID = id;
+        }
         public override String ToString()
         {
             return "ID : " + PersonID + "\nName : " + FirstName + " " + Surname +
-                "\nEmail Address : " + Email + "\nPhone Number : " + Phone +
-                "\nStatus : " + Status;
+                "\nEmail Address : " + Email + "\nPhone Number : " + Phone;
         }
 
     }

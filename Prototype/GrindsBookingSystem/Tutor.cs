@@ -17,8 +17,8 @@ namespace GrindsBookingSystem
         public string Subject { get; set; }
 
 
-        public Tutor(int id, string name, string sname, string rate, string sub, string emailAddress, string phoneNo, string status) 
-            : base(id, name, sname, emailAddress, phoneNo, status)
+        public Tutor(string name, string sname, string rate, string sub, string emailAddress, string phoneNo) 
+            : base(name, sname, emailAddress, phoneNo)
         {
             RateCode = rate;
             Subject = sub;
@@ -34,14 +34,15 @@ namespace GrindsBookingSystem
         {
             Debug.WriteLine(this);
 
-            string sql = "INSERT INTO Tutors VALUES (" +
-                "'T' || LPAD(" + PersonID + ", 3, '0')" +
+            string sql = "INSERT INTO Tutors (FirstName, Surname" +
+                ",Email, PhoneNo, RateCode, SubjectCode, Status) VALUES ('" +
                 FirstName + "','" +
                 Surname + "','" +
-                RateCode + "','" +
-                Subject + "')" +
                 Email + "','" +
-                Phone + "')";
+                Phone + "','" +
+                RateCode + "','" +
+                Subject + "'," +
+                "'A')";
 
             Database.ExecuteNonQuery(sql);
         }
@@ -49,10 +50,12 @@ namespace GrindsBookingSystem
         public void Remove() 
         {
             string sql = "UPDATE Tutors SET Status = 'I'" +
-                " WHERE PersonID = " + PersonID;
+                " WHERE TutorID = '" + PersonID + "'";
+            
             try
             {
                 Database.ExecuteNonQuery(sql);
+
             }
             catch (Exception ex)
             {
@@ -63,7 +66,7 @@ namespace GrindsBookingSystem
         public void Update()
         {
             string sql = "UPDATE Tutors SET Email = '" + Email + "', PhoneNo = '" + Phone + "RateCode = '" + RateCode
-                + "', SubjectCode = '" + Subject + "' WHERE PersonID = " + PersonID;
+                + "', SubjectCode = '" + Subject + "' WHERE TutorID = " + PersonID;
             try
             {
                 Database.ExecuteNonQuery(sql);
@@ -79,8 +82,7 @@ namespace GrindsBookingSystem
         {
             try
             {
-                string sql = "SELECT t.TutorID, p.FirstName, p.Surname, t.RateCode, t.SubjectCode, p.PhoneNo, p.Email FROM Tutors t JOIN People p " +
-                    "ON t.TutorID = p.PersonID WHERE t.TutorID = " + id;
+                string sql = "SELECT * FROM Tutors WHERE TutorID = " + id;
 
                 OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
                 dr.Read();
@@ -95,37 +97,16 @@ namespace GrindsBookingSystem
                 return "";
             }
         }
-        public static int GetNextID()
-        {
-            string sqlQuery = "SELECT TutorID_SEQ.NEXTVAL FROM DUAL";
-
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sqlQuery);
-
-            dr.Read();
-
-            int nextIDnum;
-            if (dr.IsDBNull(0))
-            {
-                nextIDnum = 1;
-            }
-            else
-            {
-                nextIDnum = dr.GetInt32(0);
-            }
-
-
-            dr.Close();
-            return nextIDnum;
-        }
-        public DataSet RetrieveAll()
+        public static DataSet RetrieveAll()
         {
             string sql = "SELECT TutorID, FirstName, Surname FROM Tutors ORDER BY TutorID";
             return Database.ExecuteMultiRowQuery(sql);
         }
 
-        public static DataSet GetSpecificTutors(ComboBox cb)
+        public static DataSet GetTutorList(ComboBox cb)
         {
             string idList = "";
+
             foreach (var v in cb.Items) 
             {
                 if (cb.Items.IndexOf(v) == cb.Items.Count-1)
@@ -136,23 +117,22 @@ namespace GrindsBookingSystem
                 idList += v.ToString() + ",";
             }
 
-            string sql = "SELECT t.TutorID, p.FirstName, p.Surname " +
-                "FROM People p JOIN Tutors t ON p.PersonID = t.TutorID " +
-                "WHERE p.PersonID IN (" + idList + ") " +
+            string sql = "SELECT TutorID, FirstName, Surname " +
+                "FROM Tutors " +
+                "WHERE TutorID IN (" + idList + ") " +
                 "ORDER BY TutorID";
             return Database.ExecuteMultiRowQuery(sql);
         }
 
         public static Tutor GetTutor(int id)
         {
-            string sql = "SELECT t.TutorID, p.FirstName, p.Surname, t.RateCode, t.SubjectCode, p.Email, p.PhoneNo " +
-                "FROM People p JOIN Tutors t ON p.PersonID = t.TutorID WHERE t.TutorID = " + id;
+            string sql = "SELECT * FROM Tutors WHERE TutorID = '" + id + "'";
 
             OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
 
             dr.Read();
 
-            Tutor t = new Tutor(dr.GetInt32(0), dr.GetString(1), dr.GetString(2), dr.GetString(3), dr.GetString(4), dr.GetString(5), dr.GetString(6), "A");
+            Tutor t = new Tutor(dr.GetString(1), dr.GetString(2), dr.GetString(3), dr.GetString(4), dr.GetString(5), dr.GetString(6));
 
             return t;
         }

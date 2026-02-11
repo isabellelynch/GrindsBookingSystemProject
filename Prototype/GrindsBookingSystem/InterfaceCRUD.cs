@@ -13,6 +13,5 @@ namespace GrindsBookingSystem
         void Remove();
         void Update();
         String View(int id);
-        DataSet RetrieveAll();
     }
 }

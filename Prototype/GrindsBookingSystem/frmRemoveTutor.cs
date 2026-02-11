@@ -24,9 +24,9 @@ namespace GrindsBookingSystem
         {
             InitializeComponent();
 
-            //dgvRemoveTutor.DataSource = Tutor.RetrieveAll().Tables[0];
+            dgvRemoveTutor.DataSource = Tutor.RetrieveAll().Tables[0];
 
-            formatGridView(dgvRemoveTutor);
+            ControlFunctions.formatGridView(dgvRemoveTutor);
 
             ControlFunctions.FillBoxes("Tutors", cboTutorID, cboFirstName, cboSurname);
 
@@ -58,18 +58,6 @@ namespace GrindsBookingSystem
 
         }
 
-        public static void formatGridView(DataGridView grid)
-        {
-            grid.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            grid.Columns[0].DefaultCellStyle.Format = "0000";
-            grid.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            
-            grid.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            grid.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-
-            grid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            grid.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        }
         public void ComboBoxChange(object sender, EventArgs e)
         {
             if (updating) return;
@@ -96,14 +84,31 @@ namespace GrindsBookingSystem
                 ControlFunctions.ApplyFilters("'" + cboSurname.Text + "'", "Surname", "Tutors", cboTutorID, cboFirstName, cboSurname);
             }
 
-            dgvRemoveTutor.DataSource = Tutor.GetSpecificTutors(cboTutorID).Tables[0];
+            dgvRemoveTutor.DataSource = Tutor.GetTutorList(cboTutorID).Tables[0];
 
             updating = false;
 
         }
 
+        private void btnRemoveTutor_Click(object sender, EventArgs e)
+        {
+            if (dgvRemoveTutor.SelectedRows.Count == 1)
+            {
+                DataGridViewRow row = dgvRemoveTutor.SelectedRows[0];
 
+                Tutor t = Tutor.GetTutor(Convert.ToInt32(row.Cells[0].Value));
 
+                t.SetID(row.Cells[0].Value.ToString());
+
+                t.Remove();
+
+                MessageBox.Show("Tutor Removed");
+            }
+            else
+            {
+                MessageBox.Show("No row selected.");
+            }
+        }
     }
 
 

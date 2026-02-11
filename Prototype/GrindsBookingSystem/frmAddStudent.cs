@@ -23,7 +23,7 @@ namespace GrindsBookingSystem
 
         private void btnAddStudent_Click(object sender, EventArgs e)
         {
-            Student s = new Student(Student.GetNextID(), txtStudentName.Text, txtStudentSurname.Text, txtStudentEmail.Text, txtStudentPhone.Text, "A");
+            Student s = new Student(txtStudentName.Text, txtStudentSurname.Text, txtStudentEmail.Text, txtStudentPhone.Text);
 
             if (s.IsValid() != "Valid")
             {
@@ -39,7 +39,15 @@ namespace GrindsBookingSystem
                                                     MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                s.Add();
+                try
+                {
+                    s.Add();
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                
 
                 MessageBox.Show("Student " + txtStudentName.Text + txtStudentSurname.Text + "has been succesfully added to the system.",
                                 "Success",

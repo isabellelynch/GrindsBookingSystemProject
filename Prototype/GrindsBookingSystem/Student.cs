@@ -13,8 +13,8 @@ namespace GrindsBookingSystem
 {
     public class Student: Person, InterfaceCRUD
     {
-        public Student(int id, string name, string sname, string email, string phone, string status) : 
-            base(id, name, sname, email, phone, status)
+        public Student(string name, string sname, string email, string phone) : 
+            base(name, sname, email, phone)
         { 
             
         }
@@ -28,20 +28,22 @@ namespace GrindsBookingSystem
         {
             Debug.WriteLine(this);
 
-            string sql = "INSERT INTO Students VALUES (" +
-                "'S' || LPAD(" + PersonID + ", 3, '0')" +
+            string sql = "INSERT INTO Students (FirstName, Surname" +
+                ",Email, PhoneNo, Status) VALUES ('" +
                 FirstName + "','" +
                 Surname + "','" +
                 Email + "','" +
-                Phone + "','" +
-                Status + "')";
+                Phone + "'," +
+                "'A')";
+
+
             Database.ExecuteNonQuery(sql);
         }
 
         public void Remove() 
         {
             string sql = "UPDATE Students SET Status = 'I'" +
-                " WHERE PersonID = " + PersonID;
+                " WHERE StudentID = '" + PersonID + "'";
             try
             {
                 Database.ExecuteNonQuery(sql);
@@ -115,6 +117,19 @@ namespace GrindsBookingSystem
 
             dr.Close();
             return nextIDnum;
+        }
+
+        public static Student GetStudent(int id)
+        {
+            string sql = "SELECT * FROM Students WHERE StudentID = '" + id + "'";
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+
+            dr.Read();
+
+            Student s = new Student(dr.GetString(1), dr.GetString(2), dr.GetString(3), dr.GetString(4));
+
+            return s;
         }
 
         public String IsValid()

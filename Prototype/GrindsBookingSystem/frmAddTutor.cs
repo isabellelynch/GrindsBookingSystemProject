@@ -34,7 +34,7 @@ namespace GrindsBookingSystem
             
             String subject = cboTutorSubjects.Text.Substring(0,3);
 
-            Tutor t = new Tutor(Tutor.GetNextID(), txtTutorName.Text, txtTutorSurname.Text, rate, subject, txtTutorEmail.Text, txtTutorPhone.Text, "A");
+            Tutor t = new Tutor(txtTutorName.Text, txtTutorSurname.Text, rate, subject, txtTutorEmail.Text, txtTutorPhone.Text);
 
             if(t.IsValid() == "Valid")
             {

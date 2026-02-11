@@ -102,15 +102,18 @@ namespace GrindsBookingSystem
 
         private void btnUpdateTutor_Click(object sender, EventArgs e)
         {
-            Tutor t = new Tutor(Convert.ToInt32(cboTutorID.Text),cboNames.Text, cboSurnames.Text, cboRates.Text.Substring(0, 3),
-                cboSubjects.Text.Substring(0, 3), txtEmail.Text, txtPhone.Text, "A");
+            Tutor t = new Tutor(cboNames.Text, cboSurnames.Text, cboRates.Text.Substring(0, 3),
+                cboSubjects.Text.Substring(0, 3), txtEmail.Text, txtPhone.Text);
+
+            t.SetID(cboTutorID.Text);
+
 
             if (t.IsValid() != "Valid")
             {
                 return;
             }
 
-            Tutor t2 = Tutor.GetTutor(t.PersonID);
+            Tutor t2 = Tutor.GetTutor(Convert.ToInt32(t.PersonID));
 
             if (t2 == null) { return; }
 
@@ -121,7 +124,7 @@ namespace GrindsBookingSystem
 
             t2.Update();
 
-            String details = t.View(t2.PersonID);
+            String details = t.View(Convert.ToInt32(t2.PersonID));
 
             if (details != null)
             {

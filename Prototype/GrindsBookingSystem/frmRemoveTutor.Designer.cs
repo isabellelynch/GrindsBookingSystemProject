@@ -139,6 +139,7 @@
             this.btnRemoveTutor.TabIndex = 23;
             this.btnRemoveTutor.Text = "Remove Selected Tutor";
             this.btnRemoveTutor.UseVisualStyleBackColor = true;
+            this.btnRemoveTutor.Click += new System.EventHandler(this.btnRemoveTutor_Click);
             // 
             // btnResetFilters
             // 

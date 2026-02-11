@@ -22,12 +22,12 @@ namespace GrindsBookingSystem
 
             if (location == "Tutors")
             {
-                sql = "SELECT * FROM People p JOIN Tutors t ON p.PersonID = t.TutorID WHERE t.TutorID = p.PersonID";
+                sql = "SELECT * FROM Tutors";
                 ds = Database.ExecuteMultiRowQuery(sql);
             }
             else if (location == "Students")
             {
-                sql = "SELECT * FROM People p JOIN Students s ON p.PersonID = s.StudentID WHERE s.StudentID = p.PersonID";
+                sql = "SELECT * FROM Students";
                 ds = Database.ExecuteMultiRowQuery(sql);
             }
             if (string.IsNullOrEmpty(sql) || ds == null) { return; }
@@ -71,34 +71,6 @@ namespace GrindsBookingSystem
             DeselectAll(cb);
         }
 
-        /*public static void RateCodes(ComboBox c)
-        {
-            c.Items.Clear();
-
-            String sql = "SELECT RateCode, Description FROM TutorRates ORDER BY RateCode";
-
-            DataSet ds = Database.ExecuteMultiRowQuery(sql);
-
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-            {
-                c.Items.Add(ds.Tables[0].Rows[i][0] + " - " + ds.Tables[0].Rows[i][1]);
-            }
-            c.SelectedIndex = -1;
-        }
-
-        public static void Subjects(ComboBox c)
-        {
-            c.Items.Clear();
-
-            String sql = "SELECT SubjectCode, Description FROM Subjects ORDER BY SubjectCode";
-            DataSet ds = Database.ExecuteMultiRowQuery(sql);
-
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-            {
-                c.Items.Add(ds.Tables[0].Rows[i][0] + " - " + ds.Tables[0].Rows[i][1]);
-            }
-            c.SelectedIndex = -1;
-        }*/
 
         public static void ApplyFilters(String value, String column, String location, params ComboBox[] cb)
         {
@@ -107,12 +79,12 @@ namespace GrindsBookingSystem
 
             if(location == "Tutors")
             {
-                sql = "SELECT * FROM People p JOIN Tutors t ON p.PersonID = t.TutorID WHERE " + column + " = " + value;
+                sql = "SELECT * FROM Tutors WHERE " + column + " = " + value;
                 ds = Database.ExecuteMultiRowQuery(sql);
             }
             else if(location == "Students")
             {
-                sql = "SELECT * FROM People p JOIN Students s ON p.PersonID = s.StudentID WHERE " + column + " = " + value;
+                sql = "SELECT * FROM Students WHERE " + column + " = " + value;
                 ds = Database.ExecuteMultiRowQuery(sql);
             }
 
@@ -153,9 +125,20 @@ namespace GrindsBookingSystem
             }
         }
 
-        public static void FilterDGV()
+        public static void formatGridView(DataGridView grid)
         {
+            grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            grid.MultiSelect = false;
 
+            grid.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            grid.Columns[0].DefaultCellStyle.Format = "0000";
+            grid.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            grid.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            grid.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
+            grid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            grid.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
         }
 
         public static void ClearCombos(params ComboBox[] cb)
