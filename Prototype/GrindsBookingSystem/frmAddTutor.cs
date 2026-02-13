@@ -9,9 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
-using static GrindsBookingSystem.frmAddStudent;
-using static GrindsBookingSystem.frmHome;
+
 
 namespace GrindsBookingSystem
 {

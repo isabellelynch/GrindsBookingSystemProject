@@ -8,8 +8,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static GrindsBookingSystem.frmAddTutor;
-using static GrindsBookingSystem.frmHome;
 
 namespace GrindsBookingSystem
 {
@@ -20,8 +18,11 @@ namespace GrindsBookingSystem
         public frmUpdateTutor()
         {
             InitializeComponent();
+            Reset();
+
             comboBoxes = ControlFunctions.CreateComboList(cboTutorID, cboNames, cboSurnames);
-            ClearUI();
+            
+            
 
             foreach (var c in comboBoxes)
             {
@@ -94,68 +95,86 @@ namespace GrindsBookingSystem
             txtEmail.Text = t.Email;
             txtPhone.Text = t.Phone;
 
-            cboTutorID.Enabled = false;
-            cboNames.Enabled = false;
-            cboSurnames.Enabled = false;
+            ControlFunctions.DisableBoxes(cboNames, cboSurnames, cboTutorID);
             
         }
 
         private void btnUpdateTutor_Click(object sender, EventArgs e)
         {
-            Tutor t = new Tutor(cboNames.Text, cboSurnames.Text, cboRates.Text.Substring(0, 3),
-                cboSubjects.Text.Substring(0, 3), txtEmail.Text, txtPhone.Text);
+            Tutor t = new Tutor(cboNames.Text, 
+                                cboSurnames.Text, 
+                                txtEmail.Text, 
+                                txtPhone.Text, 
+                                cboRates.Text.Substring(0, 3),
+                                cboSubjects.Text.Substring(0, 3));
 
             t.SetID(cboTutorID.Text);
 
 
             if (t.IsValid() != "Valid")
             {
+                MessageBox.Show(t.IsValid()
+                    , "Invalid Details Entered",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             Tutor t2 = Tutor.GetTutor(Convert.ToInt32(t.PersonID));
+            t2.SetID(t.PersonID);
 
-            if (t2 == null) { return; }
-
-            t2.RateCode = t.RateCode;
-            t2.Subject = t.Subject;
-            t2.Email = t.Email;
-            t2.Phone = t.Phone;
-
-            t2.Update();
-
-            String details = t.View(Convert.ToInt32(t2.PersonID));
-
-            if (details != null)
+            if (t2 == null) 
+            { 
+                return; 
+            }
+            else if (t == t2) 
             {
-                MessageBox.Show("The selected Tutor has been updated and their details are now as follows\n\n" +
-                    details, "Tutor Updated Successfully",
+                MessageBox.Show("No Details Changed, Goodbye"
+                    , "Goodbye",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return; 
             }
             else
             {
-                MessageBox.Show("The selected Tutor could not be found.",
-                    "Tutor Details", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+                    t2.RateCode = t.RateCode;
+                    t2.Subject = t.Subject;
+                    t2.Email = t.Email;
+                    t2.Phone = t.Phone;
+                    t2.SetID(t.PersonID);
+                try
+                {
+                    t2.Update();
 
-            ClearUI();
+
+                    MessageBox.Show("The selected Tutor has been updated and their details are now as follows\n\n" +
+                            t2.ToString(), "Tutor Updated Successfully",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                    
+            }
+            Reset();
         }
 
-        private void ClearUI()
+        private void Reset()
         {
             ControlFunctions.ClearCombos(cboTutorID, cboNames, cboSurnames, cboRates, cboSubjects);
             ControlFunctions.ClearTextBoxes(txtEmail, txtPhone);
 
             grpTutorDetails.Visible = false;
 
-            cboTutorID.Enabled = true;
-            cboNames.Enabled = true;
-            cboSurnames.Enabled = true;
+            ControlFunctions.EnableBoxes(cboTutorID, cboNames, cboSurnames);
 
             ControlFunctions.FillRatesAndSubjects(cboRates, cboSubjects);
             ControlFunctions.FillBoxes("Tutors", cboTutorID, cboNames, cboSurnames);
         }
 
-     
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            Reset();
+        }
     }
 }

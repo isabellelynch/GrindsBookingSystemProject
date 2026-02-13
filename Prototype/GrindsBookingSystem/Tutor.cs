@@ -17,7 +17,7 @@ namespace GrindsBookingSystem
         public string Subject { get; set; }
 
 
-        public Tutor(string name, string sname, string rate, string sub, string emailAddress, string phoneNo) 
+        public Tutor(string name, string sname, string emailAddress, string phoneNo, string rate, string sub) 
             : base(name, sname, emailAddress, phoneNo)
         {
             RateCode = rate;
@@ -65,8 +65,8 @@ namespace GrindsBookingSystem
 
         public void Update()
         {
-            string sql = "UPDATE Tutors SET Email = '" + Email + "', PhoneNo = '" + Phone + "RateCode = '" + RateCode
-                + "', SubjectCode = '" + Subject + "' WHERE TutorID = " + PersonID;
+            string sql = "UPDATE Tutors SET Email = '" + Email + "', PhoneNo = '" + Phone + "', RateCode = '" + RateCode
+                + "', SubjectCode = '" + Subject + "' WHERE TutorID = '" + PersonID + "'";
             try
             {
                 Database.ExecuteNonQuery(sql);
@@ -78,24 +78,9 @@ namespace GrindsBookingSystem
 
         }
 
-        public string View(int id)
+        public string View()
         {
-            try
-            {
-                string sql = "SELECT * FROM Tutors WHERE TutorID = " + id;
-
-                OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
-                dr.Read();
-
-
-                return "Tutor ID: " + dr.GetInt32(0).ToString() + "\nFirst Name: " + dr.GetString(1) + "\nSurname: " +
-                        dr.GetString(2) + "\nRate Code: " + dr.GetString(3) + "\nSubject: " +
-                        dr.GetString(4) + "\nPhone Number: " + dr.GetString(5) + "\nEmail Address: " + dr.GetString(6);
-            }
-            catch
-            {
-                return "";
-            }
+            return this.ToString();
         }
         public static DataSet RetrieveAll()
         {
@@ -133,6 +118,7 @@ namespace GrindsBookingSystem
             dr.Read();
 
             Tutor t = new Tutor(dr.GetString(1), dr.GetString(2), dr.GetString(3), dr.GetString(4), dr.GetString(5), dr.GetString(6));
+            t.SetID(id.ToString());
 
             return t;
         }

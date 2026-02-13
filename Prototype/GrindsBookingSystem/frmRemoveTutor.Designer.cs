@@ -79,6 +79,7 @@
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(58, 20);
             this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // label1
             // 
@@ -149,6 +150,7 @@
             this.btnResetFilters.TabIndex = 24;
             this.btnResetFilters.Text = "Reset Filters";
             this.btnResetFilters.UseVisualStyleBackColor = true;
+            this.btnResetFilters.Click += new System.EventHandler(this.btnResetFilters_Click);
             // 
             // dgvRemoveTutor
             // 

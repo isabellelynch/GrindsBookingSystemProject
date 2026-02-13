@@ -69,11 +69,11 @@ namespace GrindsBookingSystem
 
         }
 
-        public string View(int id)
+        public string View()
         {
             try
             {
-                string sql = "SELECT * FROM Students WHERE StudentID = " + PersonID;
+                string sql = "SELECT * FROM Students WHERE StudentID = '" + PersonID + "'";
 
                 OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
                 dr.Read();

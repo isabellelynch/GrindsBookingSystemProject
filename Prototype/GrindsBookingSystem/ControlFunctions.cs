@@ -68,7 +68,7 @@ namespace GrindsBookingSystem
             {
                 cb1.Items.Add(ds.Tables[0].Rows[i][0] + " - " + ds.Tables[0].Rows[i][1]);
             }
-            DeselectAll(cb);
+            DeselectAll(cb, cb1);
         }
 
 

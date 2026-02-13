@@ -8,10 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static GrindsBookingSystem.frmAddTutor;
-using static GrindsBookingSystem.frmHome;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using ComboBox = System.Windows.Forms.ComboBox;
 
 namespace GrindsBookingSystem
 {
@@ -24,11 +20,7 @@ namespace GrindsBookingSystem
         {
             InitializeComponent();
 
-            dgvRemoveTutor.DataSource = Tutor.RetrieveAll().Tables[0];
-
-            ControlFunctions.formatGridView(dgvRemoveTutor);
-
-            ControlFunctions.FillBoxes("Tutors", cboTutorID, cboFirstName, cboSurname);
+            reset();
 
             comboBoxes = ControlFunctions.CreateComboList(cboTutorID, cboFirstName, cboSurname);
 
@@ -103,11 +95,29 @@ namespace GrindsBookingSystem
                 t.Remove();
 
                 MessageBox.Show("Tutor Removed");
+                reset();
             }
             else
             {
                 MessageBox.Show("No row selected.");
             }
+        }
+
+        private void reset()
+        {
+            dgvRemoveTutor.DataSource = Tutor.RetrieveAll().Tables[0];
+            ControlFunctions.formatGridView(dgvRemoveTutor);
+            ControlFunctions.FillBoxes("Tutors", cboTutorID, cboFirstName, cboSurname);
+        }
+
+        private void btnResetFilters_Click(object sender, EventArgs e)
+        {
+            reset();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            reset();
         }
     }
 

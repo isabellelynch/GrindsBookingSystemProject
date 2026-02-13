@@ -87,6 +87,7 @@
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(58, 20);
             this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // label1
             // 
@@ -115,11 +116,11 @@
             this.label3.TabIndex = 19;
             this.label3.Text = "Last Name";
             // 
-            // cboTutID
+            // cboTutorID
             // 
             this.cboTutorID.FormattingEnabled = true;
             this.cboTutorID.Location = new System.Drawing.Point(392, 32);
-            this.cboTutorID.Name = "cboTutID";
+            this.cboTutorID.Name = "cboTutorID";
             this.cboTutorID.Size = new System.Drawing.Size(121, 21);
             this.cboTutorID.TabIndex = 20;
             // 

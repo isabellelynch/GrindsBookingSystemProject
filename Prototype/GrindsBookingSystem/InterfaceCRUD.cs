@@ -12,6 +12,6 @@ namespace GrindsBookingSystem
         void Add();
         void Remove();
         void Update();
-        String View(int id);
+        String View();
     }
 }
