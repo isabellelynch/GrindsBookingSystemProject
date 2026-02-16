@@ -165,6 +165,7 @@
             this.backBtnAddStudent.Name = "backBtnAddStudent";
             this.backBtnAddStudent.Size = new System.Drawing.Size(44, 20);
             this.backBtnAddStudent.Text = "Back";
+            this.backBtnAddStudent.Click += new System.EventHandler(this.backBtnAddStudent_Click);
             // 
             // btnRefresh
             // 

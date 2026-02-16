@@ -30,7 +30,7 @@ namespace GrindsBookingSystem
                 "\nSubject Code : " + Subject;
         }
 
-        public void Add()
+        public void Create()
         {
             Debug.WriteLine(this);
 
@@ -47,26 +47,19 @@ namespace GrindsBookingSystem
             Database.ExecuteNonQuery(sql);
         }
 
-        public void Remove() 
-        {
-            string sql = "UPDATE Tutors SET Status = 'I'" +
-                " WHERE TutorID = '" + PersonID + "'";
-            
-            try
-            {
-                Database.ExecuteNonQuery(sql);
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+        public string Read()
+        {
+            Tutor t = GetTutor(Convert.ToInt32(this.PersonID));
+
+            return t.ToString();
         }
+
 
         public void Update()
         {
             string sql = "UPDATE Tutors SET Email = '" + Email + "', PhoneNo = '" + Phone + "', RateCode = '" + RateCode
-                + "', SubjectCode = '" + Subject + "' WHERE TutorID = '" + PersonID + "'";
+                + "', SubjectCode = '" + Subject + "' WHERE TutorID = '" + this.PersonID + "'";
             try
             {
                 Database.ExecuteNonQuery(sql);
@@ -78,10 +71,24 @@ namespace GrindsBookingSystem
 
         }
 
-        public string View()
+        public void Delete() 
         {
-            return this.ToString();
+            string sql = "UPDATE Tutors SET Status = 'I'" +
+                " WHERE TutorID = '" + this.PersonID + "'";
+            
+            try
+            {
+                Database.ExecuteNonQuery(sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
+        
+
+        
         public static DataSet RetrieveAll()
         {
             string sql = "SELECT TutorID, FirstName, Surname FROM Tutors ORDER BY TutorID";
@@ -106,6 +113,7 @@ namespace GrindsBookingSystem
                 "FROM Tutors " +
                 "WHERE TutorID IN (" + idList + ") " +
                 "ORDER BY TutorID";
+
             return Database.ExecuteMultiRowQuery(sql);
         }
 

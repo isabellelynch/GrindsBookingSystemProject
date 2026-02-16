@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace GrindsBookingSystem
 {
 
-    public partial class frmRemoveTutor : Form
+    public partial class frmRemoveTutor : BaseForm
     {
         List<ComboBox> comboBoxes;
         private bool updating = false;
@@ -20,33 +14,18 @@ namespace GrindsBookingSystem
         {
             InitializeComponent();
 
-            reset();
-
-            comboBoxes = ControlFunctions.CreateComboList(cboTutorID, cboFirstName, cboSurname);
-
-            foreach (ComboBox cb in comboBoxes)
-            {
-                cb.SelectedIndexChanged += ComboBoxChange;
-            }
+            Reset(this.Controls);
         }
 
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Owner.Show();
+            GoHome();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to exit ?",
-                                                "Please Confirm",
-                                                MessageBoxButtons.YesNo,
-                                                MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
+            Exit();
 
         }
 
@@ -90,12 +69,13 @@ namespace GrindsBookingSystem
 
                 Tutor t = Tutor.GetTutor(Convert.ToInt32(row.Cells[0].Value));
 
-                t.SetID(row.Cells[0].Value.ToString());
+                t.SetID(t.PersonID);
 
-                t.Remove();
+                t.Delete();
 
                 MessageBox.Show("Tutor Removed");
-                reset();
+
+                Reset(this.Controls);
             }
             else
             {
@@ -103,21 +83,30 @@ namespace GrindsBookingSystem
             }
         }
 
-        private void reset()
+        protected override void Reset(Control.ControlCollection controls)
         {
+            base.Reset(controls);
+
             dgvRemoveTutor.DataSource = Tutor.RetrieveAll().Tables[0];
             ControlFunctions.formatGridView(dgvRemoveTutor);
             ControlFunctions.FillBoxes("Tutors", cboTutorID, cboFirstName, cboSurname);
+
+            comboBoxes = ControlFunctions.CreateComboList(cboTutorID, cboFirstName, cboSurname);
+            foreach (ComboBox cb in comboBoxes)
+            {
+                cb.SelectedIndexChanged -= ComboBoxChange;
+                cb.SelectedIndexChanged += ComboBoxChange;
+            }
         }
 
         private void btnResetFilters_Click(object sender, EventArgs e)
         {
-            reset();
+            Reset(this.Controls);
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            reset();
+            Reset(this.Controls);
         }
     }
 

@@ -89,7 +89,7 @@ namespace GrindsBookingSystem
             pickTime.Value = DateTime.Now;
 
             ControlFunctions.DeselectAll(cboRooms, cboTutors);
-            ControlFunctions.ClearTextBoxes(txtAttendance);
+            //ControlFunctions.ClearTextBoxes(txtAttendance);
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)

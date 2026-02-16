@@ -1,20 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using static GrindsBookingSystem.frmHome;
 
 namespace GrindsBookingSystem
 {
-    public partial class frmAddStudent : Form
+    public partial class frmAddStudent : BaseForm
     {
         public frmAddStudent()
         {
@@ -41,26 +30,24 @@ namespace GrindsBookingSystem
             {
                 try
                 {
-                    s.Add();
-                }
-                catch(Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                
-
-                MessageBox.Show("Student " + txtStudentName.Text + txtStudentSurname.Text + "has been succesfully added to the system.",
+                    s.Create();
+                    MessageBox.Show("Student " + txtStudentName.Text + txtStudentSurname.Text + "has been succesfully added to the system.",
                                 "Success",
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Information);
                     
-                DialogResult addAnother = MessageBox.Show("Would you like to add another Student?",
+                    DialogResult addAnother = MessageBox.Show("Would you like to add another Student?",
                                                         "Please Confirm",
                                                         MessageBoxButtons.YesNo,
                                                         MessageBoxIcon.Question);
-                if (addAnother == DialogResult.No)
+                    if (addAnother == DialogResult.No)
+                    {
+                        GoHome();
+                    }
+                }
+                catch(Exception ex)
                 {
-                    goHome();
+                    MessageBox.Show(ex.Message);
                 }
             }
             else
@@ -70,40 +57,29 @@ namespace GrindsBookingSystem
                                  MessageBoxButtons.OK,
                                  MessageBoxIcon.Warning);
             }
-            clearUI();
+
+            Reset(this.Controls);
+
             return;
         }
 
 
-
-        public void clearUI()
-        {
-            ControlFunctions.ClearTextBoxes(txtStudentName, txtStudentSurname, txtStudentEmail, txtStudentPhone);
-        }
-        public void goHome()
-        {
-            Owner.Show();
-            this.Close();
-        }
-
+       
 
         private void exitBtnAddStudent_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to exit ?",
-                                                    "Please Confirm",
-                                                    MessageBoxButtons.YesNo,
-                                                    MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
+            Exit();
         }
 
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            clearUI();
+            Reset(this.Controls);
         }
 
+        private void backBtnAddStudent_Click(object sender, EventArgs e)
+        {
+            GoHome();
+        }
     }
 }

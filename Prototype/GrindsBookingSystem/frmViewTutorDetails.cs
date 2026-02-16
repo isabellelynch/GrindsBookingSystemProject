@@ -1,17 +1,10 @@
-﻿using Oracle.ManagedDataAccess.Client;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GrindsBookingSystem
 {
-    public partial class frmViewTutorDetails : Form
+    public partial class frmViewTutorDetails : BaseForm
     {
         List<ComboBox> comboBoxes;
         private bool updating = false;
@@ -19,33 +12,18 @@ namespace GrindsBookingSystem
         {
             InitializeComponent();
 
-            ControlFunctions.FillBoxes("Tutors", cboTutorID, cboName, cboLastName);
-
-            comboBoxes = ControlFunctions.CreateComboList(cboTutorID, cboName, cboLastName);
-            
-            foreach(ComboBox cb  in comboBoxes)
-            {
-                cb.SelectedIndexChanged += ComboBoxChange;
-            }
+            Reset(this.Controls);
         }
 
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            Owner.Show();
-            this.Hide();
+            GoHome();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to exit ?",
-                                                "Please Confirm",
-                                                MessageBoxButtons.YesNo,
-                                                MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
+            Exit();
         }
 
         public void ComboBoxChange(object sender, EventArgs e)
@@ -84,7 +62,7 @@ namespace GrindsBookingSystem
         {
             Tutor t = Tutor.GetTutor(Convert.ToInt32(cboTutorID.Items[0]));
 
-            String details = t.View();
+            String details = t.Read();
 
             if (details != null)
             {
@@ -96,7 +74,28 @@ namespace GrindsBookingSystem
                 MessageBox.Show("The selected Tutor could not be found.",
                     "Tutor Details", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            Reset(this.Controls);
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            Reset(this.Controls);
+        }
+
+        protected override void Reset(Control.ControlCollection controls)
+        {
+            base.Reset(controls);
+            
+            comboBoxes = ControlFunctions.CreateComboList(cboTutorID, cboName, cboLastName);
+
             ControlFunctions.FillBoxes("Tutors", cboTutorID, cboName, cboLastName);
+
+            foreach (ComboBox cb in comboBoxes)
+            {
+                cb.SelectedIndexChanged -= ComboBoxChange;
+                cb.SelectedIndexChanged += ComboBoxChange;
+            }
+
         }
     }
     

@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 using System.Windows.Forms;
-using static GrindsBookingSystem.frmHome;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using ComboBox = System.Windows.Forms.ComboBox;
 
 namespace GrindsBookingSystem
 {
-    public partial class frmRemoveStudent : Form
+    public partial class frmRemoveStudent : BaseForm
     {
         List<ComboBox> comboBoxes;
         private bool updating = false;
@@ -17,37 +12,18 @@ namespace GrindsBookingSystem
         {
             InitializeComponent();
 
-            dgvRemoveStudent.DataSource = Tutor.RetrieveAll().Tables[0];
-
-            ControlFunctions.formatGridView(dgvRemoveStudent);
-
-            ControlFunctions.FillBoxes("Students", cboStudentID, cboName, cboSName);
-
-            comboBoxes = ControlFunctions.CreateComboList(cboStudentID, cboName, cboSName);
-
-            foreach (ComboBox cb in comboBoxes)
-            {
-                cb.SelectedIndexChanged += ComboBoxChange;
-            }
+            Reset(this.Controls);
 
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to exit ?",
-                                                "Please Confirm",
-                                                MessageBoxButtons.YesNo,
-                                                MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
+            Exit();
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            Owner.Show();
-            this.Close();
+            GoHome();
         }
 
         public void ComboBoxChange(object sender, EventArgs e)
@@ -76,7 +52,7 @@ namespace GrindsBookingSystem
                 ControlFunctions.ApplyFilters("'" + cboSName.Text + "'", "Surname", "Students", cboStudentID, cboName, cboSName);
             }
 
-            dgvRemoveStudent.DataSource = Tutor.GetTutorList(cboStudentID).Tables[0];
+            dgvRemoveStudent.DataSource = Student.GetStudentList(cboStudentID).Tables[0];
 
             updating = false;
 
@@ -86,20 +62,54 @@ namespace GrindsBookingSystem
         {
             if (dgvRemoveStudent.SelectedRows.Count == 1)
             {
-                DataGridViewRow row = dgvRemoveStudent.SelectedRows[0];
+                try
+                {
+                    DataGridViewRow row = dgvRemoveStudent.SelectedRows[0];
 
-                Student s = Student.GetStudent(Convert.ToInt32(row.Cells[0].Value));
+                    Student s = Student.GetStudent(Convert.ToInt32(row.Cells[0].Value));
 
-                s.SetID(row.Cells[0].Value.ToString());
+                    s.SetID(row.Cells[0].Value.ToString());
 
-                s.Remove();
+                    s.Delete();
 
-                MessageBox.Show("Student Removed");
+                    MessageBox.Show("The following Student has now been removed from the system \n\n" + s.ToString(),
+                                    "Student Removed",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+
+                    Reset(this.Controls);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                
             }
             else
             {
-                MessageBox.Show("No row selected.");
+                MessageBox.Show("No row selected. Please select a Student to be removed.");
             }
+        }
+        protected override void Reset(Control.ControlCollection controls)
+        {
+            base.Reset(controls);
+
+            comboBoxes = ControlFunctions.CreateComboList(cboStudentID, cboName, cboSName);
+
+            foreach (ComboBox cb in comboBoxes)
+            {
+                cb.SelectedIndexChanged -= ComboBoxChange;
+                cb.SelectedIndexChanged += ComboBoxChange;
+            }
+
+            dgvRemoveStudent.DataSource = Student.RetrieveAll().Tables[0];
+            ControlFunctions.formatGridView(dgvRemoveStudent);
+            ControlFunctions.FillBoxes("Students", cboStudentID, cboName, cboSName);
+
+        }
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            Reset(this.Controls);
         }
     }
 

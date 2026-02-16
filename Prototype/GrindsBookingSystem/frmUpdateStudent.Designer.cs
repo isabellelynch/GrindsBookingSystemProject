@@ -35,16 +35,16 @@
             this.cboNames = new System.Windows.Forms.ComboBox();
             this.cboSurnames = new System.Windows.Forms.ComboBox();
             this.grpStudentDetails = new System.Windows.Forms.GroupBox();
+            this.txtLastName = new System.Windows.Forms.TextBox();
+            this.txtFirstName = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.btnUpdateStudent = new System.Windows.Forms.Button();
             this.txtPhone = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btnFindStudent = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtFirstName = new System.Windows.Forms.TextBox();
-            this.txtLastName = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.btnExit = new System.Windows.Forms.ToolStripMenuItem();
             this.btnBack = new System.Windows.Forms.ToolStripMenuItem();
@@ -122,6 +122,38 @@
             this.grpStudentDetails.TabStop = false;
             this.grpStudentDetails.Text = "Extra Details";
             // 
+            // txtLastName
+            // 
+            this.txtLastName.Location = new System.Drawing.Point(211, 71);
+            this.txtLastName.Name = "txtLastName";
+            this.txtLastName.Size = new System.Drawing.Size(121, 20);
+            this.txtLastName.TabIndex = 34;
+            // 
+            // txtFirstName
+            // 
+            this.txtFirstName.Location = new System.Drawing.Point(211, 29);
+            this.txtFirstName.Name = "txtFirstName";
+            this.txtFirstName.Size = new System.Drawing.Size(121, 20);
+            this.txtFirstName.TabIndex = 33;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(69, 78);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(58, 13);
+            this.label7.TabIndex = 32;
+            this.label7.Text = "Last Name";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(69, 36);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(57, 13);
+            this.label4.TabIndex = 30;
+            this.label4.Text = "First Name";
+            // 
             // btnUpdateStudent
             // 
             this.btnUpdateStudent.Location = new System.Drawing.Point(139, 186);
@@ -130,6 +162,7 @@
             this.btnUpdateStudent.TabIndex = 29;
             this.btnUpdateStudent.Text = "Update Student Details";
             this.btnUpdateStudent.UseVisualStyleBackColor = true;
+            this.btnUpdateStudent.Click += new System.EventHandler(this.btnUpdateStudent_Click);
             // 
             // txtPhone
             // 
@@ -171,38 +204,7 @@
             this.btnFindStudent.TabIndex = 31;
             this.btnFindStudent.Text = "Find Student";
             this.btnFindStudent.UseVisualStyleBackColor = true;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(69, 36);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(57, 13);
-            this.label4.TabIndex = 30;
-            this.label4.Text = "First Name";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(69, 78);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(58, 13);
-            this.label7.TabIndex = 32;
-            this.label7.Text = "Last Name";
-            // 
-            // txtFirstName
-            // 
-            this.txtFirstName.Location = new System.Drawing.Point(211, 29);
-            this.txtFirstName.Name = "txtFirstName";
-            this.txtFirstName.Size = new System.Drawing.Size(121, 20);
-            this.txtFirstName.TabIndex = 33;
-            // 
-            // txtLastName
-            // 
-            this.txtLastName.Location = new System.Drawing.Point(211, 71);
-            this.txtLastName.Name = "txtLastName";
-            this.txtLastName.Size = new System.Drawing.Size(121, 20);
-            this.txtLastName.TabIndex = 34;
+            this.btnFindStudent.Click += new System.EventHandler(this.btnFindStudent_Click);
             // 
             // menuStrip1
             // 
@@ -222,7 +224,6 @@
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(37, 20);
             this.btnExit.Text = "Exit";
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click_1);
             // 
             // btnBack
             // 
@@ -230,7 +231,6 @@
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(44, 20);
             this.btnBack.Text = "Back";
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click_1);
             // 
             // btnRefresh
             // 

@@ -9,9 +9,11 @@ namespace GrindsBookingSystem
 {
     public interface InterfaceCRUD
     {
-        void Add();
-        void Remove();
+        void Create();
+        String Read();
         void Update();
-        String View();
+        void Delete();
+        
+        
     }
 }

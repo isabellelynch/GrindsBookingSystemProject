@@ -76,6 +76,7 @@
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(58, 20);
             this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // label1
             // 
@@ -119,7 +120,6 @@
             this.cboName.Name = "cboName";
             this.cboName.Size = new System.Drawing.Size(121, 21);
             this.cboName.TabIndex = 22;
-
             // 
             // cboLastName
             // 

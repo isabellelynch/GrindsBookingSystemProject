@@ -141,28 +141,21 @@ namespace GrindsBookingSystem
             grid.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
         }
 
-        public static void ClearCombos(params ComboBox[] cb)
-        {
-            foreach (ComboBox c in cb)
-            {
-                c.Items.Clear();
-                c.Text = "";
-            }
-        }
-        
-        public static void ClearTextBoxes(params TextBox[] tb)
-        {
-            foreach(TextBox t in tb)
-            {
-                t.Text = "";
-            }
-        }
-
         public static void DeselectAll(params ComboBox[] cb)
         {
             foreach(ComboBox c in cb)
             {
                 c.SelectedIndex = -1;
+            }
+        }
+
+        public static void ClearCombos(params ComboBox[] cb)
+        {
+            foreach(ComboBox c in cb)
+            {
+                c.Items.Clear();
+                c.SelectedIndex = -1;
+                c.Text = "";
             }
         }
 
@@ -191,5 +184,6 @@ namespace GrindsBookingSystem
             }
             return list;
         }
+
     }
 }

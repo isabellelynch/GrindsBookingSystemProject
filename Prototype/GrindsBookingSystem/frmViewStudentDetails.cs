@@ -1,19 +1,11 @@
-﻿using Oracle.ManagedDataAccess.Client;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
 namespace GrindsBookingSystem
 {
-    public partial class frmViewStudentDetails : Form
+    public partial class frmViewStudentDetails : BaseForm
     {
         List<ComboBox> comboBoxes;
 
@@ -28,6 +20,7 @@ namespace GrindsBookingSystem
 
             foreach(ComboBox cb in comboBoxes)
             {
+                cb.SelectedIndexChanged -= ComboBoxChange;
                 cb.SelectedIndexChanged += ComboBoxChange;
             }
         }
@@ -36,38 +29,33 @@ namespace GrindsBookingSystem
             
         private void btnBack_Click(object sender, EventArgs e)
         {
-            Owner.Show();
-            this.Hide();
+            GoHome();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to exit ?",
-                                                "Please Confirm",
-                                                MessageBoxButtons.YesNo,
-                                                MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
+            Exit();
         }
 
       
 
         private void btnShowDetails_Click(object sender, EventArgs e)
         {
+            Student s = Student.GetStudent(Convert.ToInt32(cboStudentID.Items[0]));
 
-            String sql = "SELECT * FROM Students WHERE StudentID = " + cboStudentID.Text;
+            String details = s.Read();
 
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
-            dr.Read();
-
-            if (dr != null)
+            if (details != null)
             {
-                MessageBox.Show("The selected Students details are as follows\n\nStudent ID: " + dr.GetInt32(0).ToString() + "\nFirst Name: " +
-                                dr.GetString(1) + "\nSurname: " + dr.GetString(2) + "\nPhone Number: " + dr.GetString(3) + "\nEmail Address: " +
-                                dr.GetString(4), "Tutor Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("The selected Students details are \n\n" + details,
+                    "Student Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+            else
+            {
+                MessageBox.Show("The selected Student could not be found.",
+                    "Student Details", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            Reset(this.Controls);
         }
 
         public void ComboBoxChange(object sender, EventArgs e)
@@ -85,20 +73,40 @@ namespace GrindsBookingSystem
 
             if (cbo == cboStudentID)
             {
-                ControlFunctions.ApplyFilters("'" + cboStudentID.Text + "'", "StudentID", "Student", cboStudentID, cboFirstName, cboLastName);
+                ControlFunctions.ApplyFilters("'" + cboStudentID.Text + "'", "StudentID", "Students", cboStudentID, cboFirstName, cboLastName);
             }
             else if (cbo == cboFirstName)
             {
-                ControlFunctions.ApplyFilters("'" + cboFirstName.Text + "'", "FirstName", "Student", cboStudentID, cboFirstName, cboLastName);
+                ControlFunctions.ApplyFilters("'" + cboFirstName.Text + "'", "FirstName", "Students", cboStudentID, cboFirstName, cboLastName);
             }
             else if (cbo == cboLastName)
             {
-                ControlFunctions.ApplyFilters("'" + cboLastName.Text + "'", "Surname", "Student", cboStudentID, cboFirstName, cboLastName);
+                ControlFunctions.ApplyFilters("'" + cboLastName.Text + "'", "Surname", "Students", cboStudentID, cboFirstName, cboLastName);
             }
 
             updating = false;
 
         }
-       
+
+        protected override void Reset(Control.ControlCollection controls)
+        {
+            base.Reset(controls);
+
+            comboBoxes = ControlFunctions.CreateComboList(cboStudentID, cboFirstName, cboLastName);
+
+            ControlFunctions.FillBoxes("Students", cboStudentID, cboFirstName, cboLastName);
+
+            foreach (ComboBox cb in comboBoxes)
+            {
+                cb.SelectedIndexChanged -= ComboBoxChange;
+                cb.SelectedIndexChanged += ComboBoxChange;
+            }
+
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            Reset(this.Controls);
+        }
     }
 }

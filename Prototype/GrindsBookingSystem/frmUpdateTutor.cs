@@ -1,51 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GrindsBookingSystem
 {
-    public partial class frmUpdateTutor : Form
+    public partial class frmUpdateTutor : BaseForm
     {
         List<ComboBox> comboBoxes;
         private bool updating = false;
         public frmUpdateTutor()
         {
             InitializeComponent();
-            Reset();
-
-            comboBoxes = ControlFunctions.CreateComboList(cboTutorID, cboNames, cboSurnames);
-            
-            
-
-            foreach (var c in comboBoxes)
-            {
-                c.SelectedIndexChanged += ComboBoxChange;
-            }
+            Reset(this.Controls);
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Owner.Show();
+            GoHome();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to exit ?",
-                                                    "Please Confirm",
-                                                    MessageBoxButtons.YesNo,
-                                                    MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
+            Exit();
         }
 
 
@@ -156,13 +132,13 @@ namespace GrindsBookingSystem
                 }
                     
             }
-            Reset();
+
+            Reset(this.Controls);
         }
 
-        private void Reset()
+        protected override void Reset(Control.ControlCollection controls)
         {
-            ControlFunctions.ClearCombos(cboTutorID, cboNames, cboSurnames, cboRates, cboSubjects);
-            ControlFunctions.ClearTextBoxes(txtEmail, txtPhone);
+            base.Reset(controls);
 
             grpTutorDetails.Visible = false;
 
@@ -170,11 +146,20 @@ namespace GrindsBookingSystem
 
             ControlFunctions.FillRatesAndSubjects(cboRates, cboSubjects);
             ControlFunctions.FillBoxes("Tutors", cboTutorID, cboNames, cboSurnames);
+            
+            comboBoxes = ControlFunctions.CreateComboList(cboTutorID, cboNames, cboSurnames);
+            foreach (var c in comboBoxes)
+            {
+                c.SelectedIndexChanged -= ComboBoxChange;
+                c.SelectedIndexChanged += ComboBoxChange;
+            }
+
+
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            Reset();
+            Reset(this.Controls);
         }
     }
 }

@@ -18,13 +18,7 @@ namespace GrindsBookingSystem
         { 
             
         }
-
-        public override string ToString()
-        {
-            return base.ToString();
-        }
-
-        public void Add()
+        public void Create()
         {
             Debug.WriteLine(this);
 
@@ -39,25 +33,18 @@ namespace GrindsBookingSystem
 
             Database.ExecuteNonQuery(sql);
         }
-
-        public void Remove() 
+        
+        public string Read()
         {
-            string sql = "UPDATE Students SET Status = 'I'" +
-                " WHERE StudentID = '" + PersonID + "'";
-            try
-            {
-                Database.ExecuteNonQuery(sql);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+            Student s = GetStudent(Convert.ToInt32(this.PersonID));
 
+            return s.ToString();
+        }
+        
         public void Update()
         {
             string sql = "UPDATE Students SET Email = '" + Email + "', PhoneNo = '" + Phone + 
-                "' WHERE StudentID = " + PersonID;
+                "' WHERE StudentID = " + this.PersonID;
             try
             {
                 Database.ExecuteNonQuery(sql);
@@ -69,55 +56,31 @@ namespace GrindsBookingSystem
 
         }
 
-        public string View()
+        public void Delete() 
         {
+            string sql = "UPDATE Students SET Status = 'I'" +
+                " WHERE StudentID = '" + this.PersonID + "'";
             try
             {
-                string sql = "SELECT * FROM Students WHERE StudentID = '" + PersonID + "'";
-
-                OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
-                dr.Read();
-
-
-                return "Tutor ID: " + dr.GetInt32(0).ToString() + "\nFirst Name: " + dr.GetString(1) + "\nSurname: " +
-                        dr.GetString(2) + "\nRate Code: " + dr.GetString(3) + "\nSubject: " +
-                        dr.GetString(4) + "\nPhone Number: " + dr.GetString(5) + "\nEmail Address: " + dr.GetString(6);
+                Database.ExecuteNonQuery(sql);
             }
-            catch
+            catch (Exception ex)
             {
-                return "";
+                MessageBox.Show(ex.Message);
             }
         }
 
+        
 
-        public DataSet RetrieveAll()
+        
+
+
+        public static DataSet RetrieveAll()
         {
             string sql = "SELECT StudentID, FirstName, Surname FROM Students ORDER BY StudentID";
             return Database.ExecuteMultiRowQuery(sql);
         }
 
-        public static int GetNextID()
-        {
-            string sqlQuery = "SELECT StudentID_SEQ.NEXTVAL FROM DUAL";
-
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sqlQuery);
-
-            dr.Read();
-
-            int nextIDnum;
-            if (dr.IsDBNull(0))
-            {
-                nextIDnum = 1;
-            }
-            else
-            {
-                nextIDnum = dr.GetInt32(0);
-            }
-
-
-            dr.Close();
-            return nextIDnum;
-        }
 
         public static Student GetStudent(int id)
         {
@@ -152,6 +115,28 @@ namespace GrindsBookingSystem
             }
            
             return "Valid";
+        }
+
+        public static DataSet GetStudentList(ComboBox cb)
+        {
+            string idList = "";
+
+            foreach (var v in cb.Items)
+            {
+                if (cb.Items.IndexOf(v) == cb.Items.Count - 1)
+                {
+                    idList += v.ToString();
+                    break;
+                }
+                idList += v.ToString() + ",";
+            }
+
+            string sql = "SELECT StudentID, FirstName, Surname " +
+                "FROM Students " +
+                "WHERE StudentID IN (" + idList + ") " +
+                "ORDER BY StudentID";
+
+            return Database.ExecuteMultiRowQuery(sql);
         }
     }
 }

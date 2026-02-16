@@ -1,24 +1,15 @@
-﻿using Oracle.ManagedDataAccess.Client;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 
 
 namespace GrindsBookingSystem
 {
-    public partial class frmAddTutor : Form
+    public partial class frmAddTutor : BaseForm
     {
         public frmAddTutor()
         {
             InitializeComponent();
-            ClearUI();
+            Reset(this.Controls);
         }
         private void btnAddTutor_Click(object sender, EventArgs e)
         {
@@ -32,11 +23,11 @@ namespace GrindsBookingSystem
             
             String subject = cboTutorSubjects.Text.Substring(0,3);
 
-            Tutor t = new Tutor(txtTutorName.Text, txtTutorSurname.Text, rate, subject, txtTutorEmail.Text, txtTutorPhone.Text);
+            Tutor t = new Tutor(txtTutorName.Text, txtTutorSurname.Text, txtTutorEmail.Text, txtTutorPhone.Text, rate, subject);
 
             if(t.IsValid() == "Valid")
             {
-                t.Add();
+                t.Create();
 
                 DialogResult addAnother = MessageBox.Show("Tutor " + txtTutorName.Text + " " + txtTutorSurname.Text + " has been succesfully added to the system. Would you like to add another Tutor?",
                                                             "Success",
@@ -44,7 +35,7 @@ namespace GrindsBookingSystem
                                                             MessageBoxIcon.Question);
                 if (addAnother == DialogResult.Yes)
                 {
-                    ClearUI();
+                    Reset(this.Controls);
                 }
                 else
                 {
@@ -56,19 +47,11 @@ namespace GrindsBookingSystem
                 MessageBox.Show("Invalid Entry, " + t.IsValid(), "Invalid!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-        
-        public void GoHome()
+        protected override void Reset(Control.ControlCollection controls)
         {
-            ClearUI();
-            Owner.Show();
-            this.Hide();
-        }
-        
-
-        public void ClearUI()
-        {
+            base.Reset(controls);
             ControlFunctions.FillRatesAndSubjects(cboTutorRates, cboTutorSubjects);
-            ControlFunctions.ClearTextBoxes(txtTutorName, txtTutorSurname, txtTutorEmail, txtTutorPhone);
+
         }
 
 
@@ -79,19 +62,12 @@ namespace GrindsBookingSystem
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to exit ?",
-                                                   "Please Confirm",
-                                                   MessageBoxButtons.YesNo,
-                                                   MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
+            Exit();
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            ClearUI();
+            Reset(this.Controls);
         }
     }
 }
