@@ -1,13 +1,8 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace GrindsBookingSystem
 {
@@ -69,15 +64,9 @@ namespace GrindsBookingSystem
                 MessageBox.Show(ex.Message);
             }
         }
-
-        
-
-        
-
-
         public static DataSet RetrieveAll()
         {
-            string sql = "SELECT StudentID, FirstName, Surname FROM Students ORDER BY StudentID";
+            string sql = "SELECT StudentID, FirstName, Surname FROM Students WHERE Status = 'A' ORDER BY StudentID";
             return Database.ExecuteMultiRowQuery(sql);
         }
 
@@ -91,6 +80,8 @@ namespace GrindsBookingSystem
             dr.Read();
 
             Student s = new Student(dr.GetString(1), dr.GetString(2), dr.GetString(3), dr.GetString(4));
+
+            s.SetID(id.ToString());
 
             return s;
         }

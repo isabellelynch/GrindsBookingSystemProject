@@ -91,7 +91,7 @@ namespace GrindsBookingSystem
         
         public static DataSet RetrieveAll()
         {
-            string sql = "SELECT TutorID, FirstName, Surname FROM Tutors ORDER BY TutorID";
+            string sql = "SELECT TutorID, FirstName, Surname FROM Tutors WHERE Status = 'A' ORDER BY TutorID";
             return Database.ExecuteMultiRowQuery(sql);
         }
 
@@ -126,6 +126,7 @@ namespace GrindsBookingSystem
             dr.Read();
 
             Tutor t = new Tutor(dr.GetString(1), dr.GetString(2), dr.GetString(3), dr.GetString(4), dr.GetString(5), dr.GetString(6));
+
             t.SetID(id.ToString());
 
             return t;

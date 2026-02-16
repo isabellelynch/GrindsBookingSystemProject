@@ -15,18 +15,6 @@ namespace GrindsBookingSystem
             InitializeComponent();
             Reset(this.Controls);
         }
-
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            GoHome();
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Exit();
-        }
-
-
         private void btnFindStudent_Click(object sender, EventArgs e)
         {
             grpStudentDetails.Visible = true;
@@ -147,6 +135,21 @@ namespace GrindsBookingSystem
                 c.SelectedIndexChanged -= ComboBoxChange;
                 c.SelectedIndexChanged += ComboBoxChange;
             }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            Reset(this.Controls);
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            GoHome();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Exit();
         }
     }
 }

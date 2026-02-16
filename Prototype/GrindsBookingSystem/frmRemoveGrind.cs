@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static GrindsBookingSystem.frmHome;
-using static GrindsBookingSystem.frmSchedule;
+using static GrindsBookingSystem.frmViewSchedule;
 
 namespace GrindsBookingSystem
 {
@@ -29,7 +29,7 @@ namespace GrindsBookingSystem
         
         private void btnBack_Click(object sender, EventArgs e)
         {
-            var form = new frmSchedule();
+            var form = new frmViewSchedule();
             form.Show();
             this.Hide();
         }

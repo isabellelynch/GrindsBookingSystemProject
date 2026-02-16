@@ -33,7 +33,8 @@ namespace GrindsBookingSystem
             if (e.Length >= 255) { return false; }
 
             int index = e.IndexOf("@");
-            if(index != e.LastIndexOf("@")) { return false; }
+
+            if(index != e.LastIndexOf("@") || index == -1) { return false; }
 
             String local = e.Substring(0, index);
             

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static GrindsBookingSystem.frmAddTutor;
 using static GrindsBookingSystem.frmHome;
-using static GrindsBookingSystem.frmSchedule;
+using static GrindsBookingSystem.frmViewSchedule;
 
 namespace GrindsBookingSystem
 {
@@ -78,7 +78,7 @@ namespace GrindsBookingSystem
 
         public void goHome()
         {
-            var form = new frmSchedule();
+            var form = new frmViewSchedule();
             form.Show();
             this.Hide();
         }

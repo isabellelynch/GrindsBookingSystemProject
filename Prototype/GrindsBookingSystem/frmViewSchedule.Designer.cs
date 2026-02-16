@@ -1,6 +1,6 @@
 ﻿namespace GrindsBookingSystem
 {
-    partial class frmSchedule
+    partial class frmViewSchedule
     {
         /// <summary>
         /// Required designer variable.
@@ -31,11 +31,12 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.btnExit = new System.Windows.Forms.ToolStripMenuItem();
             this.btnBack = new System.Windows.Forms.ToolStripMenuItem();
-            this.lvSchedule = new System.Windows.Forms.ListView();
             this.label1 = new System.Windows.Forms.Label();
             this.btnAddGrind = new System.Windows.Forms.Button();
             this.btnRemoveGrind = new System.Windows.Forms.Button();
+            this.dgvSchedule = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSchedule)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -64,15 +65,6 @@
             this.btnBack.Size = new System.Drawing.Size(44, 20);
             this.btnBack.Text = "Back";
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
-            // lvSchedule
-            // 
-            this.lvSchedule.HideSelection = false;
-            this.lvSchedule.Location = new System.Drawing.Point(51, 86);
-            this.lvSchedule.Name = "lvSchedule";
-            this.lvSchedule.Size = new System.Drawing.Size(693, 257);
-            this.lvSchedule.TabIndex = 15;
-            this.lvSchedule.UseCompatibleStateImageBehavior = false;
             // 
             // label1
             // 
@@ -103,21 +95,29 @@
             this.btnRemoveGrind.UseVisualStyleBackColor = true;
             this.btnRemoveGrind.Click += new System.EventHandler(this.btnRemoveGrind_Click);
             // 
-            // frmSchedule
+            // dgvSchedule
+            // 
+            this.dgvSchedule.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSchedule.Location = new System.Drawing.Point(12, 68);
+            this.dgvSchedule.Name = "dgvSchedule";
+            this.dgvSchedule.Size = new System.Drawing.Size(765, 309);
+            this.dgvSchedule.TabIndex = 19;
+            // 
+            // frmViewSchedule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.dgvSchedule);
             this.Controls.Add(this.btnRemoveGrind);
             this.Controls.Add(this.btnAddGrind);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.lvSchedule);
             this.Controls.Add(this.menuStrip1);
-            this.Name = "frmSchedule";
+            this.Name = "frmViewSchedule";
             this.Text = "Grinds Booking System - Schedule";
-            this.Load += new System.EventHandler(this.frmSchedule_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSchedule)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -128,9 +128,9 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem btnExit;
         private System.Windows.Forms.ToolStripMenuItem btnBack;
-        private System.Windows.Forms.ListView lvSchedule;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnAddGrind;
         private System.Windows.Forms.Button btnRemoveGrind;
+        private System.Windows.Forms.DataGridView dgvSchedule;
     }
 }

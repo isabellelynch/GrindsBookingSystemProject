@@ -90,7 +90,7 @@ namespace GrindsBookingSystem
 
         private void scheduleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new frmSchedule();
+            var form = new frmViewSchedule();
             form.Owner = this;
             form.Show(); 
             this.Hide();
