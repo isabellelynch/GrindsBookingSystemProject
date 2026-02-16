@@ -59,7 +59,7 @@ namespace GrindsBookingSystem
 
         private void loadYears()
         {
-            frmHome.ClearCombos(this.Controls);
+            //frmHome.ClearCombos(this.Controls);
             if (cboYear.Items.Count == 0)
             {
                 for(int i = DateTime.Now.Year; i >= 2005; i--)

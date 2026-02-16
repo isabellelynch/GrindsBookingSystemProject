@@ -192,7 +192,6 @@
             this.Controls.Add(this.mnuViewStudentDetails);
             this.Name = "frmAddGrind";
             this.Text = "frmAddGrind";
-            this.Load += new System.EventHandler(this.frmAddGrind_Load);
             this.mnuViewStudentDetails.ResumeLayout(false);
             this.mnuViewStudentDetails.PerformLayout();
             this.ResumeLayout(false);

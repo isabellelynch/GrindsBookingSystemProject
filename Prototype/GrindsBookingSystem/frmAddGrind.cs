@@ -1,32 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static GrindsBookingSystem.frmAddTutor;
-using static GrindsBookingSystem.frmHome;
-using static GrindsBookingSystem.frmViewSchedule;
+
 
 namespace GrindsBookingSystem
 {
-    public partial class frmAddGrind : Form
+    public partial class frmAddGrind : BaseForm
     {
         public frmAddGrind()
         {
             InitializeComponent();
-        }
-
-        private void frmAddGrind_Load(object sender, EventArgs e)
-        {
-            ControlFunctions.FillSingleBox(cboRooms, "R302", "S302", "T302", "R300", "S304", "S306", "R200", "S300");
             SetDateTimeFormat();
         }
 
+        private void FillRooms()
+        {
+            cboRooms.Items.Clear();
+
+            string sql = "SELECT RoomNo FROM Rooms";
+            DataSet ds = Database.ExecuteMultiRowQuery(sql);
+            foreach (DataRow r in ds.Tables[0].Rows)
+            {
+                cboRooms.Items.Add(r[0].ToString());
+            }
+        }
         public void SetDateTimeFormat()
         {
             pickDate.Format = DateTimePickerFormat.Short;
@@ -75,44 +72,27 @@ namespace GrindsBookingSystem
 
 
         }
-
-        public void goHome()
+        protected override void Reset(Control.ControlCollection controls)
         {
-            var form = new frmViewSchedule();
-            form.Show();
-            this.Hide();
-        }
-
-        public void reset()
-        {
+            base.Reset(controls);
             pickDate.Value = DateTime.Now;
             pickTime.Value = DateTime.Now;
+            FillRooms();
 
-            ControlFunctions.DeselectAll(cboRooms, cboTutors);
-            //ControlFunctions.ClearTextBoxes(txtAttendance);
         }
-
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            reset();
+            Reset(this.Controls);
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Owner.Show();
+            GoHome();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to exit ?",
-                                                   "Please Confirm",
-                                                   MessageBoxButtons.YesNo,
-                                                   MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
+            Exit();
         }
     }
 }

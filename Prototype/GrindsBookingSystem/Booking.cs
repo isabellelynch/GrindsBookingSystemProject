@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GrindsBookingSystem
 {
-    public class Booking
+    public class Booking : InterfaceCRUD
     {
         public int bookingRef { get; set; }
         public int StudentID { get; set; }
@@ -27,6 +27,11 @@ namespace GrindsBookingSystem
             Amount = amount;
 
         }
+
+        public void Create() { }
+        public string Read() { return ""; }
+        public void Update() { }
+        public void Delete() { }
 
     }
 }

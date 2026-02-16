@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using static GrindsBookingSystem.frmHome;
+
 
 namespace GrindsBookingSystem
 {
-    public partial class frmTutorReport : Form
+    public partial class frmTutorReport : BaseForm
     {
         public frmTutorReport()
         {
@@ -24,34 +17,24 @@ namespace GrindsBookingSystem
     
         private void btnBack_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Owner.Show();
+            GoHome();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to exit ?",
-                                                   "Please Confirm",
-                                                   MessageBoxButtons.YesNo,
-                                                   MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
+            Exit();
         }
-
-
-
-
         private void chartTutorEarnings_MouseDown(object sender, MouseEventArgs e)
         {
             HitTestResult result = chartTutorEarnings.HitTest(e.X, e.Y);
+
             if (result.ChartElementType == ChartElementType.DataPoint)
             {
                 int pointIndex = result.PointIndex;
                 Series series = result.Series;
                 DataPoint point = series.Points[pointIndex];
                 var tutorView = point.Tag as Tutor;
+
                 if (tutorView != null)
                 {
                     MessageBox.Show("The details of the chosen tutor are:\n\n" + $"Tutor ID : {tutorView.PersonID}\n" +

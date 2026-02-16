@@ -176,7 +176,6 @@
             this.Controls.Add(this.label2);
             this.Name = "frmShowBookings";
             this.Text = "frmShowBookings";
-            this.Load += new System.EventHandler(this.frmShowBookings_Load);
             this.grpCancelBooking.ResumeLayout(false);
             this.mnuViewStudentDetails.ResumeLayout(false);
             this.mnuViewStudentDetails.PerformLayout();

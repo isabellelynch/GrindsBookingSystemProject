@@ -1,39 +1,61 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static GrindsBookingSystem.frmAddStudent;
-using static GrindsBookingSystem.frmHome;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 
 namespace GrindsBookingSystem
 {
-    public partial class frmAddBooking : Form
+    public partial class frmAddBooking : BaseForm
     {
+        private bool updating = false;
         public frmAddBooking()
         {
             InitializeComponent();
-            grpMakeBooking.Visible = false;
-
+            Reset(this.Controls);
         }
 
-       
-        public void reset()
-        {
-            ControlFunctions.DeselectAll(cboFirstName, cboLastName, cboStudentID);
-            ControlFunctions.EnableBoxes(cboFirstName, cboLastName, cboStudentID);
-            ControlFunctions.FillBoxes("Students", cboStudentID, cboFirstName, cboLastName);
 
-            lvSchedule.Items.Clear();
+        protected override void Reset(Control.ControlCollection controls)
+        {
+            base.Reset(controls);
+            ControlFunctions.FillBoxes("Students", cboStudentID, cboFirstName, cboLastName);
             grpMakeBooking.Visible = false;
-            
+            List<ComboBox> cb = ControlFunctions.CreateComboList(cboStudentID, cboFirstName, cboLastName);
+            foreach (ComboBox c in cb)
+            {
+                c.SelectedIndexChanged -= ComboBoxChange;
+                c.SelectedIndexChanged += ComboBoxChange;
+            }
+
+        }
+        public void ComboBoxChange(object sender, EventArgs e)
+        {
+            if (updating) return;
+
+            ComboBox cbo = sender as ComboBox;
+
+            if (cbo == null || cbo.SelectedItem == null)
+            {
+                return;
+            }
+
+            updating = true;
+
+            if (cbo == cboStudentID)
+            {
+                ControlFunctions.ApplyFilters("'" + cboStudentID.Text + "'", "StudentID", "Students", cboStudentID, cboFirstName, cboLastName);
+            }
+            else if (cbo == cboFirstName)
+            {
+                ControlFunctions.ApplyFilters("'" + cboFirstName.Text + "'", "FirstName", "Students", cboStudentID, cboFirstName, cboLastName);
+            }
+            else if (cbo == cboLastName)
+            {
+                ControlFunctions.ApplyFilters("'" + cboLastName.Text + "'", "Surname", "Students", cboStudentID, cboFirstName, cboLastName);
+            }
+
+            updating = false;
+
         }
 
         private void btnContinue_Click(object sender, EventArgs e)
@@ -55,44 +77,23 @@ namespace GrindsBookingSystem
                 return;
             }
             grpMakeBooking.Visible = true;
+
             ControlFunctions.DisableBoxes(cboFirstName, cboLastName, cboStudentID);
-
-            if (lvSchedule.Columns.Count == 0)
-            {
-                lvSchedule.Columns.Add("Date", 100);
-                lvSchedule.Columns.Add("Time", 100);
-                lvSchedule.Columns.Add("Max Attendance", 115);
-                lvSchedule.Columns.Add("Current Enrollment", 115);
-                lvSchedule.Columns.Add("Room No", 130);
-                lvSchedule.Columns.Add("Tutor ID", 120);
-            }
-
-            lvSchedule.View = View.Details;
-            lvSchedule.FullRowSelect = true;
-            lvSchedule.GridLines = true;
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            reset();
+            Reset(this.Controls);
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Owner.Show();
+            GoHome();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to exit ?",
-                                                    "Please Confirm",
-                                                    MessageBoxButtons.YesNo,
-                                                    MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
+            Exit();
         }
     }
 }

@@ -31,25 +31,28 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmHome));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tutorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.removeTutorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.updateTutorDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewTutorDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AddTutor = new System.Windows.Forms.ToolStripMenuItem();
+            this.RemoveTutor = new System.Windows.Forms.ToolStripMenuItem();
+            this.UpdateTutor = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewTutor = new System.Windows.Forms.ToolStripMenuItem();
             this.studentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addStudentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.removeStuentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.updateStudentDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewStudentDetaisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AddStudent = new System.Windows.Forms.ToolStripMenuItem();
+            this.RemoveStudent = new System.Windows.Forms.ToolStripMenuItem();
+            this.UpdateStudent = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewStudent = new System.Windows.Forms.ToolStripMenuItem();
             this.scheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewSchedule = new System.Windows.Forms.ToolStripMenuItem();
+            this.AddClass = new System.Windows.Forms.ToolStripMenuItem();
+            this.UpdateClasses = new System.Windows.Forms.ToolStripMenuItem();
             this.bookingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.makeBookingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cancelBokingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewBookingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MakeBooking = new System.Windows.Forms.ToolStripMenuItem();
+            this.CancelBooking = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewBookings = new System.Windows.Forms.ToolStripMenuItem();
             this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.YearlyRevenue = new System.Windows.Forms.ToolStripMenuItem();
+            this.EarningsAnalysis = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.picHome = new System.Windows.Forms.PictureBox();
-            this.yearlyRevenueAnalysisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tutorEarningsAnalysisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picHome)).BeginInit();
             this.SuspendLayout();
@@ -72,127 +75,165 @@
             // tutorsToolStripMenuItem
             // 
             this.tutorsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addToolStripMenuItem,
-            this.removeTutorToolStripMenuItem,
-            this.updateTutorDetailsToolStripMenuItem,
-            this.viewTutorDetailsToolStripMenuItem});
+            this.AddTutor,
+            this.RemoveTutor,
+            this.UpdateTutor,
+            this.ViewTutor});
             this.tutorsToolStripMenuItem.Name = "tutorsToolStripMenuItem";
             this.tutorsToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.tutorsToolStripMenuItem.Text = "Tutors";
             // 
-            // addToolStripMenuItem
+            // AddTutor
             // 
-            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.addToolStripMenuItem.Text = "Add Tutor";
-            this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
+            this.AddTutor.Name = "AddTutor";
+            this.AddTutor.Size = new System.Drawing.Size(182, 22);
+            this.AddTutor.Text = "Add Tutor";
+            this.AddTutor.Click += new System.EventHandler(this.AddTutor_Click);
             // 
-            // removeTutorToolStripMenuItem
+            // RemoveTutor
             // 
-            this.removeTutorToolStripMenuItem.Name = "removeTutorToolStripMenuItem";
-            this.removeTutorToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.removeTutorToolStripMenuItem.Text = "Remove Tutor";
-            this.removeTutorToolStripMenuItem.Click += new System.EventHandler(this.removeTutorToolStripMenuItem_Click);
+            this.RemoveTutor.Name = "RemoveTutor";
+            this.RemoveTutor.Size = new System.Drawing.Size(182, 22);
+            this.RemoveTutor.Text = "Remove Tutor";
+            this.RemoveTutor.Click += new System.EventHandler(this.RemoveTutor_Click);
             // 
-            // updateTutorDetailsToolStripMenuItem
+            // UpdateTutor
             // 
-            this.updateTutorDetailsToolStripMenuItem.Name = "updateTutorDetailsToolStripMenuItem";
-            this.updateTutorDetailsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.updateTutorDetailsToolStripMenuItem.Text = "Update Tutor Details";
-            this.updateTutorDetailsToolStripMenuItem.Click += new System.EventHandler(this.updateTutorDetailsToolStripMenuItem_Click);
+            this.UpdateTutor.Name = "UpdateTutor";
+            this.UpdateTutor.Size = new System.Drawing.Size(182, 22);
+            this.UpdateTutor.Text = "Update Tutor Details";
+            this.UpdateTutor.Click += new System.EventHandler(this.UpdateTutor_Click);
             // 
-            // viewTutorDetailsToolStripMenuItem
+            // ViewTutor
             // 
-            this.viewTutorDetailsToolStripMenuItem.Name = "viewTutorDetailsToolStripMenuItem";
-            this.viewTutorDetailsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.viewTutorDetailsToolStripMenuItem.Text = "View Tutor Details";
-            this.viewTutorDetailsToolStripMenuItem.Click += new System.EventHandler(this.viewTutorDetailsToolStripMenuItem_Click);
+            this.ViewTutor.Name = "ViewTutor";
+            this.ViewTutor.Size = new System.Drawing.Size(182, 22);
+            this.ViewTutor.Text = "View Tutor Details";
+            this.ViewTutor.Click += new System.EventHandler(this.ViewTutor_Click);
             // 
             // studentsToolStripMenuItem
             // 
             this.studentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addStudentToolStripMenuItem,
-            this.removeStuentToolStripMenuItem,
-            this.updateStudentDetailsToolStripMenuItem,
-            this.viewStudentDetaisToolStripMenuItem});
+            this.AddStudent,
+            this.RemoveStudent,
+            this.UpdateStudent,
+            this.ViewStudent});
             this.studentsToolStripMenuItem.Name = "studentsToolStripMenuItem";
             this.studentsToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.studentsToolStripMenuItem.Text = "Students";
             // 
-            // addStudentToolStripMenuItem
+            // AddStudent
             // 
-            this.addStudentToolStripMenuItem.Name = "addStudentToolStripMenuItem";
-            this.addStudentToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.addStudentToolStripMenuItem.Text = "Add Student";
-            this.addStudentToolStripMenuItem.Click += new System.EventHandler(this.addStudentToolStripMenuItem_Click);
+            this.AddStudent.Name = "AddStudent";
+            this.AddStudent.Size = new System.Drawing.Size(194, 22);
+            this.AddStudent.Text = "Add Student";
+            this.AddStudent.Click += new System.EventHandler(this.AddStudent_Click);
             // 
-            // removeStuentToolStripMenuItem
+            // RemoveStudent
             // 
-            this.removeStuentToolStripMenuItem.Name = "removeStuentToolStripMenuItem";
-            this.removeStuentToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.removeStuentToolStripMenuItem.Text = "Remove Student";
-            this.removeStuentToolStripMenuItem.Click += new System.EventHandler(this.removeStuentToolStripMenuItem_Click);
+            this.RemoveStudent.Name = "RemoveStudent";
+            this.RemoveStudent.Size = new System.Drawing.Size(194, 22);
+            this.RemoveStudent.Text = "Remove Student";
+            this.RemoveStudent.Click += new System.EventHandler(this.RemoveStudent_Click);
             // 
-            // updateStudentDetailsToolStripMenuItem
+            // UpdateStudent
             // 
-            this.updateStudentDetailsToolStripMenuItem.Name = "updateStudentDetailsToolStripMenuItem";
-            this.updateStudentDetailsToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.updateStudentDetailsToolStripMenuItem.Text = "Update Student Details";
-            this.updateStudentDetailsToolStripMenuItem.Click += new System.EventHandler(this.updateStudentDetailsToolStripMenuItem_Click);
+            this.UpdateStudent.Name = "UpdateStudent";
+            this.UpdateStudent.Size = new System.Drawing.Size(194, 22);
+            this.UpdateStudent.Text = "Update Student Details";
+            this.UpdateStudent.Click += new System.EventHandler(this.UpdateStudent_Click);
             // 
-            // viewStudentDetaisToolStripMenuItem
+            // ViewStudent
             // 
-            this.viewStudentDetaisToolStripMenuItem.Name = "viewStudentDetaisToolStripMenuItem";
-            this.viewStudentDetaisToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.viewStudentDetaisToolStripMenuItem.Text = "View Student Details";
-            this.viewStudentDetaisToolStripMenuItem.Click += new System.EventHandler(this.viewStudentDetaisToolStripMenuItem_Click);
+            this.ViewStudent.Name = "ViewStudent";
+            this.ViewStudent.Size = new System.Drawing.Size(194, 22);
+            this.ViewStudent.Text = "View Student Details";
+            this.ViewStudent.Click += new System.EventHandler(this.ViewStudent_Click);
             // 
             // scheduleToolStripMenuItem
             // 
+            this.scheduleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ViewSchedule,
+            this.AddClass,
+            this.UpdateClasses});
             this.scheduleToolStripMenuItem.Name = "scheduleToolStripMenuItem";
             this.scheduleToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.scheduleToolStripMenuItem.Text = "Schedule";
-            this.scheduleToolStripMenuItem.Click += new System.EventHandler(this.scheduleToolStripMenuItem_Click);
+            // 
+            // ViewSchedule
+            // 
+            this.ViewSchedule.Name = "ViewSchedule";
+            this.ViewSchedule.Size = new System.Drawing.Size(180, 22);
+            this.ViewSchedule.Text = "View Schedule";
+            this.ViewSchedule.Click += new System.EventHandler(this.ViewSchedule_Click);
+            // 
+            // AddClass
+            // 
+            this.AddClass.Name = "AddClass";
+            this.AddClass.Size = new System.Drawing.Size(180, 22);
+            this.AddClass.Text = "Add Class";
+            this.AddClass.Click += new System.EventHandler(this.AddClass_Click);
+            // 
+            // UpdateClasses
+            // 
+            this.UpdateClasses.Name = "UpdateClasses";
+            this.UpdateClasses.Size = new System.Drawing.Size(180, 22);
+            this.UpdateClasses.Text = "Update Classes";
+            this.UpdateClasses.Click += new System.EventHandler(this.UpdateClasses_Click);
             // 
             // bookingsToolStripMenuItem
             // 
             this.bookingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.makeBookingToolStripMenuItem,
-            this.cancelBokingToolStripMenuItem,
-            this.viewBookingsToolStripMenuItem});
+            this.MakeBooking,
+            this.CancelBooking,
+            this.ViewBookings});
             this.bookingsToolStripMenuItem.Name = "bookingsToolStripMenuItem";
             this.bookingsToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
             this.bookingsToolStripMenuItem.Text = "Bookings";
             // 
-            // makeBookingToolStripMenuItem
+            // MakeBooking
             // 
-            this.makeBookingToolStripMenuItem.Name = "makeBookingToolStripMenuItem";
-            this.makeBookingToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
-            this.makeBookingToolStripMenuItem.Text = "Make Booking";
-            this.makeBookingToolStripMenuItem.Click += new System.EventHandler(this.makeBookingToolStripMenuItem_Click);
+            this.MakeBooking.Name = "MakeBooking";
+            this.MakeBooking.Size = new System.Drawing.Size(180, 22);
+            this.MakeBooking.Text = "Make Booking";
+            this.MakeBooking.Click += new System.EventHandler(this.MakeBooking_Click);
             // 
-            // cancelBokingToolStripMenuItem
+            // CancelBooking
             // 
-            this.cancelBokingToolStripMenuItem.Name = "cancelBokingToolStripMenuItem";
-            this.cancelBokingToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
-            this.cancelBokingToolStripMenuItem.Text = "Cancel Booking";
-            this.cancelBokingToolStripMenuItem.Click += new System.EventHandler(this.cancelBokingToolStripMenuItem_Click);
+            this.CancelBooking.Name = "CancelBooking";
+            this.CancelBooking.Size = new System.Drawing.Size(180, 22);
+            this.CancelBooking.Text = "Cancel Booking";
+            this.CancelBooking.Click += new System.EventHandler(this.CancelBooking_Click);
             // 
-            // viewBookingsToolStripMenuItem
+            // ViewBookings
             // 
-            this.viewBookingsToolStripMenuItem.Name = "viewBookingsToolStripMenuItem";
-            this.viewBookingsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
-            this.viewBookingsToolStripMenuItem.Text = "View Bookings";
-            this.viewBookingsToolStripMenuItem.Click += new System.EventHandler(this.viewBookingsToolStripMenuItem_Click);
+            this.ViewBookings.Name = "ViewBookings";
+            this.ViewBookings.Size = new System.Drawing.Size(180, 22);
+            this.ViewBookings.Text = "View Bookings";
+            this.ViewBookings.Click += new System.EventHandler(this.ViewBookings_Click);
             // 
             // adminToolStripMenuItem
             // 
             this.adminToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.yearlyRevenueAnalysisToolStripMenuItem,
-            this.tutorEarningsAnalysisToolStripMenuItem});
+            this.YearlyRevenue,
+            this.EarningsAnalysis});
             this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
             this.adminToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.adminToolStripMenuItem.Text = "Admin";
+            // 
+            // YearlyRevenue
+            // 
+            this.YearlyRevenue.Name = "YearlyRevenue";
+            this.YearlyRevenue.Size = new System.Drawing.Size(199, 22);
+            this.YearlyRevenue.Text = "Yearly Revenue Analysis";
+            this.YearlyRevenue.Click += new System.EventHandler(this.YearlyRevenue_Click);
+            // 
+            // EarningsAnalysis
+            // 
+            this.EarningsAnalysis.Name = "EarningsAnalysis";
+            this.EarningsAnalysis.Size = new System.Drawing.Size(199, 22);
+            this.EarningsAnalysis.Text = "Tutor Earnings Analysis";
+            this.EarningsAnalysis.Click += new System.EventHandler(this.EarningsAnalysis_Click);
             // 
             // exitToolStripMenuItem
             // 
@@ -212,20 +253,6 @@
             this.picHome.Size = new System.Drawing.Size(800, 423);
             this.picHome.TabIndex = 1;
             this.picHome.TabStop = false;
-            // 
-            // yearlyRevenueAnalysisToolStripMenuItem
-            // 
-            this.yearlyRevenueAnalysisToolStripMenuItem.Name = "yearlyRevenueAnalysisToolStripMenuItem";
-            this.yearlyRevenueAnalysisToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
-            this.yearlyRevenueAnalysisToolStripMenuItem.Text = "Yearly Revenue Analysis";
-            this.yearlyRevenueAnalysisToolStripMenuItem.Click += new System.EventHandler(this.yearlyRevenueAnalysisToolStripMenuItem_Click);
-            // 
-            // tutorEarningsAnalysisToolStripMenuItem
-            // 
-            this.tutorEarningsAnalysisToolStripMenuItem.Name = "tutorEarningsAnalysisToolStripMenuItem";
-            this.tutorEarningsAnalysisToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
-            this.tutorEarningsAnalysisToolStripMenuItem.Text = "Tutor Earnings Analysis";
-            this.tutorEarningsAnalysisToolStripMenuItem.Click += new System.EventHandler(this.tutorEarningsAnalysisToolStripMenuItem_Click);
             // 
             // frmHome
             // 
@@ -249,25 +276,28 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem studentsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addStudentToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem removeStuentToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem updateStudentDetailsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem viewStudentDetaisToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AddStudent;
+        private System.Windows.Forms.ToolStripMenuItem RemoveStudent;
+        private System.Windows.Forms.ToolStripMenuItem UpdateStudent;
+        private System.Windows.Forms.ToolStripMenuItem ViewStudent;
         private System.Windows.Forms.ToolStripMenuItem tutorsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem removeTutorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem updateTutorDetailsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem viewTutorDetailsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AddTutor;
+        private System.Windows.Forms.ToolStripMenuItem RemoveTutor;
+        private System.Windows.Forms.ToolStripMenuItem UpdateTutor;
+        private System.Windows.Forms.ToolStripMenuItem ViewTutor;
         private System.Windows.Forms.ToolStripMenuItem scheduleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bookingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem makeBookingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cancelBokingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem viewBookingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MakeBooking;
+        private System.Windows.Forms.ToolStripMenuItem CancelBooking;
+        private System.Windows.Forms.ToolStripMenuItem ViewBookings;
         private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.PictureBox picHome;
-        private System.Windows.Forms.ToolStripMenuItem yearlyRevenueAnalysisToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tutorEarningsAnalysisToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem YearlyRevenue;
+        private System.Windows.Forms.ToolStripMenuItem EarningsAnalysis;
+        private System.Windows.Forms.ToolStripMenuItem ViewSchedule;
+        private System.Windows.Forms.ToolStripMenuItem AddClass;
+        private System.Windows.Forms.ToolStripMenuItem UpdateClasses;
     }
 }
 
