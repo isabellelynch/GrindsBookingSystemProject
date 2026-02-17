@@ -13,12 +13,7 @@ namespace GrindsBookingSystem
         }
         private void btnAddTutor_Click(object sender, EventArgs e)
         {
-            if(!Validation.ComboSelected(cboTutorRates) || !Validation.ComboSelected(cboTutorSubjects))
-            {
-                MessageBox.Show("Tutor Rate and Subject must be selected, please try again.",
-                    "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            
             String rate = cboTutorRates.Text.Substring(0,3);
             
             String subject = cboTutorSubjects.Text.Substring(0,3);
@@ -44,14 +39,23 @@ namespace GrindsBookingSystem
             }
             else
             {
-                MessageBox.Show("Invalid Entry, " + t.IsValid(), "Invalid!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if(!Validation.ComboSelected(cboTutorRates) || !Validation.ComboSelected(cboTutorSubjects))
+                {
+                    MessageBox.Show("Tutor Rate and Subject must be selected, please try again.",
+                        "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Invalid Entry, " + t.IsValid(), "Invalid!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                    
             }
         }
         protected override void Reset(Control.ControlCollection controls)
         {
             base.Reset(controls);
             ControlFunctions.FillRatesAndSubjects(cboTutorRates, cboTutorSubjects);
-
         }
 
 

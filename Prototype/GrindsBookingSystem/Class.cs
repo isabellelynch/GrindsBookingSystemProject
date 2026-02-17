@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlTypes;
 using System.Security.Policy;
+using System.Windows.Forms;
 
 namespace GrindsBookingSystem
 {
     public class Class
     {
-        public string Subject { get; set; }
         public int Day { get; set; }
         public int Time { get; set; }
         public string TutorID { get; set; }
@@ -16,9 +16,8 @@ namespace GrindsBookingSystem
         public string RoomNo { get; set; }
         public int Semester {  get; set; }
 
-        public Class(string sub, int day, int time, string id, int enroll, string room, int sem)
+        public Class(int day, int time, string id, int enroll, string room, int sem)
         {
-            Subject = sub;
             Day = day;
             Time = time;
             TutorID = id;
@@ -27,11 +26,11 @@ namespace GrindsBookingSystem
             Semester = sem;
         }
 
-        public static List<Class> ClassList(int sem)
+        public static List<Class> ClassList(String room, int sem)
         {
             List<Class> list = new List<Class>();
 
-            string sql = "SELECT * FROM Classes WHERE SemesterNo =  " + sem;
+            string sql = "SELECT * FROM Classes WHERE SemesterNo =  " + sem + " AND RoomNo = '" + room + "'";
 
             DataSet ds = Database.ExecuteMultiRowQuery(sql);
 
@@ -39,19 +38,20 @@ namespace GrindsBookingSystem
             {
                 Class c = new Class
                 (
-                    r[0].ToString(),
+                    Convert.ToInt32(r[0]),
                     Convert.ToInt32(r[1]),
-                    Convert.ToInt32(r[2]),
-                    r[3].ToString(),
-                    Convert.ToInt32(r[4]),
-                    r[5].ToString(),
-                    Convert.ToInt32(r[6])
+                    r[2].ToString(),
+                    Convert.ToInt32(r[3]),
+                    r[4].ToString(),
+                    2
                 );
 
                 list.Add(c);
             }
             return list;
         }
-        
+
+       
+
     }
 }

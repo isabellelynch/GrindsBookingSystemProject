@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 
@@ -11,6 +13,8 @@ namespace GrindsBookingSystem
         public frmViewSchedule()
         {
             InitializeComponent();
+            FormatGridView();
+            Reset(this.Controls);
         }
 
        
@@ -20,50 +24,6 @@ namespace GrindsBookingSystem
             GoHome();
         }
 
-        private void btnAddGrind_Click(object sender, EventArgs e)
-        {
-            var form = new frmAddGrind();
-            form.Owner = this;
-            form.Show();
-            this.Hide();
-        }
-
-        private void btnRemoveGrind_Click(object sender, EventArgs e)
-        {
-            var form = new frmRemoveGrind();
-            form.Owner = this;
-            form.Show();
-            this.Hide();
-        }
-
-
-       /* public class ScheduleDateTimeComparer : IComparer
-        {
-            private bool ascending;
-
-            public ScheduleDateTimeComparer(bool ascending)
-            {
-                this.ascending = ascending;
-            }
-
-            public int Compare(object x, object y)
-            {
-                ListViewItem item1 = x as ListViewItem;
-                ListViewItem item2 = y as ListViewItem;
-
-                DateTime date1 = DateTime.Parse(item1.SubItems[0].Text);
-                DateTime date2 = DateTime.Parse(item2.SubItems[0].Text);
-
-                TimeSpan time1 = TimeSpan.Parse(item1.SubItems[1].Text);
-                TimeSpan time2 = TimeSpan.Parse(item2.SubItems[1].Text);
-
-                DateTime dt1 = date1.Add(time1);
-                DateTime dt2 = date2.Add(time2);
-
-                return ascending ? dt1.CompareTo(dt2) : dt2.CompareTo(dt1);
-            }
-        }
-       */
         private void btnExit_Click(object sender, EventArgs e)
         {
             Exit();
@@ -72,54 +32,104 @@ namespace GrindsBookingSystem
         private void FormatGridView()
         {
             dgvSchedule.Columns.Clear();
+            dgvSchedule.Rows.Clear();
+
+            //add headings
             dgvSchedule.Columns.Add("Time", "Time");
-            string[] days = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
-            foreach (var day in days)
-            {
-                dgvSchedule.Columns.Add(day, day);
-            }
 
-            dgvSchedule.Columns[0].Width = 80;
-
-            for (int i = 1; i <= 7; i++)
-            {
-                dgvSchedule.Columns[i].Width = 120;
-            }
-
+            string[] days = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+            
             dgvSchedule.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
+            //header styling
             dgvSchedule.EnableHeadersVisualStyles = false;
             dgvSchedule.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
             dgvSchedule.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvSchedule.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Bold);
 
-            dgvSchedule.Rows.Clear();
+            foreach (var day in days)
+            {
+                dgvSchedule.Columns.Add(day, day);
+            }
 
-            for (int hour = 8; hour <= 17; hour++)
+            for (int i = 1; i <= 5; i++)
+            {
+                dgvSchedule.Columns[i].Width = 120;
+            }
+
+            dgvSchedule.Columns[0].Width = 80;
+
+            
+            //add time fields
+            for (int hour = 9; hour <= 17; hour++)
             {
                 int rowIndex = dgvSchedule.Rows.Add();
                 dgvSchedule.Rows[rowIndex].Cells[0].Value = $"{hour:00}:00";
             }
 
-            List<Class> classList = Class.ClassList(2);
+            dgvSchedule.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvSchedule.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            dgvSchedule.GridColor = Color.Gray;
+            dgvSchedule.ScrollBars = ScrollBars.None;
+        }
+
+        public void btnAddClass_Click(object sender, EventArgs e)
+        {
+            int day = dgvSchedule.CurrentCell.ColumnIndex;
+            int time = dgvSchedule.CurrentCell.RowIndex;
+            string room = cboRooms.Text;
+
+            if (day == 0 || time < 0)
+            {
+                MessageBox.Show("A Timeslot must be chosen before adding a class", "Error", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            frmAddClass f = new frmAddClass(day, time, room);
+            
+            f.Owner = this;
+            f.Show();
+            f.Focus();
+            
+        }
+
+        protected override void Reset(Control.ControlCollection controls)
+        {
+            base.Reset(controls);
+            ControlFunctions.FillRooms(cboRooms);
+            cboRooms.SelectedIndexChanged -= FillSchedule;
+            cboRooms.SelectedIndexChanged += FillSchedule;
+        }
+
+        private void FillSchedule(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dgvSchedule.Rows)
+            {
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    if (cell.ColumnIndex != 0 && !row.IsNewRow)
+                    {
+                        cell.Value = "";
+                    }
+                }
+            }
+            List<Class> classList = Class.ClassList(cboRooms.Text.Substring(0,1), 2);
 
             foreach (Class c in classList)
             {
                 int rowIndex = c.Time - 9;
+
                 if (rowIndex < 0 || rowIndex >= dgvSchedule.Rows.Count) continue;
 
                 int colIndex = ((int)c.Day + 6) % 7 + 1;
 
-                dgvSchedule.Rows[rowIndex].Cells[colIndex].Value = c.Subject;
-            }
+                Tutor t = Tutor.GetTutor(Convert.ToInt32(c.TutorID));
 
-            dgvSchedule.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvSchedule.RowHeadersVisible = false;
-            dgvSchedule.AllowUserToAddRows = false;
-            dgvSchedule.AllowUserToResizeRows = false;
-            dgvSchedule.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            dgvSchedule.GridColor = Color.Gray;
+                dgvSchedule.Rows[rowIndex].Cells[colIndex].Value = t.Subject + " - " + t.FirstName + " " + t.Surname;
+            }
         }
+
     }
 }
     

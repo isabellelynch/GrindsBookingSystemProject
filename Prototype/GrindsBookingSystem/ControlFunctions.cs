@@ -43,17 +43,22 @@ namespace GrindsBookingSystem
 
         }
 
-        public static void FillSingleBox(ComboBox cb, params String[] s)
+        public static void FillRooms(ComboBox c)
         {
-            foreach(String item in s)
+            c.Items.Clear();
+
+            string sql = "SELECT RoomNo, Description FROM Rooms";
+
+            DataSet ds = Database.ExecuteMultiRowQuery(sql);
+            foreach (DataRow r in ds.Tables[0].Rows)
             {
-                cb.Items.Add(item);
+                c.Items.Add(r[0].ToString() + " - " + r[1].ToString());
             }
         }
 
         public static void FillRatesAndSubjects(ComboBox cb, ComboBox cb1)
         {
-            ClearCombos(cb);
+            ClearCombos(cb, cb1);
             String sql = "SELECT RateCode, Description FROM TutorRates ORDER BY RateCode";
             DataSet ds = Database.ExecuteMultiRowQuery(sql);
 
@@ -167,9 +172,9 @@ namespace GrindsBookingSystem
             }
         }
 
-        public static void DisableBoxes(params ComboBox[] cb)
+        public static void DisableBoxes(params Control[] cb)
         {
-            foreach (ComboBox c in cb)
+            foreach (Control c in cb)
             {
                 c.Enabled = false;
             }

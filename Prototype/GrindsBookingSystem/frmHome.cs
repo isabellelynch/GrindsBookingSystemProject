@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Windows.Forms;
 
 
@@ -52,21 +51,6 @@ namespace GrindsBookingSystem
             NewPage(new frmViewStudentDetails());
         }
 
-        private void ViewSchedule_Click(object sender, EventArgs e)
-        {
-            NewPage(new frmViewSchedule());
-        }
-
-        private void AddClass_Click(object sender, EventArgs e)
-        {
-            NewPage(new frmAddGrind());
-        }
-
-        private void UpdateClasses_Click(object sender, EventArgs e)
-        {
-            NewPage(new frmRemoveGrind());
-        }
-
         private void MakeBooking_Click(object sender, EventArgs e)
         {
             NewPage(new frmAddBooking());
@@ -91,6 +75,11 @@ namespace GrindsBookingSystem
         {
             NewPage(new frmTutorReport());
         }
+        
+        private void scheduleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewPage(new frmViewSchedule());
+        }
         private void NewPage(Form f)
         {
             f.Owner = this;
@@ -102,5 +91,7 @@ namespace GrindsBookingSystem
         {
             Exit();
         }
+
+        
     }
 }

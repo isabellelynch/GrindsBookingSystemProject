@@ -41,9 +41,6 @@
             this.UpdateStudent = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewStudent = new System.Windows.Forms.ToolStripMenuItem();
             this.scheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ViewSchedule = new System.Windows.Forms.ToolStripMenuItem();
-            this.AddClass = new System.Windows.Forms.ToolStripMenuItem();
-            this.UpdateClasses = new System.Windows.Forms.ToolStripMenuItem();
             this.bookingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MakeBooking = new System.Windows.Forms.ToolStripMenuItem();
             this.CancelBooking = new System.Windows.Forms.ToolStripMenuItem();
@@ -152,34 +149,10 @@
             // 
             // scheduleToolStripMenuItem
             // 
-            this.scheduleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ViewSchedule,
-            this.AddClass,
-            this.UpdateClasses});
             this.scheduleToolStripMenuItem.Name = "scheduleToolStripMenuItem";
             this.scheduleToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.scheduleToolStripMenuItem.Text = "Schedule";
-            // 
-            // ViewSchedule
-            // 
-            this.ViewSchedule.Name = "ViewSchedule";
-            this.ViewSchedule.Size = new System.Drawing.Size(180, 22);
-            this.ViewSchedule.Text = "View Schedule";
-            this.ViewSchedule.Click += new System.EventHandler(this.ViewSchedule_Click);
-            // 
-            // AddClass
-            // 
-            this.AddClass.Name = "AddClass";
-            this.AddClass.Size = new System.Drawing.Size(180, 22);
-            this.AddClass.Text = "Add Class";
-            this.AddClass.Click += new System.EventHandler(this.AddClass_Click);
-            // 
-            // UpdateClasses
-            // 
-            this.UpdateClasses.Name = "UpdateClasses";
-            this.UpdateClasses.Size = new System.Drawing.Size(180, 22);
-            this.UpdateClasses.Text = "Update Classes";
-            this.UpdateClasses.Click += new System.EventHandler(this.UpdateClasses_Click);
+            this.scheduleToolStripMenuItem.Click += new System.EventHandler(this.scheduleToolStripMenuItem_Click);
             // 
             // bookingsToolStripMenuItem
             // 
@@ -194,21 +167,21 @@
             // MakeBooking
             // 
             this.MakeBooking.Name = "MakeBooking";
-            this.MakeBooking.Size = new System.Drawing.Size(180, 22);
+            this.MakeBooking.Size = new System.Drawing.Size(157, 22);
             this.MakeBooking.Text = "Make Booking";
             this.MakeBooking.Click += new System.EventHandler(this.MakeBooking_Click);
             // 
             // CancelBooking
             // 
             this.CancelBooking.Name = "CancelBooking";
-            this.CancelBooking.Size = new System.Drawing.Size(180, 22);
+            this.CancelBooking.Size = new System.Drawing.Size(157, 22);
             this.CancelBooking.Text = "Cancel Booking";
             this.CancelBooking.Click += new System.EventHandler(this.CancelBooking_Click);
             // 
             // ViewBookings
             // 
             this.ViewBookings.Name = "ViewBookings";
-            this.ViewBookings.Size = new System.Drawing.Size(180, 22);
+            this.ViewBookings.Size = new System.Drawing.Size(157, 22);
             this.ViewBookings.Text = "View Bookings";
             this.ViewBookings.Click += new System.EventHandler(this.ViewBookings_Click);
             // 
@@ -295,9 +268,6 @@
         private System.Windows.Forms.PictureBox picHome;
         private System.Windows.Forms.ToolStripMenuItem YearlyRevenue;
         private System.Windows.Forms.ToolStripMenuItem EarningsAnalysis;
-        private System.Windows.Forms.ToolStripMenuItem ViewSchedule;
-        private System.Windows.Forms.ToolStripMenuItem AddClass;
-        private System.Windows.Forms.ToolStripMenuItem UpdateClasses;
     }
 }
 

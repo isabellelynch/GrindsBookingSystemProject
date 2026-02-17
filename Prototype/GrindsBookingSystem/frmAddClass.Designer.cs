@@ -1,6 +1,6 @@
 ﻿namespace GrindsBookingSystem
 {
-    partial class frmAddGrind
+    partial class frmAddClass
     {
         /// <summary>
         /// Required designer variable.
@@ -32,8 +32,6 @@
             this.btnExit = new System.Windows.Forms.ToolStripMenuItem();
             this.btnBack = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRefresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.pickTime = new System.Windows.Forms.DateTimePicker();
-            this.pickDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,6 +41,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.cboTutors = new System.Windows.Forms.ComboBox();
             this.btnAddGrind = new System.Windows.Forms.Button();
+            this.txtDay = new System.Windows.Forms.TextBox();
+            this.txtTime = new System.Windows.Forms.TextBox();
             this.mnuViewStudentDetails.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,7 +54,7 @@
             this.btnRefresh});
             this.mnuViewStudentDetails.Location = new System.Drawing.Point(0, 0);
             this.mnuViewStudentDetails.Name = "mnuViewStudentDetails";
-            this.mnuViewStudentDetails.Size = new System.Drawing.Size(800, 24);
+            this.mnuViewStudentDetails.Size = new System.Drawing.Size(442, 24);
             this.mnuViewStudentDetails.TabIndex = 18;
             this.mnuViewStudentDetails.Text = "menuStrip1";
             // 
@@ -82,24 +82,10 @@
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // pickTime
-            // 
-            this.pickTime.Location = new System.Drawing.Point(353, 73);
-            this.pickTime.Name = "pickTime";
-            this.pickTime.Size = new System.Drawing.Size(200, 20);
-            this.pickTime.TabIndex = 19;
-            // 
-            // pickDate
-            // 
-            this.pickDate.Location = new System.Drawing.Point(353, 132);
-            this.pickDate.Name = "pickDate";
-            this.pickDate.Size = new System.Drawing.Size(200, 20);
-            this.pickDate.TabIndex = 20;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(218, 79);
+            this.label1.Location = new System.Drawing.Point(53, 60);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(30, 13);
             this.label1.TabIndex = 21;
@@ -108,16 +94,16 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(218, 138);
+            this.label2.Location = new System.Drawing.Point(53, 119);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(30, 13);
+            this.label2.Size = new System.Drawing.Size(26, 13);
             this.label2.TabIndex = 22;
-            this.label2.Text = "Date";
+            this.label2.Text = "Day";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(218, 203);
+            this.label3.Location = new System.Drawing.Point(53, 184);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(86, 13);
             this.label3.TabIndex = 23;
@@ -125,7 +111,7 @@
             // 
             // txtAttendance
             // 
-            this.txtAttendance.Location = new System.Drawing.Point(353, 196);
+            this.txtAttendance.Location = new System.Drawing.Point(188, 177);
             this.txtAttendance.Name = "txtAttendance";
             this.txtAttendance.Size = new System.Drawing.Size(200, 20);
             this.txtAttendance.TabIndex = 24;
@@ -133,7 +119,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(218, 259);
+            this.label4.Location = new System.Drawing.Point(53, 240);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 13);
             this.label4.TabIndex = 25;
@@ -142,7 +128,7 @@
             // cboRooms
             // 
             this.cboRooms.FormattingEnabled = true;
-            this.cboRooms.Location = new System.Drawing.Point(353, 251);
+            this.cboRooms.Location = new System.Drawing.Point(188, 232);
             this.cboRooms.Name = "cboRooms";
             this.cboRooms.Size = new System.Drawing.Size(200, 21);
             this.cboRooms.TabIndex = 26;
@@ -150,7 +136,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(218, 313);
+            this.label5.Location = new System.Drawing.Point(53, 294);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(32, 13);
             this.label5.TabIndex = 27;
@@ -159,25 +145,41 @@
             // cboTutors
             // 
             this.cboTutors.FormattingEnabled = true;
-            this.cboTutors.Location = new System.Drawing.Point(353, 305);
+            this.cboTutors.Location = new System.Drawing.Point(188, 286);
             this.cboTutors.Name = "cboTutors";
             this.cboTutors.Size = new System.Drawing.Size(200, 21);
             this.cboTutors.TabIndex = 28;
             // 
             // btnAddGrind
             // 
-            this.btnAddGrind.Location = new System.Drawing.Point(353, 362);
+            this.btnAddGrind.Location = new System.Drawing.Point(143, 360);
             this.btnAddGrind.Name = "btnAddGrind";
             this.btnAddGrind.Size = new System.Drawing.Size(142, 33);
             this.btnAddGrind.TabIndex = 29;
             this.btnAddGrind.Text = "Add Grind";
             this.btnAddGrind.UseVisualStyleBackColor = true;
             // 
-            // frmAddGrind
+            // txtDay
+            // 
+            this.txtDay.Location = new System.Drawing.Point(188, 112);
+            this.txtDay.Name = "txtDay";
+            this.txtDay.Size = new System.Drawing.Size(200, 20);
+            this.txtDay.TabIndex = 30;
+            // 
+            // txtTime
+            // 
+            this.txtTime.Location = new System.Drawing.Point(188, 60);
+            this.txtTime.Name = "txtTime";
+            this.txtTime.Size = new System.Drawing.Size(200, 20);
+            this.txtTime.TabIndex = 31;
+            // 
+            // frmAddClass
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(442, 426);
+            this.Controls.Add(this.txtTime);
+            this.Controls.Add(this.txtDay);
             this.Controls.Add(this.btnAddGrind);
             this.Controls.Add(this.cboTutors);
             this.Controls.Add(this.label5);
@@ -187,11 +189,10 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.pickDate);
-            this.Controls.Add(this.pickTime);
             this.Controls.Add(this.mnuViewStudentDetails);
-            this.Name = "frmAddGrind";
+            this.Name = "frmAddClass";
             this.Text = "frmAddGrind";
+            this.Load += new System.EventHandler(this.frmAddClass_Load);
             this.mnuViewStudentDetails.ResumeLayout(false);
             this.mnuViewStudentDetails.PerformLayout();
             this.ResumeLayout(false);
@@ -205,8 +206,6 @@
         private System.Windows.Forms.ToolStripMenuItem btnExit;
         private System.Windows.Forms.ToolStripMenuItem btnBack;
         private System.Windows.Forms.ToolStripMenuItem btnRefresh;
-        private System.Windows.Forms.DateTimePicker pickTime;
-        private System.Windows.Forms.DateTimePicker pickDate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -216,5 +215,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cboTutors;
         private System.Windows.Forms.Button btnAddGrind;
+        private System.Windows.Forms.TextBox txtDay;
+        private System.Windows.Forms.TextBox txtTime;
     }
 }

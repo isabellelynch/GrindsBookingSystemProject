@@ -203,7 +203,6 @@ C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject\Prototype\
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject\Prototype\GrindsBookingSystem\bin\Debug\System.ValueTuple.xml
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.csproj.AssemblyReference.cache
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmAddBooking.resources
-C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmAddGrind.resources
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmAdmin.resources
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmCancelBooking.resources
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmDBconnectionTest.resources
@@ -330,3 +329,5 @@ C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject11\Prototyp
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject11\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.exe
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject11\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.pdb
 C:\Users\StudentIsabelleLynch\source\repos\GrindsBookingSystemProject\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmViewSchedule.resources
+C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.exe.config
+C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmAddClass.resources

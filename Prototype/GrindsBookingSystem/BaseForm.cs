@@ -5,16 +5,7 @@ namespace GrindsBookingSystem
 
     public class BaseForm : Form
     {
-        public BaseForm()
-        {
-            if (!DesignMode)
-            {
-                InitializeRuntimeLogic();
-            }
-        }
-
-        private void InitializeRuntimeLogic()
-        { }
+        public BaseForm() { }
         protected void GoHome()
         {
             if (this.Owner != null)
