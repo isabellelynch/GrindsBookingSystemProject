@@ -1,6 +1,7 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 
@@ -44,7 +45,7 @@ namespace GrindsBookingSystem
 
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                cboTutors.Items.Add(dr[1].ToString() + " " + dr[2].ToString());
+                cboTutors.Items.Add(dr[1].ToString() + " " + dr[2].ToString() + " - " + dr[6].ToString());
             }
 
             
@@ -107,11 +108,59 @@ namespace GrindsBookingSystem
         private void SetAttendance()
         {
             string sql = "SELECT Capacity FROM Rooms WHERE RoomNo = '" + room + "'";
+
             OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
-            dr.Read();
-            string cap = dr.GetInt32(0).ToString();
-            txtAttendance.Text = cap;
+
+            if (dr.Read())
+            {
+                int cap = dr.GetInt32(0);
+                txtAttendance.Text = cap.ToString();
+            }
+            
+            dr.Close();
         }
-        
+
+        private void btnAddGrind_Click(object sender, EventArgs e)
+        {
+            string details = cboTutors.Text;
+
+            if(details == "")
+            {
+                MessageBox.Show("A Tutor must be chosen before adding a class", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string[] parts = details.Split('-');
+            string[] nameParts = parts[0].Split(' ');
+
+
+            string sql = "SELECT TutorID FROM Tutors WHERE FirstName = '" + nameParts[0].Trim() +
+                "' AND Surname = '" + nameParts[1].Trim() + "' AND SubjectCode = '" + parts[1].Trim() + "'";
+            try
+            {
+                OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+
+                if (dr.Read())
+                {
+                    int id = dr.GetInt32(0);
+                    int t = Convert.ToInt32(txtTime.Text.Substring(0, txtTime.Text.IndexOf(':')));
+                    Class c = new Class(day, t, id.ToString(), 0, room, 2);
+                    c.Create();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                return;
+            }
+
+            MessageBox.Show("Your Class has been sucessfully added to the Schedule", "Class Added",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            this.Close();
+        }
+
     }
 }

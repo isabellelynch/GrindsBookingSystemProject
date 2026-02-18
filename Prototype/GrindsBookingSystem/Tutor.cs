@@ -1,13 +1,8 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace GrindsBookingSystem
 {
@@ -91,7 +86,7 @@ namespace GrindsBookingSystem
         
         public static DataSet RetrieveAll()
         {
-            string sql = "SELECT TutorID, FirstName, Surname FROM Tutors WHERE Status = 'A' ORDER BY TutorID";
+            string sql = "SELECT * FROM Tutors WHERE Status = 'A' ORDER BY TutorID";
             return Database.ExecuteMultiRowQuery(sql);
         }
 
@@ -128,6 +123,8 @@ namespace GrindsBookingSystem
             Tutor t = new Tutor(dr.GetString(1), dr.GetString(2), dr.GetString(3), dr.GetString(4), dr.GetString(5), dr.GetString(6));
 
             t.SetID(id.ToString());
+
+            dr.Close();
 
             return t;
         }

@@ -85,10 +85,11 @@ namespace GrindsBookingSystem
         protected override void Reset(Control.ControlCollection controls)
         {
             base.Reset(controls);
-
-            dgvRemoveTutor.DataSource = Tutor.RetrieveAll().Tables[0];
-            ControlFunctions.formatGridView(dgvRemoveTutor);
             ControlFunctions.FillBoxes("Tutors", cboTutorID, cboFirstName, cboSurname);
+            dgvRemoveTutor.DataSource = Tutor.GetTutorList(cboTutorID).Tables[0];
+
+            ControlFunctions.formatGridView(dgvRemoveTutor);
+            
 
             comboBoxes = ControlFunctions.CreateComboList(cboTutorID, cboFirstName, cboSurname);
             foreach (ComboBox cb in comboBoxes)

@@ -10,7 +10,7 @@ namespace GrindsBookingSystem
     public interface InterfaceCRUD
     {
         void Create();
-        String Read();
+        string Read();
         void Update();
         void Delete();
         

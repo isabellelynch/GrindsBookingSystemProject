@@ -83,6 +83,8 @@ namespace GrindsBookingSystem
 
             s.SetID(id.ToString());
 
+            dr.Close();
+
             return s;
         }
 

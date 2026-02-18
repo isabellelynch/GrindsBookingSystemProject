@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace GrindsBookingSystem
 {
-    public class Class
+    public class Class:InterfaceCRUD
     {
         public int Day { get; set; }
         public int Time { get; set; }
@@ -26,6 +26,34 @@ namespace GrindsBookingSystem
             Semester = sem;
         }
 
+        public void Create()
+        {
+            string sql = "INSERT INTO Classes (Day, Time, TutorID, CurrentEnrollment, RoomNo, SemesterNo)" +
+                "VALUES (" + 
+                Day + "," + 
+                Time + "," +
+                TutorID + "," +
+                CurrentEnrollment + ",'" +
+                RoomNo + "'," + 
+                Semester + ")";
+            try
+            {
+                Database.ExecuteNonQuery(sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public string Read()
+        {
+            return "";
+        }
+
+        public void Update() { }
+        public void Delete() { }
+        
         public static List<Class> ClassList(String room, int sem)
         {
             List<Class> list = new List<Class>();

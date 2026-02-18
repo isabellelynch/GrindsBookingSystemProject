@@ -158,6 +158,7 @@
             this.btnAddGrind.TabIndex = 29;
             this.btnAddGrind.Text = "Add Grind";
             this.btnAddGrind.UseVisualStyleBackColor = true;
+            this.btnAddGrind.Click += new System.EventHandler(this.btnAddGrind_Click);
             // 
             // txtDay
             // 

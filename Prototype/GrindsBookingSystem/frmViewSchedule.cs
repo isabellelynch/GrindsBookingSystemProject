@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 
@@ -77,7 +75,14 @@ namespace GrindsBookingSystem
         {
             int day = dgvSchedule.CurrentCell.ColumnIndex;
             int time = dgvSchedule.CurrentCell.RowIndex;
-            string room = cboRooms.Text;
+            string room = cboRooms.Text.Substring(0,1);
+
+            if(room == null)
+            {
+                MessageBox.Show("A Room must be chosen before adding a class", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             if (day == 0 || time < 0)
             {
