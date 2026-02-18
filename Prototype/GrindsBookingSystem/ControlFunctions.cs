@@ -50,10 +50,13 @@ namespace GrindsBookingSystem
             string sql = "SELECT RoomNo, Description FROM Rooms";
 
             DataSet ds = Database.ExecuteMultiRowQuery(sql);
+
             foreach (DataRow r in ds.Tables[0].Rows)
             {
                 c.Items.Add(r[0].ToString() + " - " + r[1].ToString());
             }
+
+            c.SelectedIndex = -1;
         }
 
         public static void FillRatesAndSubjects(ComboBox cb, ComboBox cb1)

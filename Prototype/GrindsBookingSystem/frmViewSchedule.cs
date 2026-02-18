@@ -11,7 +11,7 @@ namespace GrindsBookingSystem
         public frmViewSchedule()
         {
             InitializeComponent();
-            FormatGridView();
+            
             Reset(this.Controls);
         }
 
@@ -31,17 +31,11 @@ namespace GrindsBookingSystem
         {
             dgvSchedule.Columns.Clear();
             dgvSchedule.Rows.Clear();
-
-            //add headings
             dgvSchedule.Columns.Add("Time", "Time");
-
             string[] days = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
-            
             dgvSchedule.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-            //header styling
             dgvSchedule.EnableHeadersVisualStyles = false;
-            dgvSchedule.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
+            dgvSchedule.ColumnHeadersDefaultCellStyle.BackColor = Color.DarkCyan;
             dgvSchedule.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvSchedule.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Bold);
 
@@ -57,8 +51,6 @@ namespace GrindsBookingSystem
 
             dgvSchedule.Columns[0].Width = 80;
 
-            
-            //add time fields
             for (int hour = 9; hour <= 17; hour++)
             {
                 int rowIndex = dgvSchedule.Rows.Add();
@@ -73,38 +65,68 @@ namespace GrindsBookingSystem
 
         public void btnAddClass_Click(object sender, EventArgs e)
         {
-            int day = dgvSchedule.CurrentCell.ColumnIndex;
-            int time = dgvSchedule.CurrentCell.RowIndex;
-            string room = cboRooms.Text.Substring(0,1);
 
-            if(room == null)
+            DataGridViewCell c = dgvSchedule.CurrentCell;
+
+            string msg = CheckSelected(c, btnAddClass);
+            if (msg != "")
             {
-                MessageBox.Show("A Room must be chosen before adding a class", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(msg + " must be chosen before adding a class.", 
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (day == 0 || time < 0)
-            {
-                MessageBox.Show("A Timeslot must be chosen before adding a class", "Error", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            frmAddClass f = new frmAddClass(c.ColumnIndex, c.RowIndex, cboRooms.Text.Substring(0, 1));
+            f.FormClosing += FillSchedule;
+            f.ShowDialog();
 
-            frmAddClass f = new frmAddClass(day, time, room);
-            
-            f.Owner = this;
-            f.Show();
-            f.Focus();
-            
+            Reset(this.Controls);
+        }
+
+        private string CheckSelected(DataGridViewCell c, Button btn)
+        {
+            int day = c.ColumnIndex;
+            int time = c.RowIndex;
+            string room = cboRooms.Text;
+
+            string msg = "";
+            if(btn == btnAddClass)
+            {
+                if (room == "")
+                {
+                    msg = "A room" + msg;
+                }
+                else if (day == 0 || day > 5 || time < 0 || time > 8)
+                {
+                    msg = "An appropriate timeslot" + msg;
+                }
+                else if (c.Value.ToString() != "")
+                {
+                    msg = "An empty timeslot" + msg;
+                }
+            }
+            else if(btn == btnAlterClass)
+            {
+                if (day == 0 || day > 5 || time < 0 || time > 8 || c.Value.ToString() == "")
+                {
+                    msg = "A class must be chosen in order to update/remove it.";
+                }
+            }
+            return msg;
+
         }
 
         protected override void Reset(Control.ControlCollection controls)
         {
             base.Reset(controls);
+
             ControlFunctions.FillRooms(cboRooms);
+
             cboRooms.SelectedIndexChanged -= FillSchedule;
             cboRooms.SelectedIndexChanged += FillSchedule;
+
+            dgvSchedule.Rows.Clear();
+            FormatGridView();
         }
 
         private void FillSchedule(object sender, EventArgs e)
@@ -135,6 +157,23 @@ namespace GrindsBookingSystem
             }
         }
 
+        private void btnAlterClass_Click(object sender, EventArgs e)
+        {
+            DataGridViewCell c = dgvSchedule.CurrentCell;
+
+            string msg = CheckSelected(c, btnAddClass);
+            if (msg != "")
+            {
+                MessageBox.Show(msg,"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            frmUpdateClass f = new frmUpdateClass(c.ColumnIndex, c.RowIndex, cboRooms.Text.Substring(0, 1));
+            f.FormClosing += FillSchedule;
+            f.ShowDialog();
+
+            Reset(this.Controls);
+        }
     }
 }
     

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnRemoveClass = new System.Windows.Forms.Button();
+            this.btnAlterClass = new System.Windows.Forms.Button();
             this.btnAddClass = new System.Windows.Forms.Button();
             this.dgvSchedule = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,14 +41,15 @@
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnRemoveClass
+            // btnAlterClass
             // 
-            this.btnRemoveClass.Location = new System.Drawing.Point(426, 388);
-            this.btnRemoveClass.Name = "btnRemoveClass";
-            this.btnRemoveClass.Size = new System.Drawing.Size(115, 23);
-            this.btnRemoveClass.TabIndex = 21;
-            this.btnRemoveClass.Text = "Remove Class";
-            this.btnRemoveClass.UseVisualStyleBackColor = true;
+            this.btnAlterClass.Location = new System.Drawing.Point(426, 388);
+            this.btnAlterClass.Name = "btnAlterClass";
+            this.btnAlterClass.Size = new System.Drawing.Size(115, 23);
+            this.btnAlterClass.TabIndex = 21;
+            this.btnAlterClass.Text = "Alter Class";
+            this.btnAlterClass.UseVisualStyleBackColor = true;
+            this.btnAlterClass.Click += new System.EventHandler(this.btnAlterClass_Click);
             // 
             // btnAddClass
             // 
@@ -129,7 +130,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.labelRooms);
             this.Controls.Add(this.cboRooms);
-            this.Controls.Add(this.btnRemoveClass);
+            this.Controls.Add(this.btnAlterClass);
             this.Controls.Add(this.btnAddClass);
             this.Controls.Add(this.dgvSchedule);
             this.Controls.Add(this.label1);
@@ -152,7 +153,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvSchedule;
         private System.Windows.Forms.Button btnAddClass;
-        private System.Windows.Forms.Button btnRemoveClass;
+        private System.Windows.Forms.Button btnAlterClass;
         private System.Windows.Forms.ComboBox cboRooms;
         private System.Windows.Forms.Label labelRooms;
     }
