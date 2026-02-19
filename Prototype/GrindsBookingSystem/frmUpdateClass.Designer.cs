@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtTime = new System.Windows.Forms.TextBox();
-            this.txtDay = new System.Windows.Forms.TextBox();
             this.btnRemoveClass = new System.Windows.Forms.Button();
             this.cboTutors = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -44,22 +42,10 @@
             this.btnBack = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.btnUpdateClass = new System.Windows.Forms.Button();
+            this.cboTime = new System.Windows.Forms.ComboBox();
+            this.cboDays = new System.Windows.Forms.ComboBox();
             this.mnuViewStudentDetails.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // txtTime
-            // 
-            this.txtTime.Location = new System.Drawing.Point(188, 89);
-            this.txtTime.Name = "txtTime";
-            this.txtTime.Size = new System.Drawing.Size(200, 20);
-            this.txtTime.TabIndex = 43;
-            // 
-            // txtDay
-            // 
-            this.txtDay.Location = new System.Drawing.Point(188, 141);
-            this.txtDay.Name = "txtDay";
-            this.txtDay.Size = new System.Drawing.Size(200, 20);
-            this.txtDay.TabIndex = 42;
             // 
             // btnRemoveClass
             // 
@@ -69,6 +55,7 @@
             this.btnRemoveClass.TabIndex = 41;
             this.btnRemoveClass.Text = "Remove Class";
             this.btnRemoveClass.UseVisualStyleBackColor = true;
+            this.btnRemoveClass.Click += new System.EventHandler(this.btnRemoveClass_Click);
             // 
             // cboTutors
             // 
@@ -179,15 +166,32 @@
             this.btnUpdateClass.TabIndex = 44;
             this.btnUpdateClass.Text = "Update Class";
             this.btnUpdateClass.UseVisualStyleBackColor = true;
+            this.btnUpdateClass.Click += new System.EventHandler(this.btnUpdateClass_Click);
+            // 
+            // cboTime
+            // 
+            this.cboTime.FormattingEnabled = true;
+            this.cboTime.Location = new System.Drawing.Point(188, 86);
+            this.cboTime.Name = "cboTime";
+            this.cboTime.Size = new System.Drawing.Size(200, 21);
+            this.cboTime.TabIndex = 45;
+            // 
+            // cboDays
+            // 
+            this.cboDays.FormattingEnabled = true;
+            this.cboDays.Location = new System.Drawing.Point(188, 145);
+            this.cboDays.Name = "cboDays";
+            this.cboDays.Size = new System.Drawing.Size(200, 21);
+            this.cboDays.TabIndex = 46;
             // 
             // frmUpdateClass
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(430, 450);
+            this.Controls.Add(this.cboDays);
+            this.Controls.Add(this.cboTime);
             this.Controls.Add(this.btnUpdateClass);
-            this.Controls.Add(this.txtTime);
-            this.Controls.Add(this.txtDay);
             this.Controls.Add(this.btnRemoveClass);
             this.Controls.Add(this.cboTutors);
             this.Controls.Add(this.label5);
@@ -209,9 +213,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txtTime;
-        private System.Windows.Forms.TextBox txtDay;
         private System.Windows.Forms.Button btnRemoveClass;
         private System.Windows.Forms.ComboBox cboTutors;
         private System.Windows.Forms.Label label5;
@@ -226,5 +227,7 @@
         private System.Windows.Forms.ToolStripMenuItem btnBack;
         private System.Windows.Forms.ToolStripMenuItem btnRefresh;
         private System.Windows.Forms.Button btnUpdateClass;
+        private System.Windows.Forms.ComboBox cboTime;
+        private System.Windows.Forms.ComboBox cboDays;
     }
 }

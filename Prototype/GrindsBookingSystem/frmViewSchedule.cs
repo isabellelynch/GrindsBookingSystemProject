@@ -29,6 +29,8 @@ namespace GrindsBookingSystem
 
         private void FormatGridView()
         {
+            if (dgvSchedule.Disposing) { return; }
+
             dgvSchedule.Columns.Clear();
             dgvSchedule.Rows.Clear();
             dgvSchedule.Columns.Add("Time", "Time");
@@ -161,7 +163,7 @@ namespace GrindsBookingSystem
         {
             DataGridViewCell c = dgvSchedule.CurrentCell;
 
-            string msg = CheckSelected(c, btnAddClass);
+            string msg = CheckSelected(c, btnAlterClass);
             if (msg != "")
             {
                 MessageBox.Show(msg,"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

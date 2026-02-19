@@ -5,13 +5,23 @@ namespace GrindsBookingSystem
 {
     public partial class ClassBaseForm : BaseForm
     {
-        
+        protected int Day { get; set; }
+        protected int Time { get; set; }
+        protected string Room { get; set; }
+
         public ClassBaseForm()
         {
+            InitializeComponent();
+        }
+        public ClassBaseForm(int day, int time, string room):this()
+        {
+            Day = day;
+            Time = time;
+            Room = room;
         }
 
 
-        public void SetClassDay(int day, TextBox t)
+        public void SetClassDay(int day, ComboBox t)
         {
             string s = "";
 
@@ -40,15 +50,34 @@ namespace GrindsBookingSystem
             t.Text = s;
         }
 
+        public int GetClassDayNumber(string day)
+        {
+            switch (day)
+            {
+                case "Monday":
+                    return 1;
+                case "Tuesday":
+                    return 2;
+                case "Wednesday":
+                    return 3;
+                case "Thursday":
+                    return 4;
+                case "Friday":
+                    return 5;
+
+            }
+
+            return 0;
+        }
         public void SetRoom(ComboBox cb, string room)
         {
             cb.Text = room;
         }
 
-        public void SetClassTime(int time, TextBox t)
+        public void SetClassTime(int time, ComboBox t)
         {
             int t2 = time + 9;
-            t.Text = t.ToString() + ":00";
+            t.Text = t2.ToString() + ":00";
         }
 
         public void SetAttendance(TextBox t, string room)

@@ -52,7 +52,13 @@ namespace GrindsBookingSystem
         }
 
         public void Update() { }
-        public void Delete() { }
+        public void Delete() 
+        {
+            string sql = "DELETE FROM Classes WHERE Day = " + Day +
+                " AND Time = " + Time + " AND TutorID = " + TutorID;
+
+            Database.ExecuteNonQuery(sql);
+        }
         
         public static List<Class> ClassList(String room, int sem)
         {

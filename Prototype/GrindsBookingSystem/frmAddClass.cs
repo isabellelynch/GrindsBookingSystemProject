@@ -8,33 +8,29 @@ namespace GrindsBookingSystem
 {
     public partial class frmAddClass : ClassBaseForm
     {
-        public int day { get; set; }
-        public int time { get; set; }
-        public string room { get; set; }
-
-        public frmAddClass(int day, int time, string room)
+        public frmAddClass()
         {
             InitializeComponent();
-            
-            this.day = day;
-            this.time = time;
-            this.room = room;
-            
+        }
+
+        public frmAddClass(int day, int time, string room) : base(day, time, room)
+        {
+            InitializeComponent();
             Reset(this.Controls);
         }
         private void frmAddClass_Load(object sender, EventArgs e)
         {
-            SetClassDay(day, txtDay);
-            SetClassTime(time, txtTime);
-            SetAttendance(txtAttendance, room);
-            SetRoom(cboRooms, room);
+            SetClassDay(Day, cboDay);
+            SetClassTime(Time, cboTime);
+            SetAttendance(txtAttendance, Room);
+            SetRoom(cboRooms, Room);
         }
         
         protected override void Reset(Control.ControlCollection controls)
         {
             base.Reset(controls);
 
-            ControlFunctions.DisableBoxes(txtDay, txtTime, txtAttendance, cboRooms);
+            ControlFunctions.DisableBoxes(cboDay, cboTime, txtAttendance, cboRooms);
 
             ControlFunctions.FillRooms(cboRooms);
 
@@ -88,9 +84,10 @@ namespace GrindsBookingSystem
                 if (dr.Read())
                 {
                     int id = dr.GetInt32(0);
-                    int t = Convert.ToInt32(txtTime.Text.Substring(0, txtTime.Text.IndexOf(':')));
-                    Class c = new Class(day, t, id.ToString(), 0, room, 2);
+                    int t = Convert.ToInt32(cboTime.Text.Substring(0, cboTime.Text.IndexOf(':')));
+                    Class c = new Class(Day, t, id.ToString(), 0, Room, 2);
                     c.Create();
+                    dr.Close();
                 }
             }
             catch (Exception ex)
@@ -105,6 +102,7 @@ namespace GrindsBookingSystem
 
             this.Close();
         }
+
 
     }
 }

@@ -41,8 +41,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.cboTutors = new System.Windows.Forms.ComboBox();
             this.btnAddGrind = new System.Windows.Forms.Button();
-            this.txtDay = new System.Windows.Forms.TextBox();
-            this.txtTime = new System.Windows.Forms.TextBox();
+            this.cboDay = new System.Windows.Forms.ComboBox();
+            this.cboTime = new System.Windows.Forms.ComboBox();
             this.mnuViewStudentDetails.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -160,27 +160,29 @@
             this.btnAddGrind.UseVisualStyleBackColor = true;
             this.btnAddGrind.Click += new System.EventHandler(this.btnAddGrind_Click);
             // 
-            // txtDay
+            // cboDay
             // 
-            this.txtDay.Location = new System.Drawing.Point(188, 112);
-            this.txtDay.Name = "txtDay";
-            this.txtDay.Size = new System.Drawing.Size(200, 20);
-            this.txtDay.TabIndex = 30;
+            this.cboDay.FormattingEnabled = true;
+            this.cboDay.Location = new System.Drawing.Point(188, 116);
+            this.cboDay.Name = "cboDay";
+            this.cboDay.Size = new System.Drawing.Size(200, 21);
+            this.cboDay.TabIndex = 30;
             // 
-            // txtTime
+            // cboTime
             // 
-            this.txtTime.Location = new System.Drawing.Point(188, 60);
-            this.txtTime.Name = "txtTime";
-            this.txtTime.Size = new System.Drawing.Size(200, 20);
-            this.txtTime.TabIndex = 31;
+            this.cboTime.FormattingEnabled = true;
+            this.cboTime.Location = new System.Drawing.Point(188, 57);
+            this.cboTime.Name = "cboTime";
+            this.cboTime.Size = new System.Drawing.Size(200, 21);
+            this.cboTime.TabIndex = 31;
             // 
             // frmAddClass
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(442, 426);
-            this.Controls.Add(this.txtTime);
-            this.Controls.Add(this.txtDay);
+            this.Controls.Add(this.cboTime);
+            this.Controls.Add(this.cboDay);
             this.Controls.Add(this.btnAddGrind);
             this.Controls.Add(this.cboTutors);
             this.Controls.Add(this.label5);
@@ -216,7 +218,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cboTutors;
         private System.Windows.Forms.Button btnAddGrind;
-        private System.Windows.Forms.TextBox txtDay;
-        private System.Windows.Forms.TextBox txtTime;
+        private System.Windows.Forms.ComboBox cboDay;
+        private System.Windows.Forms.ComboBox cboTime;
     }
 }
