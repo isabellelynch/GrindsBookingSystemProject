@@ -27,7 +27,7 @@ namespace GrindsBookingSystem
 
             dr.Read();
 
-            c = new Class(Day, Time, dr.GetString(2), dr.GetInt32(3), Room, dr.GetInt32(5));
+            c = new Class(Day, Time, dr.GetString(2), dr.GetInt32(3), Room, dr.GetString(5));
 
             Reset(this.Controls);
 
@@ -115,10 +115,12 @@ namespace GrindsBookingSystem
 
             Class c2 = new Class(GetClassDayNumber(cboDays.Text), Convert.ToInt32(cboTime.Text.Substring(0, 2)),
                id.ToString(), c.CurrentEnrollment, cboRooms.Text.Substring(0,1), c.Semester);
+
             if (c2 != null) 
             {
                 sql = "SELECT * FROM Classes WHERE SemesterNo = " + c2.Semester.ToString();
                 DataSet ds = Database.ExecuteMultiRowQuery(sql);
+
                 foreach (DataRow r in ds.Tables[0].Rows) 
                 {
                     if (r[0].ToString() == c2.Day.ToString() && r[1].ToString() == c2.Time.ToString() && r[2].ToString() == c2.TutorID)

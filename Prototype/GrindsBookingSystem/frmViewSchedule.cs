@@ -11,11 +11,8 @@ namespace GrindsBookingSystem
         public frmViewSchedule()
         {
             InitializeComponent();
-            
             Reset(this.Controls);
         }
-
-       
 
         private void btnBack_Click(object sender, EventArgs e)
         {
@@ -128,6 +125,7 @@ namespace GrindsBookingSystem
             cboRooms.SelectedIndexChanged += FillSchedule;
 
             dgvSchedule.Rows.Clear();
+
             FormatGridView();
         }
 
@@ -143,7 +141,7 @@ namespace GrindsBookingSystem
                     }
                 }
             }
-            List<Class> classList = Class.ClassList(cboRooms.Text.Substring(0,1), 2);
+            List<Class> classList = Class.ClassList(cboRooms.Text.Substring(0,1), Class.GetCurrentSemester());
 
             foreach (Class c in classList)
             {

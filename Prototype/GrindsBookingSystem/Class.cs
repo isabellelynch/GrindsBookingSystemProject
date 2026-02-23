@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlTypes;
-using System.Security.Policy;
 using System.Windows.Forms;
 
 namespace GrindsBookingSystem
@@ -14,9 +12,9 @@ namespace GrindsBookingSystem
         public string TutorID { get; set; }
         public int CurrentEnrollment {  get; set; }
         public string RoomNo { get; set; }
-        public int Semester {  get; set; }
+        public string Semester {  get; set; }
 
-        public Class(int day, int time, string id, int enroll, string room, int sem)
+        public Class(int day, int time, string id, int enroll, string room, string sem)
         {
             Day = day;
             Time = time;
@@ -34,8 +32,8 @@ namespace GrindsBookingSystem
                 Time + "," +
                 TutorID + "," +
                 CurrentEnrollment + ",'" +
-                RoomNo + "'," + 
-                Semester + ")";
+                RoomNo + "','" + 
+                Semester + "')";
             try
             {
                 Database.ExecuteNonQuery(sql);
@@ -60,7 +58,7 @@ namespace GrindsBookingSystem
             Database.ExecuteNonQuery(sql);
         }
         
-        public static List<Class> ClassList(String room, int sem)
+        public static List<Class> ClassList(String room, string sem)
         {
             List<Class> list = new List<Class>();
 
@@ -77,12 +75,30 @@ namespace GrindsBookingSystem
                     r[2].ToString(),
                     Convert.ToInt32(r[3]),
                     r[4].ToString(),
-                    2
+                    r[5].ToString()
                 );
 
                 list.Add(c);
             }
             return list;
+        }
+
+        public static string GetCurrentSemester()
+        {
+            string sem = DateTime.Now.Year.ToString();
+            sem = sem.Substring(sem.Length - 2);
+
+            int month = DateTime.Now.Month;
+            if (month <= 6)
+            {
+                sem = sem + "1";
+            }
+            else
+            {
+                sem = sem + "2";
+            }
+
+            return sem;
         }
 
        

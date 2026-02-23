@@ -85,7 +85,9 @@ namespace GrindsBookingSystem
                 {
                     int id = dr.GetInt32(0);
                     int t = Convert.ToInt32(cboTime.Text.Substring(0, cboTime.Text.IndexOf(':')));
-                    Class c = new Class(Day, t, id.ToString(), 0, Room, 2);
+
+                    Class c = new Class(Day, t, id.ToString(), 0, Room, Class.GetCurrentSemester());
+
                     c.Create();
                     dr.Close();
                 }
