@@ -2,39 +2,29 @@
 using System;
 using System.Data;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace GrindsBookingSystem
 {
     public partial class frmUpdateClass : ClassBaseForm
     {
-        public Class c;
+        private string TutorID;
+        private Class UpdatingClass;
         public frmUpdateClass()
         {
             InitializeComponent();
         }
-        public frmUpdateClass(int day, int time, string room):base(day, time, room)
+        public frmUpdateClass(int day, int time, string room, Class c) : base(day, time, room)
         {
+            TutorID = c.TutorID;
+            UpdatingClass = c;
+
             InitializeComponent();
-            
+            Reset(this.Controls);
         }
 
         private void frmUpdateClass_Load(object sender, EventArgs e)
-        {
-            string sql = "SELECT * FROM Classes WHERE Day = " + Day + " AND Time = " + (Time + 9) + " AND RoomNo = '" + Room + "'";
-
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
-
-            dr.Read();
-
-            c = new Class(Day, Time, dr.GetString(2), dr.GetInt32(3), Room, dr.GetString(5));
-
-            Reset(this.Controls);
-
-            SetClassDay(Day, cboDays);
-            SetClassTime(Time, cboTime);
-            SetAttendance(txtAttendance, Room);
-            SetRoom(cboRooms, Room);
+        { 
+            btnClass.Text = "Alter Class";
         }
 
         protected override void Reset(Control.ControlCollection controls)
@@ -79,7 +69,7 @@ namespace GrindsBookingSystem
             }
 
     
-            Tutor t = Tutor.GetTutor(Convert.ToInt32(c.TutorID));
+            Tutor t = Tutor.GetTutor(Convert.ToInt32(UpdatingClass.TutorID));
 
             if (t != null)
             {
@@ -93,54 +83,58 @@ namespace GrindsBookingSystem
             SetAttendance(txtAttendance, cboRooms.Text.Substring(0, 1));
         }
 
-        private void btnRemoveClass_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void btnUpdateClass_Click(object sender, EventArgs e)
+        private void btnClass_Click(object sender, EventArgs e)
         {
+            string errorString = "";
             string details = cboTutors.Text;
             int id = 0;
-            string errorString = "";
             string[] parts = details.Split('-');
             string[] nameParts = parts[0].Split(' ');
+
             string sql = "SELECT TutorID FROM Tutors WHERE FirstName = '" + nameParts[0].Trim() +
                 "' AND Surname = '" + nameParts[1].Trim() + "' AND SubjectCode = '" + parts[1].Trim() + "'";
+
             OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+
             if (dr.Read())
             {
-                id = dr.GetInt32(0); 
+                id = dr.GetInt32(0);
             }
+            dr.Close();
 
-            Class c2 = new Class(GetClassDayNumber(cboDays.Text), Convert.ToInt32(cboTime.Text.Substring(0, 2)),
-               id.ToString(), c.CurrentEnrollment, cboRooms.Text.Substring(0,1), c.Semester);
+            UpdatingClass.Day = GetClassDayNumber(cboDays.Text);
+            UpdatingClass.Time = Convert.ToInt32(cboTime.Text.Substring(0, 2));
+            UpdatingClass.TutorID = id.ToString();
+            UpdatingClass.RoomNo = cboRooms.Text.Substring(0, 1);
 
-            if (c2 != null) 
+            if (UpdatingClass != null)
             {
-                sql = "SELECT * FROM Classes WHERE SemesterNo = " + c2.Semester.ToString();
+                sql = "SELECT * FROM Classes WHERE SemesterNo = " + UpdatingClass.Semester.ToString();
+
                 DataSet ds = Database.ExecuteMultiRowQuery(sql);
 
-                foreach (DataRow r in ds.Tables[0].Rows) 
+                foreach (DataRow r in ds.Tables[0].Rows)
                 {
-                    if (r[0].ToString() == c2.Day.ToString() && r[1].ToString() == c2.Time.ToString() && r[2].ToString() == c2.TutorID)
+                    if (r[0].ToString() == UpdatingClass.Day.ToString() && r[1].ToString() == UpdatingClass.Time.ToString() && r[2].ToString() == UpdatingClass.TutorID)
                     {
                         errorString = "The selected tutor already has a class on the selected day at the selected time.";
                     }
-                    else if(r[0].ToString() == c2.Day.ToString() && r[1].ToString() == c2.Time.ToString() && r[2].ToString() != c2.TutorID && r[4].ToString() == c2.RoomNo)
+                    else if (r[0].ToString() == UpdatingClass.Day.ToString() && r[1].ToString() == UpdatingClass.Time.ToString() && r[2].ToString() != UpdatingClass.TutorID && r[4].ToString() == UpdatingClass.RoomNo)
                     {
                         errorString = "The selected room is taken at the selected day and time, please try another room.";
                     }
                 }
-                if(errorString != "")
+
+                
+                if (errorString != "")
                 {
                     MessageBox.Show(errorString, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 else
                 {
-                    c.Delete();
-                    c2.Create();
+                    UpdatingClass.Update();
 
                     MessageBox.Show("Success! The class has been updated", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

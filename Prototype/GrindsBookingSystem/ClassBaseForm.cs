@@ -76,8 +76,7 @@ namespace GrindsBookingSystem
 
         public void SetClassTime(int time, ComboBox t)
         {
-            int t2 = time + 9;
-            t.Text = t2.ToString() + ":00";
+            t.Text = time.ToString() + ":00";
         }
 
         public void SetAttendance(TextBox t, string room)
@@ -93,6 +92,29 @@ namespace GrindsBookingSystem
             }
 
             dr.Close();
+        }
+
+        private void btnExit_Click(object sender, System.EventArgs e)
+        {
+            Exit();
+        }
+
+        private void btnBack_Click(object sender, System.EventArgs e)
+        {
+            GoHome();
+        }
+
+        private void btnRefresh_Click(object sender, System.EventArgs e)
+        {
+            Reset(this.Controls);
+        }
+
+        private void ClassBaseForm_Load(object sender, System.EventArgs e)
+        {
+            SetClassDay(Day, cboDays);
+            SetClassTime(Time, cboTime);
+            SetAttendance(txtAttendance, Room);
+            SetRoom(cboRooms, Room);
         }
     }
 }

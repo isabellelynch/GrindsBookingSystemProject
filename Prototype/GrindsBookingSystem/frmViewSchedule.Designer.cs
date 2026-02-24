@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnAlterClass = new System.Windows.Forms.Button();
+            this.btnRemoveClass = new System.Windows.Forms.Button();
             this.btnAddClass = new System.Windows.Forms.Button();
             this.dgvSchedule = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
@@ -37,23 +37,23 @@
             this.btnBack = new System.Windows.Forms.ToolStripMenuItem();
             this.cboRooms = new System.Windows.Forms.ComboBox();
             this.labelRooms = new System.Windows.Forms.Label();
+            this.btnAlterClass = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSchedule)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnAlterClass
+            // btnRemoveClass
             // 
-            this.btnAlterClass.Location = new System.Drawing.Point(426, 388);
-            this.btnAlterClass.Name = "btnAlterClass";
-            this.btnAlterClass.Size = new System.Drawing.Size(115, 23);
-            this.btnAlterClass.TabIndex = 21;
-            this.btnAlterClass.Text = "Alter Class";
-            this.btnAlterClass.UseVisualStyleBackColor = true;
-            this.btnAlterClass.Click += new System.EventHandler(this.btnAlterClass_Click);
+            this.btnRemoveClass.Location = new System.Drawing.Point(338, 388);
+            this.btnRemoveClass.Name = "btnRemoveClass";
+            this.btnRemoveClass.Size = new System.Drawing.Size(115, 23);
+            this.btnRemoveClass.TabIndex = 21;
+            this.btnRemoveClass.Text = "Remove Class";
+            this.btnRemoveClass.UseVisualStyleBackColor = true;
             // 
             // btnAddClass
             // 
-            this.btnAddClass.Location = new System.Drawing.Point(233, 388);
+            this.btnAddClass.Location = new System.Drawing.Point(167, 388);
             this.btnAddClass.Name = "btnAddClass";
             this.btnAddClass.Size = new System.Drawing.Size(110, 23);
             this.btnAddClass.TabIndex = 20;
@@ -123,14 +123,25 @@
             this.labelRooms.TabIndex = 23;
             this.labelRooms.Text = "Please select the room that you would like to view the schedule for :";
             // 
+            // btnAlterClass
+            // 
+            this.btnAlterClass.Location = new System.Drawing.Point(503, 388);
+            this.btnAlterClass.Name = "btnAlterClass";
+            this.btnAlterClass.Size = new System.Drawing.Size(115, 23);
+            this.btnAlterClass.TabIndex = 24;
+            this.btnAlterClass.Text = "Alter Class";
+            this.btnAlterClass.UseVisualStyleBackColor = true;
+            this.btnAlterClass.Click += new System.EventHandler(this.btnAlterClass_Click);
+            // 
             // frmViewSchedule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnAlterClass);
             this.Controls.Add(this.labelRooms);
             this.Controls.Add(this.cboRooms);
-            this.Controls.Add(this.btnAlterClass);
+            this.Controls.Add(this.btnRemoveClass);
             this.Controls.Add(this.btnAddClass);
             this.Controls.Add(this.dgvSchedule);
             this.Controls.Add(this.label1);
@@ -153,8 +164,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvSchedule;
         private System.Windows.Forms.Button btnAddClass;
-        private System.Windows.Forms.Button btnAlterClass;
+        private System.Windows.Forms.Button btnRemoveClass;
         private System.Windows.Forms.ComboBox cboRooms;
         private System.Windows.Forms.Label labelRooms;
+        private System.Windows.Forms.Button btnAlterClass;
     }
 }

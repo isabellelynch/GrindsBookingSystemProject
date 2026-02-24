@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
+using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace GrindsBookingSystem
 {
@@ -49,7 +51,19 @@ namespace GrindsBookingSystem
             return "";
         }
 
-        public void Update() { }
+        public void Update() 
+        {
+            string sql = "UPDATE Classes SET Day = " + this.Day + ", Time = " + this.Time + ", TutorID = " + this.TutorID
+                + ", RoomNo = '" + this.RoomNo + "' WHERE TutorID = " + this.TutorID;
+            try
+            {
+                Database.ExecuteNonQuery(sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         public void Delete() 
         {
             string sql = "DELETE FROM Classes WHERE Day = " + Day +

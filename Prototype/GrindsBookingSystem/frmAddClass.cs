@@ -18,19 +18,12 @@ namespace GrindsBookingSystem
             InitializeComponent();
             Reset(this.Controls);
         }
-        private void frmAddClass_Load(object sender, EventArgs e)
-        {
-            SetClassDay(Day, cboDay);
-            SetClassTime(Time, cboTime);
-            SetAttendance(txtAttendance, Room);
-            SetRoom(cboRooms, Room);
-        }
         
         protected override void Reset(Control.ControlCollection controls)
         {
             base.Reset(controls);
 
-            ControlFunctions.DisableBoxes(cboDay, cboTime, txtAttendance, cboRooms);
+            ControlFunctions.DisableBoxes(cboDays, cboTime, txtAttendance, cboRooms);
 
             ControlFunctions.FillRooms(cboRooms);
 
@@ -60,11 +53,11 @@ namespace GrindsBookingSystem
 
          
 
-        private void btnAddGrind_Click(object sender, EventArgs e)
+        private void btnClass_Click(object sender, EventArgs e)
         {
             string details = cboTutors.Text;
 
-            if(details == "")
+            if (details == "")
             {
                 MessageBox.Show("A Tutor must be chosen before adding a class", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -95,7 +88,7 @@ namespace GrindsBookingSystem
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -105,6 +98,9 @@ namespace GrindsBookingSystem
             this.Close();
         }
 
-
+        private void frmAddClass_Load(object sender, EventArgs e)
+        {
+            btnClass.Text = "Add Class";
+        }
     }
 }

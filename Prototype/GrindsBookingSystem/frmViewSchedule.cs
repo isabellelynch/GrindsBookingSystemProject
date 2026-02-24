@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -75,7 +76,7 @@ namespace GrindsBookingSystem
                 return;
             }
 
-            frmAddClass f = new frmAddClass(c.ColumnIndex, c.RowIndex, cboRooms.Text.Substring(0, 1));
+            frmAddClass f = new frmAddClass(c.ColumnIndex, c.RowIndex+9, cboRooms.Text.Substring(0, 1));
             f.FormClosing += FillSchedule;
             f.ShowDialog();
 
@@ -104,7 +105,7 @@ namespace GrindsBookingSystem
                     msg = "An empty timeslot" + msg;
                 }
             }
-            else if(btn == btnAlterClass)
+            else if(btn == btnRemoveClass)
             {
                 if (day == 0 || day > 5 || time < 0 || time > 8 || c.Value.ToString() == "")
                 {
@@ -161,16 +162,36 @@ namespace GrindsBookingSystem
         {
             DataGridViewCell c = dgvSchedule.CurrentCell;
 
-            string msg = CheckSelected(c, btnAlterClass);
+            string msg = CheckSelected(c, btnRemoveClass);
             if (msg != "")
             {
-                MessageBox.Show(msg,"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            frmUpdateClass f = new frmUpdateClass(c.ColumnIndex, c.RowIndex, cboRooms.Text.Substring(0, 1));
-            f.FormClosing += FillSchedule;
-            f.ShowDialog();
+            try
+            {
+                int currentTime = c.RowIndex + 9;
+
+                string sql2 = "SELECT * FROM Classes WHERE Day = " + c.ColumnIndex + " AND Time = " + currentTime + " AND RoomNo = '" + cboRooms.Text.Substring(0, 1) + "'";
+
+                OracleDataReader dr2 = Database.ExecuteSingleRowQuery(sql2);
+
+                dr2.Read();
+
+                Class c2 = new Class(dr2.GetInt32(0), dr2.GetInt32(1), dr2.GetString(2), dr2.GetInt32(3), dr2.GetString(4), dr2.GetString(5));
+                dr2.Close();
+
+                frmUpdateClass f = new frmUpdateClass(c2.Day, c2.Time, c2.RoomNo, c2);
+                f.FormClosing += FillSchedule;
+                f.ShowDialog();
+                
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
 
             Reset(this.Controls);
         }
