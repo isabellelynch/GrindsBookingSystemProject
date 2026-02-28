@@ -26,22 +26,17 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        new private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.mnuRemoveStudent = new System.Windows.Forms.MenuStrip();
-            this.btnExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnBack = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cboStudentID = new System.Windows.Forms.ComboBox();
             this.cboName = new System.Windows.Forms.ComboBox();
             this.cboSName = new System.Windows.Forms.ComboBox();
             this.btnResetFilters = new System.Windows.Forms.Button();
             this.btnRemoveStudent = new System.Windows.Forms.Button();
             this.dgvRemoveStudent = new System.Windows.Forms.DataGridView();
-            this.mnuRemoveStudent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRemoveStudent)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,42 +66,6 @@
             this.label3.Size = new System.Drawing.Size(49, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "Surname";
-            // 
-            // mnuRemoveStudent
-            // 
-            this.mnuRemoveStudent.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnExit,
-            this.btnBack,
-            this.btnRefresh});
-            this.mnuRemoveStudent.Location = new System.Drawing.Point(0, 0);
-            this.mnuRemoveStudent.Name = "mnuRemoveStudent";
-            this.mnuRemoveStudent.Size = new System.Drawing.Size(800, 24);
-            this.mnuRemoveStudent.TabIndex = 15;
-            this.mnuRemoveStudent.Text = "menuStrip1";
-            // 
-            // btnExit
-            // 
-            this.btnExit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(37, 20);
-            this.btnExit.Text = "Exit";
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // btnBack
-            // 
-            this.btnBack.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(44, 20);
-            this.btnBack.Text = "Back";
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(58, 20);
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // cboStudentID
             // 
@@ -170,14 +129,11 @@
             this.Controls.Add(this.cboSName);
             this.Controls.Add(this.cboName);
             this.Controls.Add(this.cboStudentID);
-            this.Controls.Add(this.mnuRemoveStudent);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "frmRemoveStudent";
             this.Text = "Grinds Booking System - Remove Student";
-            this.mnuRemoveStudent.ResumeLayout(false);
-            this.mnuRemoveStudent.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRemoveStudent)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -189,10 +145,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.MenuStrip mnuRemoveStudent;
-        private System.Windows.Forms.ToolStripMenuItem btnExit;
-        private System.Windows.Forms.ToolStripMenuItem btnBack;
-        private System.Windows.Forms.ToolStripMenuItem btnRefresh;
         private System.Windows.Forms.ComboBox cboStudentID;
         private System.Windows.Forms.ComboBox cboName;
         private System.Windows.Forms.ComboBox cboSName;

@@ -14,15 +14,6 @@ namespace GrindsBookingSystem
             Reset(this.Controls);
         }
 
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            GoHome();
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Exit();
-        }
 
 
         public void ComboBoxChange(object sender, EventArgs e)
@@ -89,9 +80,7 @@ namespace GrindsBookingSystem
 
             if (t.IsValid() != "Valid")
             {
-                MessageBox.Show(t.IsValid()
-                    , "Invalid Details Entered",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ErrorMessage(t.IsValid());
                 return;
             }
 
@@ -104,9 +93,7 @@ namespace GrindsBookingSystem
             }
             else if (t == t2) 
             {
-                MessageBox.Show("No Details Changed, Goodbye"
-                    , "Goodbye",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                SuccessMessage("No Details Changed, Goodbye");
                 return; 
             }
             else
@@ -119,16 +106,11 @@ namespace GrindsBookingSystem
                 try
                 {
                     t2.Update();
-
-
-                    MessageBox.Show("The selected Tutor has been updated and their details are now as follows\n\n" +
-                            t2.ToString(), "Tutor Updated Successfully",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                    SuccessMessage("The selected Tutor has been updated and their details are now as follows\n\n" + t2.ToString());
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    ErrorMessage(ex.Message);
                 }
                     
             }
@@ -155,11 +137,6 @@ namespace GrindsBookingSystem
             }
 
 
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            Reset(this.Controls);
         }
     }
 }

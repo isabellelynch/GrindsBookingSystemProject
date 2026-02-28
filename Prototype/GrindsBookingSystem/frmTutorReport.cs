@@ -13,17 +13,6 @@ namespace GrindsBookingSystem
 
 
         }
-
-    
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            GoHome();
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Exit();
-        }
         private void chartTutorEarnings_MouseDown(object sender, MouseEventArgs e)
         {
             HitTestResult result = chartTutorEarnings.HitTest(e.X, e.Y);

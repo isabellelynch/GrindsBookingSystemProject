@@ -16,15 +16,6 @@ namespace GrindsBookingSystem
 
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Exit();
-        }
-
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            GoHome();
-        }
 
         public void ComboBoxChange(object sender, EventArgs e)
         {
@@ -71,23 +62,19 @@ namespace GrindsBookingSystem
                     s.SetID(row.Cells[0].Value.ToString());
 
                     s.Delete();
-
-                    MessageBox.Show("The following Student has now been removed from the system \n\n" + s.ToString(),
-                                    "Student Removed",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Information);
+                    SuccessMessage("The following Student has now been removed from the system \n\n" + s.ToString());
 
                     Reset(this.Controls);
                 }
                 catch(Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    ErrorMessage(ex.Message);
                 }
                 
             }
             else
             {
-                MessageBox.Show("No row selected. Please select a Student to be removed.");
+                ErrorMessage("No row selected. Please select a Student to be removed.");
             }
         }
         protected override void Reset(Control.ControlCollection controls)
@@ -106,10 +93,6 @@ namespace GrindsBookingSystem
             ControlFunctions.formatGridView(dgvRemoveStudent);
             ControlFunctions.FillBoxes("Students", cboStudentID, cboName, cboSName);
 
-        }
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            Reset(this.Controls);
         }
     }
 

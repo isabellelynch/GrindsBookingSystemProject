@@ -26,7 +26,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        new private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -42,12 +42,7 @@
             this.cboTutorSubjects = new System.Windows.Forms.ComboBox();
             this.grpAddTutor = new System.Windows.Forms.GroupBox();
             this.btnAddTutor = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.btnExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnBack = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.grpAddTutor.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -180,56 +175,16 @@
             this.btnAddTutor.UseVisualStyleBackColor = true;
             this.btnAddTutor.Click += new System.EventHandler(this.btnAddTutor_Click);
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnExit,
-            this.btnBack,
-            this.btnRefresh});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
-            this.menuStrip1.TabIndex = 13;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // btnExit
-            // 
-            this.btnExit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(37, 20);
-            this.btnExit.Text = "Exit";
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // btnBack
-            // 
-            this.btnBack.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(44, 20);
-            this.btnBack.Text = "Back";
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(58, 20);
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
             // frmAddTutor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.grpAddTutor);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmAddTutor";
             this.Text = "Grinds Booking System - Add Tutor";
             this.grpAddTutor.ResumeLayout(false);
             this.grpAddTutor.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -251,9 +206,5 @@
         private System.Windows.Forms.ComboBox cboTutorSubjects;
         private System.Windows.Forms.GroupBox grpAddTutor;
         private System.Windows.Forms.Button btnAddTutor;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem btnExit;
-        private System.Windows.Forms.ToolStripMenuItem btnBack;
-        private System.Windows.Forms.ToolStripMenuItem btnRefresh;
     }
 }

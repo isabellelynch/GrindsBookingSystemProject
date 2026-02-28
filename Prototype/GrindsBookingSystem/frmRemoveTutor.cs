@@ -17,16 +17,6 @@ namespace GrindsBookingSystem
         }
 
 
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            GoHome();
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Exit();
-
-        }
 
         public void ComboBoxChange(object sender, EventArgs e)
         {
@@ -72,26 +62,28 @@ namespace GrindsBookingSystem
 
                 t.Delete();
 
-                MessageBox.Show("Tutor Removed");
+                SuccessMessage("Tutor Removed");
 
                 Reset(this.Controls);
             }
             else
             {
-                MessageBox.Show("No row selected.");
+                ErrorMessage("No row selected.");
             }
         }
 
         protected override void Reset(Control.ControlCollection controls)
         {
             base.Reset(controls);
+
             ControlFunctions.FillBoxes("Tutors", cboTutorID, cboFirstName, cboSurname);
+
             dgvRemoveTutor.DataSource = Tutor.GetTutorList(cboTutorID).Tables[0];
 
             ControlFunctions.formatGridView(dgvRemoveTutor);
-            
 
             comboBoxes = ControlFunctions.CreateComboList(cboTutorID, cboFirstName, cboSurname);
+
             foreach (ComboBox cb in comboBoxes)
             {
                 cb.SelectedIndexChanged -= ComboBoxChange;
@@ -104,10 +96,6 @@ namespace GrindsBookingSystem
             Reset(this.Controls);
         }
 
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            Reset(this.Controls);
-        }
     }
 
 

@@ -26,20 +26,18 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        new private void InitializeComponent()
         {
             this.btnRemoveClass = new System.Windows.Forms.Button();
             this.btnAddClass = new System.Windows.Forms.Button();
             this.dgvSchedule = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.btnExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnBack = new System.Windows.Forms.ToolStripMenuItem();
+
             this.cboRooms = new System.Windows.Forms.ComboBox();
             this.labelRooms = new System.Windows.Forms.Label();
             this.btnAlterClass = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSchedule)).BeginInit();
-            this.menuStrip1.SuspendLayout();
+
             this.SuspendLayout();
             // 
             // btnRemoveClass
@@ -50,6 +48,7 @@
             this.btnRemoveClass.TabIndex = 21;
             this.btnRemoveClass.Text = "Remove Class";
             this.btnRemoveClass.UseVisualStyleBackColor = true;
+            this.btnRemoveClass.Click += new System.EventHandler(this.btnRemoveClass_Click);
             // 
             // btnAddClass
             // 
@@ -79,32 +78,7 @@
             this.label1.TabIndex = 16;
             this.label1.Text = "Grinds Booking System - Schedule";
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnExit,
-            this.btnBack});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
-            this.menuStrip1.TabIndex = 14;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // btnExit
-            // 
-            this.btnExit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(37, 20);
-            this.btnExit.Text = "Exit";
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // btnBack
-            // 
-            this.btnBack.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(44, 20);
-            this.btnBack.Text = "Back";
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+          
             // 
             // cboRooms
             // 
@@ -145,12 +119,11 @@
             this.Controls.Add(this.btnAddClass);
             this.Controls.Add(this.dgvSchedule);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.menuStrip1);
+
             this.Name = "frmViewSchedule";
             this.Text = "Grinds Booking System - Schedule";
             ((System.ComponentModel.ISupportInitialize)(this.dgvSchedule)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,9 +131,6 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem btnExit;
-        private System.Windows.Forms.ToolStripMenuItem btnBack;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvSchedule;
         private System.Windows.Forms.Button btnAddClass;

@@ -24,18 +24,6 @@ namespace GrindsBookingSystem
                 cb.SelectedIndexChanged += ComboBoxChange;
             }
         }
-        
-        
-            
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            GoHome();
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Exit();
-        }
 
       
 
@@ -102,11 +90,6 @@ namespace GrindsBookingSystem
                 cb.SelectedIndexChanged += ComboBoxChange;
             }
 
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            Reset(this.Controls);
         }
     }
 }

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 
-
 namespace GrindsBookingSystem
 {
-    public partial class frmHome : BaseForm
+    public partial class frmHome : Form
     {
         public frmHome()
         {
@@ -80,6 +79,18 @@ namespace GrindsBookingSystem
         {
             NewPage(new frmViewSchedule());
         }
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to exit ?",
+                                                    "Please Confirm",
+                                                    MessageBoxButtons.YesNo,
+                                                    MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
+
         private void NewPage(Form f)
         {
             f.Owner = this;
@@ -87,11 +98,6 @@ namespace GrindsBookingSystem
             this.Hide();
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Exit();
-        }
 
-        
     }
 }

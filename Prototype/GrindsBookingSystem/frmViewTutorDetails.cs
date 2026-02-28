@@ -15,17 +15,6 @@ namespace GrindsBookingSystem
             Reset(this.Controls);
         }
 
-
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            GoHome();
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Exit();
-        }
-
         public void ComboBoxChange(object sender, EventArgs e)
         {
             if (updating) return;
@@ -76,12 +65,6 @@ namespace GrindsBookingSystem
             }
             Reset(this.Controls);
         }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            Reset(this.Controls);
-        }
-
         protected override void Reset(Control.ControlCollection controls)
         {
             base.Reset(controls);

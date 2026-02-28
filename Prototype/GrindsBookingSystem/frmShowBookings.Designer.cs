@@ -26,7 +26,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        new private void InitializeComponent()
         {
             this.btnShowBookings = new System.Windows.Forms.Button();
             this.grpCancelBooking = new System.Windows.Forms.GroupBox();
@@ -37,12 +37,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.mnuViewStudentDetails = new System.Windows.Forms.MenuStrip();
-            this.btnExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnBack = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.grpCancelBooking.SuspendLayout();
-            this.mnuViewStudentDetails.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnShowBookings
@@ -124,48 +119,11 @@
             this.label2.TabIndex = 33;
             this.label2.Text = "Student ID";
             // 
-            // mnuViewStudentDetails
-            // 
-            this.mnuViewStudentDetails.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnExit,
-            this.btnBack,
-            this.btnRefresh});
-            this.mnuViewStudentDetails.Location = new System.Drawing.Point(0, 0);
-            this.mnuViewStudentDetails.Name = "mnuViewStudentDetails";
-            this.mnuViewStudentDetails.Size = new System.Drawing.Size(800, 24);
-            this.mnuViewStudentDetails.TabIndex = 41;
-            this.mnuViewStudentDetails.Text = "menuStrip1";
-            // 
-            // btnExit
-            // 
-            this.btnExit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(37, 20);
-            this.btnExit.Text = "Exit";
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // btnBack
-            // 
-            this.btnBack.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(44, 20);
-            this.btnBack.Text = "Back";
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(58, 20);
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
             // frmShowBookings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.mnuViewStudentDetails);
             this.Controls.Add(this.btnShowBookings);
             this.Controls.Add(this.grpCancelBooking);
             this.Controls.Add(this.cboName);
@@ -176,9 +134,15 @@
             this.Controls.Add(this.label2);
             this.Name = "frmShowBookings";
             this.Text = "frmShowBookings";
+            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.label4, 0);
+            this.Controls.SetChildIndex(this.cboStudentID, 0);
+            this.Controls.SetChildIndex(this.cboSName, 0);
+            this.Controls.SetChildIndex(this.cboName, 0);
+            this.Controls.SetChildIndex(this.grpCancelBooking, 0);
+            this.Controls.SetChildIndex(this.btnShowBookings, 0);
             this.grpCancelBooking.ResumeLayout(false);
-            this.mnuViewStudentDetails.ResumeLayout(false);
-            this.mnuViewStudentDetails.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -195,9 +159,5 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.MenuStrip mnuViewStudentDetails;
-        private System.Windows.Forms.ToolStripMenuItem btnExit;
-        private System.Windows.Forms.ToolStripMenuItem btnBack;
-        private System.Windows.Forms.ToolStripMenuItem btnRefresh;
     }
 }

@@ -19,19 +19,5 @@ namespace GrindsBookingSystem
             ControlFunctions.EnableBoxes(cboStudentID, cboName, cboSName);
             grpCancelBooking.Visible = false;
         }
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            Reset(this.Controls);
-        }
-
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            GoHome();
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Exit();
-        }
     }
 }

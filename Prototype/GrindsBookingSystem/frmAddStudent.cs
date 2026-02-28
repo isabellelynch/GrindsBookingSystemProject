@@ -16,8 +16,7 @@ namespace GrindsBookingSystem
 
             if (s.IsValid() != "Valid")
             {
-                MessageBox.Show(s.IsValid() + "\nPlease make the necessary changes to the information and try again",
-                    "Invalid!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorMessage(s.IsValid() + "\nPlease make the necessary changes to the information and try again");
                 return;
             }
 
@@ -31,10 +30,8 @@ namespace GrindsBookingSystem
                 try
                 {
                     s.Create();
-                    MessageBox.Show("Student " + txtStudentName.Text + txtStudentSurname.Text + "has been succesfully added to the system.",
-                                "Success",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Information);
+
+                    SuccessMessage("Student " + txtStudentName.Text + txtStudentSurname.Text + "has been succesfully added to the system.");
                     
                     DialogResult addAnother = MessageBox.Show("Would you like to add another Student?",
                                                         "Please Confirm",
@@ -47,39 +44,17 @@ namespace GrindsBookingSystem
                 }
                 catch(Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    ErrorMessage(ex.Message);
                 }
             }
             else
             {
-                MessageBox.Show("Adding Student Function Cancelled",
-                                "Cancelled",
-                                 MessageBoxButtons.OK,
-                                 MessageBoxIcon.Warning);
+                ErrorMessage("Adding Student Function Cancelled, Goodbye");
             }
 
             Reset(this.Controls);
 
             return;
-        }
-
-
-       
-
-        private void exitBtnAddStudent_Click(object sender, EventArgs e)
-        {
-            Exit();
-        }
-
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            Reset(this.Controls);
-        }
-
-        private void backBtnAddStudent_Click(object sender, EventArgs e)
-        {
-            GoHome();
         }
     }
 }

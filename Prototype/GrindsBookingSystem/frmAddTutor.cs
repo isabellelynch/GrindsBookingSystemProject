@@ -24,10 +24,12 @@ namespace GrindsBookingSystem
             {
                 t.Create();
 
-                DialogResult addAnother = MessageBox.Show("Tutor " + txtTutorName.Text + " " + txtTutorSurname.Text + " has been succesfully added to the system. Would you like to add another Tutor?",
-                                                            "Success",
-                                                            MessageBoxButtons.YesNo,
-                                                            MessageBoxIcon.Question);
+                SuccessMessage("Tutor " + txtTutorName.Text + " " + txtTutorSurname.Text + " has been succesfully added to the system.");
+
+                DialogResult addAnother = MessageBox.Show("Would you like to add another Tutor?",
+                                                    "Please Confirm",
+                                                    MessageBoxButtons.YesNo,
+                                                    MessageBoxIcon.Question);
                 if (addAnother == DialogResult.Yes)
                 {
                     Reset(this.Controls);
@@ -41,13 +43,12 @@ namespace GrindsBookingSystem
             {
                 if(!Validation.ComboSelected(cboTutorRates) || !Validation.ComboSelected(cboTutorSubjects))
                 {
-                    MessageBox.Show("Tutor Rate and Subject must be selected, please try again.",
-                        "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ErrorMessage("Tutor Rate and Subject must be selected, please try again.");
                     return;
                 }
                 else
                 {
-                    MessageBox.Show("Invalid Entry, " + t.IsValid(), "Invalid!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ErrorMessage("Invalid Entry, " + t.IsValid());
                 }
                     
             }
@@ -56,22 +57,6 @@ namespace GrindsBookingSystem
         {
             base.Reset(controls);
             ControlFunctions.FillRatesAndSubjects(cboTutorRates, cboTutorSubjects);
-        }
-
-
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            GoHome();
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Exit();
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            Reset(this.Controls);
         }
     }
 }

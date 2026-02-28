@@ -42,9 +42,7 @@ namespace GrindsBookingSystem
 
             if (s.IsValid() != "Valid")
             {
-                MessageBox.Show(s.IsValid()
-                    , "Invalid Details Entered",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ErrorMessage(s.IsValid());
                 return;
             }
 
@@ -57,9 +55,7 @@ namespace GrindsBookingSystem
             }
             else if (s == s2)
             {
-                MessageBox.Show("No Details Changed, Goodbye"
-                    , "Goodbye",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                SuccessMessage("No details changed, Goodbye!");
                 return;
             }
             else
@@ -72,15 +68,14 @@ namespace GrindsBookingSystem
                 {
                     s2.Update();
 
+                    SuccessMessage("The selected Student has been updated and their details are now as follows\n\n" + s2.ToString());
 
-                    MessageBox.Show("The selected Student has been updated and their details are now as follows\n\n" +
-                            s2.ToString(), "Student Updated Successfully",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    ErrorMessage(ex.Message);
                 }
 
             }
@@ -135,21 +130,6 @@ namespace GrindsBookingSystem
                 c.SelectedIndexChanged -= ComboBoxChange;
                 c.SelectedIndexChanged += ComboBoxChange;
             }
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            Reset(this.Controls);
-        }
-
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            GoHome();
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Exit();
         }
     }
 }

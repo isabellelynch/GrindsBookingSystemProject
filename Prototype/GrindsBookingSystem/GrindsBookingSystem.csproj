@@ -101,6 +101,12 @@
     <Compile Include="frmAddBooking.Designer.cs">
       <DependentUpon>frmAddBooking.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmRemoveClass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRemoveClass.Designer.cs">
+      <DependentUpon>frmRemoveClass.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmAddClass.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,12 +124,6 @@
     </Compile>
     <Compile Include="frmCancelBooking.Designer.cs">
       <DependentUpon>frmCancelBooking.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmDBconnectionTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmDBconnectionTest.Designer.cs">
-      <DependentUpon>frmDBconnectionTest.cs</DependentUpon>
     </Compile>
     <Compile Include="frmUpdateClass.cs">
       <SubType>Form</SubType>
@@ -213,11 +213,17 @@
     <Compile Include="Student.cs" />
     <Compile Include="Tutor.cs" />
     <Compile Include="Validation.cs" />
+    <EmbeddedResource Include="BaseForm.resx">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ClassBaseForm.resx">
       <DependentUpon>ClassBaseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAddBooking.resx">
       <DependentUpon>frmAddBooking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRemoveClass.resx">
+      <DependentUpon>frmRemoveClass.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAddClass.resx">
       <DependentUpon>frmAddClass.cs</DependentUpon>
@@ -227,9 +233,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCancelBooking.resx">
       <DependentUpon>frmCancelBooking.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmDBconnectionTest.resx">
-      <DependentUpon>frmDBconnectionTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmUpdateClass.resx">
       <DependentUpon>frmUpdateClass.cs</DependentUpon>

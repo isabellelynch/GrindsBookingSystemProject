@@ -4,8 +4,6 @@ using System.Data;
 using System.Data.Common;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GrindsBookingSystem
@@ -31,6 +29,7 @@ namespace GrindsBookingSystem
                 ds = Database.ExecuteMultiRowQuery(sql);
             }
             if (string.IsNullOrEmpty(sql) || ds == null) { return; }
+
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
                 for (int j = 0; j < cb.Length; j++) 

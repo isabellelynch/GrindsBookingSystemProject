@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace GrindsBookingSystem
 {
@@ -48,21 +47,13 @@ namespace GrindsBookingSystem
         }
         public string Read()
         {
-            return "";
+            Class c = GetClass(this.Day, this.Time, this.RoomNo);
+            return c.ToString();
         }
 
         public void Update() 
         {
-            string sql = "UPDATE Classes SET Day = " + this.Day + ", Time = " + this.Time + ", TutorID = " + this.TutorID
-                + ", RoomNo = '" + this.RoomNo + "' WHERE TutorID = " + this.TutorID;
-            try
-            {
-                Database.ExecuteNonQuery(sql);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            this.Create();
         }
         public void Delete() 
         {
@@ -115,7 +106,22 @@ namespace GrindsBookingSystem
             return sem;
         }
 
-       
+        public static Class GetClass(int day, int time, string room)
+        {
+            string sql2 = "SELECT * FROM Classes WHERE Day = " + day + " AND Time = " + time + " AND RoomNo = '" + room + "'";
+
+            OracleDataReader dr2 = Database.ExecuteSingleRowQuery(sql2);
+
+            dr2.Read();
+
+            Class c2 = new Class(dr2.GetInt32(0), dr2.GetInt32(1), dr2.GetString(2), dr2.GetInt32(3), dr2.GetString(4), dr2.GetString(5));
+
+            dr2.Close();
+
+            return c2;
+        }
+
+
 
     }
 }

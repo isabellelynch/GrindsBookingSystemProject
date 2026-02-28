@@ -1,5 +1,4 @@
-﻿using Oracle.ManagedDataAccess.Client;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -15,15 +14,6 @@ namespace GrindsBookingSystem
             Reset(this.Controls);
         }
 
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            GoHome();
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Exit();
-        }
 
         private void FormatGridView()
         {
@@ -31,14 +21,16 @@ namespace GrindsBookingSystem
 
             dgvSchedule.Columns.Clear();
             dgvSchedule.Rows.Clear();
-            dgvSchedule.Columns.Add("Time", "Time");
-            string[] days = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+            
+            
             dgvSchedule.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvSchedule.EnableHeadersVisualStyles = false;
             dgvSchedule.ColumnHeadersDefaultCellStyle.BackColor = Color.DarkCyan;
             dgvSchedule.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvSchedule.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Bold);
 
+            dgvSchedule.Columns.Add("Time", "Time");
+            string[] days = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
             foreach (var day in days)
             {
                 dgvSchedule.Columns.Add(day, day);
@@ -109,7 +101,7 @@ namespace GrindsBookingSystem
             {
                 if (day == 0 || day > 5 || time < 0 || time > 8 || c.Value.ToString() == "")
                 {
-                    msg = "A class must be chosen in order to update/remove it.";
+                    msg = "A class must be chosen in order to remove it.";
                 }
             }
             return msg;
@@ -124,8 +116,6 @@ namespace GrindsBookingSystem
 
             cboRooms.SelectedIndexChanged -= FillSchedule;
             cboRooms.SelectedIndexChanged += FillSchedule;
-
-            dgvSchedule.Rows.Clear();
 
             FormatGridView();
         }
@@ -171,16 +161,7 @@ namespace GrindsBookingSystem
 
             try
             {
-                int currentTime = c.RowIndex + 9;
-
-                string sql2 = "SELECT * FROM Classes WHERE Day = " + c.ColumnIndex + " AND Time = " + currentTime + " AND RoomNo = '" + cboRooms.Text.Substring(0, 1) + "'";
-
-                OracleDataReader dr2 = Database.ExecuteSingleRowQuery(sql2);
-
-                dr2.Read();
-
-                Class c2 = new Class(dr2.GetInt32(0), dr2.GetInt32(1), dr2.GetString(2), dr2.GetInt32(3), dr2.GetString(4), dr2.GetString(5));
-                dr2.Close();
+                Class c2 = Class.GetClass(c.ColumnIndex, c.RowIndex + 9, cboRooms.Text.Substring(0, 1));
 
                 frmUpdateClass f = new frmUpdateClass(c2.Day, c2.Time, c2.RoomNo, c2);
                 f.FormClosing += FillSchedule;
@@ -194,6 +175,29 @@ namespace GrindsBookingSystem
             }
 
             Reset(this.Controls);
+        }
+
+        private void btnRemoveClass_Click(object sender, EventArgs e)
+        {
+            DataGridViewCell c = dgvSchedule.CurrentCell;
+
+            string msg = CheckSelected(c, btnRemoveClass);
+
+            if (msg != "")
+            {
+                MessageBox.Show(msg ,"Error", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Class c2 = Class.GetClass(c.ColumnIndex, c.RowIndex + 9, cboRooms.Text.Substring(0,1));
+
+            frmRemoveClass f = new frmRemoveClass(c2.Day, c2.Time, c2.RoomNo, c2);
+            f.FormClosing += FillSchedule;
+            f.ShowDialog();
+
+            Reset(this.Controls);
+
         }
     }
 }

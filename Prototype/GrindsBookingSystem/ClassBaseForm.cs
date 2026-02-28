@@ -1,4 +1,6 @@
 ﻿using Oracle.ManagedDataAccess.Client;
+using System;
+using System.Data;
 using System.Windows.Forms;
 
 namespace GrindsBookingSystem
@@ -20,7 +22,19 @@ namespace GrindsBookingSystem
             Room = room;
         }
 
+        protected override void Reset(Control.ControlCollection controls)
+        {
+            base.Reset(controls);
+            ControlFunctions.DisableBoxes(cboDays, cboTime, txtAttendance, cboRooms);
+            
+            SetClassDay(Day, cboDays);
+            SetClassTime(Time, cboTime);
+            SetAttendance(txtAttendance, Room);
+            SetRoom(cboRooms, Room);
 
+            FillBoxes();
+
+        }
         public void SetClassDay(int day, ComboBox t)
         {
             string s = "";
@@ -71,7 +85,7 @@ namespace GrindsBookingSystem
         }
         public void SetRoom(ComboBox cb, string room)
         {
-            cb.Text = room;
+            cb.Text = GetRoomDetails(room);
         }
 
         public void SetClassTime(int time, ComboBox t)
@@ -94,27 +108,87 @@ namespace GrindsBookingSystem
             dr.Close();
         }
 
-        private void btnExit_Click(object sender, System.EventArgs e)
+        protected string GetRoomDetails(string r)
         {
-            Exit();
+            string sql = "SELECT RoomNo, Description FROM Rooms WHERE RoomNo = '" + r + "'";
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            dr.Read();
+            string details =  dr.GetString(0) + " - " + dr.GetString(1);
+            dr.Close();
+            return details;
         }
 
-        private void btnBack_Click(object sender, System.EventArgs e)
+        protected void SetTutor(ComboBox cb, string id)
         {
-            GoHome();
+            Tutor t = Tutor.GetTutor(Convert.ToInt32(id));
+            cb.Text = t.FirstName + " " + t.Surname + " - " + t.Subject;
         }
 
-        private void btnRefresh_Click(object sender, System.EventArgs e)
+        protected void FillTutorDetails()
         {
-            Reset(this.Controls);
+            cboTutors.Items.Clear();
+
+            DataSet ds = Tutor.RetrieveAll();
+
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                cboTutors.Items.Add(dr[1].ToString() + " " + dr[2].ToString() + " - " + dr[6].ToString());
+            }
         }
 
-        private void ClassBaseForm_Load(object sender, System.EventArgs e)
+        protected void FillTimes()
         {
-            SetClassDay(Day, cboDays);
-            SetClassTime(Time, cboTime);
-            SetAttendance(txtAttendance, Room);
-            SetRoom(cboRooms, Room);
+            cboTime.Items.Clear();
+
+            for (int i = 9; i <= 17; i++)
+            {
+                string s = "";
+
+                if (i < 10)
+                {
+                    s = "0" + i.ToString() + ":00";
+                }
+                else
+                {
+                    s = i.ToString() + ":00";
+                }
+
+                if (i == Time)
+                {
+                    cboTime.Text = s;
+                }
+
+                cboTime.Items.Add(s);
+            }
+        }
+
+        protected void FillBoxes()
+        {
+            ControlFunctions.FillRooms(cboRooms);
+            FillTutorDetails();
+            FillTimes();
+        }
+
+        protected int GetTutorID()
+        {
+            string details = cboTutors.Text;
+            int id = 0;
+            string[] parts = details.Split('-');
+            string[] nameParts = parts[0].Split(' ');
+
+            string sql = "SELECT TutorID FROM Tutors WHERE FirstName = '" + nameParts[0].Trim() +
+                "' AND Surname = '" + nameParts[1].Trim() + "' AND SubjectCode = '" + parts[1].Trim() + "'";
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+
+            if (dr.Read())
+            {
+                id = dr.GetInt32(0);
+            }
+
+            dr.Close();
+
+            return id;
         }
     }
 }
