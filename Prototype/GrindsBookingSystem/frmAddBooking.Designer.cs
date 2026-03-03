@@ -35,17 +35,21 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnContinue = new System.Windows.Forms.Button();
-            this.lvSchedule = new System.Windows.Forms.ListView();
             this.btnMakeBooking = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
             this.grpMakeBooking = new System.Windows.Forms.GroupBox();
+            this.cboRooms = new System.Windows.Forms.ComboBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label5 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.filterLabel = new System.Windows.Forms.Label();
             this.grpMakeBooking.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // cboLastName
             // 
             this.cboLastName.FormattingEnabled = true;
-            this.cboLastName.Location = new System.Drawing.Point(379, 98);
+            this.cboLastName.Location = new System.Drawing.Point(419, 93);
             this.cboLastName.Name = "cboLastName";
             this.cboLastName.Size = new System.Drawing.Size(121, 21);
             this.cboLastName.TabIndex = 28;
@@ -53,7 +57,7 @@
             // cboFirstName
             // 
             this.cboFirstName.FormattingEnabled = true;
-            this.cboFirstName.Location = new System.Drawing.Point(379, 63);
+            this.cboFirstName.Location = new System.Drawing.Point(419, 58);
             this.cboFirstName.Name = "cboFirstName";
             this.cboFirstName.Size = new System.Drawing.Size(121, 21);
             this.cboFirstName.TabIndex = 27;
@@ -61,7 +65,7 @@
             // cboStudentID
             // 
             this.cboStudentID.FormattingEnabled = true;
-            this.cboStudentID.Location = new System.Drawing.Point(379, 32);
+            this.cboStudentID.Location = new System.Drawing.Point(419, 27);
             this.cboStudentID.Name = "cboStudentID";
             this.cboStudentID.Size = new System.Drawing.Size(121, 21);
             this.cboStudentID.TabIndex = 26;
@@ -69,7 +73,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(269, 106);
+            this.label3.Location = new System.Drawing.Point(309, 101);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 25;
@@ -78,7 +82,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(269, 71);
+            this.label2.Location = new System.Drawing.Point(309, 66);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 13);
             this.label2.TabIndex = 24;
@@ -87,7 +91,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(269, 40);
+            this.label1.Location = new System.Drawing.Point(309, 35);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 23;
@@ -95,7 +99,7 @@
             // 
             // btnContinue
             // 
-            this.btnContinue.Location = new System.Drawing.Point(317, 136);
+            this.btnContinue.Location = new System.Drawing.Point(357, 131);
             this.btnContinue.Name = "btnContinue";
             this.btnContinue.Size = new System.Drawing.Size(130, 23);
             this.btnContinue.TabIndex = 30;
@@ -103,49 +107,77 @@
             this.btnContinue.UseVisualStyleBackColor = true;
             this.btnContinue.Click += new System.EventHandler(this.btnContinue_Click);
             // 
-            // lvSchedule
-            // 
-            this.lvSchedule.HideSelection = false;
-            this.lvSchedule.Location = new System.Drawing.Point(34, 36);
-            this.lvSchedule.Name = "lvSchedule";
-            this.lvSchedule.Size = new System.Drawing.Size(543, 161);
-            this.lvSchedule.TabIndex = 31;
-            this.lvSchedule.UseCompatibleStateImageBehavior = false;
-            // 
             // btnMakeBooking
             // 
-            this.btnMakeBooking.Location = new System.Drawing.Point(207, 213);
+            this.btnMakeBooking.Location = new System.Drawing.Point(232, 354);
             this.btnMakeBooking.Name = "btnMakeBooking";
             this.btnMakeBooking.Size = new System.Drawing.Size(182, 23);
             this.btnMakeBooking.TabIndex = 32;
             this.btnMakeBooking.Text = "Make Booking";
             this.btnMakeBooking.UseVisualStyleBackColor = true;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(169, 10);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(245, 13);
-            this.label4.TabIndex = 33;
-            this.label4.Text = "Please select the class that you would like to book";
-            // 
             // grpMakeBooking
             // 
-            this.grpMakeBooking.Controls.Add(this.label4);
+            this.grpMakeBooking.Controls.Add(this.filterLabel);
+            this.grpMakeBooking.Controls.Add(this.comboBox1);
+            this.grpMakeBooking.Controls.Add(this.label5);
+            this.grpMakeBooking.Controls.Add(this.cboRooms);
+            this.grpMakeBooking.Controls.Add(this.dataGridView1);
             this.grpMakeBooking.Controls.Add(this.btnMakeBooking);
-            this.grpMakeBooking.Controls.Add(this.lvSchedule);
-            this.grpMakeBooking.Location = new System.Drawing.Point(100, 170);
+            this.grpMakeBooking.Location = new System.Drawing.Point(100, 165);
             this.grpMakeBooking.Name = "grpMakeBooking";
-            this.grpMakeBooking.Size = new System.Drawing.Size(615, 253);
+            this.grpMakeBooking.Size = new System.Drawing.Size(659, 394);
             this.grpMakeBooking.TabIndex = 34;
             this.grpMakeBooking.TabStop = false;
+            this.grpMakeBooking.Text = "Select Class to Book";
+            // 
+            // cboRooms
+            // 
+            this.cboRooms.FormattingEnabled = true;
+            this.cboRooms.Location = new System.Drawing.Point(319, 13);
+            this.cboRooms.Name = "cboRooms";
+            this.cboRooms.Size = new System.Drawing.Size(121, 21);
+            this.cboRooms.TabIndex = 35;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(23, 88);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(606, 260);
+            this.dataGridView1.TabIndex = 34;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(209, 16);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 13);
+            this.label5.TabIndex = 36;
+            this.label5.Text = "Room";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(319, 49);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 39;
+            // 
+            // filterLabel
+            // 
+            this.filterLabel.AutoSize = true;
+            this.filterLabel.Location = new System.Drawing.Point(201, 49);
+            this.filterLabel.Name = "filterLabel";
+            this.filterLabel.Size = new System.Drawing.Size(43, 13);
+            this.filterLabel.TabIndex = 40;
+            this.filterLabel.Text = "Subject";
             // 
             // frmAddBooking
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(872, 584);
             this.Controls.Add(this.grpMakeBooking);
             this.Controls.Add(this.btnContinue);
             this.Controls.Add(this.cboLastName);
@@ -166,6 +198,7 @@
             this.Controls.SetChildIndex(this.grpMakeBooking, 0);
             this.grpMakeBooking.ResumeLayout(false);
             this.grpMakeBooking.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -180,9 +213,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnContinue;
-        private System.Windows.Forms.ListView lvSchedule;
         private System.Windows.Forms.Button btnMakeBooking;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox grpMakeBooking;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ComboBox cboRooms;
+        private System.Windows.Forms.Label filterLabel;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label5;
     }
 }

@@ -42,6 +42,10 @@
             this.cboTutorSubjects = new System.Windows.Forms.ComboBox();
             this.grpAddTutor = new System.Windows.Forms.GroupBox();
             this.btnAddTutor = new System.Windows.Forms.Button();
+            this.cboLevel = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cboCategory = new System.Windows.Forms.ComboBox();
             this.grpAddTutor.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,7 +79,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(343, 155);
+            this.label4.Location = new System.Drawing.Point(358, 105);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 13);
             this.label4.TabIndex = 3;
@@ -138,13 +142,18 @@
             // cboTutorSubjects
             // 
             this.cboTutorSubjects.FormattingEnabled = true;
-            this.cboTutorSubjects.Location = new System.Drawing.Point(443, 146);
+            this.cboTutorSubjects.Location = new System.Drawing.Point(443, 102);
             this.cboTutorSubjects.Name = "cboTutorSubjects";
             this.cboTutorSubjects.Size = new System.Drawing.Size(121, 21);
             this.cboTutorSubjects.TabIndex = 11;
+            this.cboTutorSubjects.SelectedIndexChanged += new System.EventHandler(this.cboTutorSubjects_SelectedIndexChanged);
             // 
             // grpAddTutor
             // 
+            this.grpAddTutor.Controls.Add(this.cboCategory);
+            this.grpAddTutor.Controls.Add(this.label8);
+            this.grpAddTutor.Controls.Add(this.label7);
+            this.grpAddTutor.Controls.Add(this.cboLevel);
             this.grpAddTutor.Controls.Add(this.btnAddTutor);
             this.grpAddTutor.Controls.Add(this.cboTutorSubjects);
             this.grpAddTutor.Controls.Add(this.cboTutorRates);
@@ -175,6 +184,40 @@
             this.btnAddTutor.UseVisualStyleBackColor = true;
             this.btnAddTutor.Click += new System.EventHandler(this.btnAddTutor_Click);
             // 
+            // cboLevel
+            // 
+            this.cboLevel.FormattingEnabled = true;
+            this.cboLevel.Location = new System.Drawing.Point(443, 152);
+            this.cboLevel.Name = "cboLevel";
+            this.cboLevel.Size = new System.Drawing.Size(121, 21);
+            this.cboLevel.TabIndex = 13;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(368, 160);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(33, 13);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "Level";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(352, 201);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(49, 13);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "Category";
+            // 
+            // cboCategory
+            // 
+            this.cboCategory.FormattingEnabled = true;
+            this.cboCategory.Location = new System.Drawing.Point(443, 197);
+            this.cboCategory.Name = "cboCategory";
+            this.cboCategory.Size = new System.Drawing.Size(121, 21);
+            this.cboCategory.TabIndex = 16;
+            // 
             // frmAddTutor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -183,6 +226,7 @@
             this.Controls.Add(this.grpAddTutor);
             this.Name = "frmAddTutor";
             this.Text = "Grinds Booking System - Add Tutor";
+            this.Controls.SetChildIndex(this.grpAddTutor, 0);
             this.grpAddTutor.ResumeLayout(false);
             this.grpAddTutor.PerformLayout();
             this.ResumeLayout(false);
@@ -206,5 +250,9 @@
         private System.Windows.Forms.ComboBox cboTutorSubjects;
         private System.Windows.Forms.GroupBox grpAddTutor;
         private System.Windows.Forms.Button btnAddTutor;
+        private System.Windows.Forms.ComboBox cboCategory;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cboLevel;
     }
 }

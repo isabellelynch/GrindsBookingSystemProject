@@ -18,9 +18,13 @@ namespace GrindsBookingSystem
         protected override void Reset(Control.ControlCollection controls)
         {
             base.Reset(controls);
+
             ControlFunctions.FillBoxes("Students", cboStudentID, cboFirstName, cboLastName);
+
             grpMakeBooking.Visible = false;
+
             List<ComboBox> cb = ControlFunctions.CreateComboList(cboStudentID, cboFirstName, cboLastName);
+
             foreach (ComboBox c in cb)
             {
                 c.SelectedIndexChanged -= ComboBoxChange;
@@ -63,19 +67,25 @@ namespace GrindsBookingSystem
 
             if(cboStudentID.SelectedIndex == -1)
             {
-                MessageBox.Show("Student ID must be selected before continuing.", "Error",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ErrorMessage("Student ID must be selected before continuing.");
                 return;
             }
             if (cboFirstName.SelectedIndex == -1)
             {
-                MessageBox.Show("Student First Name must be selected before continuing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ErrorMessage("Student First Name must be selected before continuing.");
                 return;
             }
             if (cboLastName.SelectedIndex == -1)
             {
-                MessageBox.Show("Student Last Name must be selected before continuing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ErrorMessage("Student Last Name must be selected before continuing.");
                 return;
             }
+            if (cboStudentID.Items.Count > 1) 
+            {
+                ErrorMessage("Please select a single student in order to book a class for them");
+                return;
+            }
+
             grpMakeBooking.Visible = true;
 
             ControlFunctions.DisableBoxes(cboFirstName, cboLastName, cboStudentID);

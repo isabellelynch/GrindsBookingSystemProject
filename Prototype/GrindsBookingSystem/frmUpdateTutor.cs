@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -58,7 +59,9 @@ namespace GrindsBookingSystem
             Tutor t = Tutor.GetTutor(Convert.ToInt32(cboTutorID.Items[0]));
 
             cboRates.Text = t.RateCode;
-            cboSubjects.Text = t.Subject;
+            cboSubjects.Text = GetSubject(t.PersonID);
+
+
             txtEmail.Text = t.Email;
             txtPhone.Text = t.Phone;
 
@@ -137,6 +140,16 @@ namespace GrindsBookingSystem
             }
 
 
+        }
+
+        private string GetSubject(string id)
+        {
+            string sql =    "SELECT Description, SubjectLevel, SubjectCategory " +
+                            "FROM Subjects " +
+                            "WHERE SubjectID = " + id;
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            dr.Read();
+            return dr.GetString(1) + " " + dr.GetString(0) + " (" + dr.GetString(2) + ")";
         }
     }
 }

@@ -30,7 +30,7 @@ namespace GrindsBookingSystem
             Debug.WriteLine(this);
 
             string sql = "INSERT INTO Tutors (FirstName, Surname" +
-                ",Email, PhoneNo, RateCode, SubjectCode, Status) VALUES ('" +
+                ",Email, PhoneNo, RateCode, SubjectID, Status) VALUES ('" +
                 FirstName + "','" +
                 Surname + "','" +
                 Email + "','" +

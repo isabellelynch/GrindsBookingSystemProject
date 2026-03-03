@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace GrindsBookingSystem
@@ -73,7 +70,10 @@ namespace GrindsBookingSystem
             ds = Database.ExecuteMultiRowQuery(sql);
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
-                cb1.Items.Add(ds.Tables[0].Rows[i][0] + " - " + ds.Tables[0].Rows[i][1]);
+                if(!cb1.Items.Contains(ds.Tables[0].Rows[i][0] + " - " + ds.Tables[0].Rows[i][1])) 
+                {
+                    cb1.Items.Add(ds.Tables[0].Rows[i][0] + " - " + ds.Tables[0].Rows[i][1]);
+                }
             }
             DeselectAll(cb, cb1);
         }
