@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -72,7 +73,13 @@ namespace GrindsBookingSystem
 
                 Tutor t = Tutor.GetTutor(Convert.ToInt32(c.TutorID));
 
-                dgv.Rows[rowIndex].Cells[colIndex].Value = t.Subject + " - " + t.FirstName + " " + t.Surname;
+                string sql = "SELECT Description FROM Subjects WHERE SubjectID = '" + c.SubjectID + "'";
+                OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+                dr.Read();
+                string sub = dr.GetString(0);
+                dr.Close();
+
+                dgv.Rows[rowIndex].Cells[colIndex].Value = sub + " - " + t.FirstName + " " + t.Surname;
             }
 
         }

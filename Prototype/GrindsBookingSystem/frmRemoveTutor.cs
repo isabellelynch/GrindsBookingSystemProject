@@ -44,7 +44,7 @@ namespace GrindsBookingSystem
                 ControlFunctions.ApplyFilters("'" + cboSurname.Text + "'", "Surname", "Tutors", cboTutorID, cboFirstName, cboSurname);
             }
 
-            dgvRemoveTutor.DataSource = Tutor.GetTutorList(cboTutorID).Tables[0];
+            dgvRemoveTutors.DataSource = Tutor.GetTutorList(cboTutorID).Tables[0];
 
             updating = false;
 
@@ -52,9 +52,9 @@ namespace GrindsBookingSystem
 
         private void btnRemoveTutor_Click(object sender, EventArgs e)
         {
-            if (dgvRemoveTutor.SelectedRows.Count == 1)
+            if (dgvRemoveTutors.SelectedRows.Count == 1)
             {
-                DataGridViewRow row = dgvRemoveTutor.SelectedRows[0];
+                DataGridViewRow row = dgvRemoveTutors.SelectedRows[0];
 
                 Tutor t = Tutor.GetTutor(Convert.ToInt32(row.Cells[0].Value));
 
@@ -78,9 +78,9 @@ namespace GrindsBookingSystem
 
             ControlFunctions.FillBoxes("Tutors", cboTutorID, cboFirstName, cboSurname);
 
-            dgvRemoveTutor.DataSource = Tutor.GetTutorList(cboTutorID).Tables[0];
+            dgvRemoveTutors.DataSource = Tutor.GetTutorList(cboTutorID).Tables[0];
 
-            ControlFunctions.formatGridView(dgvRemoveTutor);
+            ControlFunctions.formatGridView(dgvRemoveTutors, 3);
 
             comboBoxes = ControlFunctions.CreateComboList(cboTutorID, cboFirstName, cboSurname);
 

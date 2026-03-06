@@ -59,9 +59,6 @@ namespace GrindsBookingSystem
             Tutor t = Tutor.GetTutor(Convert.ToInt32(cboTutorID.Items[0]));
 
             cboRates.Text = t.RateCode;
-            cboSubjects.Text = GetSubject(t.PersonID);
-
-
             txtEmail.Text = t.Email;
             txtPhone.Text = t.Phone;
 
@@ -75,8 +72,7 @@ namespace GrindsBookingSystem
                                 cboSurnames.Text, 
                                 txtEmail.Text, 
                                 txtPhone.Text, 
-                                cboRates.Text.Substring(0, 3),
-                                cboSubjects.Text.Substring(0, 3));
+                                cboRates.Text.Substring(0, 3));
 
             t.SetID(cboTutorID.Text);
 
@@ -102,7 +98,6 @@ namespace GrindsBookingSystem
             else
             {
                     t2.RateCode = t.RateCode;
-                    t2.Subject = t.Subject;
                     t2.Email = t.Email;
                     t2.Phone = t.Phone;
                     t2.SetID(t.PersonID);
@@ -129,7 +124,7 @@ namespace GrindsBookingSystem
 
             ControlFunctions.EnableBoxes(cboTutorID, cboNames, cboSurnames);
 
-            ControlFunctions.FillRatesAndSubjects(cboRates, cboSubjects);
+            ControlFunctions.FillRates(cboRates);
             ControlFunctions.FillBoxes("Tutors", cboTutorID, cboNames, cboSurnames);
             
             comboBoxes = ControlFunctions.CreateComboList(cboTutorID, cboNames, cboSurnames);
@@ -142,14 +137,5 @@ namespace GrindsBookingSystem
 
         }
 
-        private string GetSubject(string id)
-        {
-            string sql =    "SELECT Description, SubjectLevel, SubjectCategory " +
-                            "FROM Subjects " +
-                            "WHERE SubjectID = " + id;
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
-            dr.Read();
-            return dr.GetString(1) + " " + dr.GetString(0) + " (" + dr.GetString(2) + ")";
-        }
     }
 }

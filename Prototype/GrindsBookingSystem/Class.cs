@@ -14,8 +14,9 @@ namespace GrindsBookingSystem
         public int CurrentEnrollment {  get; set; }
         public string RoomNo { get; set; }
         public string Semester {  get; set; }
+        public string SubjectID { get; set; }
 
-        public Class(int day, int time, string id, int enroll, string room, string sem)
+        public Class(int day, int time, string id, int enroll, string room, string sem, string subjectID)
         {
             Day = day;
             Time = time;
@@ -23,18 +24,20 @@ namespace GrindsBookingSystem
             CurrentEnrollment = enroll;
             RoomNo = room;
             Semester = sem;
+            SubjectID = subjectID;
         }
 
         public void Create()
         {
-            string sql = "INSERT INTO Classes (Day, Time, TutorID, CurrentEnrollment, RoomNo, SemesterNo)" +
+            string sql = "INSERT INTO Classes (Day, Time, TutorID, CurrentEnrollment, RoomNo, SemesterNo, SubjectID)" +
                 "VALUES (" + 
                 Day + "," + 
                 Time + "," +
                 TutorID + "," +
                 CurrentEnrollment + ",'" +
-                RoomNo + "','" + 
-                Semester + "')";
+                RoomNo + "','" +
+                Semester + "','" +
+                SubjectID + "')";
             try
             {
                 Database.ExecuteNonQuery(sql);
@@ -80,7 +83,8 @@ namespace GrindsBookingSystem
                     r[2].ToString(),
                     Convert.ToInt32(r[3]),
                     r[4].ToString(),
-                    r[5].ToString()
+                    r[5].ToString(),
+                    r[6].ToString()
                 );
 
                 list.Add(c);
@@ -114,7 +118,7 @@ namespace GrindsBookingSystem
 
             dr2.Read();
 
-            Class c2 = new Class(dr2.GetInt32(0), dr2.GetInt32(1), dr2.GetString(2), dr2.GetInt32(3), dr2.GetString(4), dr2.GetString(5));
+            Class c2 = new Class(dr2.GetInt32(0), dr2.GetInt32(1), dr2.GetString(2), dr2.GetInt32(3), dr2.GetString(4), dr2.GetString(5), dr2.GetString(6));
 
             dr2.Close();
 

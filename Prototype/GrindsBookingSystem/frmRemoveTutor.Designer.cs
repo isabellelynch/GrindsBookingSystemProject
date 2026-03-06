@@ -36,11 +36,10 @@
             this.cboSurname = new System.Windows.Forms.ComboBox();
             this.btnRemoveTutor = new System.Windows.Forms.Button();
             this.btnResetFilters = new System.Windows.Forms.Button();
-            this.dgvRemoveTutor = new System.Windows.Forms.DataGridView();;
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRemoveTutor)).BeginInit();
+            this.dgvRemoveTutors = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRemoveTutors)).BeginInit();
             this.SuspendLayout();
             // 
-    
             // label1
             // 
             this.label1.AutoSize = true;
@@ -112,20 +111,20 @@
             this.btnResetFilters.UseVisualStyleBackColor = true;
             this.btnResetFilters.Click += new System.EventHandler(this.btnResetFilters_Click);
             // 
-            // dgvRemoveTutor
+            // dgvRemoveTutors
             // 
-            this.dgvRemoveTutor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRemoveTutor.Location = new System.Drawing.Point(214, 173);
-            this.dgvRemoveTutor.Name = "dgvRemoveTutor";
-            this.dgvRemoveTutor.Size = new System.Drawing.Size(390, 150);
-            this.dgvRemoveTutor.TabIndex = 25;
+            this.dgvRemoveTutors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvRemoveTutors.Location = new System.Drawing.Point(92, 148);
+            this.dgvRemoveTutors.Name = "dgvRemoveTutors";
+            this.dgvRemoveTutors.Size = new System.Drawing.Size(650, 199);
+            this.dgvRemoveTutors.TabIndex = 25;
             // 
             // frmRemoveTutor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.dgvRemoveTutor);
+            this.Controls.Add(this.dgvRemoveTutors);
             this.Controls.Add(this.btnResetFilters);
             this.Controls.Add(this.btnRemoveTutor);
             this.Controls.Add(this.cboSurname);
@@ -136,8 +135,16 @@
             this.Controls.Add(this.label1);
             this.Name = "frmRemoveTutor";
             this.Text = "Grinds Booking System - Remove Tutor";
-
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRemoveTutor)).EndInit();
+            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.cboTutorID, 0);
+            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.cboFirstName, 0);
+            this.Controls.SetChildIndex(this.cboSurname, 0);
+            this.Controls.SetChildIndex(this.btnRemoveTutor, 0);
+            this.Controls.SetChildIndex(this.btnResetFilters, 0);
+            this.Controls.SetChildIndex(this.dgvRemoveTutors, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRemoveTutors)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,6 +160,6 @@
         private System.Windows.Forms.ComboBox cboSurname;
         private System.Windows.Forms.Button btnRemoveTutor;
         private System.Windows.Forms.Button btnResetFilters;
-        private System.Windows.Forms.DataGridView dgvRemoveTutor;
+        private System.Windows.Forms.DataGridView dgvRemoveTutors;
     }
 }

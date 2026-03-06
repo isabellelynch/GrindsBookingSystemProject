@@ -1,7 +1,6 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Data;
-using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace GrindsBookingSystem
@@ -9,26 +8,21 @@ namespace GrindsBookingSystem
     public class Tutor : Person, InterfaceCRUD
     {
         public string RateCode { get; set; }
-        public string Subject { get; set; }
 
 
-        public Tutor(string name, string sname, string emailAddress, string phoneNo, string rate, string sub) 
+        public Tutor(string name, string sname, string emailAddress, string phoneNo, string rate) 
             : base(name, sname, emailAddress, phoneNo)
         {
             RateCode = rate;
-            Subject = sub;
         }
 
         public override string ToString()
         {
-            return base.ToString() + "\nRate Code : " + RateCode +
-                "\nSubject Code : " + Subject;
+            return base.ToString() + "\nRate Code : " + RateCode;
         }
 
         public void Create()
         {
-            Debug.WriteLine(this);
-
             string sql = "INSERT INTO Tutors (FirstName, Surname" +
                 ",Email, PhoneNo, RateCode, SubjectID, Status) VALUES ('" +
                 FirstName + "','" +
@@ -36,10 +30,11 @@ namespace GrindsBookingSystem
                 Email + "','" +
                 Phone + "','" +
                 RateCode + "','" +
-                Subject + "'," +
                 "'A')";
 
             Database.ExecuteNonQuery(sql);
+
+            
         }
 
 
@@ -53,8 +48,8 @@ namespace GrindsBookingSystem
 
         public void Update()
         {
-            string sql = "UPDATE Tutors SET Email = '" + Email + "', PhoneNo = '" + Phone + "', RateCode = '" + RateCode
-                + "', SubjectCode = '" + Subject + "' WHERE TutorID = '" + this.PersonID + "'";
+            string sql = "UPDATE Tutors SET Email = '" + Email + "', PhoneNo = '" + Phone + "', RateCode = '" + RateCode +
+               "' WHERE TutorID = '" + this.PersonID + "'";
             try
             {
                 Database.ExecuteNonQuery(sql);
@@ -120,7 +115,7 @@ namespace GrindsBookingSystem
 
             dr.Read();
 
-            Tutor t = new Tutor(dr.GetString(1), dr.GetString(2), dr.GetString(3), dr.GetString(4), dr.GetString(5), dr.GetString(6));
+            Tutor t = new Tutor(dr.GetString(1), dr.GetString(2), dr.GetString(3), dr.GetString(4), dr.GetString(5));
 
             t.SetID(id.ToString());
 
@@ -151,10 +146,6 @@ namespace GrindsBookingSystem
             else if (string.IsNullOrWhiteSpace(RateCode))
             {
                 return "Rate Code must be selected";
-            }
-            else if (string.IsNullOrWhiteSpace(Subject))
-            {
-                return "Subject must be selected";
             }
             
             return "Valid";

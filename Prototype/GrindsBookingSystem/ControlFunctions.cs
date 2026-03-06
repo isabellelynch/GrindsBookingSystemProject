@@ -55,9 +55,10 @@ namespace GrindsBookingSystem
             c.SelectedIndex = -1;
         }
 
-        public static void FillRatesAndSubjects(ComboBox cb, ComboBox cb1)
+        public static void FillRates(ComboBox cb)
         {
-            ClearCombos(cb, cb1);
+            ClearCombos(cb);
+
             String sql = "SELECT RateCode, Description FROM TutorRates ORDER BY RateCode";
             DataSet ds = Database.ExecuteMultiRowQuery(sql);
 
@@ -66,16 +67,7 @@ namespace GrindsBookingSystem
                 cb.Items.Add(ds.Tables[0].Rows[i][0] + " - " + ds.Tables[0].Rows[i][1]);
             }
             
-            sql = "SELECT SubjectCode, Description FROM Subjects ORDER BY SubjectCode";
-            ds = Database.ExecuteMultiRowQuery(sql);
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-            {
-                if(!cb1.Items.Contains(ds.Tables[0].Rows[i][0] + " - " + ds.Tables[0].Rows[i][1])) 
-                {
-                    cb1.Items.Add(ds.Tables[0].Rows[i][0] + " - " + ds.Tables[0].Rows[i][1]);
-                }
-            }
-            DeselectAll(cb, cb1);
+            DeselectAll(cb);
         }
 
 
@@ -132,20 +124,21 @@ namespace GrindsBookingSystem
             }
         }
 
-        public static void formatGridView(DataGridView grid)
+        public static void formatGridView(DataGridView grid, int cols)
         {
             grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             grid.MultiSelect = false;
 
-            grid.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             grid.Columns[0].DefaultCellStyle.Format = "0000";
             grid.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            grid.Columns[0].FillWeight = 1;
 
-            grid.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            grid.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-
-            grid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            grid.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            for (int i  = 1; i < cols; i++) 
+            {
+                grid.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                grid.Columns[i].FillWeight = 3;
+            }
         }
 
         public static void DeselectAll(params ComboBox[] cb)

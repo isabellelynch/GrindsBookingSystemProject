@@ -81,6 +81,12 @@ namespace GrindsBookingSystem
         {
             base.Reset(controls);
 
+            ControlFunctions.FillBoxes("Students", cboStudentID, cboName, cboSName);
+
+            dgvRemoveStudent.DataSource = Student.RetrieveAll().Tables[0];
+
+            ControlFunctions.formatGridView(dgvRemoveStudent, 3);
+
             comboBoxes = ControlFunctions.CreateComboList(cboStudentID, cboName, cboSName);
 
             foreach (ComboBox cb in comboBoxes)
@@ -88,11 +94,6 @@ namespace GrindsBookingSystem
                 cb.SelectedIndexChanged -= ComboBoxChange;
                 cb.SelectedIndexChanged += ComboBoxChange;
             }
-
-            dgvRemoveStudent.DataSource = Student.RetrieveAll().Tables[0];
-            ControlFunctions.formatGridView(dgvRemoveStudent);
-            ControlFunctions.FillBoxes("Students", cboStudentID, cboName, cboSName);
-
         }
     }
 

@@ -28,7 +28,7 @@ namespace GrindsBookingSystem
                 {
                     MessageBox.Show("The details of the chosen tutor are:\n\n" + $"Tutor ID : {tutorView.PersonID}\n" +
                         $"First Name : {tutorView.FirstName}\n" + $"Last Name : {tutorView.Surname}\n" +
-                        $"Subject : {tutorView.Subject}\n" + $"Phone : {tutorView.Phone}\n" + $"Email : {tutorView.Email}",
+                        $"Phone : {tutorView.Phone}\n" + $"Email : {tutorView.Email}",
                         "Tutor Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }

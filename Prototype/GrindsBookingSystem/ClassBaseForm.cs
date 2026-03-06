@@ -31,7 +31,7 @@ namespace GrindsBookingSystem
             SetClassTime(Time, cboTime);
             SetAttendance(txtAttendance, Room);
             SetRoom(cboRooms, Room);
-
+            cboSubjects.Enabled = false;
             FillBoxes();
 
         }
@@ -121,7 +121,7 @@ namespace GrindsBookingSystem
         protected void SetTutor(ComboBox cb, string id)
         {
             Tutor t = Tutor.GetTutor(Convert.ToInt32(id));
-            cb.Text = t.FirstName + " " + t.Surname + " - " + t.Subject;
+            cb.Text = t.FirstName + " " + t.Surname;
         }
 
         protected void FillTutorDetails()
@@ -132,7 +132,21 @@ namespace GrindsBookingSystem
 
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                cboTutors.Items.Add(dr[1].ToString() + " " + dr[2].ToString() + " - " + dr[6].ToString());
+                cboTutors.Items.Add(dr[0].ToString() + " - " + dr[1].ToString() + " " + dr[2].ToString());
+            }
+        }
+
+        protected void FillSubjects()
+        {
+            cboSubjects.Items.Clear();
+
+            string sql = "SELECT Description, SubjectLevel, SubjectCategory " +
+                "FROM Tutor_Subjects WHERE TutorID = '" + cboTutors.Text.Split(' ')[0] + "'";
+
+            DataSet ds = Database.ExecuteMultiRowQuery(sql);
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                cboSubjects.Items.Add(dr[2] + ", " + dr[1] + " " + dr[0]);
             }
         }
 
@@ -189,6 +203,12 @@ namespace GrindsBookingSystem
             dr.Close();
 
             return id;
+        }
+
+        private void cboTutors_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FillSubjects();
+            cboSubjects.Enabled = true;
         }
     }
 }

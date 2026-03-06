@@ -2,6 +2,8 @@
 using System;
 using System.Data;
 using System.Windows.Forms;
+using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 
 namespace GrindsBookingSystem
@@ -17,11 +19,13 @@ namespace GrindsBookingSystem
         {
             String rate = cboTutorRates.Text.Substring(0,3);
 
-            Tutor t = new Tutor(txtTutorName.Text, txtTutorSurname.Text, txtTutorEmail.Text, txtTutorPhone.Text, rate, GetSubjectID());
+            Tutor t = new Tutor(txtTutorName.Text, txtTutorSurname.Text, txtTutorEmail.Text, txtTutorPhone.Text, rate);
 
             if(t.IsValid() == "Valid")
             {
                 t.Create();
+
+                AddToTutorSubjectTable(t);
 
                 SuccessMessage("Tutor " + txtTutorName.Text + " " + txtTutorSurname.Text + " has been succesfully added to the system.");
 
@@ -55,7 +59,7 @@ namespace GrindsBookingSystem
         protected override void Reset(Control.ControlCollection controls)
         {
             base.Reset(controls);
-            ControlFunctions.FillRatesAndSubjects(cboTutorRates, cboTutorSubjects);
+            ControlFunctions.FillRates(cboTutorRates);
             ControlFunctions.DisableBoxes(cboLevel, cboCategory);
         }
 
@@ -89,6 +93,21 @@ namespace GrindsBookingSystem
             }
         }
 
+        public void AddToTutorSubjectTable(Tutor t) 
+        {
+            string sql = "SELECT TutorID FROM Tutors WHERE FirstName = '" + t.FirstName + "' AND Surname = '" +
+                    t.Surname + "' AND Email = '" + t.Email + "' AND PhoneNo = '" + t.Phone + "'";
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            dr.Read();
+            string tutorID = dr.GetString(0);
+            dr.Close();
+
+
+            sql = "INSERT INTO Tutor_Subjects (TutorID, SubjectID) VALUES ('" + tutorID + "','" + GetSubjectID() + "')";
+            Database.ExecuteNonQuery(sql);
+
+        }
+        
         private string GetSubjectID()
         {
             String subject = cboTutorSubjects.Text.Substring(0, 3);

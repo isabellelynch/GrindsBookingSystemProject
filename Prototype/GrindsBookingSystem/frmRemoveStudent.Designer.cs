@@ -113,9 +113,9 @@
             // dgvRemoveStudent
             // 
             this.dgvRemoveStudent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRemoveStudent.Location = new System.Drawing.Point(204, 149);
+            this.dgvRemoveStudent.Location = new System.Drawing.Point(122, 147);
             this.dgvRemoveStudent.Name = "dgvRemoveStudent";
-            this.dgvRemoveStudent.Size = new System.Drawing.Size(387, 207);
+            this.dgvRemoveStudent.Size = new System.Drawing.Size(580, 207);
             this.dgvRemoveStudent.TabIndex = 27;
             // 
             // frmRemoveStudent
@@ -134,6 +134,15 @@
             this.Controls.Add(this.label1);
             this.Name = "frmRemoveStudent";
             this.Text = "Grinds Booking System - Remove Student";
+            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.cboStudentID, 0);
+            this.Controls.SetChildIndex(this.cboName, 0);
+            this.Controls.SetChildIndex(this.cboSName, 0);
+            this.Controls.SetChildIndex(this.btnResetFilters, 0);
+            this.Controls.SetChildIndex(this.btnRemoveStudent, 0);
+            this.Controls.SetChildIndex(this.dgvRemoveStudent, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRemoveStudent)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -39,6 +39,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cboSubjects = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // cboDays
@@ -68,15 +70,16 @@
             // cboTutors
             // 
             this.cboTutors.FormattingEnabled = true;
-            this.cboTutors.Location = new System.Drawing.Point(189, 294);
+            this.cboTutors.Location = new System.Drawing.Point(189, 279);
             this.cboTutors.Name = "cboTutors";
             this.cboTutors.Size = new System.Drawing.Size(200, 21);
             this.cboTutors.TabIndex = 55;
+            this.cboTutors.SelectedIndexChanged += new System.EventHandler(this.cboTutors_SelectedIndexChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(54, 302);
+            this.label5.Location = new System.Drawing.Point(54, 287);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(32, 13);
             this.label5.TabIndex = 54;
@@ -133,11 +136,30 @@
             this.label1.TabIndex = 48;
             this.label1.Text = "Time";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(54, 322);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(76, 13);
+            this.label6.TabIndex = 60;
+            this.label6.Text = "Tutor Subjects";
+            // 
+            // cboSubjects
+            // 
+            this.cboSubjects.FormattingEnabled = true;
+            this.cboSubjects.Location = new System.Drawing.Point(189, 314);
+            this.cboSubjects.Name = "cboSubjects";
+            this.cboSubjects.Size = new System.Drawing.Size(200, 21);
+            this.cboSubjects.TabIndex = 61;
+            // 
             // ClassBaseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(443, 450);
+            this.Controls.Add(this.cboSubjects);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.cboDays);
             this.Controls.Add(this.cboTime);
             this.Controls.Add(this.btnClass);
@@ -162,6 +184,8 @@
             this.Controls.SetChildIndex(this.btnClass, 0);
             this.Controls.SetChildIndex(this.cboTime, 0);
             this.Controls.SetChildIndex(this.cboDays, 0);
+            this.Controls.SetChildIndex(this.label6, 0);
+            this.Controls.SetChildIndex(this.cboSubjects, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -179,5 +203,7 @@
         protected System.Windows.Forms.ComboBox cboTutors;
         protected System.Windows.Forms.ComboBox cboRooms;
         protected System.Windows.Forms.TextBox txtAttendance;
+        private System.Windows.Forms.Label label6;
+        protected System.Windows.Forms.ComboBox cboSubjects;
     }
 }
