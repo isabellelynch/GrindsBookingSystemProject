@@ -31,18 +31,7 @@ namespace GrindsBookingSystem
 
             updating = true;
 
-            if (cbo == cboTutorID)
-            {
-                ControlFunctions.ApplyFilters("'" + cboTutorID.Text + "'", "TutorID", "Tutors", cboTutorID, cboFirstName, cboSurname);
-            }
-            else if (cbo == cboFirstName)
-            {
-                ControlFunctions.ApplyFilters("'" + cboFirstName.Text + "'", "FirstName", "Tutors", cboTutorID, cboFirstName, cboSurname);
-            }
-            else if (cbo == cboSurname)
-            {
-                ControlFunctions.ApplyFilters("'" + cboSurname.Text + "'", "Surname", "Tutors", cboTutorID, cboFirstName, cboSurname);
-            }
+            ControlFunctions.Filters("Tutor", cbo, cboTutorID, cboFirstName, cboSurname);
 
             dgvRemoveTutors.DataSource = Tutor.GetTutorList(cboTutorID).Tables[0];
 
@@ -80,7 +69,7 @@ namespace GrindsBookingSystem
 
             dgvRemoveTutors.DataSource = Tutor.GetTutorList(cboTutorID).Tables[0];
 
-            ControlFunctions.formatGridView(dgvRemoveTutors, 3);
+            GridViews.Default(dgvRemoveTutors, 3);
 
             comboBoxes = ControlFunctions.CreateComboList(cboTutorID, cboFirstName, cboSurname);
 

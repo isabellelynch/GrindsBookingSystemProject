@@ -4,37 +4,34 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
+
 namespace GrindsBookingSystem
 {
-    internal class ScheduleGridView
+    internal class GridViews
     {
-        public static void Format(DataGridView dgv)
+        public static void Schedule(DataGridView dgv, int cols)
         {
-            if (dgv.Disposing) { return; }
-
-            dgv.Columns.Clear();
-            dgv.Rows.Clear();
-
+            ClearGridViewValues(dgv);
+            ResetGridView(dgv);
 
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv.MultiSelect = false;
             dgv.EnableHeadersVisualStyles = false;
             dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.DarkCyan;
             dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Bold);
+            dgv.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            dgv.GridColor = Color.Gray;
+            dgv.ScrollBars = ScrollBars.None;
 
             dgv.Columns.Add("Time", "Time");
+
             string[] days = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
+
             foreach (var day in days)
             {
                 dgv.Columns.Add(day, day);
             }
-
-            for (int i = 1; i <= 5; i++)
-            {
-                dgv.Columns[i].Width = 120;
-            }
-
-            dgv.Columns[0].Width = 80;
 
             for (int hour = 9; hour <= 17; hour++)
             {
@@ -42,13 +39,36 @@ namespace GrindsBookingSystem
                 dgv.Rows[rowIndex].Cells[0].Value = $"{hour:00}:00";
             }
 
-            dgv.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgv.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            dgv.GridColor = Color.Gray;
-            dgv.ScrollBars = ScrollBars.None;
+            dgv.Columns[0].DefaultCellStyle.Format = "0000";
+            dgv.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv.Columns[0].FillWeight = 1;
+
+            for (int i = 1; i < cols; i++)
+            {
+                dgv.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                dgv.Columns[i].FillWeight = 2;
+            }
         }
 
-        public static void Fill(DataGridView dgv, string rooms)
+        public static void Default(DataGridView dgv, int cols)
+        {
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv.MultiSelect = false;
+            dgv.ReadOnly = true;
+
+            dgv.Columns[0].DefaultCellStyle.Format = "0000";
+            dgv.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv.Columns[0].FillWeight = 1;
+
+            for (int i = 1; i < cols; i++)
+            {
+                dgv.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                dgv.Columns[i].FillWeight = 2;
+            }
+        }
+
+        public static void ClearGridViewValues(DataGridView dgv)
         {
             foreach (DataGridViewRow row in dgv.Rows)
             {
@@ -60,7 +80,16 @@ namespace GrindsBookingSystem
                     }
                 }
             }
+        }
 
+        public static void ResetGridView(DataGridView dgv)
+        {
+            dgv.Columns.Clear();
+            dgv.Rows.Clear();
+        }
+
+        public static void FillSchedule(DataGridView dgv, string rooms)
+        {
             List<Class> classList = Class.ClassList(rooms, Class.GetCurrentSemester());
 
             foreach (Class c in classList)
@@ -83,5 +112,9 @@ namespace GrindsBookingSystem
             }
 
         }
+
+        
+
+        
     }
 }

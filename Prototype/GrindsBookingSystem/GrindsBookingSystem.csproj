@@ -101,6 +101,18 @@
     <Compile Include="frmAddBooking.Designer.cs">
       <DependentUpon>frmAddBooking.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAddSubject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddSubject.Designer.cs">
+      <DependentUpon>frmAddSubject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAssignSubjects.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAssignSubjects.Designer.cs">
+      <DependentUpon>frmAssignSubjects.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmRemoveClass.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -210,8 +222,9 @@
     <Compile Include="Refund.cs" />
     <Compile Include="Class.cs" />
     <Compile Include="Person.cs" />
-    <Compile Include="ScheduleGridView.cs" />
+    <Compile Include="GridViews.cs" />
     <Compile Include="Student.cs" />
+    <Compile Include="Subject.cs" />
     <Compile Include="Tutor.cs" />
     <Compile Include="Validation.cs" />
     <EmbeddedResource Include="BaseForm.resx">
@@ -222,6 +235,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmAddBooking.resx">
       <DependentUpon>frmAddBooking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddSubject.resx">
+      <DependentUpon>frmAddSubject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAssignSubjects.resx">
+      <DependentUpon>frmAssignSubjects.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmRemoveClass.resx">
       <DependentUpon>frmRemoveClass.cs</DependentUpon>

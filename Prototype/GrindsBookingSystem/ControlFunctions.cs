@@ -70,7 +70,6 @@ namespace GrindsBookingSystem
             DeselectAll(cb);
         }
 
-
         public static void ApplyFilters(String value, String column, String location, params ComboBox[] cb)
         {
             String sql = "";
@@ -124,23 +123,21 @@ namespace GrindsBookingSystem
             }
         }
 
-        public static void formatGridView(DataGridView grid, int cols)
+        public static void Filters(string location, ComboBox send, ComboBox cbo1, ComboBox cbo2, ComboBox cbo3)
         {
-            grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            grid.MultiSelect = false;
-
-            grid.Columns[0].DefaultCellStyle.Format = "0000";
-            grid.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            grid.Columns[0].FillWeight = 1;
-
-            for (int i  = 1; i < cols; i++) 
+            if (send == cbo1)
             {
-                grid.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-                grid.Columns[i].FillWeight = 3;
+                ApplyFilters("'" + cbo1.Text + "'", location + "ID", location + "s", cbo1, cbo2, cbo3);
+            }
+            else if (send == cbo2)
+            {
+                ApplyFilters("'" + cbo2.Text + "'", "FirstName", location + "s", cbo1, cbo2, cbo3);
+            }
+            else if (send == cbo3)
+            {
+                ApplyFilters("'" + cbo3.Text + "'", "Surname", location + "s", cbo1, cbo2, cbo3);
             }
         }
-
         public static void DeselectAll(params ComboBox[] cb)
         {
             foreach(ComboBox c in cb)

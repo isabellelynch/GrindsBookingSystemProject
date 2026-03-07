@@ -35,6 +35,12 @@
             this.RemoveTutor = new System.Windows.Forms.ToolStripMenuItem();
             this.UpdateTutor = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewTutor = new System.Windows.Forms.ToolStripMenuItem();
+            this.AssignSubjects = new System.Windows.Forms.ToolStripMenuItem();
+            this.subjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AddSubject = new System.Windows.Forms.ToolStripMenuItem();
+            this.RemoveSubject = new System.Windows.Forms.ToolStripMenuItem();
+            this.UpdateSubject = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewSubjects = new System.Windows.Forms.ToolStripMenuItem();
             this.studentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AddStudent = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveStudent = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,6 +64,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tutorsToolStripMenuItem,
+            this.subjectsToolStripMenuItem,
             this.studentsToolStripMenuItem,
             this.scheduleToolStripMenuItem,
             this.bookingsToolStripMenuItem,
@@ -75,7 +82,8 @@
             this.AddTutor,
             this.RemoveTutor,
             this.UpdateTutor,
-            this.ViewTutor});
+            this.ViewTutor,
+            this.AssignSubjects});
             this.tutorsToolStripMenuItem.Name = "tutorsToolStripMenuItem";
             this.tutorsToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.tutorsToolStripMenuItem.Text = "Tutors";
@@ -107,6 +115,49 @@
             this.ViewTutor.Size = new System.Drawing.Size(182, 22);
             this.ViewTutor.Text = "View Tutor Details";
             this.ViewTutor.Click += new System.EventHandler(this.ViewTutor_Click);
+            // 
+            // AssignSubjects
+            // 
+            this.AssignSubjects.Name = "AssignSubjects";
+            this.AssignSubjects.Size = new System.Drawing.Size(182, 22);
+            this.AssignSubjects.Text = "Assign Subjects";
+            this.AssignSubjects.Click += new System.EventHandler(this.AssignSubjects_Click);
+            // 
+            // subjectsToolStripMenuItem
+            // 
+            this.subjectsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AddSubject,
+            this.RemoveSubject,
+            this.UpdateSubject,
+            this.ViewSubjects});
+            this.subjectsToolStripMenuItem.Name = "subjectsToolStripMenuItem";
+            this.subjectsToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.subjectsToolStripMenuItem.Text = "Subjects";
+            // 
+            // AddSubject
+            // 
+            this.AddSubject.Name = "AddSubject";
+            this.AddSubject.Size = new System.Drawing.Size(180, 22);
+            this.AddSubject.Text = "Add Subjecst";
+            this.AddSubject.Click += new System.EventHandler(this.AddSubject_Click);
+            // 
+            // RemoveSubject
+            // 
+            this.RemoveSubject.Name = "RemoveSubject";
+            this.RemoveSubject.Size = new System.Drawing.Size(180, 22);
+            this.RemoveSubject.Text = "Remove Subject";
+            // 
+            // UpdateSubject
+            // 
+            this.UpdateSubject.Name = "UpdateSubject";
+            this.UpdateSubject.Size = new System.Drawing.Size(180, 22);
+            this.UpdateSubject.Text = "Update Subjects";
+            // 
+            // ViewSubjects
+            // 
+            this.ViewSubjects.Name = "ViewSubjects";
+            this.ViewSubjects.Size = new System.Drawing.Size(180, 22);
+            this.ViewSubjects.Text = "View Subjects";
             // 
             // studentsToolStripMenuItem
             // 
@@ -268,6 +319,12 @@
         private System.Windows.Forms.PictureBox picHome;
         private System.Windows.Forms.ToolStripMenuItem YearlyRevenue;
         private System.Windows.Forms.ToolStripMenuItem EarningsAnalysis;
+        private System.Windows.Forms.ToolStripMenuItem subjectsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AddSubject;
+        private System.Windows.Forms.ToolStripMenuItem AssignSubjects;
+        private System.Windows.Forms.ToolStripMenuItem RemoveSubject;
+        private System.Windows.Forms.ToolStripMenuItem UpdateSubject;
+        private System.Windows.Forms.ToolStripMenuItem ViewSubjects;
     }
 }
 

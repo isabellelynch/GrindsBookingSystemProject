@@ -31,8 +31,8 @@
             this.btnShowBookings = new System.Windows.Forms.Button();
             this.grpCancelBooking = new System.Windows.Forms.GroupBox();
             this.lvBookings = new System.Windows.Forms.ListView();
-            this.cboName = new System.Windows.Forms.ComboBox();
-            this.cboSName = new System.Windows.Forms.ComboBox();
+            this.cboFirstName = new System.Windows.Forms.ComboBox();
+            this.cboSurname = new System.Windows.Forms.ComboBox();
             this.cboStudentID = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -68,21 +68,21 @@
             this.lvBookings.TabIndex = 0;
             this.lvBookings.UseCompatibleStateImageBehavior = false;
             // 
-            // cboName
+            // cboFirstName
             // 
-            this.cboName.FormattingEnabled = true;
-            this.cboName.Location = new System.Drawing.Point(343, 80);
-            this.cboName.Name = "cboName";
-            this.cboName.Size = new System.Drawing.Size(121, 21);
-            this.cboName.TabIndex = 38;
+            this.cboFirstName.FormattingEnabled = true;
+            this.cboFirstName.Location = new System.Drawing.Point(343, 80);
+            this.cboFirstName.Name = "cboFirstName";
+            this.cboFirstName.Size = new System.Drawing.Size(121, 21);
+            this.cboFirstName.TabIndex = 38;
             // 
-            // cboSName
+            // cboSurname
             // 
-            this.cboSName.FormattingEnabled = true;
-            this.cboSName.Location = new System.Drawing.Point(343, 112);
-            this.cboSName.Name = "cboSName";
-            this.cboSName.Size = new System.Drawing.Size(121, 21);
-            this.cboSName.TabIndex = 37;
+            this.cboSurname.FormattingEnabled = true;
+            this.cboSurname.Location = new System.Drawing.Point(343, 112);
+            this.cboSurname.Name = "cboSurname";
+            this.cboSurname.Size = new System.Drawing.Size(121, 21);
+            this.cboSurname.TabIndex = 37;
             // 
             // cboStudentID
             // 
@@ -126,8 +126,8 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btnShowBookings);
             this.Controls.Add(this.grpCancelBooking);
-            this.Controls.Add(this.cboName);
-            this.Controls.Add(this.cboSName);
+            this.Controls.Add(this.cboFirstName);
+            this.Controls.Add(this.cboSurname);
             this.Controls.Add(this.cboStudentID);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -138,8 +138,8 @@
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.cboStudentID, 0);
-            this.Controls.SetChildIndex(this.cboSName, 0);
-            this.Controls.SetChildIndex(this.cboName, 0);
+            this.Controls.SetChildIndex(this.cboSurname, 0);
+            this.Controls.SetChildIndex(this.cboFirstName, 0);
             this.Controls.SetChildIndex(this.grpCancelBooking, 0);
             this.Controls.SetChildIndex(this.btnShowBookings, 0);
             this.grpCancelBooking.ResumeLayout(false);
@@ -153,8 +153,8 @@
         private System.Windows.Forms.Button btnShowBookings;
         private System.Windows.Forms.GroupBox grpCancelBooking;
         private System.Windows.Forms.ListView lvBookings;
-        private System.Windows.Forms.ComboBox cboName;
-        private System.Windows.Forms.ComboBox cboSName;
+        private System.Windows.Forms.ComboBox cboFirstName;
+        private System.Windows.Forms.ComboBox cboSurname;
         private System.Windows.Forms.ComboBox cboStudentID;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;

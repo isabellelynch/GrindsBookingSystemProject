@@ -19,11 +19,11 @@ namespace GrindsBookingSystem
         {
             base.Reset(controls);
 
-            ControlFunctions.FillBoxes("Students", cboStudentID, cboFirstName, cboLastName);
+            ControlFunctions.FillBoxes("Students", cboStudentID, cboFirstName, cboSurname);
 
             grpMakeBooking.Visible = false;
 
-            List<ComboBox> cb = ControlFunctions.CreateComboList(cboStudentID, cboFirstName, cboLastName);
+            List<ComboBox> cb = ControlFunctions.CreateComboList(cboStudentID, cboFirstName, cboSurname);
 
             foreach (ComboBox c in cb)
             {
@@ -45,18 +45,7 @@ namespace GrindsBookingSystem
 
             updating = true;
 
-            if (cbo == cboStudentID)
-            {
-                ControlFunctions.ApplyFilters("'" + cboStudentID.Text + "'", "StudentID", "Students", cboStudentID, cboFirstName, cboLastName);
-            }
-            else if (cbo == cboFirstName)
-            {
-                ControlFunctions.ApplyFilters("'" + cboFirstName.Text + "'", "FirstName", "Students", cboStudentID, cboFirstName, cboLastName);
-            }
-            else if (cbo == cboLastName)
-            {
-                ControlFunctions.ApplyFilters("'" + cboLastName.Text + "'", "Surname", "Students", cboStudentID, cboFirstName, cboLastName);
-            }
+            ControlFunctions.Filters("Student", cbo, cboStudentID, cboFirstName, cboSurname);
 
             updating = false;
 
@@ -75,7 +64,7 @@ namespace GrindsBookingSystem
                 ErrorMessage("Student First Name must be selected before continuing.");
                 return;
             }
-            if (cboLastName.SelectedIndex == -1)
+            if (cboSurname.SelectedIndex == -1)
             {
                 ErrorMessage("Student Last Name must be selected before continuing.");
                 return;
@@ -88,7 +77,7 @@ namespace GrindsBookingSystem
 
             grpMakeBooking.Visible = true;
 
-            ControlFunctions.DisableBoxes(cboFirstName, cboLastName, cboStudentID);
+            ControlFunctions.DisableBoxes(cboFirstName, cboSurname, cboStudentID);
         }
 
     }

@@ -98,6 +98,14 @@ namespace GrindsBookingSystem
             this.Hide();
         }
 
+        private void AssignSubjects_Click(object sender, EventArgs e)
+        {
+            NewPage(new frmAssignSubjects());
+        }
 
+        private void AddSubject_Click(object sender, EventArgs e)
+        {
+            NewPage(new frmAddSubject());
+        }
     }
 }

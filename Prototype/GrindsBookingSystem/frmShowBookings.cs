@@ -26,18 +26,7 @@ namespace GrindsBookingSystem
 
             updating = true;
 
-            if (cbo == cboStudentID)
-            {
-                ControlFunctions.ApplyFilters("'" + cboStudentID.Text + "'", "StudentID", "Students", cboStudentID, cboName, cboSName);
-            }
-            else if (cbo == cboName)
-            {
-                ControlFunctions.ApplyFilters("'" + cboName.Text + "'", "FirstName", "Students", cboStudentID, cboName, cboSName);
-            }
-            else if (cbo == cboSName)
-            {
-                ControlFunctions.ApplyFilters("'" + cboSName.Text + "'", "Surname", "Students", cboStudentID, cboName, cboSName);
-            }
+            ControlFunctions.Filters("Student", cbo, cboStudentID, cboFirstName, cboSurname);
 
             updating = false;
 
@@ -46,14 +35,14 @@ namespace GrindsBookingSystem
         {
             base.Reset(controls);
             grpCancelBooking.Visible = false;
-            ControlFunctions.EnableBoxes(cboStudentID, cboName, cboSName);
-            ControlFunctions.FillBoxes("Students", cboStudentID, cboName, cboSName);
+            ControlFunctions.EnableBoxes(cboStudentID, cboFirstName, cboSurname);
+            ControlFunctions.FillBoxes("Students", cboStudentID, cboFirstName, cboSurname);
         }
 
         private void btnShowBookings_Click(object sender, EventArgs e)
         {
             grpCancelBooking.Visible = true;
-            ControlFunctions.DisableBoxes(cboStudentID, cboName, cboSName);
+            ControlFunctions.DisableBoxes(cboStudentID, cboFirstName, cboSurname);
         }
     }
 }

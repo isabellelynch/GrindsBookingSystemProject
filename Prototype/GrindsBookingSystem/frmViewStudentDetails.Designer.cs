@@ -33,7 +33,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cboStudentID = new System.Windows.Forms.ComboBox();
             this.cboFirstName = new System.Windows.Forms.ComboBox();
-            this.cboLastName = new System.Windows.Forms.ComboBox();
+            this.cboSurname = new System.Windows.Forms.ComboBox();
             this.btnShowDetails = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -80,13 +80,13 @@
             this.cboFirstName.Size = new System.Drawing.Size(121, 21);
             this.cboFirstName.TabIndex = 21;
             // 
-            // cboLastName
+            // cboSurname
             // 
-            this.cboLastName.FormattingEnabled = true;
-            this.cboLastName.Location = new System.Drawing.Point(360, 192);
-            this.cboLastName.Name = "cboLastName";
-            this.cboLastName.Size = new System.Drawing.Size(121, 21);
-            this.cboLastName.TabIndex = 22;
+            this.cboSurname.FormattingEnabled = true;
+            this.cboSurname.Location = new System.Drawing.Point(360, 192);
+            this.cboSurname.Name = "cboSurname";
+            this.cboSurname.Size = new System.Drawing.Size(121, 21);
+            this.cboSurname.TabIndex = 22;
             // 
             // btnShowDetails
             // 
@@ -104,7 +104,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btnShowDetails);
-            this.Controls.Add(this.cboLastName);
+            this.Controls.Add(this.cboSurname);
             this.Controls.Add(this.cboFirstName);
             this.Controls.Add(this.cboStudentID);
             this.Controls.Add(this.label3);
@@ -117,7 +117,7 @@
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.cboStudentID, 0);
             this.Controls.SetChildIndex(this.cboFirstName, 0);
-            this.Controls.SetChildIndex(this.cboLastName, 0);
+            this.Controls.SetChildIndex(this.cboSurname, 0);
             this.Controls.SetChildIndex(this.btnShowDetails, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -130,7 +130,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cboStudentID;
         private System.Windows.Forms.ComboBox cboFirstName;
-        private System.Windows.Forms.ComboBox cboLastName;
+        private System.Windows.Forms.ComboBox cboSurname;
         private System.Windows.Forms.Button btnShowDetails;
     }
 }

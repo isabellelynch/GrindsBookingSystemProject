@@ -31,7 +31,7 @@ namespace GrindsBookingSystem
             txtFirstName.Text = s.FirstName;
             txtLastName.Text = s.Surname;
 
-            ControlFunctions.DisableBoxes(cboNames, cboSurnames, cboStudentID);
+            ControlFunctions.DisableBoxes(cboFirstName, cboSurname, cboStudentID);
         }
         private void btnUpdateStudent_Click(object sender, EventArgs e)
         {
@@ -96,18 +96,7 @@ namespace GrindsBookingSystem
 
             updating = true;
 
-            if (cbo == cboStudentID)
-            {
-                ControlFunctions.ApplyFilters("'" + cboStudentID.Text + "'", "StudentID", "Students", cboStudentID, cboNames, cboSurnames);
-            }
-            else if (cbo == cboNames)
-            {
-                ControlFunctions.ApplyFilters("'" + cboNames.Text + "'", "FirstName", "Students", cboStudentID, cboNames, cboSurnames);
-            }
-            else if (cbo == cboSurnames)
-            {
-                ControlFunctions.ApplyFilters("'" + cboSurnames.Text + "'", "Surname", "Students", cboStudentID, cboNames, cboSurnames);
-            }
+            ControlFunctions.Filters("Student", cbo, cboStudentID, cboFirstName, cboSurname);
 
             updating = false;
 
@@ -119,11 +108,11 @@ namespace GrindsBookingSystem
 
             grpStudentDetails.Visible = false;
 
-            ControlFunctions.EnableBoxes(cboStudentID, cboNames, cboSurnames);
+            ControlFunctions.EnableBoxes(cboStudentID, cboFirstName, cboSurname);
 
-            ControlFunctions.FillBoxes("Students", cboStudentID, cboNames, cboSurnames);
+            ControlFunctions.FillBoxes("Students", cboStudentID, cboFirstName, cboSurname);
 
-            comboBoxes = ControlFunctions.CreateComboList(cboStudentID, cboNames, cboSurnames);
+            comboBoxes = ControlFunctions.CreateComboList(cboStudentID, cboFirstName, cboSurname);
 
             foreach (var c in comboBoxes)
             {

@@ -495,3 +495,5 @@ C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystem\Prototype\GrindsB
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystem\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.pdb
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.BaseForm.resources
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmRemoveClass.resources
+C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmAssignSubjects.resources
+C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmAddSubject.resources

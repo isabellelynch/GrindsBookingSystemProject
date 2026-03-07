@@ -31,7 +31,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txtTutorName = new System.Windows.Forms.TextBox();
@@ -39,13 +38,8 @@
             this.txtTutorEmail = new System.Windows.Forms.TextBox();
             this.txtTutorPhone = new System.Windows.Forms.TextBox();
             this.cboTutorRates = new System.Windows.Forms.ComboBox();
-            this.cboTutorSubjects = new System.Windows.Forms.ComboBox();
             this.grpAddTutor = new System.Windows.Forms.GroupBox();
             this.btnAddTutor = new System.Windows.Forms.Button();
-            this.cboLevel = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.cboCategory = new System.Windows.Forms.ComboBox();
             this.grpAddTutor.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,20 +64,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(343, 55);
+            this.label3.Location = new System.Drawing.Point(42, 251);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "Tutor Rate";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(358, 105);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(43, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Subject";
             // 
             // label5
             // 
@@ -134,28 +119,14 @@
             // cboTutorRates
             // 
             this.cboTutorRates.FormattingEnabled = true;
-            this.cboTutorRates.Location = new System.Drawing.Point(443, 47);
+            this.cboTutorRates.Location = new System.Drawing.Point(143, 243);
             this.cboTutorRates.Name = "cboTutorRates";
             this.cboTutorRates.Size = new System.Drawing.Size(121, 21);
             this.cboTutorRates.TabIndex = 10;
             // 
-            // cboTutorSubjects
-            // 
-            this.cboTutorSubjects.FormattingEnabled = true;
-            this.cboTutorSubjects.Location = new System.Drawing.Point(443, 102);
-            this.cboTutorSubjects.Name = "cboTutorSubjects";
-            this.cboTutorSubjects.Size = new System.Drawing.Size(121, 21);
-            this.cboTutorSubjects.TabIndex = 11;
-            this.cboTutorSubjects.SelectedIndexChanged += new System.EventHandler(this.cboTutorSubjects_SelectedIndexChanged);
-            // 
             // grpAddTutor
             // 
-            this.grpAddTutor.Controls.Add(this.cboCategory);
-            this.grpAddTutor.Controls.Add(this.label8);
-            this.grpAddTutor.Controls.Add(this.label7);
-            this.grpAddTutor.Controls.Add(this.cboLevel);
             this.grpAddTutor.Controls.Add(this.btnAddTutor);
-            this.grpAddTutor.Controls.Add(this.cboTutorSubjects);
             this.grpAddTutor.Controls.Add(this.cboTutorRates);
             this.grpAddTutor.Controls.Add(this.txtTutorPhone);
             this.grpAddTutor.Controls.Add(this.txtTutorEmail);
@@ -163,66 +134,31 @@
             this.grpAddTutor.Controls.Add(this.txtTutorName);
             this.grpAddTutor.Controls.Add(this.label6);
             this.grpAddTutor.Controls.Add(this.label5);
-            this.grpAddTutor.Controls.Add(this.label4);
             this.grpAddTutor.Controls.Add(this.label3);
             this.grpAddTutor.Controls.Add(this.label2);
             this.grpAddTutor.Controls.Add(this.label1);
             this.grpAddTutor.Location = new System.Drawing.Point(60, 62);
             this.grpAddTutor.Name = "grpAddTutor";
-            this.grpAddTutor.Size = new System.Drawing.Size(673, 325);
+            this.grpAddTutor.Size = new System.Drawing.Size(344, 351);
             this.grpAddTutor.TabIndex = 12;
             this.grpAddTutor.TabStop = false;
             this.grpAddTutor.Text = "Add New Tutor";
             // 
             // btnAddTutor
             // 
-            this.btnAddTutor.Location = new System.Drawing.Point(281, 260);
+            this.btnAddTutor.Location = new System.Drawing.Point(123, 298);
             this.btnAddTutor.Name = "btnAddTutor";
-            this.btnAddTutor.Size = new System.Drawing.Size(130, 43);
+            this.btnAddTutor.Size = new System.Drawing.Size(85, 33);
             this.btnAddTutor.TabIndex = 12;
             this.btnAddTutor.Text = "Add Tutor";
             this.btnAddTutor.UseVisualStyleBackColor = true;
             this.btnAddTutor.Click += new System.EventHandler(this.btnAddTutor_Click);
             // 
-            // cboLevel
-            // 
-            this.cboLevel.FormattingEnabled = true;
-            this.cboLevel.Location = new System.Drawing.Point(443, 152);
-            this.cboLevel.Name = "cboLevel";
-            this.cboLevel.Size = new System.Drawing.Size(121, 21);
-            this.cboLevel.TabIndex = 13;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(368, 160);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(33, 13);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "Level";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(352, 201);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(49, 13);
-            this.label8.TabIndex = 15;
-            this.label8.Text = "Category";
-            // 
-            // cboCategory
-            // 
-            this.cboCategory.FormattingEnabled = true;
-            this.cboCategory.Location = new System.Drawing.Point(443, 197);
-            this.cboCategory.Name = "cboCategory";
-            this.cboCategory.Size = new System.Drawing.Size(121, 21);
-            this.cboCategory.TabIndex = 16;
-            // 
             // frmAddTutor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(474, 450);
             this.Controls.Add(this.grpAddTutor);
             this.Name = "frmAddTutor";
             this.Text = "Grinds Booking System - Add Tutor";
@@ -239,7 +175,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtTutorName;
@@ -247,12 +182,7 @@
         private System.Windows.Forms.TextBox txtTutorEmail;
         private System.Windows.Forms.TextBox txtTutorPhone;
         private System.Windows.Forms.ComboBox cboTutorRates;
-        private System.Windows.Forms.ComboBox cboTutorSubjects;
         private System.Windows.Forms.GroupBox grpAddTutor;
         private System.Windows.Forms.Button btnAddTutor;
-        private System.Windows.Forms.ComboBox cboCategory;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox cboLevel;
     }
 }

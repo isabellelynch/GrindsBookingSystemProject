@@ -32,8 +32,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cboStudentID = new System.Windows.Forms.ComboBox();
-            this.cboNames = new System.Windows.Forms.ComboBox();
-            this.cboSurnames = new System.Windows.Forms.ComboBox();
+            this.cboFirstName = new System.Windows.Forms.ComboBox();
+            this.cboSurname = new System.Windows.Forms.ComboBox();
             this.grpStudentDetails = new System.Windows.Forms.GroupBox();
             this.txtLastName = new System.Windows.Forms.TextBox();
             this.txtFirstName = new System.Windows.Forms.TextBox();
@@ -46,7 +46,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.btnFindStudent = new System.Windows.Forms.Button();
             this.grpStudentDetails.SuspendLayout();
-
             this.SuspendLayout();
             // 
             // label1
@@ -84,21 +83,21 @@
             this.cboStudentID.Size = new System.Drawing.Size(121, 21);
             this.cboStudentID.TabIndex = 3;
             // 
-            // cboNames
+            // cboFirstName
             // 
-            this.cboNames.FormattingEnabled = true;
-            this.cboNames.Location = new System.Drawing.Point(354, 77);
-            this.cboNames.Name = "cboNames";
-            this.cboNames.Size = new System.Drawing.Size(121, 21);
-            this.cboNames.TabIndex = 4;
+            this.cboFirstName.FormattingEnabled = true;
+            this.cboFirstName.Location = new System.Drawing.Point(354, 77);
+            this.cboFirstName.Name = "cboFirstName";
+            this.cboFirstName.Size = new System.Drawing.Size(121, 21);
+            this.cboFirstName.TabIndex = 4;
             // 
-            // cboSurnames
+            // cboSurname
             // 
-            this.cboSurnames.FormattingEnabled = true;
-            this.cboSurnames.Location = new System.Drawing.Point(354, 117);
-            this.cboSurnames.Name = "cboSurnames";
-            this.cboSurnames.Size = new System.Drawing.Size(121, 21);
-            this.cboSurnames.TabIndex = 5;
+            this.cboSurname.FormattingEnabled = true;
+            this.cboSurname.Location = new System.Drawing.Point(354, 117);
+            this.cboSurname.Name = "cboSurname";
+            this.cboSurname.Size = new System.Drawing.Size(121, 21);
+            this.cboSurname.TabIndex = 5;
             // 
             // grpStudentDetails
             // 
@@ -202,8 +201,6 @@
             this.btnFindStudent.UseVisualStyleBackColor = true;
             this.btnFindStudent.Click += new System.EventHandler(this.btnFindStudent_Click);
             // 
-     
-            // 
             // frmUpdateStudent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -211,17 +208,24 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btnFindStudent);
             this.Controls.Add(this.grpStudentDetails);
-            this.Controls.Add(this.cboSurnames);
-            this.Controls.Add(this.cboNames);
+            this.Controls.Add(this.cboSurname);
+            this.Controls.Add(this.cboFirstName);
             this.Controls.Add(this.cboStudentID);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "frmUpdateStudent";
             this.Text = "Grinds Booking System - Update Student Details";
+            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.cboStudentID, 0);
+            this.Controls.SetChildIndex(this.cboFirstName, 0);
+            this.Controls.SetChildIndex(this.cboSurname, 0);
+            this.Controls.SetChildIndex(this.grpStudentDetails, 0);
+            this.Controls.SetChildIndex(this.btnFindStudent, 0);
             this.grpStudentDetails.ResumeLayout(false);
             this.grpStudentDetails.PerformLayout();
-
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -233,8 +237,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cboStudentID;
-        private System.Windows.Forms.ComboBox cboNames;
-        private System.Windows.Forms.ComboBox cboSurnames;
+        private System.Windows.Forms.ComboBox cboFirstName;
+        private System.Windows.Forms.ComboBox cboSurname;
         private System.Windows.Forms.GroupBox grpStudentDetails;
         private System.Windows.Forms.Button btnUpdateStudent;
         private System.Windows.Forms.TextBox txtPhone;

@@ -30,18 +30,7 @@ namespace GrindsBookingSystem
 
             updating = true;
 
-            if (cbo == cboTutorID)
-            {
-                ControlFunctions.ApplyFilters("'" + cboTutorID.Text + "'", "TutorID", "Tutors", cboTutorID, cboNames, cboSurnames);
-            }
-            else if (cbo == cboNames)
-            {
-                ControlFunctions.ApplyFilters("'" + cboNames.Text + "'", "FirstName", "Tutors", cboTutorID, cboNames, cboSurnames);
-            }
-            else if (cbo == cboSurnames)
-            {
-                ControlFunctions.ApplyFilters("'" + cboSurnames.Text + "'", "Surname", "Tutors", cboTutorID, cboNames, cboSurnames);
-            }
+            ControlFunctions.Filters("Tutor", cbo, cboTutorID, cboNames, cboSurnames);
 
             updating = false;
 

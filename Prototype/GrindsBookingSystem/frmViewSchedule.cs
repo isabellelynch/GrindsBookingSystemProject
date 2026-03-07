@@ -73,12 +73,12 @@ namespace GrindsBookingSystem
             cboRooms.SelectedIndexChanged -= FillSchedule;
             cboRooms.SelectedIndexChanged += FillSchedule;
 
-            ScheduleGridView.Format(dgvSchedule);
+            GridViews.Schedule(dgvSchedule, 6);
         }
 
         private void FillSchedule(object sender, EventArgs e)
         {
-            ScheduleGridView.Fill(dgvSchedule, cboRooms.Text.Substring(0, 1));
+            GridViews.FillSchedule(dgvSchedule, cboRooms.Text.Substring(0, 1));
         }
 
         private void btnAlterClass_Click(object sender, EventArgs e)

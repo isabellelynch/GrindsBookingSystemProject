@@ -1,9 +1,7 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
-using System.Data;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+
 
 
 namespace GrindsBookingSystem
@@ -25,7 +23,7 @@ namespace GrindsBookingSystem
             {
                 t.Create();
 
-                AddToTutorSubjectTable(t);
+                //AddToTutorSubjectTable(t);
 
                 SuccessMessage("Tutor " + txtTutorName.Text + " " + txtTutorSurname.Text + " has been succesfully added to the system.");
 
@@ -44,31 +42,17 @@ namespace GrindsBookingSystem
             }
             else
             {
-                if(!Validation.ComboSelected(cboTutorRates) || !Validation.ComboSelected(cboTutorSubjects))
-                {
-                    ErrorMessage("Tutor Rate and Subject must be selected, please try again.");
-                    return;
-                }
-                else
-                {
-                    ErrorMessage("Invalid Entry, " + t.IsValid());
-                }
-                    
+                ErrorMessage("Invalid Entry, " + t.IsValid());
             }
         }
         protected override void Reset(Control.ControlCollection controls)
         {
             base.Reset(controls);
             ControlFunctions.FillRates(cboTutorRates);
-            ControlFunctions.DisableBoxes(cboLevel, cboCategory);
         }
 
-        private void cboTutorSubjects_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            FillLevelAndCategory();
-        }
 
-        private void FillLevelAndCategory()
+        /*private void FillLevelAndCategory()
         {
             ControlFunctions.ClearCombos(cboCategory, cboLevel);
             ControlFunctions.EnableBoxes(cboLevel, cboCategory);
@@ -108,7 +92,7 @@ namespace GrindsBookingSystem
 
         }
         
-        private string GetSubjectID()
+       private string GetSubjectID()
         {
             String subject = cboTutorSubjects.Text.Substring(0, 3);
 
@@ -126,6 +110,6 @@ namespace GrindsBookingSystem
             dr.Close();
 
             return sub;
-        }
+        }*/
     }
 }

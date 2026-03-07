@@ -37,6 +37,11 @@ namespace GrindsBookingSystem
                     cb.SelectedIndex = -1;
                     cb.Text = "";
                 }
+                else if (control is RadioButton rb)
+                {
+                    rb.Checked = false;
+                }
+
                 if (control.HasChildren)
                 {
                     Reset(control.Controls);

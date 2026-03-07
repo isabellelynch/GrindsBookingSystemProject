@@ -32,8 +32,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cboStudentID = new System.Windows.Forms.ComboBox();
-            this.cboName = new System.Windows.Forms.ComboBox();
-            this.cboSName = new System.Windows.Forms.ComboBox();
+            this.cboFirstName = new System.Windows.Forms.ComboBox();
+            this.cboSurname = new System.Windows.Forms.ComboBox();
             this.btnResetFilters = new System.Windows.Forms.Button();
             this.btnRemoveStudent = new System.Windows.Forms.Button();
             this.dgvRemoveStudent = new System.Windows.Forms.DataGridView();
@@ -75,21 +75,21 @@
             this.cboStudentID.Size = new System.Drawing.Size(121, 21);
             this.cboStudentID.TabIndex = 16;
             // 
-            // cboName
+            // cboFirstName
             // 
-            this.cboName.FormattingEnabled = true;
-            this.cboName.Location = new System.Drawing.Point(352, 62);
-            this.cboName.Name = "cboName";
-            this.cboName.Size = new System.Drawing.Size(121, 21);
-            this.cboName.TabIndex = 17;
+            this.cboFirstName.FormattingEnabled = true;
+            this.cboFirstName.Location = new System.Drawing.Point(352, 62);
+            this.cboFirstName.Name = "cboFirstName";
+            this.cboFirstName.Size = new System.Drawing.Size(121, 21);
+            this.cboFirstName.TabIndex = 17;
             // 
-            // cboSName
+            // cboSurname
             // 
-            this.cboSName.FormattingEnabled = true;
-            this.cboSName.Location = new System.Drawing.Point(352, 92);
-            this.cboSName.Name = "cboSName";
-            this.cboSName.Size = new System.Drawing.Size(121, 21);
-            this.cboSName.TabIndex = 18;
+            this.cboSurname.FormattingEnabled = true;
+            this.cboSurname.Location = new System.Drawing.Point(352, 92);
+            this.cboSurname.Name = "cboSurname";
+            this.cboSurname.Size = new System.Drawing.Size(121, 21);
+            this.cboSurname.TabIndex = 18;
             // 
             // btnResetFilters
             // 
@@ -126,8 +126,8 @@
             this.Controls.Add(this.dgvRemoveStudent);
             this.Controls.Add(this.btnRemoveStudent);
             this.Controls.Add(this.btnResetFilters);
-            this.Controls.Add(this.cboSName);
-            this.Controls.Add(this.cboName);
+            this.Controls.Add(this.cboSurname);
+            this.Controls.Add(this.cboFirstName);
             this.Controls.Add(this.cboStudentID);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -138,8 +138,8 @@
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.cboStudentID, 0);
-            this.Controls.SetChildIndex(this.cboName, 0);
-            this.Controls.SetChildIndex(this.cboSName, 0);
+            this.Controls.SetChildIndex(this.cboFirstName, 0);
+            this.Controls.SetChildIndex(this.cboSurname, 0);
             this.Controls.SetChildIndex(this.btnResetFilters, 0);
             this.Controls.SetChildIndex(this.btnRemoveStudent, 0);
             this.Controls.SetChildIndex(this.dgvRemoveStudent, 0);
@@ -155,8 +155,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cboStudentID;
-        private System.Windows.Forms.ComboBox cboName;
-        private System.Windows.Forms.ComboBox cboSName;
+        private System.Windows.Forms.ComboBox cboFirstName;
+        private System.Windows.Forms.ComboBox cboSurname;
         private System.Windows.Forms.Button btnResetFilters;
         private System.Windows.Forms.Button btnRemoveStudent;
         private System.Windows.Forms.DataGridView dgvRemoveStudent;

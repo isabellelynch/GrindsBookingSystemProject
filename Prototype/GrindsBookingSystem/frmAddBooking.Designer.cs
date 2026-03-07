@@ -28,7 +28,7 @@
         /// </summary>
         new private void InitializeComponent()
         {
-            this.cboLastName = new System.Windows.Forms.ComboBox();
+            this.cboSurname = new System.Windows.Forms.ComboBox();
             this.cboFirstName = new System.Windows.Forms.ComboBox();
             this.cboStudentID = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -37,22 +37,22 @@
             this.btnContinue = new System.Windows.Forms.Button();
             this.btnMakeBooking = new System.Windows.Forms.Button();
             this.grpMakeBooking = new System.Windows.Forms.GroupBox();
+            this.filterLabel = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.cboRooms = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label5 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.filterLabel = new System.Windows.Forms.Label();
             this.grpMakeBooking.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // cboLastName
+            // cboSurname
             // 
-            this.cboLastName.FormattingEnabled = true;
-            this.cboLastName.Location = new System.Drawing.Point(419, 93);
-            this.cboLastName.Name = "cboLastName";
-            this.cboLastName.Size = new System.Drawing.Size(121, 21);
-            this.cboLastName.TabIndex = 28;
+            this.cboSurname.FormattingEnabled = true;
+            this.cboSurname.Location = new System.Drawing.Point(419, 93);
+            this.cboSurname.Name = "cboSurname";
+            this.cboSurname.Size = new System.Drawing.Size(121, 21);
+            this.cboSurname.TabIndex = 28;
             // 
             // cboFirstName
             // 
@@ -131,6 +131,32 @@
             this.grpMakeBooking.TabStop = false;
             this.grpMakeBooking.Text = "Select Class to Book";
             // 
+            // filterLabel
+            // 
+            this.filterLabel.AutoSize = true;
+            this.filterLabel.Location = new System.Drawing.Point(201, 49);
+            this.filterLabel.Name = "filterLabel";
+            this.filterLabel.Size = new System.Drawing.Size(43, 13);
+            this.filterLabel.TabIndex = 40;
+            this.filterLabel.Text = "Subject";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(319, 49);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 39;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(209, 16);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 13);
+            this.label5.TabIndex = 36;
+            this.label5.Text = "Room";
+            // 
             // cboRooms
             // 
             this.cboRooms.FormattingEnabled = true;
@@ -147,32 +173,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(606, 260);
             this.dataGridView1.TabIndex = 34;
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(209, 16);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 13);
-            this.label5.TabIndex = 36;
-            this.label5.Text = "Room";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(319, 49);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 39;
-            // 
-            // filterLabel
-            // 
-            this.filterLabel.AutoSize = true;
-            this.filterLabel.Location = new System.Drawing.Point(201, 49);
-            this.filterLabel.Name = "filterLabel";
-            this.filterLabel.Size = new System.Drawing.Size(43, 13);
-            this.filterLabel.TabIndex = 40;
-            this.filterLabel.Text = "Subject";
-            // 
             // frmAddBooking
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -180,7 +180,7 @@
             this.ClientSize = new System.Drawing.Size(872, 584);
             this.Controls.Add(this.grpMakeBooking);
             this.Controls.Add(this.btnContinue);
-            this.Controls.Add(this.cboLastName);
+            this.Controls.Add(this.cboSurname);
             this.Controls.Add(this.cboFirstName);
             this.Controls.Add(this.cboStudentID);
             this.Controls.Add(this.label3);
@@ -193,7 +193,7 @@
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.cboStudentID, 0);
             this.Controls.SetChildIndex(this.cboFirstName, 0);
-            this.Controls.SetChildIndex(this.cboLastName, 0);
+            this.Controls.SetChildIndex(this.cboSurname, 0);
             this.Controls.SetChildIndex(this.btnContinue, 0);
             this.Controls.SetChildIndex(this.grpMakeBooking, 0);
             this.grpMakeBooking.ResumeLayout(false);
@@ -206,7 +206,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cboLastName;
+        private System.Windows.Forms.ComboBox cboSurname;
         private System.Windows.Forms.ComboBox cboFirstName;
         private System.Windows.Forms.ComboBox cboStudentID;
         private System.Windows.Forms.Label label3;
