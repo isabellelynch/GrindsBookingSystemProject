@@ -38,7 +38,6 @@ namespace GrindsBookingSystem
             }
             else
             {
-                string code = txtSubjectName.Text.Substring(0,3).ToUpper();
                 string level = "HL";
                 string cert = "LC";
                 if (radioOrdinary.Checked)
@@ -50,9 +49,19 @@ namespace GrindsBookingSystem
                     cert = "JC";
                 }
 
-                Subject s = new Subject(code, cert, level, txtSubjectName.Text);
+                Subject s = new Subject(cert, level, txtSubjectName.Text);
+                try
+                {
+                    s.Create();
+                    SuccessMessage("Subject Added Successfully.");
+                }
+                catch (Exception ex)
+                {
+                    ErrorMessage(ex.ToString());
+                }
+                
 
-                s.Create();
+
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 
 namespace GrindsBookingSystem
@@ -17,6 +18,7 @@ namespace GrindsBookingSystem
             DataGridViewCell c = dgvSchedule.CurrentCell;
 
             string msg = CheckSelected(c, btnAddClass);
+
             if (msg != "")
             {
                 MessageBox.Show(msg + " must be chosen before adding a class.", 
@@ -48,7 +50,11 @@ namespace GrindsBookingSystem
                 {
                     msg = "An appropriate timeslot" + msg;
                 }
-                else if (c.Value.ToString() != "")
+                else if(c.Value == null)
+                {
+                    return msg;
+                }
+                else if (c.Value.ToString().Length > 0)
                 {
                     msg = "An empty timeslot" + msg;
                 }

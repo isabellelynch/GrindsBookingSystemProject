@@ -1,8 +1,6 @@
 ﻿using System.Windows.Forms;
-
 namespace GrindsBookingSystem
 {
-
     public class BaseForm : Form
     {
         protected MenuStrip menuStrip2;
@@ -20,7 +18,6 @@ namespace GrindsBookingSystem
             {
                 this.Owner.Show();
             }
-
             this.Close();
         }
         protected virtual void Reset(Control.ControlCollection controls)

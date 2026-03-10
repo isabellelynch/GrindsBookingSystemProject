@@ -140,8 +140,10 @@ namespace GrindsBookingSystem
         {
             cboSubjects.Items.Clear();
 
-            string sql = "SELECT Description, SubjectLevel, SubjectCategory " +
-                "FROM Tutor_Subjects WHERE TutorID = '" + cboTutors.Text.Split(' ')[0] + "'";
+            string sql = "SELECT s.Description, s.SubjectLevel, s.SubjectCategory " +
+                "FROM Subjects s " +
+                "JOIN Tutor_Subjects ts ON s.SubjectID = ts.SubjectID" +
+                " WHERE ts.TutorID = '" + cboTutors.Text.Split(' ')[0] + "'";
 
             DataSet ds = Database.ExecuteMultiRowQuery(sql);
             foreach (DataRow dr in ds.Tables[0].Rows)
@@ -191,7 +193,7 @@ namespace GrindsBookingSystem
             string[] nameParts = parts[0].Split(' ');
 
             string sql = "SELECT TutorID FROM Tutors WHERE FirstName = '" + nameParts[0].Trim() +
-                "' AND Surname = '" + nameParts[1].Trim() + "' AND SubjectCode = '" + parts[1].Trim() + "'";
+                "' AND Surname = '" + nameParts[1].Trim() + "'";
 
             OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
 

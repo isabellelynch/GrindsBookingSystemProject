@@ -90,6 +90,8 @@ namespace GrindsBookingSystem
 
         public static void FillSchedule(DataGridView dgv, string rooms)
         {
+            ClearGridViewValues(dgv);
+
             List<Class> classList = Class.ClassList(rooms, Class.GetCurrentSemester());
 
             foreach (Class c in classList)

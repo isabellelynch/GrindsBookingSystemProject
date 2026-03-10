@@ -34,11 +34,11 @@ namespace GrindsBookingSystem
                 cb.SelectedIndexChanged += ComboBoxChange;
             }
 
-            string sql = "SELECT DISTINCT SubjectCode, Description FROM Subjects";
+            string sql = "SELECT DISTINCT Description FROM Subjects";
             DataSet ds = Database.ExecuteMultiRowQuery(sql);
             dgvSubjects.DataSource = ds.Tables[0];
 
-            GridViews.Default(dgvSubjects, 2);
+            GridViews.Default(dgvSubjects, 1);
         }
 
         public void ComboBoxChange(object sender, EventArgs e)
@@ -109,7 +109,7 @@ namespace GrindsBookingSystem
 
                 string sql = "SELECT SubjectID " +
                             "FROM Subjects " +
-                            "WHERE SubjectCode = '" + dgvr.Cells[0].Value.ToString() +
+                            "WHERE Description = '" + dgvr.Cells[0].Value.ToString() +
                             "' AND SubjectLevel = '" + level +
                             "' AND SubjectCategory = '" + cert + "'";
 
@@ -137,7 +137,7 @@ namespace GrindsBookingSystem
                     subID = dr.GetInt32(0).ToString();
                     sql = "INSERT INTO Tutor_Subjects (TutorID, SubjectID) VALUES ('" + tutorID + "','" + subID + "')";
                     Database.ExecuteNonQuery(sql);
-                    SuccessMessage(dgvr.Cells[1].Value.ToString() + " successfully assigned to tutor " + cboFirstName.Text + " " + cboSurname.Text);
+                    SuccessMessage(dgvr.Cells[0].Value.ToString() + " successfully assigned to tutor " + cboFirstName.Text + " " + cboSurname.Text);
                 }
 
                 dr.Close();
