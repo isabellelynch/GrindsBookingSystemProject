@@ -31,7 +31,7 @@ namespace GrindsBookingSystem
                 ErrorMessage("Please select ordinary or Higher Level to continue.");
                 return;
             }
-            else if (txtSubjectName == null) 
+            else if (string.IsNullOrEmpty(txtSubjectName.Text))
             {
                 ErrorMessage("Please enter an appropriate Subject Name to continue");
                 return;
@@ -60,7 +60,7 @@ namespace GrindsBookingSystem
                     ErrorMessage(ex.ToString());
                 }
                 
-
+                Reset(this.Controls);
 
             }
         }

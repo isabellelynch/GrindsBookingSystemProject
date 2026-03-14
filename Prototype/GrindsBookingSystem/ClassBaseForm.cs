@@ -7,33 +7,19 @@ namespace GrindsBookingSystem
 {
     public partial class ClassBaseForm : BaseForm
     {
-        protected int Day { get; set; }
-        protected int Time { get; set; }
-        protected string Room { get; set; }
-
         public ClassBaseForm()
         {
             InitializeComponent();
         }
-        public ClassBaseForm(int day, int time, string room):this()
-        {
-            Day = day;
-            Time = time;
-            Room = room;
-        }
-
         protected override void Reset(Control.ControlCollection controls)
         {
             base.Reset(controls);
             ControlFunctions.DisableBoxes(cboDays, cboTime, txtAttendance, cboRooms);
+            ControlFunctions.FillRooms(cboRooms);
             
-            SetClassDay(Day, cboDays);
-            SetClassTime(Time, cboTime);
-            SetAttendance(txtAttendance, Room);
-            SetRoom(cboRooms, Room);
+            FillTutorDetails();
+            FillTimes();
             cboSubjects.Enabled = false;
-            FillBoxes();
-
         }
         public void SetClassDay(int day, ComboBox t)
         {
@@ -141,11 +127,12 @@ namespace GrindsBookingSystem
             cboSubjects.Items.Clear();
 
             string sql = "SELECT s.Description, s.SubjectLevel, s.SubjectCategory " +
-                "FROM Subjects s " +
-                "JOIN Tutor_Subjects ts ON s.SubjectID = ts.SubjectID" +
-                " WHERE ts.TutorID = '" + cboTutors.Text.Split(' ')[0] + "'";
+                         "FROM Subjects s " +
+                         "JOIN Tutor_Subjects ts ON s.SubjectID = ts.SubjectID" +
+                         " WHERE ts.TutorID = '" + cboTutors.Text.Split(' ')[0] + "'";
 
             DataSet ds = Database.ExecuteMultiRowQuery(sql);
+
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
                 cboSubjects.Items.Add(dr[2] + ", " + dr[1] + " " + dr[0]);
@@ -158,32 +145,17 @@ namespace GrindsBookingSystem
 
             for (int i = 9; i <= 17; i++)
             {
-                string s = "";
-
                 if (i < 10)
                 {
-                    s = "0" + i.ToString() + ":00";
+                    cboTime.Items.Add("0" + i.ToString() + ":00");
                 }
                 else
                 {
-                    s = i.ToString() + ":00";
+                    cboTime.Items.Add(i.ToString() + ":00");
                 }
-
-                if (i == Time)
-                {
-                    cboTime.Text = s;
-                }
-
-                cboTime.Items.Add(s);
             }
         }
 
-        protected void FillBoxes()
-        {
-            ControlFunctions.FillRooms(cboRooms);
-            FillTutorDetails();
-            FillTimes();
-        }
 
         protected int GetTutorID()
         {

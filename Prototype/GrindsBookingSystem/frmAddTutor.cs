@@ -15,7 +15,13 @@ namespace GrindsBookingSystem
         }
         private void btnAddTutor_Click(object sender, EventArgs e)
         {
-            String rate = cboTutorRates.Text.Substring(0,3);
+            string rate = "";
+
+            if(cboTutorRates.Text.Length > 0)
+            {
+                rate = cboTutorRates.Text.Substring(0, 3);
+            }
+            
 
             Tutor t = new Tutor(txtTutorName.Text, txtTutorSurname.Text, txtTutorEmail.Text, txtTutorPhone.Text, rate);
 

@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace GrindsBookingSystem
 {
     public partial class frmUpdateClass : ClassBaseForm
     {
-        private Class c1;
-        public frmUpdateClass()
+        private Class updatingClass;
+        public frmUpdateClass(Class c)
         {
             InitializeComponent();
-        }
-        public frmUpdateClass(int day, int time, string room, Class c) : base(day, time, room)
-        {
-            c1 = c;
-            InitializeComponent();
+            updatingClass = c;
             Reset(this.Controls);
         }
 
@@ -22,6 +19,13 @@ namespace GrindsBookingSystem
         { 
             btnClass.Text = "Alter Class";
             ControlFunctions.EnableBoxes(cboDays, cboTime, cboRooms);
+
+            SetClassDay(updatingClass.Day, cboDays);
+            SetClassTime(updatingClass.Time, cboTime);
+            SetAttendance(txtAttendance, updatingClass.RoomNo);
+            SetRoom(cboRooms, updatingClass.RoomNo);
+
+            cboSubjects.Text = Subject.GetSubjectDetails(updatingClass.SubjectID);
         }
         protected override void Reset(Control.ControlCollection controls)
         {
@@ -30,7 +34,7 @@ namespace GrindsBookingSystem
             cboRooms.SelectedIndexChanged -= RoomChanged;
             cboRooms.SelectedIndexChanged += RoomChanged;
 
-            SetTutor(cboTutors, c1.TutorID);
+            SetTutor(cboTutors, updatingClass.TutorID);
         }
 
         private void RoomChanged(object sender, EventArgs e)
@@ -41,61 +45,46 @@ namespace GrindsBookingSystem
 
         private void btnClass_Click(object sender, EventArgs e)
         {
-            Class c = c1;
+            updatingClass.Day = GetClassDayNumber(cboDays.Text);
+            updatingClass.Time = Convert.ToInt32(cboTime.Text.Substring(0, 2));
+            updatingClass.TutorID = GetTutorID().ToString();
+            updatingClass.RoomNo = cboRooms.Text.Substring(0, 1);
 
-            c.Delete();
-
-            c1.Day = GetClassDayNumber(cboDays.Text);
-            c1.Time = Convert.ToInt32(cboTime.Text.Substring(0, 2));
-            c1.TutorID = GetTutorID().ToString();
-            c1.RoomNo = cboRooms.Text.Substring(0, 1);
-
-            if (c1 != null)
+            if (updatingClass != null)
             {
-                string errorString = "";
-                string sql = "SELECT * FROM Classes WHERE SemesterNo = " + c1.Semester.ToString();
+                string sql = "SELECT * FROM Classes WHERE SemesterNo = " + updatingClass.Semester.ToString();
 
                 DataSet ds = Database.ExecuteMultiRowQuery(sql);
 
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
-                    string day = r[0].ToString();
-                    string time = r[1].ToString();
-                    string id = r[2].ToString();
-                    string room = r[4].ToString();
+                    string day = r[1].ToString();
+                    string time = r[2].ToString();
+                    string id = r[3].ToString();
+                    string room = r[5].ToString();
 
-                    if (day == c1.Day.ToString() && time == c1.Time.ToString() && id == c1.TutorID)
+                    if (day == updatingClass.Day.ToString() && time == updatingClass.Time.ToString() && id == updatingClass.TutorID)
                     {
-                        errorString = "The selected tutor already has a class on the selected day at the selected time.";
-                    }
-                    else if (day == c1.Day.ToString() && time == c1.Time.ToString() && id != c1.TutorID && room == c1.RoomNo)
-                    {
-                        errorString = "The selected room is taken at the selected day and time, please try another room.";
-                    }
-                }
-
-                
-                if (errorString != "")
-                {
-                    ErrorMessage(errorString);
-                    return;
-                }
-                else
-                {
-                    try
-                    {
-                        c1.Update();
-                        SuccessMessage("Success! The class has been updated");
-                        GoHome();
+                        ErrorMessage("The selected tutor already has a class on the selected day at the selected time.");
                         return;
                     }
-                    catch (Exception ex)
+                    else if (day == updatingClass.Day.ToString() && time == updatingClass.Time.ToString() && id != updatingClass.TutorID && room == updatingClass.RoomNo)
                     {
-                        ErrorMessage(ex.Message);
+                        ErrorMessage("The selected room is taken at the selected day and time, please try another room.");
                         return;
                     }
-                    
                 }
+                try
+                {
+                    updatingClass.Update();
+                    SuccessMessage("Success! The class has been updated");
+                    GoHome();
+                }
+                catch (Exception ex)
+                {
+                    ErrorMessage(ex.Message);
+                }
+                  
             }
         }
     }

@@ -38,8 +38,10 @@ namespace GrindsBookingSystem
         
         public void Update()
         {
-            string sql = "UPDATE Students SET Email = '" + Email + "', PhoneNo = '" + Phone + 
-                "' WHERE StudentID = " + this.PersonID;
+            string sql = "UPDATE Students SET " +
+                         "Email = '" + Email + "', " +
+                         "PhoneNo = '" + Phone + 
+                         "' WHERE StudentID = " + this.PersonID;
             try
             {
                 Database.ExecuteNonQuery(sql);

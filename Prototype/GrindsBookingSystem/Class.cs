@@ -8,6 +8,7 @@ namespace GrindsBookingSystem
 {
     public class Class:InterfaceCRUD
     {
+        public int ClassID { get; private set; }
         public int Day { get; set; }
         public int Time { get; set; }
         public string TutorID { get; set; }
@@ -25,6 +26,11 @@ namespace GrindsBookingSystem
             RoomNo = room;
             Semester = sem;
             SubjectID = subjectID;
+        }
+
+        public void SetID(int id)
+        {
+            ClassID = id;
         }
 
         public void Create()
@@ -56,7 +62,25 @@ namespace GrindsBookingSystem
 
         public void Update() 
         {
-            this.Create();
+            string sql = "UPDATE Classes SET " +
+                         "Day = " + this.Day + "," +
+                         "Time = " + this.Time + "," +
+                         "TutorID = " + this.TutorID + "," +
+                         "CurrentEnrollment = " + this.CurrentEnrollment + "," +
+                         "RoomNo = " + this.RoomNo + "," +
+                         "SemesterNo = " + this.Semester + "," +
+                         "SubjectID = " + this.SubjectID +
+                         " WHERE ClassID = " + this.ClassID;
+            try
+            {
+                Database.ExecuteNonQuery(sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
         public void Delete() 
         {
@@ -78,13 +102,13 @@ namespace GrindsBookingSystem
             {
                 Class c = new Class
                 (
-                    Convert.ToInt32(r[0]),
                     Convert.ToInt32(r[1]),
-                    r[2].ToString(),
-                    Convert.ToInt32(r[3]),
-                    r[4].ToString(),
+                    Convert.ToInt32(r[2]),
+                    r[3].ToString(),
+                    Convert.ToInt32(r[4]),
                     r[5].ToString(),
-                    r[6].ToString()
+                    r[6].ToString(),
+                    r[7].ToString()
                 );
 
                 list.Add(c);
@@ -112,17 +136,25 @@ namespace GrindsBookingSystem
 
         public static Class GetClass(int day, int time, string room)
         {
-            string sql2 = "SELECT * FROM Classes WHERE Day = " + day + " AND Time = " + time + " AND RoomNo = '" + room + "'";
+            string sql = "SELECT * FROM Classes WHERE Day = " + day + " AND Time = " + time + " AND RoomNo = '" + room + "'";
 
-            OracleDataReader dr2 = Database.ExecuteSingleRowQuery(sql2);
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
 
-            dr2.Read();
+            if (dr.Read())
+            {
+                Class c2 = new Class(dr.GetInt32(1), dr.GetInt32(2), dr.GetString(3), dr.GetInt32(4), dr.GetString(5), dr.GetString(6), dr.GetString(7));
 
-            Class c2 = new Class(dr2.GetInt32(0), dr2.GetInt32(1), dr2.GetString(2), dr2.GetInt32(3), dr2.GetString(4), dr2.GetString(5), dr2.GetString(6));
+                dr.Close();
 
-            dr2.Close();
+                return c2;
+            }
+            else
+            {
+                return null;
+            }
 
-            return c2;
+
+                
         }
 
 

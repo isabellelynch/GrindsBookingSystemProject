@@ -7,6 +7,10 @@ namespace GrindsBookingSystem
 {
     public partial class frmViewSchedule : BaseForm
     {
+        int day;
+        int time;
+        string room;
+
         public frmViewSchedule()
         {
             InitializeComponent();
@@ -21,12 +25,15 @@ namespace GrindsBookingSystem
 
             if (msg != "")
             {
-                MessageBox.Show(msg + " must be chosen before adding a class.", 
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ErrorMessage(msg);
                 return;
             }
 
-            frmAddClass f = new frmAddClass(c.ColumnIndex, c.RowIndex+9, cboRooms.Text.Substring(0, 1));
+            day = c.ColumnIndex;
+            time = c.RowIndex + 9;
+            room = cboRooms.Text.Substring(0, 1);
+
+            frmAddClass f = new frmAddClass(day, time, room);
             f.FormClosing += FillSchedule;
             f.ShowDialog();
 
@@ -35,16 +42,16 @@ namespace GrindsBookingSystem
 
         private string CheckSelected(DataGridViewCell c, Button btn)
         {
-            int day = c.ColumnIndex;
-            int time = c.RowIndex;
-            string room = cboRooms.Text;
+            day = c.ColumnIndex;
+            time = c.RowIndex;
+            room = cboRooms.Text;
 
             string msg = "";
             if(btn == btnAddClass)
             {
                 if (room == "")
                 {
-                    msg = "A room" + msg;
+                    msg = "A room must be chosen before adding a new class";
                 }
                 else if (day == 0 || day > 5 || time < 0 || time > 8)
                 {
@@ -56,7 +63,7 @@ namespace GrindsBookingSystem
                 }
                 else if (c.Value.ToString().Length > 0)
                 {
-                    msg = "An empty timeslot" + msg;
+                    msg = "An empty timeslot must be chosen before adding a new class";
                 }
             }
             else if(btn == btnRemoveClass)
@@ -79,7 +86,7 @@ namespace GrindsBookingSystem
             cboRooms.SelectedIndexChanged -= FillSchedule;
             cboRooms.SelectedIndexChanged += FillSchedule;
 
-            GridViews.Schedule(dgvSchedule, 6);
+            GridViews.Schedule(dgvSchedule);
         }
 
         private void FillSchedule(object sender, EventArgs e)
@@ -94,22 +101,25 @@ namespace GrindsBookingSystem
             string msg = CheckSelected(c, btnRemoveClass);
             if (msg != "")
             {
-                MessageBox.Show(msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ErrorMessage(msg);
                 return;
             }
 
+            day = c.ColumnIndex;
+            time = c.RowIndex + 9;
+            room = cboRooms.Text.Substring(0, 1);
+
             try
             {
-                Class c2 = Class.GetClass(c.ColumnIndex, c.RowIndex + 9, cboRooms.Text.Substring(0, 1));
+                Class c2 = Class.GetClass(day, time, room);
 
-                frmUpdateClass f = new frmUpdateClass(c2.Day, c2.Time, c2.RoomNo, c2);
+                frmUpdateClass f = new frmUpdateClass(c2);
                 f.FormClosing += FillSchedule;
                 f.ShowDialog();
-                
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                ErrorMessage(ex.Message);
                 return;
             }
 
@@ -124,14 +134,13 @@ namespace GrindsBookingSystem
 
             if (msg != "")
             {
-                MessageBox.Show(msg ,"Error", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ErrorMessage(msg);
                 return;
             }
 
             Class c2 = Class.GetClass(c.ColumnIndex, c.RowIndex + 9, cboRooms.Text.Substring(0,1));
 
-            frmRemoveClass f = new frmRemoveClass(c2.Day, c2.Time, c2.RoomNo, c2);
+            frmRemoveClass f = new frmRemoveClass(c2);
             f.FormClosing += FillSchedule;
             f.ShowDialog();
 

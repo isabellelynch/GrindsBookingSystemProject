@@ -38,12 +38,10 @@
             this.btnMakeBooking = new System.Windows.Forms.Button();
             this.grpMakeBooking = new System.Windows.Forms.GroupBox();
             this.filterLabel = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cboRooms = new System.Windows.Forms.ComboBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.cboSubjects = new System.Windows.Forms.ComboBox();
+            this.dgvMakeBooking = new System.Windows.Forms.DataGridView();
             this.grpMakeBooking.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMakeBooking)).BeginInit();
             this.SuspendLayout();
             // 
             // cboSurname
@@ -119,10 +117,8 @@
             // grpMakeBooking
             // 
             this.grpMakeBooking.Controls.Add(this.filterLabel);
-            this.grpMakeBooking.Controls.Add(this.comboBox1);
-            this.grpMakeBooking.Controls.Add(this.label5);
-            this.grpMakeBooking.Controls.Add(this.cboRooms);
-            this.grpMakeBooking.Controls.Add(this.dataGridView1);
+            this.grpMakeBooking.Controls.Add(this.cboSubjects);
+            this.grpMakeBooking.Controls.Add(this.dgvMakeBooking);
             this.grpMakeBooking.Controls.Add(this.btnMakeBooking);
             this.grpMakeBooking.Location = new System.Drawing.Point(100, 165);
             this.grpMakeBooking.Name = "grpMakeBooking";
@@ -134,44 +130,27 @@
             // filterLabel
             // 
             this.filterLabel.AutoSize = true;
-            this.filterLabel.Location = new System.Drawing.Point(201, 49);
+            this.filterLabel.Location = new System.Drawing.Point(209, 16);
             this.filterLabel.Name = "filterLabel";
             this.filterLabel.Size = new System.Drawing.Size(43, 13);
             this.filterLabel.TabIndex = 40;
             this.filterLabel.Text = "Subject";
             // 
-            // comboBox1
+            // cboSubjects
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(319, 49);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 39;
+            this.cboSubjects.FormattingEnabled = true;
+            this.cboSubjects.Location = new System.Drawing.Point(319, 8);
+            this.cboSubjects.Name = "cboSubjects";
+            this.cboSubjects.Size = new System.Drawing.Size(121, 21);
+            this.cboSubjects.TabIndex = 39;
             // 
-            // label5
+            // dgvMakeBooking
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(209, 16);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 13);
-            this.label5.TabIndex = 36;
-            this.label5.Text = "Room";
-            // 
-            // cboRooms
-            // 
-            this.cboRooms.FormattingEnabled = true;
-            this.cboRooms.Location = new System.Drawing.Point(319, 13);
-            this.cboRooms.Name = "cboRooms";
-            this.cboRooms.Size = new System.Drawing.Size(121, 21);
-            this.cboRooms.TabIndex = 35;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(23, 88);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(606, 260);
-            this.dataGridView1.TabIndex = 34;
+            this.dgvMakeBooking.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMakeBooking.Location = new System.Drawing.Point(23, 88);
+            this.dgvMakeBooking.Name = "dgvMakeBooking";
+            this.dgvMakeBooking.Size = new System.Drawing.Size(606, 260);
+            this.dgvMakeBooking.TabIndex = 34;
             // 
             // frmAddBooking
             // 
@@ -198,7 +177,7 @@
             this.Controls.SetChildIndex(this.grpMakeBooking, 0);
             this.grpMakeBooking.ResumeLayout(false);
             this.grpMakeBooking.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMakeBooking)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -215,10 +194,8 @@
         private System.Windows.Forms.Button btnContinue;
         private System.Windows.Forms.Button btnMakeBooking;
         private System.Windows.Forms.GroupBox grpMakeBooking;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.ComboBox cboRooms;
+        private System.Windows.Forms.DataGridView dgvMakeBooking;
         private System.Windows.Forms.Label filterLabel;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cboSubjects;
     }
 }

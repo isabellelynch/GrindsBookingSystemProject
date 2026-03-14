@@ -47,8 +47,6 @@ namespace GrindsBookingSystem
 
                 Tutor t = Tutor.GetTutor(Convert.ToInt32(row.Cells[0].Value));
 
-                t.SetID(t.PersonID);
-
                 t.Delete();
 
                 SuccessMessage("Tutor Removed");
@@ -66,10 +64,10 @@ namespace GrindsBookingSystem
             base.Reset(controls);
 
             ControlFunctions.FillBoxes("Tutors", cboTutorID, cboFirstName, cboSurname);
-
+            GridViews.Default(dgvRemoveTutors);
             dgvRemoveTutors.DataSource = Tutor.GetTutorList(cboTutorID).Tables[0];
 
-            GridViews.Default(dgvRemoveTutors, 3);
+            
 
             comboBoxes = ControlFunctions.CreateComboList(cboTutorID, cboFirstName, cboSurname);
 

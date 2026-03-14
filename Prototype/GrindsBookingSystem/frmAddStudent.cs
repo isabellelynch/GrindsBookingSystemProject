@@ -20,41 +20,27 @@ namespace GrindsBookingSystem
                 return;
             }
 
-            DialogResult result = MessageBox.Show("Are you sure you wish to add student " + txtStudentName.Text + " " +
-                                                    txtStudentSurname.Text + "to the system ?",
+            try
+            {
+                s.Create();
+
+                SuccessMessage("Student " + txtStudentName.Text + txtStudentSurname.Text + "has been succesfully added to the system.");
+                    
+                DialogResult addAnother = MessageBox.Show("Would you like to add another Student?",
                                                     "Please Confirm",
                                                     MessageBoxButtons.YesNo,
                                                     MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                try
+                if (addAnother == DialogResult.No)
                 {
-                    s.Create();
-
-                    SuccessMessage("Student " + txtStudentName.Text + txtStudentSurname.Text + "has been succesfully added to the system.");
-                    
-                    DialogResult addAnother = MessageBox.Show("Would you like to add another Student?",
-                                                        "Please Confirm",
-                                                        MessageBoxButtons.YesNo,
-                                                        MessageBoxIcon.Question);
-                    if (addAnother == DialogResult.No)
-                    {
-                        GoHome();
-                    }
-                }
-                catch(Exception ex)
-                {
-                    ErrorMessage(ex.Message);
+                    GoHome();
                 }
             }
-            else
+            catch(Exception ex)
             {
-                ErrorMessage("Adding Student Function Cancelled, Goodbye");
+                ErrorMessage(ex.Message);
             }
 
             Reset(this.Controls);
-
-            return;
         }
     }
 }

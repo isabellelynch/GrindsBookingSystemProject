@@ -1,11 +1,14 @@
 ﻿
 
 using Oracle.ManagedDataAccess.Client;
+using System;
+using System.Data;
 
 namespace GrindsBookingSystem
 {
     internal class Subject:InterfaceCRUD
     {
+        public int SubjectID { get; private set; }
         public string Category { get; set; }
         public string Level { get; set; }
         public string Description { get; set; }
@@ -15,6 +18,11 @@ namespace GrindsBookingSystem
             Category = category;
             Level = level;
             Description = description;
+        }
+
+        public void SetID(int id)
+        {
+            SubjectID = id;
         }
 
         public void Create() 
@@ -29,25 +37,42 @@ namespace GrindsBookingSystem
         }
         public string Read() 
         {
-            string sql = "SELECT * FROM Subjects";
+            Subject s = GetSubject(this.SubjectID.ToString());
+
+            return s.ToString();
+        }
+
+        public static Subject GetSubject(string id)
+        {
+            string sql = "SELECT * FROM Subjects WHERE SubjectID = '" + id + "'";
 
             OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
 
-            if (dr.Read())
-            {
-                string sub = "Subject : " + dr.GetString(4) +
-                "\nSubject ID : " + dr.GetString(0) +
-                "\nLevel : " + dr.GetString(2) +
-                "\nCertificate : " + dr.GetString(3);
+            dr.Read();
 
-                return sub;
-            }
+            Subject s = new Subject(dr.GetString(1), dr.GetString(2), dr.GetString(3));
 
-            return "No Subjects Found";
+            dr.Close();
+
+            return s;
+        }
+
+        public override string ToString()
+        {
+            return "Subject : " + this.Description +
+                "\nSubject ID : " + this.SubjectID +
+                "\nLevel : " + this.Level +
+                "\nCertificate : " + this.Category;
         }
 
         public void Update() { }
 
         public void Delete() { }
+
+        public static string GetSubjectDetails(string subID)
+        {
+            Subject s = GetSubject(subID);
+            return s.Level + ", " + s.Category + " - " + s.Description;
+        }
     }
 }

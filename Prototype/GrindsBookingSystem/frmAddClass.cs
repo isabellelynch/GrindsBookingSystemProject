@@ -6,14 +6,17 @@ namespace GrindsBookingSystem
 {
     public partial class frmAddClass : ClassBaseForm
     {
-        public frmAddClass()
+        private int Day {  get; set; }
+        private int Time { get; set; }
+        private string Room {  get; set; }
+        public frmAddClass(int day, int time, string room)
         {
             InitializeComponent();
-        }
 
-        public frmAddClass(int day, int time, string room) : base(day, time, room)
-        {
-            InitializeComponent();
+            Day = day;
+            Time = time;
+            Room = room;
+
             Reset(this.Controls);
         }
          
@@ -27,13 +30,12 @@ namespace GrindsBookingSystem
             }
             
             string text = cboTutors.Text;
+
             int spaceIndex = text.IndexOf(" ");
 
-            string id = spaceIndex > -1 ? text.Substring(0, spaceIndex) : text;
+            string tutorID = spaceIndex > -1 ? text.Substring(0, spaceIndex) : text;
 
-            int t = Convert.ToInt32(cboTime.Text.Substring(0, cboTime.Text.IndexOf(':')));
-
-            Class c = new Class(Day, t, id, 0, Room, Class.GetCurrentSemester(), "1");
+            Class c = new Class(Day, Time, tutorID, 0, Room, Class.GetCurrentSemester(), "1");
 
             try
             {
@@ -53,6 +55,10 @@ namespace GrindsBookingSystem
         private void frmAddClass_Load(object sender, EventArgs e)
         {
             btnClass.Text = "Add Class";
+            SetClassDay(Day, cboDays);
+            SetClassTime(Time, cboTime);
+            SetAttendance(txtAttendance, Room);
+            SetRoom(cboRooms, Room);
         }
     }
 }

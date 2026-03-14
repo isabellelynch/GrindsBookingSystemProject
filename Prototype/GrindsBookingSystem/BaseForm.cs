@@ -26,7 +26,7 @@ namespace GrindsBookingSystem
             {
                 if (control is TextBox txt)
                 {
-                    txt.Text = "";
+                    txt.Clear();
                 }
                 else if (control is ComboBox cb)
                 {
@@ -36,7 +36,9 @@ namespace GrindsBookingSystem
                 }
                 else if (control is RadioButton rb)
                 {
+                    rb.AutoCheck = false;
                     rb.Checked = false;
+                    rb.AutoCheck = true;
                 }
 
                 if (control.HasChildren)

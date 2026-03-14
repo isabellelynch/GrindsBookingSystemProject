@@ -38,7 +38,7 @@ namespace GrindsBookingSystem
             DataSet ds = Database.ExecuteMultiRowQuery(sql);
             dgvSubjects.DataSource = ds.Tables[0];
 
-            GridViews.Default(dgvSubjects, 1);
+            GridViews.Default(dgvSubjects);
         }
 
         public void ComboBoxChange(object sender, EventArgs e)

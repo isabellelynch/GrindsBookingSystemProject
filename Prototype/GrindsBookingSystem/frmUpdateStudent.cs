@@ -69,9 +69,6 @@ namespace GrindsBookingSystem
                     s2.Update();
 
                     SuccessMessage("The selected Student has been updated and their details are now as follows\n\n" + s2.ToString());
-
-                    return;
-
                 }
                 catch (Exception ex)
                 {

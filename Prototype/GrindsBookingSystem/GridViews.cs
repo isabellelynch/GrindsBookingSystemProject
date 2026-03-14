@@ -9,63 +9,19 @@ namespace GrindsBookingSystem
 {
     internal class GridViews
     {
-        public static void Schedule(DataGridView dgv, int cols)
+        public static void Default(DataGridView dgv)
         {
             ClearGridViewValues(dgv);
             ResetGridView(dgv);
-
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgv.MultiSelect = false;
             dgv.EnableHeadersVisualStyles = false;
             dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.DarkCyan;
             dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Bold);
-            dgv.SelectionMode = DataGridViewSelectionMode.CellSelect;
             dgv.GridColor = Color.Gray;
-            dgv.ScrollBars = ScrollBars.None;
-
-            dgv.Columns.Add("Time", "Time");
-
-            string[] days = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
-
-            foreach (var day in days)
-            {
-                dgv.Columns.Add(day, day);
-            }
-
-            for (int hour = 9; hour <= 17; hour++)
-            {
-                int rowIndex = dgv.Rows.Add();
-                dgv.Rows[rowIndex].Cells[0].Value = $"{hour:00}:00";
-            }
-
-            dgv.Columns[0].DefaultCellStyle.Format = "0000";
-            dgv.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgv.Columns[0].FillWeight = 1;
-
-            for (int i = 1; i < cols; i++)
-            {
-                dgv.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-                dgv.Columns[i].FillWeight = 2;
-            }
-        }
-
-        public static void Default(DataGridView dgv, int cols)
-        {
-            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Bold);
+            dgv.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv.MultiSelect = false;
             dgv.ReadOnly = true;
-
-            dgv.Columns[0].DefaultCellStyle.Format = "0000";
-            dgv.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgv.Columns[0].FillWeight = 1;
-
-            for (int i = 1; i < cols; i++)
-            {
-                dgv.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-                dgv.Columns[i].FillWeight = 2;
-            }
         }
 
         public static void ClearGridViewValues(DataGridView dgv)
@@ -84,8 +40,14 @@ namespace GrindsBookingSystem
 
         public static void ResetGridView(DataGridView dgv)
         {
-            dgv.Columns.Clear();
-            dgv.Rows.Clear();
+            if(dgv.Rows.Count > 0)
+            {
+                dgv.Rows.Clear();
+            }
+            if(dgv.Columns.Count > 0) 
+            { 
+                dgv.Columns.Clear();
+            }  
         }
 
         public static void FillSchedule(DataGridView dgv, string rooms)
@@ -114,9 +76,47 @@ namespace GrindsBookingSystem
             }
 
         }
+        public static void AddHeadings(DataGridView dgv, string[] headings) 
+        {
+            Default(dgv);
+            foreach (var h in headings)
+            {
+                dgv.Columns.Add(h, h);
+            }
+        }
 
-        
+        public static void MakeBooking(DataGridView dgv)
+        {
+            string[] h = {"Subject", "Level", "Group", "Day", "Time", "Room"};
+            AddHeadings(dgv, h);
+        }
 
-        
+        public static void Schedule(DataGridView dgv)
+        {
+            Default(dgv);
+
+            string[] h = { "Time", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
+            AddHeadings(dgv, h);
+
+            for (int hour = 9; hour <= 17; hour++)
+            {
+                int rowIndex = dgv.Rows.Add();
+                dgv.Rows[rowIndex].Cells[0].Value = $"{hour:00}:00";
+            }
+
+            dgv.Columns[0].DefaultCellStyle.Format = "0000";
+            dgv.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv.Columns[0].FillWeight = 1;
+
+            for (int i = 1; i < 6; i++)
+            {
+                dgv.Columns[i].FillWeight = 2;
+            }
+
+            dgv.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            dgv.ScrollBars = ScrollBars.None;
+        }
+
+
     }
 }

@@ -23,18 +23,16 @@ namespace GrindsBookingSystem
 
         public void Create()
         {
-            string sql = "INSERT INTO Tutors (FirstName, Surname" +
-                ",Email, PhoneNo, RateCode, SubjectID, Status) VALUES ('" +
+            string sql = "INSERT INTO Tutors (FirstName, Surname," +
+                "Email, PhoneNo, RateCode, Status) VALUES ('" +
                 FirstName + "','" +
                 Surname + "','" +
                 Email + "','" +
                 Phone + "','" +
-                RateCode + "','" +
+                RateCode + "'," +
                 "'A')";
 
             Database.ExecuteNonQuery(sql);
-
-            
         }
 
 
@@ -48,8 +46,11 @@ namespace GrindsBookingSystem
 
         public void Update()
         {
-            string sql = "UPDATE Tutors SET Email = '" + Email + "', PhoneNo = '" + Phone + "', RateCode = '" + RateCode +
-               "' WHERE TutorID = '" + this.PersonID + "'";
+            string sql = "UPDATE Tutors SET " +
+                         "Email = '" + Email + "', " +
+                         "PhoneNo = '" + Phone + "', " +
+                         "RateCode = '" + RateCode +
+                         "' WHERE TutorID = '" + this.PersonID + "'";
             try
             {
                 Database.ExecuteNonQuery(sql);
@@ -65,7 +66,6 @@ namespace GrindsBookingSystem
         {
             string sql = "UPDATE Tutors SET Status = 'I'" +
                 " WHERE TutorID = '" + this.PersonID + "'";
-            
             try
             {
                 Database.ExecuteNonQuery(sql);
