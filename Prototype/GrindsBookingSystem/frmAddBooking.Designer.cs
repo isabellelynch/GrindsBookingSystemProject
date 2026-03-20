@@ -113,6 +113,7 @@
             this.btnMakeBooking.TabIndex = 32;
             this.btnMakeBooking.Text = "Make Booking";
             this.btnMakeBooking.UseVisualStyleBackColor = true;
+            this.btnMakeBooking.Click += new System.EventHandler(this.btnMakeBooking_Click);
             // 
             // grpMakeBooking
             // 
@@ -143,6 +144,7 @@
             this.cboSubjects.Name = "cboSubjects";
             this.cboSubjects.Size = new System.Drawing.Size(121, 21);
             this.cboSubjects.TabIndex = 39;
+            this.cboSubjects.SelectedIndexChanged += new System.EventHandler(this.cboSubjects_SelectedIndexChanged);
             // 
             // dgvMakeBooking
             // 

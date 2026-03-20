@@ -58,12 +58,12 @@ namespace GrindsBookingSystem
                 Application.Exit();
             }
         }
-        public void ErrorMessage(string message)
+        public static void ErrorMessage(string message)
         {
             MessageBox.Show(message,"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        public void SuccessMessage(string message)
+        public static void SuccessMessage(string message)
         {
             MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }

@@ -23,6 +23,11 @@ namespace GrindsBookingSystem
         }
         public void SetClassDay(int day, ComboBox t)
         {
+            t.Text = GetClassDay(day);
+        }
+
+        public static string GetClassDay(int day)
+        {
             string s = "";
 
             switch (day)
@@ -46,11 +51,10 @@ namespace GrindsBookingSystem
                     s = "";
                     break;
             }
-
-            t.Text = s;
+            return s;
         }
 
-        public int GetClassDayNumber(string day)
+        public static int GetClassDayNumber(string day)
         {
             switch (day)
             {

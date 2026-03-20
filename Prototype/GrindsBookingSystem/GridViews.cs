@@ -9,14 +9,23 @@ namespace GrindsBookingSystem
 {
     internal class GridViews
     {
-        public static void Default(DataGridView dgv)
-        {
+        public static void Default(DataGridView dgv, params string[] headings)
+        { 
             ClearGridViewValues(dgv);
-            ResetGridView(dgv);
+            if (headings.Length > 0)
+            {
+                foreach (var h in headings)
+                {
+                    dgv.Columns.Add(h, h);
+                }
+            }
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.EnableHeadersVisualStyles = false;
             dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.DarkCyan;
             dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgv.GridColor = Color.Gray;
+            dgv.ColumnHeadersDefaultCellStyle.SelectionBackColor = dgv.ColumnHeadersDefaultCellStyle.BackColor;
+            dgv.RowsDefaultCellStyle.SelectionBackColor = dgv.ColumnHeadersDefaultCellStyle.BackColor;
             dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Bold);
             dgv.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -40,11 +49,11 @@ namespace GrindsBookingSystem
 
         public static void ResetGridView(DataGridView dgv)
         {
-            if(dgv.Rows.Count > 0)
+            if(dgv.Rows.Count > 1)
             {
                 dgv.Rows.Clear();
             }
-            if(dgv.Columns.Count > 0) 
+            if(dgv.Columns.Count > 1) 
             { 
                 dgv.Columns.Clear();
             }  
@@ -76,27 +85,21 @@ namespace GrindsBookingSystem
             }
 
         }
-        public static void AddHeadings(DataGridView dgv, string[] headings) 
-        {
-            Default(dgv);
-            foreach (var h in headings)
-            {
-                dgv.Columns.Add(h, h);
-            }
-        }
 
         public static void MakeBooking(DataGridView dgv)
         {
-            string[] h = {"Subject", "Level", "Group", "Day", "Time", "Room"};
-            AddHeadings(dgv, h);
+            ResetGridView(dgv);
+            string[] h = {"Subject", "Day", "Time", "Room", "CurrentEnrollment", "Level", "Group"};
+            Default(dgv, h);
+           
+
         }
 
         public static void Schedule(DataGridView dgv)
         {
-            Default(dgv);
-
+            ResetGridView(dgv);
             string[] h = { "Time", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
-            AddHeadings(dgv, h);
+            Default(dgv, h);
 
             for (int hour = 9; hour <= 17; hour++)
             {

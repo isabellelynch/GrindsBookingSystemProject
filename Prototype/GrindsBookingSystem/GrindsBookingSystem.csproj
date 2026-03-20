@@ -216,6 +216,7 @@
       <DependentUpon>frmRemoveTutor.cs</DependentUpon>
     </Compile>
     <Compile Include="ControlFunctions.cs" />
+    <Compile Include="GmailSender.cs" />
     <Compile Include="InterfaceCRUD.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

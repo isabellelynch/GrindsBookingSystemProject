@@ -111,7 +111,8 @@ namespace GrindsBookingSystem
 
             try
             {
-                Class c2 = Class.GetClass(day, time, room);
+                int ClassID = Class.GetClassID(day, time, room);
+                Class c2 = Class.GetClass(ClassID);
 
                 frmUpdateClass f = new frmUpdateClass(c2);
                 f.FormClosing += FillSchedule;
@@ -137,8 +138,8 @@ namespace GrindsBookingSystem
                 ErrorMessage(msg);
                 return;
             }
-
-            Class c2 = Class.GetClass(c.ColumnIndex, c.RowIndex + 9, cboRooms.Text.Substring(0,1));
+            int ClassID = Class.GetClassID(c.ColumnIndex, c.RowIndex + 9, cboRooms.Text.Substring(0, 1));
+            Class c2 = Class.GetClass(ClassID);
 
             frmRemoveClass f = new frmRemoveClass(c2);
             f.FormClosing += FillSchedule;

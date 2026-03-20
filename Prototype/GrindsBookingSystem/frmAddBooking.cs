@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
@@ -23,6 +24,8 @@ namespace GrindsBookingSystem
             ControlFunctions.FillBoxes("Students", cboStudentID, cboFirstName, cboSurname);
 
             grpMakeBooking.Visible = false;
+
+            ControlFunctions.EnableBoxes(cboStudentID, cboFirstName, cboSurname);
 
             List<ComboBox> cb = ControlFunctions.CreateComboList(cboStudentID, cboFirstName, cboSurname);
 
@@ -74,7 +77,9 @@ namespace GrindsBookingSystem
         private void FillSubjects()
         {
             cboSubjects.Items.Clear();
+
             string sql = "SELECT DISTINCT Description FROM Subjects";
+
             try
             {
                 DataSet ds = Database.ExecuteMultiRowQuery(sql);
@@ -91,6 +96,15 @@ namespace GrindsBookingSystem
 
         private void FillGridView()
         {
+            dgvMakeBooking.Rows.Clear();
+
+            string edit = "";
+
+            if(cboSubjects.Text.Length > 0)
+            {
+                edit = " AND s.Description = '" + cboSubjects.Text + "' ";
+            }
+
             string sql = "SELECT s.Description, s.SubjectLevel, s.SubjectCategory, " +
                          "CASE c.Day " +
                                 "WHEN 1 THEN 'Monday'"+
@@ -99,30 +113,110 @@ namespace GrindsBookingSystem
                                 "WHEN 4 THEN 'Thursday'"+
                                 "WHEN 5 THEN 'Friday'"+
                                 "END AS DayName, " +
-                         "c.Time, c.RoomNo " +
+                         "c.Time, c.RoomNo, c.CurrentEnrollment, r.Capacity " +
                          "FROM Classes c JOIN Subjects s " +
                          "ON c.SubjectID = s.SubjectID " +
-                         "WHERE c.SemesterNo = " + Class.GetCurrentSemester() +
+                         "JOIN Rooms r ON c.RoomNo = r.RoomNo " +
+                         "WHERE c.SemesterNo = " + Class.GetCurrentSemester() + edit +
                          "ORDER BY s.Description, c.Day";
 
+            
+
             DataSet ds = Database.ExecuteMultiRowQuery(sql);
+
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
                 dgvMakeBooking.Rows.Add(
                 dr["Description"],
-                dr["SubjectLevel"],
-                dr["SubjectCategory"],
                 dr["DayName"],
-                dr["Time"],
-                dr["RoomNo"]
+                dr["Time"] + ":00",
+                dr["RoomNo"],
+                dr["CurrentEnrollment"] + " / " + dr["Capacity"],
+                dr["SubjectLevel"],
+                dr["SubjectCategory"]
                 );
             }
 
         }
 
-            
-            
-        
+        private void cboSubjects_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FillGridView();
+        }
 
+        private void btnMakeBooking_Click(object sender, EventArgs e)
+        {
+            if (dgvMakeBooking.SelectedRows.Count == 0)
+            {
+                ErrorMessage("A class must be chosen to book it");
+                return;
+            }
+            else if(cboStudentID.Text == "" || cboStudentID.Items.Count > 1)
+            {
+                ErrorMessage("A single student must be chosen to book a class");
+                return;
+            }
+            else
+            {
+                DataGridViewRow r = dgvMakeBooking.CurrentRow;
+
+                int day = ClassBaseForm.GetClassDayNumber(r.Cells[1].Value.ToString());
+                string time = r.Cells[2].Value.ToString().Substring(0,r.Cells[2].Value.ToString().IndexOf(":"));
+                string room = r.Cells[3].Value.ToString();
+
+                int ClassID = Class.GetClassID(day, Convert.ToInt32(time), room);
+
+                Class c = Class.GetClass(ClassID);
+
+                Booking b = new Booking(Convert.ToInt32(cboStudentID.Text), ClassID);
+
+                if (c.IsClassFull() == false)
+                {
+                    if (b.HasStudentAlreadyBooked() == false)
+                    {
+                        int amount = b.GetAmount(c.TutorID);
+
+                        DialogResult d = MessageBox.Show("Please confirm that the student has paid the €" + amount + " due before continuing to book","Payment", 
+                            MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                        if (d == DialogResult.Yes)
+                        {
+                            b.IncrementCurrentEnrollment(c.CurrentEnrollment);
+
+                            try
+                            {
+                                b.Create();
+                                SuccessMessage("Class Booked!");
+                                //SendBookingConfirmation();
+                            }
+                            catch (Exception ex)
+                            {
+                                ErrorMessage(ex.Message);
+                            } 
+                        }
+                        else
+                        {
+                            ErrorMessage("The student must provide payment before continuing");
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        ErrorMessage("This student has already been booked into this class");
+                    }
+                }
+                else
+                {
+                    ErrorMessage("System Error! The class you would like to book cannot be found");
+                    return;
+                }
+
+
+                
+            }
+            Reset(this.Controls);
+        }
+
+        
     }
 }

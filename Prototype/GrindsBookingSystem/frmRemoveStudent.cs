@@ -71,10 +71,10 @@ namespace GrindsBookingSystem
             base.Reset(controls);
 
             ControlFunctions.FillBoxes("Students", cboStudentID, cboFirstName, cboSurname);
-
+            GridViews.Default(dgvRemoveStudent);
             dgvRemoveStudent.DataSource = Student.RetrieveAll().Tables[0];
 
-            GridViews.Default(dgvRemoveStudent);
+            
 
             comboBoxes = ControlFunctions.CreateComboList(cboStudentID, cboFirstName, cboSurname);
 

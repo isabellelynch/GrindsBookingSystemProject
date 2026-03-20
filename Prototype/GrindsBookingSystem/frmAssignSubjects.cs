@@ -75,6 +75,7 @@ namespace GrindsBookingSystem
 
         private void btnAssignSubject_Click(object sender, EventArgs e)
         {
+            String sub = dgvSubjects.CurrentCell.Value.ToString();
             if(!radioJunior.Checked && !radioLeaving.Checked)
             {
                 ErrorMessage("Please select Leaving or Junior Certificate to continue.");
@@ -85,7 +86,7 @@ namespace GrindsBookingSystem
                 ErrorMessage("Please select ordinary or Higher Level to continue.");
                 return;
             }
-            else if (dgvSubjects.SelectedRows.Count == 0) 
+            else if (sub == null) 
             {
                 ErrorMessage("A subject must be selected to continue");
                 return;
@@ -105,11 +106,11 @@ namespace GrindsBookingSystem
                     cert = "JC";
                 }
 
-                DataGridViewRow dgvr = dgvSubjects.SelectedRows[0];
+                
 
                 string sql = "SELECT SubjectID " +
                             "FROM Subjects " +
-                            "WHERE Description = '" + dgvr.Cells[0].Value.ToString() +
+                            "WHERE Description = '" + sub +
                             "' AND SubjectLevel = '" + level +
                             "' AND SubjectCategory = '" + cert + "'";
 
@@ -137,7 +138,7 @@ namespace GrindsBookingSystem
                     subID = dr.GetInt32(0).ToString();
                     sql = "INSERT INTO Tutor_Subjects (TutorID, SubjectID) VALUES ('" + tutorID + "','" + subID + "')";
                     Database.ExecuteNonQuery(sql);
-                    SuccessMessage(dgvr.Cells[0].Value.ToString() + " successfully assigned to tutor " + cboFirstName.Text + " " + cboSurname.Text);
+                    SuccessMessage(sub + " successfully assigned to tutor " + cboFirstName.Text + " " + cboSurname.Text);
                 }
 
                 dr.Close();

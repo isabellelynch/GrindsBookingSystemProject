@@ -64,10 +64,11 @@ namespace GrindsBookingSystem
             base.Reset(controls);
 
             ControlFunctions.FillBoxes("Tutors", cboTutorID, cboFirstName, cboSurname);
+            
             GridViews.Default(dgvRemoveTutors);
+            
             dgvRemoveTutors.DataSource = Tutor.GetTutorList(cboTutorID).Tables[0];
 
-            
 
             comboBoxes = ControlFunctions.CreateComboList(cboTutorID, cboFirstName, cboSurname);
 
