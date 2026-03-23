@@ -28,7 +28,6 @@
         /// </summary>
         new private void InitializeComponent()
         {
-            this.lvBookings = new System.Windows.Forms.ListView();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -38,22 +37,15 @@
             this.btnCancelBooking = new System.Windows.Forms.Button();
             this.grpCancelBooking = new System.Windows.Forms.GroupBox();
             this.btnShowBookings = new System.Windows.Forms.Button();
+            this.dgvCancelBooking = new System.Windows.Forms.DataGridView();
             this.grpCancelBooking.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCancelBooking)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lvBookings
-            // 
-            this.lvBookings.HideSelection = false;
-            this.lvBookings.Location = new System.Drawing.Point(84, 25);
-            this.lvBookings.Name = "lvBookings";
-            this.lvBookings.Size = new System.Drawing.Size(552, 145);
-            this.lvBookings.TabIndex = 0;
-            this.lvBookings.UseCompatibleStateImageBehavior = false;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(238, 59);
+            this.label2.Location = new System.Drawing.Point(104, 54);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(58, 13);
             this.label2.TabIndex = 4;
@@ -62,7 +54,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(238, 91);
+            this.label3.Location = new System.Drawing.Point(104, 86);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 13);
             this.label3.TabIndex = 5;
@@ -71,7 +63,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(238, 123);
+            this.label4.Location = new System.Drawing.Point(104, 118);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(49, 13);
             this.label4.TabIndex = 6;
@@ -80,7 +72,7 @@
             // cboStudentID
             // 
             this.cboStudentID.FormattingEnabled = true;
-            this.cboStudentID.Location = new System.Drawing.Point(351, 51);
+            this.cboStudentID.Location = new System.Drawing.Point(217, 46);
             this.cboStudentID.Name = "cboStudentID";
             this.cboStudentID.Size = new System.Drawing.Size(121, 21);
             this.cboStudentID.TabIndex = 7;
@@ -88,7 +80,7 @@
             // cboSName
             // 
             this.cboSName.FormattingEnabled = true;
-            this.cboSName.Location = new System.Drawing.Point(351, 115);
+            this.cboSName.Location = new System.Drawing.Point(217, 110);
             this.cboSName.Name = "cboSName";
             this.cboSName.Size = new System.Drawing.Size(121, 21);
             this.cboSName.TabIndex = 8;
@@ -96,14 +88,14 @@
             // cboName
             // 
             this.cboName.FormattingEnabled = true;
-            this.cboName.Location = new System.Drawing.Point(351, 83);
+            this.cboName.Location = new System.Drawing.Point(217, 78);
             this.cboName.Name = "cboName";
             this.cboName.Size = new System.Drawing.Size(121, 21);
             this.cboName.TabIndex = 9;
             // 
             // btnCancelBooking
             // 
-            this.btnCancelBooking.Location = new System.Drawing.Point(299, 194);
+            this.btnCancelBooking.Location = new System.Drawing.Point(199, 206);
             this.btnCancelBooking.Name = "btnCancelBooking";
             this.btnCancelBooking.Size = new System.Drawing.Size(138, 23);
             this.btnCancelBooking.TabIndex = 31;
@@ -112,28 +104,36 @@
             // 
             // grpCancelBooking
             // 
+            this.grpCancelBooking.Controls.Add(this.dgvCancelBooking);
             this.grpCancelBooking.Controls.Add(this.btnCancelBooking);
-            this.grpCancelBooking.Controls.Add(this.lvBookings);
-            this.grpCancelBooking.Location = new System.Drawing.Point(43, 170);
+            this.grpCancelBooking.Location = new System.Drawing.Point(9, 165);
             this.grpCancelBooking.Name = "grpCancelBooking";
-            this.grpCancelBooking.Size = new System.Drawing.Size(730, 235);
+            this.grpCancelBooking.Size = new System.Drawing.Size(501, 235);
             this.grpCancelBooking.TabIndex = 32;
             this.grpCancelBooking.TabStop = false;
             // 
             // btnShowBookings
             // 
-            this.btnShowBookings.Location = new System.Drawing.Point(342, 142);
+            this.btnShowBookings.Location = new System.Drawing.Point(208, 137);
             this.btnShowBookings.Name = "btnShowBookings";
             this.btnShowBookings.Size = new System.Drawing.Size(138, 23);
             this.btnShowBookings.TabIndex = 32;
             this.btnShowBookings.Text = "Show Bookings";
             this.btnShowBookings.UseVisualStyleBackColor = true;
             // 
+            // dgvCancelBooking
+            // 
+            this.dgvCancelBooking.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCancelBooking.Location = new System.Drawing.Point(6, 19);
+            this.dgvCancelBooking.Name = "dgvCancelBooking";
+            this.dgvCancelBooking.Size = new System.Drawing.Size(488, 181);
+            this.dgvCancelBooking.TabIndex = 32;
+            // 
             // frmCancelBooking
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(520, 450);
             this.Controls.Add(this.btnShowBookings);
             this.Controls.Add(this.grpCancelBooking);
             this.Controls.Add(this.cboName);
@@ -153,14 +153,13 @@
             this.Controls.SetChildIndex(this.grpCancelBooking, 0);
             this.Controls.SetChildIndex(this.btnShowBookings, 0);
             this.grpCancelBooking.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCancelBooking)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ListView lvBookings;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -170,5 +169,6 @@
         private System.Windows.Forms.Button btnCancelBooking;
         private System.Windows.Forms.GroupBox grpCancelBooking;
         private System.Windows.Forms.Button btnShowBookings;
+        private System.Windows.Forms.DataGridView dgvCancelBooking;
     }
 }
