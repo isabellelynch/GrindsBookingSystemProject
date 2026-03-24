@@ -91,8 +91,6 @@ namespace GrindsBookingSystem
             ResetGridView(dgv);
             string[] h = {"Subject", "Day", "Time", "Room", "CurrentEnrollment", "Level", "Group"};
             Default(dgv, h);
-           
-
         }
 
         public static void Schedule(DataGridView dgv)

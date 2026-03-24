@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Runtime.CompilerServices;
 using System.Runtime.Remoting;
 using System.Windows.Forms;
 
@@ -218,6 +219,16 @@ namespace GrindsBookingSystem
             }
             return full;
 
+        }
+
+        public static void DecrementCurrentEnrollment(Class c)
+        {
+            int ce = c.CurrentEnrollment - 1;
+
+            string sql = "UPDATE Classes " +
+                         "SET CurrentEnrollment = " + ce;
+
+            Database.ExecuteNonQuery(sql);
         }
     }
 }

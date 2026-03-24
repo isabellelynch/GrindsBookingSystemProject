@@ -36,8 +36,8 @@
             this.cboName = new System.Windows.Forms.ComboBox();
             this.btnCancelBooking = new System.Windows.Forms.Button();
             this.grpCancelBooking = new System.Windows.Forms.GroupBox();
-            this.btnShowBookings = new System.Windows.Forms.Button();
             this.dgvCancelBooking = new System.Windows.Forms.DataGridView();
+            this.btnShowBookings = new System.Windows.Forms.Button();
             this.grpCancelBooking.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCancelBooking)).BeginInit();
             this.SuspendLayout();
@@ -101,6 +101,7 @@
             this.btnCancelBooking.TabIndex = 31;
             this.btnCancelBooking.Text = "Cancel Booking";
             this.btnCancelBooking.UseVisualStyleBackColor = true;
+            this.btnCancelBooking.Click += new System.EventHandler(this.btnCancelBooking_Click);
             // 
             // grpCancelBooking
             // 
@@ -112,6 +113,14 @@
             this.grpCancelBooking.TabIndex = 32;
             this.grpCancelBooking.TabStop = false;
             // 
+            // dgvCancelBooking
+            // 
+            this.dgvCancelBooking.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCancelBooking.Location = new System.Drawing.Point(6, 19);
+            this.dgvCancelBooking.Name = "dgvCancelBooking";
+            this.dgvCancelBooking.Size = new System.Drawing.Size(488, 181);
+            this.dgvCancelBooking.TabIndex = 32;
+            // 
             // btnShowBookings
             // 
             this.btnShowBookings.Location = new System.Drawing.Point(208, 137);
@@ -120,14 +129,7 @@
             this.btnShowBookings.TabIndex = 32;
             this.btnShowBookings.Text = "Show Bookings";
             this.btnShowBookings.UseVisualStyleBackColor = true;
-            // 
-            // dgvCancelBooking
-            // 
-            this.dgvCancelBooking.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCancelBooking.Location = new System.Drawing.Point(6, 19);
-            this.dgvCancelBooking.Name = "dgvCancelBooking";
-            this.dgvCancelBooking.Size = new System.Drawing.Size(488, 181);
-            this.dgvCancelBooking.TabIndex = 32;
+            this.btnShowBookings.Click += new System.EventHandler(this.btnShowBookings_Click);
             // 
             // frmCancelBooking
             // 

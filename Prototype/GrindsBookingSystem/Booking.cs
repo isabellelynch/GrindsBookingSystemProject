@@ -29,6 +29,11 @@ namespace GrindsBookingSystem
                                     "VALUES (" + this.StudentID.ToString() + " , " + this.ClassID.ToString() + ")";
 
             Database.ExecuteNonQuery(sql);
+
+            sql = "INSERT INTO Student_Classes (StudentID, ClassID) " +
+                "VALUES (" + this.StudentID.ToString() + " , " + this.ClassID.ToString() + ")";
+
+            Database.ExecuteNonQuery(sql);
         }
         public string Read() { return ""; }
         public void Update() { }
@@ -67,6 +72,19 @@ namespace GrindsBookingSystem
                 return 0;
             }
 
+        }
+
+        public static DataSet GetStudentBookings(string id)
+        {
+            string sql = "SELECT b.BookingID, s.Description,c.Day,c.Time,tr.HourlyRate AS Amount " +
+                         "FROM Bookings b " +
+                         "JOIN Classes c ON b.ClassID = c.ClassID " +
+                         "JOIN Subjects s ON c.SubjectID = s.SubjectID " +
+                         "JOIN Tutors t ON c.TutorID = t.TutorID " +
+                         "JOIN TutorRates tr ON t.RateCode = tr.RateCode " +
+                         "WHERE b.StudentID = " + id;
+
+            return Database.ExecuteMultiRowQuery(sql);
         }
 
         public void SendBookingConfirmation()
