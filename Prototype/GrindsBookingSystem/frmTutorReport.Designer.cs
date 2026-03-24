@@ -41,13 +41,13 @@
             this.chartTutorEarnings.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chartTutorEarnings.Legends.Add(legend1);
-            this.chartTutorEarnings.Location = new System.Drawing.Point(119, 40);
+            this.chartTutorEarnings.Location = new System.Drawing.Point(27, 40);
             this.chartTutorEarnings.Name = "chartTutorEarnings";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chartTutorEarnings.Series.Add(series1);
-            this.chartTutorEarnings.Size = new System.Drawing.Size(572, 366);
+            this.chartTutorEarnings.Size = new System.Drawing.Size(999, 366);
             this.chartTutorEarnings.TabIndex = 45;
             this.chartTutorEarnings.Text = "Tutor Earnings Chart";
             this.chartTutorEarnings.MouseDown += new System.Windows.Forms.MouseEventHandler(this.chartTutorEarnings_MouseDown);
@@ -56,10 +56,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1057, 450);
             this.Controls.Add(this.chartTutorEarnings);
             this.Name = "frmTutorReport";
             this.Text = "frmTutorReport";
+            this.Load += new System.EventHandler(this.frmTutorReport_Load);
             this.Controls.SetChildIndex(this.chartTutorEarnings, 0);
             ((System.ComponentModel.ISupportInitialize)(this.chartTutorEarnings)).EndInit();
             this.ResumeLayout(false);

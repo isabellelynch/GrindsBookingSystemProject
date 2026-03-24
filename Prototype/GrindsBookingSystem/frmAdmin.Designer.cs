@@ -26,107 +26,237 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        private new void InitializeComponent()
         {
-            this.mnuViewStudentDetails = new System.Windows.Forms.MenuStrip();
-            this.btnExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnBack = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnRefresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnYearlyRev = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.cboYear = new System.Windows.Forms.ComboBox();
-            this.mnuViewStudentDetails.SuspendLayout();
+            this.grpKPIs = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtRevenue = new System.Windows.Forms.TextBox();
+            this.txtTotalBookings = new System.Windows.Forms.TextBox();
+            this.txtActiveTutors = new System.Windows.Forms.TextBox();
+            this.txtActiveStudents = new System.Windows.Forms.TextBox();
+            this.grpCharts = new System.Windows.Forms.GroupBox();
+            this.cboCharts = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtWorstTutor = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtLeastBooked = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.grpKPIs.SuspendLayout();
+            this.grpCharts.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // mnuViewStudentDetails
-            // 
-            this.mnuViewStudentDetails.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnExit,
-            this.btnBack,
-            this.btnRefresh});
-            this.mnuViewStudentDetails.Location = new System.Drawing.Point(0, 0);
-            this.mnuViewStudentDetails.Name = "mnuViewStudentDetails";
-            this.mnuViewStudentDetails.Size = new System.Drawing.Size(800, 24);
-            this.mnuViewStudentDetails.TabIndex = 42;
-            this.mnuViewStudentDetails.Text = "menuStrip1";
-            // 
-            // btnExit
-            // 
-            this.btnExit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(37, 20);
-            this.btnExit.Text = "Exit";
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // btnBack
-            // 
-            this.btnBack.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(44, 20);
-            this.btnBack.Text = "Back";
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(58, 20);
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
-            // btnYearlyRev
-            // 
-            this.btnYearlyRev.Location = new System.Drawing.Point(284, 215);
-            this.btnYearlyRev.Name = "btnYearlyRev";
-            this.btnYearlyRev.Size = new System.Drawing.Size(187, 67);
-            this.btnYearlyRev.TabIndex = 43;
-            this.btnYearlyRev.Text = "Show Total Yearly Revenue";
-            this.btnYearlyRev.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(281, 147);
+            this.label1.Location = new System.Drawing.Point(21, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 13);
+            this.label1.Size = new System.Drawing.Size(78, 13);
             this.label1.TabIndex = 45;
-            this.label1.Text = "Year";
+            this.label1.Text = "Total Revenue";
             // 
-            // cboYear
+            // grpKPIs
             // 
-            this.cboYear.FormattingEnabled = true;
-            this.cboYear.Location = new System.Drawing.Point(350, 144);
-            this.cboYear.Name = "cboYear";
-            this.cboYear.Size = new System.Drawing.Size(121, 21);
-            this.cboYear.TabIndex = 46;
+            this.grpKPIs.Controls.Add(this.label8);
+            this.grpKPIs.Controls.Add(this.txtActiveStudents);
+            this.grpKPIs.Controls.Add(this.txtActiveTutors);
+            this.grpKPIs.Controls.Add(this.txtTotalBookings);
+            this.grpKPIs.Controls.Add(this.txtRevenue);
+            this.grpKPIs.Controls.Add(this.label4);
+            this.grpKPIs.Controls.Add(this.label3);
+            this.grpKPIs.Controls.Add(this.label2);
+            this.grpKPIs.Controls.Add(this.label1);
+            this.grpKPIs.Location = new System.Drawing.Point(12, 27);
+            this.grpKPIs.Name = "grpKPIs";
+            this.grpKPIs.Size = new System.Drawing.Size(535, 123);
+            this.grpKPIs.TabIndex = 46;
+            this.grpKPIs.TabStop = false;
+            this.grpKPIs.Text = "Key Performance Indicators";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(269, 74);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(70, 13);
+            this.label2.TabIndex = 46;
+            this.label2.Text = "Active Tutors";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(269, 28);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(82, 13);
+            this.label3.TabIndex = 47;
+            this.label3.Text = "Active Students";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(21, 74);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(78, 13);
+            this.label4.TabIndex = 48;
+            this.label4.Text = "Total Bookings";
+            // 
+            // txtRevenue
+            // 
+            this.txtRevenue.Location = new System.Drawing.Point(122, 25);
+            this.txtRevenue.Name = "txtRevenue";
+            this.txtRevenue.Size = new System.Drawing.Size(100, 20);
+            this.txtRevenue.TabIndex = 49;
+            // 
+            // txtTotalBookings
+            // 
+            this.txtTotalBookings.Location = new System.Drawing.Point(126, 71);
+            this.txtTotalBookings.Name = "txtTotalBookings";
+            this.txtTotalBookings.Size = new System.Drawing.Size(100, 20);
+            this.txtTotalBookings.TabIndex = 50;
+            // 
+            // txtActiveTutors
+            // 
+            this.txtActiveTutors.Location = new System.Drawing.Point(381, 67);
+            this.txtActiveTutors.Name = "txtActiveTutors";
+            this.txtActiveTutors.Size = new System.Drawing.Size(100, 20);
+            this.txtActiveTutors.TabIndex = 51;
+            // 
+            // txtActiveStudents
+            // 
+            this.txtActiveStudents.Location = new System.Drawing.Point(381, 25);
+            this.txtActiveStudents.Name = "txtActiveStudents";
+            this.txtActiveStudents.Size = new System.Drawing.Size(100, 20);
+            this.txtActiveStudents.TabIndex = 52;
+            // 
+            // grpCharts
+            // 
+            this.grpCharts.Controls.Add(this.label5);
+            this.grpCharts.Controls.Add(this.cboCharts);
+            this.grpCharts.Location = new System.Drawing.Point(12, 167);
+            this.grpCharts.Name = "grpCharts";
+            this.grpCharts.Size = new System.Drawing.Size(535, 266);
+            this.grpCharts.TabIndex = 47;
+            this.grpCharts.TabStop = false;
+            this.grpCharts.Text = "Charts";
+            // 
+            // cboCharts
+            // 
+            this.cboCharts.FormattingEnabled = true;
+            this.cboCharts.Location = new System.Drawing.Point(106, 14);
+            this.cboCharts.Name = "cboCharts";
+            this.cboCharts.Size = new System.Drawing.Size(121, 21);
+            this.cboCharts.TabIndex = 0;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 22);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(94, 13);
+            this.label5.TabIndex = 49;
+            this.label5.Text = "Choose chart data";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtLeastBooked);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.txtWorstTutor);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Location = new System.Drawing.Point(12, 450);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(535, 117);
+            this.groupBox1.TabIndex = 48;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Concerns";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(21, 25);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(119, 13);
+            this.label6.TabIndex = 46;
+            this.label6.Text = " Worst Performing Tutor";
+            // 
+            // txtWorstTutor
+            // 
+            this.txtWorstTutor.Location = new System.Drawing.Point(156, 22);
+            this.txtWorstTutor.Name = "txtWorstTutor";
+            this.txtWorstTutor.Size = new System.Drawing.Size(100, 20);
+            this.txtWorstTutor.TabIndex = 50;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(21, 61);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(101, 13);
+            this.label7.TabIndex = 51;
+            this.label7.Text = "Least Booked Class";
+            // 
+            // txtLeastBooked
+            // 
+            this.txtLeastBooked.Location = new System.Drawing.Point(156, 58);
+            this.txtLeastBooked.Name = "txtLeastBooked";
+            this.txtLeastBooked.Size = new System.Drawing.Size(100, 20);
+            this.txtLeastBooked.TabIndex = 52;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(226, 70);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(0, 13);
+            this.label8.TabIndex = 53;
             // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.cboYear);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnYearlyRev);
-            this.Controls.Add(this.mnuViewStudentDetails);
+            this.ClientSize = new System.Drawing.Size(561, 583);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.grpCharts);
+            this.Controls.Add(this.grpKPIs);
             this.Name = "frmAdmin";
             this.Text = "frmAdmin";
             this.Load += new System.EventHandler(this.frmAdmin_Load);
-            this.mnuViewStudentDetails.ResumeLayout(false);
-            this.mnuViewStudentDetails.PerformLayout();
+            this.Controls.SetChildIndex(this.grpKPIs, 0);
+            this.Controls.SetChildIndex(this.grpCharts, 0);
+            this.Controls.SetChildIndex(this.groupBox1, 0);
+            this.grpKPIs.ResumeLayout(false);
+            this.grpKPIs.PerformLayout();
+            this.grpCharts.ResumeLayout(false);
+            this.grpCharts.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.MenuStrip mnuViewStudentDetails;
-        private System.Windows.Forms.ToolStripMenuItem btnExit;
-        private System.Windows.Forms.ToolStripMenuItem btnBack;
-        private System.Windows.Forms.ToolStripMenuItem btnRefresh;
-        private System.Windows.Forms.Button btnYearlyRev;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cboYear;
+        private System.Windows.Forms.GroupBox grpKPIs;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtActiveStudents;
+        private System.Windows.Forms.TextBox txtActiveTutors;
+        private System.Windows.Forms.TextBox txtTotalBookings;
+        private System.Windows.Forms.TextBox txtRevenue;
+        private System.Windows.Forms.GroupBox grpCharts;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cboCharts;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox txtLeastBooked;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtWorstTutor;
+        private System.Windows.Forms.Label label6;
     }
 }

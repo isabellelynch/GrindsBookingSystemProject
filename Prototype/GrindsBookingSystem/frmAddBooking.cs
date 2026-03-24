@@ -174,7 +174,7 @@ namespace GrindsBookingSystem
                 {
                     if (b.HasStudentAlreadyBooked() == false)
                     {
-                        int amount = b.GetAmount(c.TutorID);
+                        int amount = Booking.GetAmount(c.TutorID);
 
                         DialogResult d = MessageBox.Show("Please confirm that the student has paid the €" + amount + " due before continuing to book","Payment", 
                             MessageBoxButtons.YesNo, MessageBoxIcon.Question);

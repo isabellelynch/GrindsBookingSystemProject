@@ -55,7 +55,7 @@ namespace GrindsBookingSystem
             }
         }
 
-        public int GetAmount(string id)
+        public static int GetAmount(string id)
         {
             string sql = "SELECT tr.HourlyRate " +
                                 "FROM Tutors t " +

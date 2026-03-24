@@ -1,6 +1,6 @@
 ﻿namespace GrindsBookingSystem
 {
-    partial class frmCancelBooking
+    partial class frmManageBookings
     {
         /// <summary>
         /// Required designer variable.

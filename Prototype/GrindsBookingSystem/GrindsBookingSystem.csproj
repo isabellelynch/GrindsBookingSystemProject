@@ -131,11 +131,11 @@
     <Compile Include="frmAdmin.Designer.cs">
       <DependentUpon>frmAdmin.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmCancelBooking.cs">
+    <Compile Include="frmManageBookings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmCancelBooking.Designer.cs">
-      <DependentUpon>frmCancelBooking.cs</DependentUpon>
+    <Compile Include="frmManageBookings.Designer.cs">
+      <DependentUpon>frmManageBookings.cs</DependentUpon>
     </Compile>
     <Compile Include="frmUpdateClass.cs">
       <SubType>Form</SubType>
@@ -252,8 +252,8 @@
     <EmbeddedResource Include="frmAdmin.resx">
       <DependentUpon>frmAdmin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmCancelBooking.resx">
-      <DependentUpon>frmCancelBooking.cs</DependentUpon>
+    <EmbeddedResource Include="frmManageBookings.resx">
+      <DependentUpon>frmManageBookings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmUpdateClass.resx">
       <DependentUpon>frmUpdateClass.cs</DependentUpon>

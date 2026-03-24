@@ -252,8 +252,6 @@ C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject1\Prototype
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject1\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.exe.config
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject1\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmAddBooking.resources
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject1\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmAdmin.resources
-C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject1\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmCancelBooking.resources
-C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject1\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmDBconnectionTest.resources
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject1\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmShowBookings.resources
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject1\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmTutorReport.resources
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject1\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmUpdateTutor.resources
@@ -609,3 +607,8 @@ C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProje\Prototype\Gr
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProje\Prototype\GrindsBookingSystem\obj\Debug\GrindsBo.9DA63EF8.Up2Date
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProje\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.exe
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProje\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.pdb
+C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject1\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.BaseForm.resources
+C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject1\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmAddSubject.resources
+C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject1\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmAssignSubjects.resources
+C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject1\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmRemoveClass.resources
+C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject1\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmManageBookings.resources

@@ -57,14 +57,8 @@ namespace GrindsBookingSystem
 
         private void CancelBooking_Click(object sender, EventArgs e)
         {
-            NewPage(new frmCancelBooking());
+            NewPage(new frmManageBookings());
         }
-
-        private void ViewBookings_Click(object sender, EventArgs e)
-        {
-            NewPage(new frmShowBookings());
-        }
-
         private void YearlyRevenue_Click(object sender, EventArgs e)
         {
             NewPage(new frmAdmin());

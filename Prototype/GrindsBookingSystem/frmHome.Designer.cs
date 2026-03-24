@@ -50,7 +50,6 @@
             this.bookingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MakeBooking = new System.Windows.Forms.ToolStripMenuItem();
             this.CancelBooking = new System.Windows.Forms.ToolStripMenuItem();
-            this.ViewBookings = new System.Windows.Forms.ToolStripMenuItem();
             this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.YearlyRevenue = new System.Windows.Forms.ToolStripMenuItem();
             this.EarningsAnalysis = new System.Windows.Forms.ToolStripMenuItem();
@@ -137,26 +136,26 @@
             // AddSubject
             // 
             this.AddSubject.Name = "AddSubject";
-            this.AddSubject.Size = new System.Drawing.Size(180, 22);
+            this.AddSubject.Size = new System.Drawing.Size(159, 22);
             this.AddSubject.Text = "Add Subjecst";
             this.AddSubject.Click += new System.EventHandler(this.AddSubject_Click);
             // 
             // RemoveSubject
             // 
             this.RemoveSubject.Name = "RemoveSubject";
-            this.RemoveSubject.Size = new System.Drawing.Size(180, 22);
+            this.RemoveSubject.Size = new System.Drawing.Size(159, 22);
             this.RemoveSubject.Text = "Remove Subject";
             // 
             // UpdateSubject
             // 
             this.UpdateSubject.Name = "UpdateSubject";
-            this.UpdateSubject.Size = new System.Drawing.Size(180, 22);
+            this.UpdateSubject.Size = new System.Drawing.Size(159, 22);
             this.UpdateSubject.Text = "Update Subjects";
             // 
             // ViewSubjects
             // 
             this.ViewSubjects.Name = "ViewSubjects";
-            this.ViewSubjects.Size = new System.Drawing.Size(180, 22);
+            this.ViewSubjects.Size = new System.Drawing.Size(159, 22);
             this.ViewSubjects.Text = "View Subjects";
             // 
             // studentsToolStripMenuItem
@@ -209,8 +208,7 @@
             // 
             this.bookingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MakeBooking,
-            this.CancelBooking,
-            this.ViewBookings});
+            this.CancelBooking});
             this.bookingsToolStripMenuItem.Name = "bookingsToolStripMenuItem";
             this.bookingsToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
             this.bookingsToolStripMenuItem.Text = "Bookings";
@@ -218,23 +216,16 @@
             // MakeBooking
             // 
             this.MakeBooking.Name = "MakeBooking";
-            this.MakeBooking.Size = new System.Drawing.Size(157, 22);
+            this.MakeBooking.Size = new System.Drawing.Size(180, 22);
             this.MakeBooking.Text = "Make Booking";
             this.MakeBooking.Click += new System.EventHandler(this.MakeBooking_Click);
             // 
             // CancelBooking
             // 
             this.CancelBooking.Name = "CancelBooking";
-            this.CancelBooking.Size = new System.Drawing.Size(157, 22);
-            this.CancelBooking.Text = "Cancel Booking";
+            this.CancelBooking.Size = new System.Drawing.Size(180, 22);
+            this.CancelBooking.Text = "Manage Bookings";
             this.CancelBooking.Click += new System.EventHandler(this.CancelBooking_Click);
-            // 
-            // ViewBookings
-            // 
-            this.ViewBookings.Name = "ViewBookings";
-            this.ViewBookings.Size = new System.Drawing.Size(157, 22);
-            this.ViewBookings.Text = "View Bookings";
-            this.ViewBookings.Click += new System.EventHandler(this.ViewBookings_Click);
             // 
             // adminToolStripMenuItem
             // 
@@ -248,8 +239,8 @@
             // YearlyRevenue
             // 
             this.YearlyRevenue.Name = "YearlyRevenue";
-            this.YearlyRevenue.Size = new System.Drawing.Size(199, 22);
-            this.YearlyRevenue.Text = "Yearly Revenue Analysis";
+            this.YearlyRevenue.Size = new System.Drawing.Size(197, 22);
+            this.YearlyRevenue.Text = "Statistics";
             this.YearlyRevenue.Click += new System.EventHandler(this.YearlyRevenue_Click);
             // 
             // EarningsAnalysis
@@ -313,7 +304,6 @@
         private System.Windows.Forms.ToolStripMenuItem bookingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem MakeBooking;
         private System.Windows.Forms.ToolStripMenuItem CancelBooking;
-        private System.Windows.Forms.ToolStripMenuItem ViewBookings;
         private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.PictureBox picHome;
