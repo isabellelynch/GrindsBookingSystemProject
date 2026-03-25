@@ -14,31 +14,29 @@ namespace GrindsBookingSystem
         public frmTutorReport()
         {
             InitializeComponent();
-
-
         }
         private void chartTutorEarnings_MouseDown(object sender, MouseEventArgs e)
         {
             HitTestResult result = chartTutorEarnings.HitTest(e.X, e.Y);
+            int pointIndex = result.PointIndex;
+            Series series = result.Series;
+            DataPoint point = series.Points[pointIndex];
 
-            if (result.ChartElementType == ChartElementType.DataPoint)
+            var tutorID = point.AxisLabel;
+            if (tutorID != null) 
             {
-                int pointIndex = result.PointIndex;
-
-                Series series = result.Series;
-
-                DataPoint point = series.Points[pointIndex];
-
-                var tutorView = point.Tag as Tutor;
-
-                if (tutorView != null)
+                try
                 {
-                    MessageBox.Show("The details of the chosen tutor are:\n\n" + $"Tutor ID : {tutorView.PersonID}\n" +
-                        $"First Name : {tutorView.FirstName}\n" + $"Last Name : {tutorView.Surname}\n" +
-                        $"Phone : {tutorView.Phone}\n" + $"Email : {tutorView.Email}",
-                        "Tutor Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
+                    Tutor t = Tutor.GetTutor(Convert.ToInt32(tutorID));
+                    MessageBox.Show(t.ToString(),
+                                "Tutor Details",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
                 }
+                catch (Exception ex) 
+                {
+                    ErrorMessage(ex.Message);
+                } 
             }
         }
 
