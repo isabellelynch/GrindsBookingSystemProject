@@ -50,7 +50,6 @@
             this.chartTutorEarnings.Size = new System.Drawing.Size(999, 366);
             this.chartTutorEarnings.TabIndex = 45;
             this.chartTutorEarnings.Text = "Tutor Earnings Chart";
-            this.chartTutorEarnings.MouseDown += new System.Windows.Forms.MouseEventHandler(this.chartTutorEarnings_MouseDown);
             // 
             // frmTutorReport
             // 
@@ -60,7 +59,6 @@
             this.Controls.Add(this.chartTutorEarnings);
             this.Name = "frmTutorReport";
             this.Text = "frmTutorReport";
-            this.Load += new System.EventHandler(this.frmTutorReport_Load);
             this.Controls.SetChildIndex(this.chartTutorEarnings, 0);
             ((System.ComponentModel.ISupportInitialize)(this.chartTutorEarnings)).EndInit();
             this.ResumeLayout(false);

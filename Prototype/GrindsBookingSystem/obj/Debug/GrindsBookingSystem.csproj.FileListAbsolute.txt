@@ -611,3 +611,4 @@ C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject1\Prototype
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject1\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmManageBookings.resources
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProjec\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmManageBookings.resources
 C:\Users\StudentIsabelleLynch\source\repos\GrindsBookingSystemProject\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmManageBookings.resources
+C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProject\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.exe.config

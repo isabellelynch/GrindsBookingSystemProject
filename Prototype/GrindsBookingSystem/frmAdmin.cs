@@ -1,6 +1,8 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Data;
+using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 
 
@@ -8,6 +10,7 @@ namespace GrindsBookingSystem
 {
     public partial class frmAdmin : BaseForm
     {
+        string[] headings = { "Tutor Earnings" , "Monthly Revenue Analysis" };
         public frmAdmin()
         {
             InitializeComponent();
@@ -20,35 +23,45 @@ namespace GrindsBookingSystem
             txtTotalBookings.Text = GenerateTotalAnnualBookings().ToString();
             txtActiveStudents.Text = GetActive("Students").ToString();
             txtActiveTutors.Text = GetActive("Tutors").ToString();
-            txtWorstTutor.Text = WorstPerformingTutor();
+            txtWorstTutor.Text = Tutor.WorstPerformingTutor();
             txtLeastBooked.Text = LeastBookedClass();
+            foreach(var h in headings)
+            {
+                cboCharts.Items.Add(h.ToString());
+            }
+            Charts.Visible = false;
         }
 
-        private double GenerateTotalAnnualRevenue()
+        private int GenerateTotalAnnualRevenue()
         {
             string sql = "SELECT SUM(tr.HourlyRate) " +
                          "FROM Bookings b " +
-                         "JOIN Classes c ON b.ClassID = c.ClassID " +
+                         "JOIN Classes c ON c.ClassID = b.ClassID " +
                          "JOIN Tutors t ON c.TutorID = t.TutorID " +
                          "JOIN TutorRates tr ON t.RateCode = tr.RateCode " +
                          "WHERE EXTRACT(YEAR FROM b.BookingDate) = EXTRACT(YEAR FROM SYSDATE)";
             
-            double total = 0;
+            int total = 0;
             
             OracleDataReader dr =  Database.ExecuteSingleRowQuery(sql);
-            if (dr.Read()) 
+
+            if (dr != null && dr.Read()) 
             {
-                total = dr.GetDouble(0);
+                if (!dr.IsDBNull(0))
+                {
+                    total = Convert.ToInt32(dr.GetValue(0));
+                }    
             }
 
             dr.Close();
+
             return total;
         }
 
         private int GenerateTotalAnnualBookings()
         {
             string sql = "SELECT COUNT(*) " +
-                         "FROM Bookings " +
+                         "FROM Bookings b " +
                          "WHERE EXTRACT(YEAR FROM b.BookingDate) = EXTRACT(YEAR FROM SYSDATE)";
 
             int total = 0;
@@ -68,7 +81,7 @@ namespace GrindsBookingSystem
         private int GetActive(string table)
         {
             string sql = "SELECT COUNT(*) " +
-                         "FROM " + table +
+                         "FROM " + table + " " +
                          "WHERE Status = 'A'";
 
             OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
@@ -85,36 +98,15 @@ namespace GrindsBookingSystem
             return count;
         }
 
-        private string WorstPerformingTutor()
-        {
-            string sql ="SELECT t.FirstName, t.Surname NVL(SUM(tr.HourlyRate), 0) AS TotalEarnings " +
-                        "FROM Tutors t " +
-                        "JOIN TutorRates tr ON t.RateCode = tr.RateCode " +
-                        "LEFT JOIN Classes c ON t.TutorID = c.TutorID " +
-                        "LEFT JOIN Bookings b ON c.ClassID = b.ClassID " +
-                        "AND EXTRACT(YEAR FROM b.BookingDate) = EXTRACT(YEAR FROM SYSDATE) " +
-                        "GROUP BY t.TutorID, t.FirstName, t.Surname " +
-                        "ORDER BY TotalEarnings ASC " +
-                        "FETCH FIRST 1 ROW WITH TIES";
-            string result = "";
-            DataSet ds = Database.ExecuteMultiRowQuery(sql);
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                if (ds.Tables[0].Rows.Count == 1) 
-                { 
-                    result = ds.Tables[0].Rows[0].ToString();
-                }
-            }
-            return result;
-        }
+        
 
         private string LeastBookedClass()
         {
-            string sql = "SELECT s.Description " +
+            string sql = "SELECT s.Description, COUNT(*) AS BookingCount " +
                          "FROM Classes c " +
                          "LEFT JOIN Bookings b ON c.ClassID = b.ClassID " +
                          "JOIN Subjects s ON c.SubjectID = s.SubjectID " +
-                         "GROUP BY c.ClassID " +
+                         "GROUP BY s.Description " +
                          "ORDER BY BookingCount ASC " +
                          "FETCH FIRST 1 ROW WITH TIES";
 
@@ -126,18 +118,149 @@ namespace GrindsBookingSystem
             {
                 if (ds.Tables[0].Rows.Count == 1)
                 {
-                    result = ds.Tables[0].Rows[0].ToString();
+                    result = ds.Tables[0].Rows[0]["Description"].ToString();
                 }
             }
             return result;
         }
 
+        private void GetTutorEarningsChart()
+        {
+            string sql = "SELECT t.TutorID, NVL(SUM(tr.HourlyRate), 0) AS TotalEarnings " +
+            "FROM Tutors t " +
+            "JOIN TutorRates tr ON t.RateCode = tr.RateCode " +
+            "LEFT JOIN Classes c ON t.TutorID = c.TutorID " +
+            "LEFT JOIN Bookings b ON c.ClassID = b.ClassID " +
+            "AND EXTRACT(YEAR FROM b.BookingDate) = EXTRACT(YEAR FROM SYSDATE) " +
+            "GROUP BY t.TutorID, t.FirstName, t.Surname " +
+            "ORDER BY TotalEarnings DESC";
+
+            DataTable dt =  Database.ExecuteMultiRowQuery(sql).Tables[0];
+
+            ChartArea area = new ChartArea();
+
+            area.AxisX.MajorGrid.Enabled = false;
+            area.AxisY.MajorGrid.Enabled = false;
+            area.AxisX.Interval = 1;
+            area.AxisX.Title = "Tutors";
+            area.AxisY.Title = "Earnings (€) " + DateTime.Now.Year;
+
+            Charts.ChartAreas.Add(area);
+
+            Series series = new Series
+            {
+                Name = "Tutors",
+                ChartType = SeriesChartType.Column,
+                IsValueShownAsLabel = true,
+            };
+
+            Charts.Series.Add(series);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                Charts.Series["Tutors"].Points.AddXY(
+                    row["TutorID"].ToString(),
+                    Convert.ToDecimal(row["TotalEarnings"])
+                );
+            }
+        }
+        private void GetRevenueChart()
+        {
+            string sql = "SELECT " +
+                             "TO_CHAR(b.BookingDate, 'YYYY-MM') AS Month," +
+                             "SUM(tr.HourlyRate) AS Revenue " +
+                         "FROM Bookings b " +
+                         "JOIN Classes c ON b.ClassID = c.ClassID " +
+                         "JOIN Tutors t ON c.TutorID = t.TutorID " +
+                         "JOIN TutorRates tr ON t.RateCode = tr.RateCode " +
+                         "GROUP BY TO_CHAR(b.BookingDate, 'YYYY-MM') " +
+                         "ORDER BY Month";
+
+            DataTable dt = Database.ExecuteMultiRowQuery(sql).Tables[0];
+
+            ChartArea area = new ChartArea();
+
+            area.AxisX.MajorGrid.Enabled = false;
+            area.AxisY.MajorGrid.Enabled = false;
+            area.AxisX.Interval = 1;
+            area.AxisX.Title = "Month";
+            area.AxisY.Title = "Revenue";
+
+            Charts.ChartAreas.Add(area);
+
+            Series series = new Series
+            {
+                Name = "Revenue",
+                ChartType = SeriesChartType.Column,
+                IsValueShownAsLabel = true,
+            };
+
+            Charts.Series.Add(series);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                Charts.Series["Revenue"].Points.AddXY(
+                    row["Month"].ToString(),
+                    Convert.ToDecimal(row["Revenue"])
+                );
+            }
+        }
+
+        
+
+        private void cboCharts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Charts.Series.Clear();
+            Charts.ChartAreas.Clear();
+            Charts.Visible = true;
+
+            if (cboCharts.Text == "Tutor Earnings")
+            {
+                GetTutorEarningsChart();
+                Charts.MouseDown -= Charts_MouseDownTutors;
+                Charts.MouseDown += Charts_MouseDownTutors;
+            }
+            if(cboCharts.Text == "Monthly Revenue Analysis")
+            {
+                GetRevenueChart();
+            }
+            
+        }
 
 
 
 
+        private void Charts_MouseDownTutors(object sender, MouseEventArgs e)
+        {
+            HitTestResult result = Charts.HitTest(e.X, e.Y);
 
 
+            if (result.ChartElementType != ChartElementType.DataPoint)
+                return;
+
+            if (result.PointIndex < 0 || result.Series == null)
+                return;
+
+            DataPoint point = result.Series.Points[result.PointIndex];
+
+            try
+            {
+                int tutorID = Convert.ToInt32(point.AxisLabel);
+
+                Tutor t = Tutor.GetTutor(tutorID);
+
+                MessageBox.Show(t.ToString(),
+                                "Tutor Details",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage(ex.Message);
+            }
+
+
+        }
 
 
     }

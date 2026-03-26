@@ -124,6 +124,32 @@ namespace GrindsBookingSystem
             return t;
         }
 
+        public string WorstPerformingTutor()
+        {
+            string sql = "SELECT t.FirstName, t.Surname, NVL(SUM(tr.HourlyRate), 0) AS TotalEarnings " +
+                        "FROM Tutors t " +
+                        "JOIN TutorRates tr ON t.RateCode = tr.RateCode " +
+                        "LEFT JOIN Classes c ON t.TutorID = c.TutorID " +
+                        "LEFT JOIN Bookings b ON c.ClassID = b.ClassID " +
+                        "AND EXTRACT(YEAR FROM b.BookingDate) = EXTRACT(YEAR FROM SYSDATE) " +
+                        "GROUP BY t.TutorID, t.FirstName, t.Surname " +
+                        "ORDER BY TotalEarnings ASC " +
+                        "FETCH FIRST 1 ROW WITH TIES";
+
+            string result = "";
+
+            DataSet ds = Database.ExecuteMultiRowQuery(sql);
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                result = ds.Tables[0].Rows[0]["FirstName"].ToString() + " " +
+                         ds.Tables[0].Rows[0]["Surname"].ToString() + " €" +
+                         ds.Tables[0].Rows[0]["TotalEarnings"].ToString();
+
+            }
+
+            return result;
+        }
 
         public String IsValid()
         {
