@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.Remoting;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -120,6 +121,35 @@ namespace GrindsBookingSystem
                 return false;
             }
             return true;
+        }
+
+        public static DataTable GetBookingDetails(string text)
+        {
+            string edit = "";
+
+            if (text.Length > 0)
+            {
+                edit = " AND s.Description = '" + text + "' ";
+            }
+
+            string sql = "SELECT s.Description, s.SubjectLevel, s.SubjectCategory, " +
+                         "CASE c.Day " +
+                                "WHEN 1 THEN 'Monday'" +
+                                "WHEN 2 THEN 'Tuesday'" +
+                                "WHEN 3 THEN 'Wednesday'" +
+                                "WHEN 4 THEN 'Thursday'" +
+                                "WHEN 5 THEN 'Friday'" +
+                                "END AS DayName, " +
+                         "c.Time, c.RoomNo, c.CurrentEnrollment, r.Capacity " +
+                         "FROM Classes c JOIN Subjects s " +
+                         "ON c.SubjectID = s.SubjectID " +
+                         "JOIN Rooms r ON c.RoomNo = r.RoomNo " +
+                         "WHERE c.SemesterNo = " + Class.GetCurrentSemester() + edit +
+                         "ORDER BY s.Description, c.Day";
+
+            DataSet ds = Database.ExecuteMultiRowQuery(sql);
+
+            return ds.Tables[0];
         }
     }
 }

@@ -55,7 +55,7 @@ namespace GrindsBookingSystem
                 }
                 else if (day == 0 || day > 5 || time < 0 || time > 8)
                 {
-                    msg = "An appropriate timeslot" + msg;
+                    msg = "An appropriate timeslot must be chosen before continuing";
                 }
                 else if(c.Value == null)
                 {

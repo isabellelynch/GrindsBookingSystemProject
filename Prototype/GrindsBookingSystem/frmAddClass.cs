@@ -35,7 +35,15 @@ namespace GrindsBookingSystem
 
             string tutorID = spaceIndex > -1 ? text.Substring(0, spaceIndex) : text;
 
-            Class c = new Class(Day, Time, tutorID, 0, Room, Class.GetCurrentSemester(), "1");
+            string sub = cboSubjects.Text;
+
+            string cat = sub.Substring(0, 2);
+            string level = sub.Substring(3, 2);
+            string description = sub.Substring(5);
+
+            string subID = Subject.GetSubjectID(cat, level, description);
+
+            Class c = new Class(Day, Time, tutorID, 0, Room, Class.GetCurrentSemester(), subID);
 
             try
             {

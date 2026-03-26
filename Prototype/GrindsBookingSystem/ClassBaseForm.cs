@@ -139,7 +139,7 @@ namespace GrindsBookingSystem
 
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                cboSubjects.Items.Add(dr[2] + ", " + dr[1] + " " + dr[0]);
+                cboSubjects.Items.Add(dr[2] + "," + dr[1] + " " + dr[0]);
             }
         }
 

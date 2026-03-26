@@ -59,7 +59,6 @@ namespace GrindsBookingSystem
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         public void Delete() 
@@ -124,7 +123,7 @@ namespace GrindsBookingSystem
             return t;
         }
 
-        public string WorstPerformingTutor()
+        public static string WorstPerformingTutor()
         {
             string sql = "SELECT t.FirstName, t.Surname, NVL(SUM(tr.HourlyRate), 0) AS TotalEarnings " +
                         "FROM Tutors t " +
@@ -145,7 +144,6 @@ namespace GrindsBookingSystem
                 result = ds.Tables[0].Rows[0]["FirstName"].ToString() + " " +
                          ds.Tables[0].Rows[0]["Surname"].ToString() + " €" +
                          ds.Tables[0].Rows[0]["TotalEarnings"].ToString();
-
             }
 
             return result;

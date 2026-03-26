@@ -3,6 +3,7 @@
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Data;
+using System.Windows.Forms;
 
 namespace GrindsBookingSystem
 {
@@ -57,6 +58,25 @@ namespace GrindsBookingSystem
             return s;
         }
 
+        public static string GetSubjectID(string cat, string level, string description)
+        {
+            string sql = "SELECT SubjectID " +
+                         "FROM Subjects " +
+                         "WHERE SubjectCategory = '" + cat + "'" +
+                         " AND SubjectLevel = '" + level + "'" +
+                         " AND Description = '" + description + "'";
+
+            string s = "";
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+
+            s = dr.GetInt32(0).ToString();
+
+            dr.Close();
+
+            return s;
+        }
+
         public override string ToString()
         {
             return "Subject : " + this.Description +
@@ -73,6 +93,13 @@ namespace GrindsBookingSystem
         {
             Subject s = GetSubject(subID);
             return s.Level + ", " + s.Category + " - " + s.Description;
+        }
+        
+        public static DataTable GetSubjectDescriptions()
+        {
+            string sql = "SELECT DISTINCT Description FROM Subjects";
+            DataSet ds = Database.ExecuteMultiRowQuery(sql);
+            return ds.Tables[0];
         }
     }
 }

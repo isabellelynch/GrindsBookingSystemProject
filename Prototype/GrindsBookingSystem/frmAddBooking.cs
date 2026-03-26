@@ -1,5 +1,4 @@
-﻿using Oracle.ManagedDataAccess.Client;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
@@ -77,66 +76,47 @@ namespace GrindsBookingSystem
         private void FillSubjects()
         {
             cboSubjects.Items.Clear();
-
-            string sql = "SELECT DISTINCT Description FROM Subjects";
-
+            DataTable dt = null;
             try
             {
-                DataSet ds = Database.ExecuteMultiRowQuery(sql);
-                foreach (DataRow dr in ds.Tables[0].Rows)
-                {
-                    cboSubjects.Items.Add(dr[0].ToString());
-                }
+                dt = Subject.GetSubjectDescriptions();
             }
             catch (Exception ex) 
             {
                 ErrorMessage(ex.Message);
+            }
+            if (dt != null)
+            {
+                foreach (DataRow dr in Subject.GetSubjectDescriptions().Rows)
+                {
+                    cboSubjects.Items.Add(dr[0].ToString());
+                }
             }
         }
 
         private void FillGridView()
         {
             dgvMakeBooking.Rows.Clear();
-
-            string edit = "";
-
-            if(cboSubjects.Text.Length > 0)
+            try
             {
-                edit = " AND s.Description = '" + cboSubjects.Text + "' ";
+                DataTable dt = Booking.GetBookingDetails(cboSubjects.Text);
+                foreach (DataRow dr in dt.Rows)
+                {
+                    dgvMakeBooking.Rows.Add(
+                    dr["Description"],
+                    dr["DayName"],
+                    dr["Time"] + ":00",
+                    dr["RoomNo"],
+                    dr["CurrentEnrollment"] + " / " + dr["Capacity"],
+                    dr["SubjectLevel"],
+                    dr["SubjectCategory"]
+                    );
+                }
             }
-
-            string sql = "SELECT s.Description, s.SubjectLevel, s.SubjectCategory, " +
-                         "CASE c.Day " +
-                                "WHEN 1 THEN 'Monday'"+
-                                "WHEN 2 THEN 'Tuesday'"+
-                                "WHEN 3 THEN 'Wednesday'"+
-                                "WHEN 4 THEN 'Thursday'"+
-                                "WHEN 5 THEN 'Friday'"+
-                                "END AS DayName, " +
-                         "c.Time, c.RoomNo, c.CurrentEnrollment, r.Capacity " +
-                         "FROM Classes c JOIN Subjects s " +
-                         "ON c.SubjectID = s.SubjectID " +
-                         "JOIN Rooms r ON c.RoomNo = r.RoomNo " +
-                         "WHERE c.SemesterNo = " + Class.GetCurrentSemester() + edit +
-                         "ORDER BY s.Description, c.Day";
-
-            
-
-            DataSet ds = Database.ExecuteMultiRowQuery(sql);
-
-            foreach (DataRow dr in ds.Tables[0].Rows)
+            catch (Exception ex) 
             {
-                dgvMakeBooking.Rows.Add(
-                dr["Description"],
-                dr["DayName"],
-                dr["Time"] + ":00",
-                dr["RoomNo"],
-                dr["CurrentEnrollment"] + " / " + dr["Capacity"],
-                dr["SubjectLevel"],
-                dr["SubjectCategory"]
-                );
+                ErrorMessage(ex.Message);
             }
-
         }
 
         private void cboSubjects_SelectedIndexChanged(object sender, EventArgs e)
@@ -203,6 +183,7 @@ namespace GrindsBookingSystem
                     else
                     {
                         ErrorMessage("This student has already been booked into this class");
+                        return;
                     }
                 }
                 else
@@ -210,9 +191,6 @@ namespace GrindsBookingSystem
                     ErrorMessage("System Error! The class you would like to book cannot be found");
                     return;
                 }
-
-
-                
             }
             Reset(this.Controls);
         }
