@@ -58,23 +58,24 @@ namespace GrindsBookingSystem
             return s;
         }
 
-        public static string GetSubjectID(string cat, string level, string description)
+        public static string GetSubjectID(string level, string cat, string description)
         {
             string sql = "SELECT SubjectID " +
                          "FROM Subjects " +
-                         "WHERE SubjectCategory = '" + cat + "'" +
-                         " AND SubjectLevel = '" + level + "'" +
-                         " AND Description = '" + description + "'";
+                         "WHERE SubjectCategory = 'JC'" +
+                         " AND SubjectLevel = 'OL'" +
+                         " AND Description = 'Mathematics'";
 
-            string s = "";
 
             OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
 
-            s = dr.GetInt32(0).ToString();
+            if(dr != null && dr.Read())
+            {
+                return dr.GetInt32(0).ToString();
+            }
 
-            dr.Close();
-
-            return s;
+            return "";
+            
         }
 
         public override string ToString()

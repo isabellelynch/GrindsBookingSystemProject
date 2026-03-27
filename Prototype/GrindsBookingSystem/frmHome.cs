@@ -64,10 +64,7 @@ namespace GrindsBookingSystem
             NewPage(new frmAdmin());
         }
 
-        private void EarningsAnalysis_Click(object sender, EventArgs e)
-        {
-            NewPage(new frmTutorReport());
-        }
+
         
         private void scheduleToolStripMenuItem_Click(object sender, EventArgs e)
         {

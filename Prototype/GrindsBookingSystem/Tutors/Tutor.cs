@@ -16,6 +16,11 @@ namespace GrindsBookingSystem
             RateCode = rate;
         }
 
+        public Tutor():base()
+        {
+            RateCode = "";
+        }
+
         public override string ToString()
         {
             return base.ToString() + "\nRate Code : " + RateCode;

@@ -113,6 +113,7 @@ namespace GrindsBookingSystem
             {
                 int ClassID = Class.GetClassID(day, time, room);
                 Class c2 = Class.GetClass(ClassID);
+                c2.SetID(ClassID);
 
                 frmUpdateClass f = new frmUpdateClass(c2);
                 f.FormClosing += FillSchedule;

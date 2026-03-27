@@ -69,10 +69,11 @@ namespace GrindsBookingSystem
                          "Time = " + this.Time + "," +
                          "TutorID = " + this.TutorID + "," +
                          "CurrentEnrollment = " + this.CurrentEnrollment + "," +
-                         "RoomNo = " + this.RoomNo + "," +
-                         "SemesterNo = " + this.Semester + "," +
+                         "RoomNo = '" + this.RoomNo + "'," +
+                         "SemesterNo = '" + this.Semester + "'," +
                          "SubjectID = " + this.SubjectID +
                          " WHERE ClassID = " + this.ClassID;
+
             try
             {
                 Database.ExecuteNonQuery(sql);

@@ -77,12 +77,12 @@ namespace GrindsBookingSystem
 
             if(location == "Tutors")
             {
-                sql = "SELECT * FROM Tutors WHERE " + column + " = " + value + "AND Status = 'A'";
+                sql = "SELECT * FROM Tutors WHERE " + column + " = " + value + " AND Status = 'A'";
                 ds = Database.ExecuteMultiRowQuery(sql);
             }
             else if(location == "Students")
             {
-                sql = "SELECT * FROM Students WHERE " + column + " = " + value + "AND Status = 'A'";
+                sql = "SELECT * FROM Students WHERE " + column + " = " + value + " AND Status = 'A'";
                 ds = Database.ExecuteMultiRowQuery(sql);
             }
 

@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Data;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+
 
 namespace GrindsBookingSystem
 {
@@ -11,7 +12,10 @@ namespace GrindsBookingSystem
         public frmUpdateClass(Class c)
         {
             InitializeComponent();
+            
             updatingClass = c;
+            updatingClass.SetID(c.ClassID);
+
             Reset(this.Controls);
         }
 
@@ -26,6 +30,10 @@ namespace GrindsBookingSystem
             SetRoom(cboRooms, updatingClass.RoomNo);
 
             cboSubjects.Text = Subject.GetSubjectDetails(updatingClass.SubjectID);
+
+            cboSubjects.Enabled = false;
+            cboTutors.Enabled = false;
+            
         }
         protected override void Reset(Control.ControlCollection controls)
         {
@@ -45,39 +53,70 @@ namespace GrindsBookingSystem
 
         private void btnClass_Click(object sender, EventArgs e)
         {
-            updatingClass.Day = GetClassDayNumber(cboDays.Text);
-            updatingClass.Time = Convert.ToInt32(cboTime.Text.Substring(0, 2));
-            updatingClass.TutorID = GetTutorID().ToString();
-            updatingClass.RoomNo = cboRooms.Text.Substring(0, 1);
+            int day = GetClassDayNumber(cboDays.Text);
+            int time = Convert.ToInt32(cboTime.Text.Substring(0, 2));
+            string room = cboRooms.Text.Substring(0, 1);
+
+            updatingClass.RoomNo = room;
+            updatingClass.Day = day;
+            updatingClass.Time = time;
 
             if (updatingClass != null)
             {
-                string sql = "SELECT * FROM Classes WHERE SemesterNo = " + updatingClass.Semester.ToString();
+                string sql = "SELECT * FROM Classes WHERE SemesterNo = " + Class.GetCurrentSemester().ToString();
 
                 DataSet ds = Database.ExecuteMultiRowQuery(sql);
 
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
-                    string day = r[1].ToString();
-                    string time = r[2].ToString();
-                    string id = r[3].ToString();
-                    string room = r[5].ToString();
+                    int D = Convert.ToInt32(r[1]);
+                    int T = Convert.ToInt32(r[2]);
+                    string ID = r[3].ToString();
+                    string Room = r[5].ToString();
 
-                    if (day == updatingClass.Day.ToString() && time == updatingClass.Time.ToString() && id == updatingClass.TutorID)
+                    string capacity = "";
+
+                    sql = "SELECT Capacity FROM Rooms WHERE RoomNo = '" + room + "'";
+
+                    OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+
+                    if (dr != null && dr.Read()) 
+                    {
+                        capacity = dr.GetString(0);
+                    }
+                    
+                    if(dr.GetInt32(0) == updatingClass.ClassID)
+                    {
+                        continue;
+                    }
+                    else if (D == updatingClass.Day && T == updatingClass.Time && ID == updatingClass.TutorID && Room == updatingClass.RoomNo)
+                    {
+                        SuccessMessage("You have made no changes to the class, goodbye");
+                        GoHome();
+                        return;
+                    }
+                    else if (D == updatingClass.Day && T == updatingClass.Time && ID == updatingClass.TutorID)
                     {
                         ErrorMessage("The selected tutor already has a class on the selected day at the selected time.");
                         return;
                     }
-                    else if (day == updatingClass.Day.ToString() && time == updatingClass.Time.ToString() && id != updatingClass.TutorID && room == updatingClass.RoomNo)
+                    else if (D == updatingClass.Day && T == updatingClass.Time && Room == updatingClass.RoomNo)
                     {
                         ErrorMessage("The selected room is taken at the selected day and time, please try another room.");
+                        return;
+                    }
+                    else if (capacity == "" || updatingClass.CurrentEnrollment > Convert.ToInt32(capacity))
+                    {
+                        ErrorMessage("The selected room cannot facilitate the amount of students already enrolled in this class");
                         return;
                     }
                 }
                 try
                 {
                     updatingClass.Update();
+
                     SuccessMessage("Success! The class has been updated");
+
                     GoHome();
                 }
                 catch (Exception ex)

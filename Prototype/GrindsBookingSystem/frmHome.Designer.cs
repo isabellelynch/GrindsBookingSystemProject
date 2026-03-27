@@ -248,7 +248,6 @@
             this.EarningsAnalysis.Name = "EarningsAnalysis";
             this.EarningsAnalysis.Size = new System.Drawing.Size(199, 22);
             this.EarningsAnalysis.Text = "Tutor Earnings Analysis";
-            this.EarningsAnalysis.Click += new System.EventHandler(this.EarningsAnalysis_Click);
             // 
             // exitToolStripMenuItem
             // 

@@ -20,6 +20,7 @@ namespace GrindsBookingSystem
             FillTutorDetails();
             FillTimes();
             cboSubjects.Enabled = false;
+            RefreshButton.Visible = false;
         }
         public void SetClassDay(int day, ComboBox t)
         {

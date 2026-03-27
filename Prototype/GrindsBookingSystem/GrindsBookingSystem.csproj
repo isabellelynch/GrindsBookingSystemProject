@@ -84,105 +84,99 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseForm.cs">
+    <Compile Include="Inheritance\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Booking.cs" />
-    <Compile Include="ClassBaseForm.cs">
+    <Compile Include="Bookings\Booking.cs" />
+    <Compile Include="Inheritance\ClassBaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ClassBaseForm.Designer.cs">
+    <Compile Include="Inheritance\ClassBaseForm.Designer.cs">
       <DependentUpon>ClassBaseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Database.cs" />
-    <Compile Include="frmAddBooking.cs">
+    <Compile Include="HelperClasses\Database.cs" />
+    <Compile Include="Bookings\frmAddBooking.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAddBooking.Designer.cs">
+    <Compile Include="Bookings\frmAddBooking.Designer.cs">
       <DependentUpon>frmAddBooking.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmAddSubject.cs">
+    <Compile Include="Subjects\frmAddSubject.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAddSubject.Designer.cs">
+    <Compile Include="Subjects\frmAddSubject.Designer.cs">
       <DependentUpon>frmAddSubject.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmAssignSubjects.cs">
+    <Compile Include="Subjects\frmAssignSubjects.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAssignSubjects.Designer.cs">
+    <Compile Include="Subjects\frmAssignSubjects.Designer.cs">
       <DependentUpon>frmAssignSubjects.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmRemoveClass.cs">
+    <Compile Include="Classes\frmRemoveClass.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmRemoveClass.Designer.cs">
+    <Compile Include="Classes\frmRemoveClass.Designer.cs">
       <DependentUpon>frmRemoveClass.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmAddClass.cs">
+    <Compile Include="Classes\frmAddClass.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAddClass.Designer.cs">
+    <Compile Include="Classes\frmAddClass.Designer.cs">
       <DependentUpon>frmAddClass.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmAdmin.cs">
+    <Compile Include="Admin\frmAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAdmin.Designer.cs">
+    <Compile Include="Admin\frmAdmin.Designer.cs">
       <DependentUpon>frmAdmin.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmManageBookings.cs">
+    <Compile Include="Bookings\frmManageBookings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmManageBookings.Designer.cs">
+    <Compile Include="Bookings\frmManageBookings.Designer.cs">
       <DependentUpon>frmManageBookings.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmUpdateClass.cs">
+    <Compile Include="Classes\frmUpdateClass.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmUpdateClass.Designer.cs">
+    <Compile Include="Classes\frmUpdateClass.Designer.cs">
       <DependentUpon>frmUpdateClass.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmViewSchedule.cs">
+    <Compile Include="Schedule\frmViewSchedule.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmViewSchedule.Designer.cs">
+    <Compile Include="Schedule\frmViewSchedule.Designer.cs">
       <DependentUpon>frmViewSchedule.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmShowBookings.cs">
+    <Compile Include="Bookings\frmShowBookings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmShowBookings.Designer.cs">
+    <Compile Include="Bookings\frmShowBookings.Designer.cs">
       <DependentUpon>frmShowBookings.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTutorReport.cs">
+    <Compile Include="Students\frmViewStudentDetails.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTutorReport.Designer.cs">
-      <DependentUpon>frmTutorReport.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmViewStudentDetails.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmViewStudentDetails.Designer.cs">
+    <Compile Include="Students\frmViewStudentDetails.Designer.cs">
       <DependentUpon>frmViewStudentDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmViewTutorDetails.cs">
+    <Compile Include="Tutors\frmViewTutorDetails.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmViewTutorDetails.Designer.cs">
+    <Compile Include="Tutors\frmViewTutorDetails.Designer.cs">
       <DependentUpon>frmViewTutorDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmUpdateTutor.cs">
+    <Compile Include="Tutors\frmUpdateTutor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmUpdateTutor.Designer.cs">
+    <Compile Include="Tutors\frmUpdateTutor.Designer.cs">
       <DependentUpon>frmUpdateTutor.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmUpdateStudent.cs">
+    <Compile Include="Students\frmUpdateStudent.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmUpdateStudent.Designer.cs">
+    <Compile Include="Students\frmUpdateStudent.Designer.cs">
       <DependentUpon>frmUpdateStudent.cs</DependentUpon>
     </Compile>
     <Compile Include="frmHome.cs">
@@ -191,107 +185,103 @@
     <Compile Include="frmHome.Designer.cs">
       <DependentUpon>frmHome.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmAddStudent.cs">
+    <Compile Include="Students\frmAddStudent.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAddStudent.Designer.cs">
+    <Compile Include="Students\frmAddStudent.Designer.cs">
       <DependentUpon>frmAddStudent.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmAddTutor.cs">
+    <Compile Include="Tutors\frmAddTutor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAddTutor.Designer.cs">
+    <Compile Include="Tutors\frmAddTutor.Designer.cs">
       <DependentUpon>frmAddTutor.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmRemoveStudent.cs">
+    <Compile Include="Students\frmRemoveStudent.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmRemoveStudent.Designer.cs">
+    <Compile Include="Students\frmRemoveStudent.Designer.cs">
       <DependentUpon>frmRemoveStudent.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmRemoveTutor.cs">
+    <Compile Include="Tutors\frmRemoveTutor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmRemoveTutor.Designer.cs">
+    <Compile Include="Tutors\frmRemoveTutor.Designer.cs">
       <DependentUpon>frmRemoveTutor.cs</DependentUpon>
     </Compile>
-    <Compile Include="ControlFunctions.cs" />
-    <Compile Include="GmailSender.cs" />
-    <Compile Include="InterfaceCRUD.cs" />
+    <Compile Include="HelperClasses\ControlFunctions.cs" />
+    <Compile Include="HelperClasses\GmailSender.cs" />
+    <Compile Include="Interfaces\InterfaceCRUD.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Refund.cs" />
-    <Compile Include="Class.cs" />
-    <Compile Include="Person.cs" />
-    <Compile Include="GridViews.cs" />
-    <Compile Include="Student.cs" />
-    <Compile Include="Subject.cs" />
-    <Compile Include="Tutor.cs" />
-    <Compile Include="Validation.cs" />
-    <EmbeddedResource Include="BaseForm.resx">
+    <Compile Include="Classes\Class.cs" />
+    <Compile Include="Inheritance\Person.cs" />
+    <Compile Include="HelperClasses\GridViews.cs" />
+    <Compile Include="Students\Student.cs" />
+    <Compile Include="Subjects\Subject.cs" />
+    <Compile Include="Tutors\Tutor.cs" />
+    <Compile Include="HelperClasses\Validation.cs" />
+    <EmbeddedResource Include="Inheritance\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ClassBaseForm.resx">
+    <EmbeddedResource Include="Inheritance\ClassBaseForm.resx">
       <DependentUpon>ClassBaseForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAddBooking.resx">
+    <EmbeddedResource Include="Bookings\frmAddBooking.resx">
       <DependentUpon>frmAddBooking.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAddSubject.resx">
+    <EmbeddedResource Include="Subjects\frmAddSubject.resx">
       <DependentUpon>frmAddSubject.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAssignSubjects.resx">
+    <EmbeddedResource Include="Subjects\frmAssignSubjects.resx">
       <DependentUpon>frmAssignSubjects.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmRemoveClass.resx">
+    <EmbeddedResource Include="Classes\frmRemoveClass.resx">
       <DependentUpon>frmRemoveClass.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAddClass.resx">
+    <EmbeddedResource Include="Classes\frmAddClass.resx">
       <DependentUpon>frmAddClass.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAdmin.resx">
+    <EmbeddedResource Include="Admin\frmAdmin.resx">
       <DependentUpon>frmAdmin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmManageBookings.resx">
+    <EmbeddedResource Include="Bookings\frmManageBookings.resx">
       <DependentUpon>frmManageBookings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmUpdateClass.resx">
+    <EmbeddedResource Include="Classes\frmUpdateClass.resx">
       <DependentUpon>frmUpdateClass.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmViewSchedule.resx">
+    <EmbeddedResource Include="Schedule\frmViewSchedule.resx">
       <DependentUpon>frmViewSchedule.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmShowBookings.resx">
+    <EmbeddedResource Include="Bookings\frmShowBookings.resx">
       <DependentUpon>frmShowBookings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTutorReport.resx">
-      <DependentUpon>frmTutorReport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmUpdateTutor.resx">
+    <EmbeddedResource Include="Tutors\frmUpdateTutor.resx">
       <DependentUpon>frmUpdateTutor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmUpdateStudent.resx">
+    <EmbeddedResource Include="Students\frmUpdateStudent.resx">
       <DependentUpon>frmUpdateStudent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmHome.resx">
       <DependentUpon>frmHome.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAddStudent.resx">
+    <EmbeddedResource Include="Students\frmAddStudent.resx">
       <DependentUpon>frmAddStudent.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAddTutor.resx">
+    <EmbeddedResource Include="Tutors\frmAddTutor.resx">
       <DependentUpon>frmAddTutor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmRemoveStudent.resx">
+    <EmbeddedResource Include="Students\frmRemoveStudent.resx">
       <DependentUpon>frmRemoveStudent.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmRemoveTutor.resx">
+    <EmbeddedResource Include="Tutors\frmRemoveTutor.resx">
       <DependentUpon>frmRemoveTutor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmViewStudentDetails.resx">
+    <EmbeddedResource Include="Students\frmViewStudentDetails.resx">
       <DependentUpon>frmViewStudentDetails.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmViewTutorDetails.resx">
+    <EmbeddedResource Include="Tutors\frmViewTutorDetails.resx">
       <DependentUpon>frmViewTutorDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -323,5 +313,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
