@@ -13,7 +13,12 @@ namespace GrindsBookingSystem
         public string Category { get; set; }
         public string Level { get; set; }
         public string Description { get; set; }
-        public Subject() { }
+        public Subject() 
+        {
+            Category = "";
+            Level = "";
+            Description = "";
+        }
         public Subject(string category, string level, string description)
         {
             Category = category;
@@ -62,9 +67,9 @@ namespace GrindsBookingSystem
         {
             string sql = "SELECT SubjectID " +
                          "FROM Subjects " +
-                         "WHERE SubjectCategory = 'JC'" +
-                         " AND SubjectLevel = 'OL'" +
-                         " AND Description = 'Mathematics'";
+                         "WHERE SubjectCategory = '" + cat + "'" +
+                         " AND SubjectLevel = '" + level + "'" +
+                         " AND Description = '" + description + "'";
 
 
             OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
@@ -73,22 +78,38 @@ namespace GrindsBookingSystem
             {
                 return dr.GetInt32(0).ToString();
             }
-
-            return "";
-            
+            else
+            {
+                return "";
+            }
         }
 
         public override string ToString()
         {
             return "Subject : " + this.Description +
-                "\nSubject ID : " + this.SubjectID +
-                "\nLevel : " + this.Level +
-                "\nCertificate : " + this.Category;
+                   "\nSubject ID : " + this.SubjectID +
+                   "\nLevel : " + this.Level +
+                   "\nCertificate : " + this.Category;
         }
 
-        public void Update() { }
+        public void Update() 
+        {
+            string sql = "Update Subjects " +
+                         "SET SubjectCategory = '" + this.Category + "' AND " +
+                         "SubjectLevel = '" + this.Level + "' AND " +
+                         "Description = '" + this.Description + 
+                         "' WHERE SubjectID = " + this.SubjectID;
 
-        public void Delete() { }
+            Database.ExecuteNonQuery(sql);
+        }
+
+        public void Delete() 
+        {
+            string sql = "DELETE FROM Subjects" +
+                         " WHERE SubjectID = " + this.SubjectID;
+
+            Database.ExecuteNonQuery(sql);
+        }
 
         public static string GetSubjectDetails(string subID)
         {
@@ -102,5 +123,31 @@ namespace GrindsBookingSystem
             DataSet ds = Database.ExecuteMultiRowQuery(sql);
             return ds.Tables[0];
         }
+
+        public static void AddToTutorSubjectTable(string tutorID, string subjectID)
+        {
+            string sql = "INSERT INTO Tutor_Subjects (TutorID, SubjectID) " +
+                          "VALUES ('" + tutorID + "','" + subjectID + "')";
+
+            Database.ExecuteNonQuery(sql);
+        }
+
+        public static string GetDescription(string id)
+        {
+            string sql = "SELECT Description " +
+                         "FROM Subjects " +
+                         "WHERE SubjectID = '" + id + "'";
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+
+            dr.Read();
+
+            string sub = dr.GetString(0);
+
+            dr.Close();
+
+            return sub;
+        }
+
     }
 }

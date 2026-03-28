@@ -1,12 +1,6 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Runtime.Remoting;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 
 namespace GrindsBookingSystem
@@ -24,6 +18,13 @@ namespace GrindsBookingSystem
             ClassID = classID;
         }
 
+        public override string ToString()
+        {
+            return "Booking Details \n" +
+                   "\nClassID : " + this.ClassID +
+                   "\nStudentID : " + this.StudentID;
+        }
+
         public void Create()
         {
             string sql = "INSERT INTO Bookings (StudentID, ClassID) " +
@@ -36,9 +37,28 @@ namespace GrindsBookingSystem
 
             Database.ExecuteNonQuery(sql);
         }
-        public string Read() { return ""; }
-        public void Update() { }
-        public void Delete() { }
+        public string Read() 
+        { 
+            return this.ToString(); 
+        }
+        public void Update() 
+        { 
+            string sql = "UPDATE Bookings SET " +
+                         "StudentID = " + this.StudentID + " AND " +
+                         "ClassID = " + this.ClassID;
+
+            Database.ExecuteNonQuery(sql);
+        }
+        public void Delete() 
+        {
+            int id = GetBookingID();
+
+            string sql = "DELETE FROM " +
+                         "Bookings " +
+                         "WHERE BookingID = " + id;
+
+            Database.ExecuteNonQuery(sql);
+        }
 
         public void IncrementCurrentEnrollment(int current)
         {
@@ -150,6 +170,120 @@ namespace GrindsBookingSystem
             DataSet ds = Database.ExecuteMultiRowQuery(sql);
 
             return ds.Tables[0];
+        }
+
+        public static int GetClassID(string bookingID)
+        {
+            string sql = "SELECT ClassID " +
+                         "FROM Bookings " +
+                         "WHERE BookingID = " + bookingID;
+
+            int id = 0;
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+
+            if (dr.Read())
+            {
+                id = dr.GetInt32(0);
+            }
+
+            dr.Close();
+
+            return id;
+        }
+
+        public static void ProcessRefund(string id, string student, string amount)
+        {
+            string sql = "INSERT INTO Refunds (BookingID, StudentID, Amount) " +
+                         "VALUES(" + id + "," + student + "," + amount + ")";
+
+            Database.ExecuteNonQuery(sql);
+        }
+
+
+        public static void RemoveFromStudentClassesTable(string ClassID, string StudentID)
+        {
+            string sql = "DELETE FROM Student_Classes " +
+                         "WHERE ClassID = " + ClassID + " " +
+                         "AND StudentID = " + StudentID;
+
+            Database.ExecuteNonQuery(sql);
+        }
+
+        public static void CancelBooking(string bookingID, string studentID)
+        {
+            int classID = GetClassID(bookingID);
+
+            Class c = Class.GetClass(classID);
+
+            Class.DecrementCurrentEnrollment(c);
+
+            string tutorID = GetTutorIDFromClassID(classID.ToString()).ToString();
+
+            RemoveFromStudentClassesTable(classID.ToString(), studentID);
+
+            string amount = GetAmount(tutorID).ToString();
+
+            ProcessRefund(bookingID, studentID, amount);
+
+            Booking b = GetBooking(bookingID);
+            
+            b.Delete();
+        }
+
+        public static int GetTutorIDFromClassID(string classID)
+        {
+            string sql = "SELECT t.TutorID FROM Bookings b JOIN Classes c ON " +
+                                "b.ClassID = c.ClassID JOIN Tutors t " +
+                                "ON c.TutorID = t.TutorID " +
+                                "WHERE b.ClassID = " + classID;
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            if (dr.Read())
+            {
+                return dr.GetInt32(0);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public int GetBookingID()
+        {
+            string sql = "SELECT BookingID " +
+                         "FROM Bookings " +
+                         "WHERE StudentID = " + this.StudentID +
+                         " AND ClassID = " + this.ClassID;
+            
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            
+            dr.Read();
+
+            int id = dr.GetInt32(0);
+
+            dr.Close();
+
+            return id;
+        }
+
+        public static Booking GetBooking(string bookingID)
+        {
+            string sql = "SELECT ClassID, StudentID " +
+                         "FROM Bookings " +
+                         "WHERE BookingID = " + bookingID;
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+
+            dr.Read();
+
+            Booking b = new Booking();
+            b.ClassID = dr.GetInt32(0);
+            b.StudentID = dr.GetInt32(1);
+
+            dr.Close();
+
+            return b;
         }
     }
 }

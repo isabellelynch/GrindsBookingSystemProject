@@ -1,13 +1,5 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
-using System.Xml.Linq;
 
 namespace GrindsBookingSystem
 {
@@ -32,10 +24,12 @@ namespace GrindsBookingSystem
         {
             PersonID = id;
         }
-        public override String ToString()
+        public override string ToString()
         {
-            return "ID : " + PersonID + "\nName : " + FirstName + " " + Surname +
-                "\nEmail Address : " + Email + "\nPhone Number : " + Phone;
+            return "ID : " + PersonID + 
+                   "\nName : " + FirstName + " " + Surname +
+                   "\nEmail Address : " + Email + 
+                   "\nPhone Number : " + Phone;
         }
 
     }

@@ -1,7 +1,6 @@
-﻿using Oracle.ManagedDataAccess.Client;
-using System;
+﻿using System;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+
 
 namespace GrindsBookingSystem
 {
@@ -18,7 +17,7 @@ namespace GrindsBookingSystem
         protected override void Reset(Control.ControlCollection controls)
         {
             base.Reset(controls);
-            SetTutor(cboTutors, deletingClass.TutorID);
+            SetTutor(deletingClass.TutorID);
             ControlFunctions.DisableBoxes(cboTutors);
         }
 
@@ -26,10 +25,10 @@ namespace GrindsBookingSystem
         {
             btnClass.Text = "Remove Class";
 
-            SetClassDay(deletingClass.Day, cboDays);
-            SetClassTime(deletingClass.Time, cboTime);
-            SetAttendance(txtAttendance, deletingClass.RoomNo);
-            SetRoom(cboRooms, deletingClass.RoomNo);
+            SetClassDay(deletingClass.Day);
+            SetClassTime(deletingClass.Time);
+            SetAttendance(deletingClass.RoomNo);
+            SetRoom(deletingClass.RoomNo);
 
             cboSubjects.Text = Subject.GetSubjectDetails(deletingClass.SubjectID);
         }

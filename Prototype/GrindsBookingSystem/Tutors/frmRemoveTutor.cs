@@ -12,11 +12,8 @@ namespace GrindsBookingSystem
         public frmRemoveTutor()
         {
             InitializeComponent();
-
             Reset(this.Controls);
         }
-
-
 
         public void ComboBoxChange(object sender, EventArgs e)
         {
@@ -45,17 +42,19 @@ namespace GrindsBookingSystem
             {
                 DataGridViewRow row = dgvRemoveTutors.SelectedRows[0];
 
-                Tutor t = Tutor.GetTutor(Convert.ToInt32(row.Cells[0].Value));
+                int id = Convert.ToInt32(row.Cells[0].Value);
+
+                Tutor t = Tutor.GetTutor(id);
 
                 t.Delete();
 
-                SuccessMessage("Tutor Removed");
+                SuccessMessage("The chosen tutor has been successfully removed");
 
                 Reset(this.Controls);
             }
             else
             {
-                ErrorMessage("No row selected.");
+                ErrorMessage("A tutor must be selected in order to be removed");
             }
         }
 
@@ -68,7 +67,6 @@ namespace GrindsBookingSystem
             GridViews.Default(dgvRemoveTutors);
             
             dgvRemoveTutors.DataSource = Tutor.GetTutorList(cboTutorID).Tables[0];
-
 
             comboBoxes = ControlFunctions.CreateComboList(cboTutorID, cboFirstName, cboSurname);
 

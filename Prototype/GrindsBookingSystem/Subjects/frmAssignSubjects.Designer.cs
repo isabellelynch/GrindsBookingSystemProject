@@ -212,7 +212,7 @@
             this.btnSelectTutor.TabIndex = 38;
             this.btnSelectTutor.Text = "Select Tutor";
             this.btnSelectTutor.UseVisualStyleBackColor = true;
-            this.btnSelectTutor.Click += new System.EventHandler(this.button1_Click);
+            this.btnSelectTutor.Click += new System.EventHandler(this.btnSelectTutor_Click);
             // 
             // frmAssignSubjects
             // 

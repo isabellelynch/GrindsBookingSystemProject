@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
 
 
 namespace GrindsBookingSystem
@@ -47,6 +46,7 @@ namespace GrindsBookingSystem
             room = cboRooms.Text;
 
             string msg = "";
+
             if(btn == btnAddClass)
             {
                 if (room == "")
@@ -112,7 +112,9 @@ namespace GrindsBookingSystem
             try
             {
                 int ClassID = Class.GetClassID(day, time, room);
+
                 Class c2 = Class.GetClass(ClassID);
+
                 c2.SetID(ClassID);
 
                 frmUpdateClass f = new frmUpdateClass(c2);

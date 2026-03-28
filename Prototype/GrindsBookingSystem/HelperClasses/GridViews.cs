@@ -73,30 +73,22 @@ namespace GrindsBookingSystem
 
                 int colIndex = ((int)c.Day + 6) % 7 + 1;
 
-                Tutor t = Tutor.GetTutor(Convert.ToInt32(c.TutorID));
+                int id = Convert.ToInt32(c.TutorID);
 
-                string sql = "SELECT Description FROM Subjects WHERE SubjectID = '" + c.SubjectID + "'";
-                OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
-                dr.Read();
-                string sub = dr.GetString(0);
-                dr.Close();
+                Tutor t = Tutor.GetTutor(id);
+
+                string sub = Subject.GetDescription(c.SubjectID);
 
                 dgv.Rows[rowIndex].Cells[colIndex].Value = sub + " - " + t.FirstName + " " + t.Surname;
             }
 
         }
-
-        public static void MakeBooking(DataGridView dgv)
-        {
-            ResetGridView(dgv);
-            string[] h = {"Subject", "Day", "Time", "Room", "CurrentEnrollment", "Level", "Group"};
-            Default(dgv, h);
-        }
-
         public static void Schedule(DataGridView dgv)
         {
             ResetGridView(dgv);
+
             string[] h = { "Time", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
+
             Default(dgv, h);
 
             for (int hour = 9; hour <= 17; hour++)
@@ -117,6 +109,16 @@ namespace GrindsBookingSystem
             dgv.SelectionMode = DataGridViewSelectionMode.CellSelect;
             dgv.ScrollBars = ScrollBars.None;
         }
+        public static void MakeBooking(DataGridView dgv)
+        {
+            ResetGridView(dgv);
+
+            string[] h = {"Subject", "Day", "Time", "Room", "CurrentEnrollment", "Level", "Group"};
+
+            Default(dgv, h);
+        }
+
+      
 
 
     }

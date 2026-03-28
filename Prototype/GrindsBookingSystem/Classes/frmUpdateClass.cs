@@ -1,4 +1,5 @@
-﻿using Oracle.ManagedDataAccess.Client;
+﻿using GrindsBookingSystem.HelperClasses;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -24,10 +25,10 @@ namespace GrindsBookingSystem
             btnClass.Text = "Alter Class";
             ControlFunctions.EnableBoxes(cboDays, cboTime, cboRooms);
 
-            SetClassDay(updatingClass.Day, cboDays);
-            SetClassTime(updatingClass.Time, cboTime);
-            SetAttendance(txtAttendance, updatingClass.RoomNo);
-            SetRoom(cboRooms, updatingClass.RoomNo);
+            SetClassDay(updatingClass.Day);
+            SetClassTime(updatingClass.Time);
+            SetAttendance(updatingClass.RoomNo);
+            SetRoom(updatingClass.RoomNo);
 
             cboSubjects.Text = Subject.GetSubjectDetails(updatingClass.SubjectID);
 
@@ -42,18 +43,18 @@ namespace GrindsBookingSystem
             cboRooms.SelectedIndexChanged -= RoomChanged;
             cboRooms.SelectedIndexChanged += RoomChanged;
 
-            SetTutor(cboTutors, updatingClass.TutorID);
+            SetTutor(updatingClass.TutorID);
         }
 
         private void RoomChanged(object sender, EventArgs e)
         {
-            SetAttendance(txtAttendance, cboRooms.Text.Substring(0, 1));
+            SetAttendance(cboRooms.Text.Substring(0, 1));
         }
 
 
         private void btnClass_Click(object sender, EventArgs e)
         {
-            int day = GetClassDayNumber(cboDays.Text);
+            int day = DayConversions.GetDayNumber(cboDays.Text);
             int time = Convert.ToInt32(cboTime.Text.Substring(0, 2));
             string room = cboRooms.Text.Substring(0, 1);
 

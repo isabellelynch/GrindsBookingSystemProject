@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
+using GrindsBookingSystem.HelperClasses;
 namespace GrindsBookingSystem
 {
     //this code has been taken from the link provided in the week 4 folder for sep module
@@ -73,7 +74,7 @@ namespace GrindsBookingSystem
                         </tr>
                         <tr>
                             <td><strong>Day:</strong></td>
-                            <td>{ClassBaseForm.GetClassDay(c.Day)}</td>
+                            <td>{DayConversions.GetDayString(c.Day)}</td>
                         </tr>
                         <tr>
                             <td><strong>Time:</strong></td>

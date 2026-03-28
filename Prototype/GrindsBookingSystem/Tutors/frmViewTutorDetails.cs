@@ -49,8 +49,7 @@ namespace GrindsBookingSystem
             }
             else
             {
-                MessageBox.Show("The selected Tutor could not be found.",
-                    "Tutor Details", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ErrorMessage("The selected Tutor could not be found.");
             }
             Reset(this.Controls);
         }

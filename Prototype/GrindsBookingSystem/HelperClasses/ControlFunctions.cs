@@ -60,6 +60,7 @@ namespace GrindsBookingSystem
             ClearCombos(cb);
 
             String sql = "SELECT RateCode, Description FROM TutorRates ORDER BY RateCode";
+
             DataSet ds = Database.ExecuteMultiRowQuery(sql);
 
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)

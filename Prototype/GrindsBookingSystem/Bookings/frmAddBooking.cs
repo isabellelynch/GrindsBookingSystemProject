@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GrindsBookingSystem.HelperClasses;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
@@ -140,7 +141,7 @@ namespace GrindsBookingSystem
             {
                 DataGridViewRow r = dgvMakeBooking.CurrentRow;
 
-                int day = ClassBaseForm.GetClassDayNumber(r.Cells[1].Value.ToString());
+                int day = DayConversions.GetDayNumber(r.Cells[1].Value.ToString());
                 string time = r.Cells[2].Value.ToString().Substring(0,r.Cells[2].Value.ToString().IndexOf(":"));
                 string room = r.Cells[3].Value.ToString();
 

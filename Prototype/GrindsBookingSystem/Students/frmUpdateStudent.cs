@@ -10,6 +10,7 @@ namespace GrindsBookingSystem
     {
         List<ComboBox> comboBoxes;
         private bool updating = false;
+        Student s = new Student();
         public frmUpdateStudent()
         {
             InitializeComponent();
@@ -24,7 +25,11 @@ namespace GrindsBookingSystem
                 return;
             }
 
-            Student s = Student.GetStudent(Convert.ToInt32(cboStudentID.Items[0]));
+            int id = Convert.ToInt32(cboStudentID.Items[0]);
+
+            Student s = Student.GetStudent(id);
+            
+            s.SetID(s.PersonID);
 
             txtEmail.Text = s.Email;
             txtPhone.Text = s.Phone;
@@ -35,10 +40,10 @@ namespace GrindsBookingSystem
         }
         private void btnUpdateStudent_Click(object sender, EventArgs e)
         {
-            Student s = new Student(txtFirstName.Text, txtLastName.Text,txtEmail.Text, txtPhone.Text);
-
-            s.SetID(cboStudentID.Text);
-
+            s.Email = txtEmail.Text;
+            s.Phone = txtPhone.Text;
+            s.Surname = txtLastName.Text;
+            s.FirstName = txtFirstName.Text;
 
             if (s.IsValid() != "Valid")
             {
@@ -46,39 +51,22 @@ namespace GrindsBookingSystem
                 return;
             }
 
-            Student s2 = Student.GetStudent(Convert.ToInt32(s.PersonID));
-            s2.SetID(s.PersonID);
-
-            if (s2 == null)
+            try
             {
-                return;
+                s.Update();
+
+                SuccessMessage("The selected Student has been updated and their details are now as follows\n\n" + s.ToString());
             }
-            else if (s == s2)
+            catch (Exception ex)
             {
-                SuccessMessage("No details changed, Goodbye!");
-                return;
-            }
-            else
-            {
-                s2.Email = s.Email;
-                s2.Phone = s.Phone;
-                s2.Surname = s.Surname;
-                s2.FirstName = s.FirstName;
-                try
-                {
-                    s2.Update();
-
-                    SuccessMessage("The selected Student has been updated and their details are now as follows\n\n" + s2.ToString());
-                }
-                catch (Exception ex)
-                {
-                    ErrorMessage(ex.Message);
-                }
-
+                ErrorMessage(ex.Message);
             }
 
             Reset(this.Controls);
         }
+
+            
+        
 
         public void ComboBoxChange(object sender, EventArgs e)
         {

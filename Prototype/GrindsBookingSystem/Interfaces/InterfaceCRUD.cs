@@ -6,5 +6,6 @@
         string Read();
         void Update();
         void Delete();
+        string ToString();
     }
 }

@@ -29,7 +29,9 @@ namespace GrindsBookingSystem
 
         private void btnShowDetails_Click(object sender, EventArgs e)
         {
-            Student s = Student.GetStudent(Convert.ToInt32(cboStudentID.Items[0]));
+            int id = Convert.ToInt32(cboStudentID.Items[0]);
+
+            Student s = Student.GetStudent(id);
 
             String details = s.Read();
 

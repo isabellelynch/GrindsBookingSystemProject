@@ -15,8 +15,6 @@ namespace GrindsBookingSystem
             Reset(this.Controls);
 
         }
-
-
         public void ComboBoxChange(object sender, EventArgs e)
         {
             if (updating) return;
@@ -46,11 +44,14 @@ namespace GrindsBookingSystem
                 {
                     DataGridViewRow row = dgvRemoveStudent.SelectedRows[0];
 
-                    Student s = Student.GetStudent(Convert.ToInt32(row.Cells[0].Value));
+                    int id = Convert.ToInt32(row.Cells[0].Value);
 
-                    s.SetID(row.Cells[0].Value.ToString());
+                    Student s = Student.GetStudent(id);
+
+                    s.SetID(id.ToString());
 
                     s.Delete();
+
                     SuccessMessage("The following Student has now been removed from the system \n\n" + s.ToString());
 
                     Reset(this.Controls);
@@ -71,10 +72,10 @@ namespace GrindsBookingSystem
             base.Reset(controls);
 
             ControlFunctions.FillBoxes("Students", cboStudentID, cboFirstName, cboSurname);
-            GridViews.Default(dgvRemoveStudent);
-            dgvRemoveStudent.DataSource = Student.RetrieveAll().Tables[0];
 
-            
+            GridViews.Default(dgvRemoveStudent);
+
+            dgvRemoveStudent.DataSource = Student.RetrieveAll().Tables[0];
 
             comboBoxes = ControlFunctions.CreateComboList(cboStudentID, cboFirstName, cboSurname);
 

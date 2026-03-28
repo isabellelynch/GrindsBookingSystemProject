@@ -13,6 +13,13 @@ namespace GrindsBookingSystem
         { 
             
         }
+
+        public Student() : base() { }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
         public void Create()
         {
             Debug.WriteLine(this);
@@ -133,5 +140,7 @@ namespace GrindsBookingSystem
 
             return Database.ExecuteMultiRowQuery(sql);
         }
+
+        
     }
 }

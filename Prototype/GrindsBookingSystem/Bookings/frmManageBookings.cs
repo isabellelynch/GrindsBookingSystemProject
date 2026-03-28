@@ -1,4 +1,5 @@
-﻿using Oracle.ManagedDataAccess.Client;
+﻿using GrindsBookingSystem.HelperClasses;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -71,7 +72,7 @@ namespace GrindsBookingSystem
 
                 foreach (DataRow dr in dt.Rows)
                 {
-                    dr["WEEKDAY"] = ClassBaseForm.GetClassDay(Convert.ToInt16(dr["Day"]));
+                    dr["WEEKDAY"] = DayConversions.GetDayString(Convert.ToInt16(dr["Day"]));
 
                     int timeVal = Convert.ToInt32(dr["Time"]);
                     dr["CLASS TIME"] = timeVal.ToString("D2") + ":00";
@@ -94,95 +95,32 @@ namespace GrindsBookingSystem
 
                 string bookingID = row.Cells[0].Value.ToString();
 
-                string sql = "SELECT ClassID FROM Bookings WHERE BookingID = " + bookingID;
-
-                OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
-
-                if (dr.Read())
+                try
                 {
-                    int classID = dr.GetInt32(0);
-
-                    Class c = Class.GetClass(classID);
-
-                    if (c != null)
-                    {
-                        try
-                        {
-                            Class.DecrementCurrentEnrollment(c);
-
-                            int tutorID = GetTutorIDFromClassID(classID.ToString());
-
-                            RemoveFromStudentClassesTable(classID.ToString(), cboStudentID.Text);
-
-                            string amount = Booking.GetAmount(tutorID.ToString()).ToString();
-
-                            ProcessRefund(bookingID, cboStudentID.Text, amount);
-
-                            RemoveFromBookingsTable(bookingID);
-
-                            SuccessMessage("Booking Cancelled");
-
-                            dr.Close();
-                        }
-                        catch (Exception ex)
-                        {
-                            ErrorMessage(ex.ToString());
-                        }
-                        
-                    }
-                    else
-                    {
-                        ErrorMessage("No Class can be found for the selected booking.");
-                    }
+                    Booking.CancelBooking(bookingID, cboStudentID.Text);
+                    SuccessMessage("Booking Cancelled");
 
                 }
-                   
+                catch (Exception ex)
+                {
+                    ErrorMessage(ex.ToString());
+                }
+
             }
             else
             {
-                ErrorMessage("No booking selected.");
+                ErrorMessage("Please select a booking before continuing.");
             }
-            
-            Reset(this.Controls);
 
-            
+            Reset(this.Controls);   
         }
 
-        public int GetTutorIDFromClassID(string classID)
-        {
-            string sql = "SELECT t.TutorID FROM Bookings b JOIN Classes c ON " +
-                                "b.ClassID = c.ClassID JOIN Tutors t " +
-                                "ON c.TutorID = t.TutorID " +
-                                "WHERE b.ClassID = " + classID;
+        
 
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
-            if (dr.Read())
-            {
-                return dr.GetInt32(0);
-            }
-            else
-            {
-                return 0;
-            }
-        }
+        
 
-        private void RemoveFromStudentClassesTable(string ClassID, string StudentID)
-        {
-            string sql = "DELETE FROM Student_Classes WHERE ClassID = " + ClassID + " AND StudentID = " + StudentID;
-            Database.ExecuteNonQuery(sql);
-        }
+        
 
-        private void ProcessRefund(string id, string student, string amount)
-        {
-            string sql = "INSERT INTO Refunds (BookingID, StudentID, Amount) " +
-                                    "VALUES(" + id + "," + student + "," + amount + ")";
-            Database.ExecuteNonQuery(sql);
-        }
-
-        private void RemoveFromBookingsTable(string id)
-        {
-            string sql = "DELETE FROM Bookings WHERE BookingID = " + id;
-            Database.ExecuteNonQuery(sql);
-        }
+        
     }
 }

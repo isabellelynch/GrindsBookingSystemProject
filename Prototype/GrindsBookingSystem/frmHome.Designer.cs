@@ -216,14 +216,14 @@
             // MakeBooking
             // 
             this.MakeBooking.Name = "MakeBooking";
-            this.MakeBooking.Size = new System.Drawing.Size(180, 22);
+            this.MakeBooking.Size = new System.Drawing.Size(169, 22);
             this.MakeBooking.Text = "Make Booking";
             this.MakeBooking.Click += new System.EventHandler(this.MakeBooking_Click);
             // 
             // CancelBooking
             // 
             this.CancelBooking.Name = "CancelBooking";
-            this.CancelBooking.Size = new System.Drawing.Size(180, 22);
+            this.CancelBooking.Size = new System.Drawing.Size(169, 22);
             this.CancelBooking.Text = "Manage Bookings";
             this.CancelBooking.Click += new System.EventHandler(this.CancelBooking_Click);
             // 
@@ -246,7 +246,7 @@
             // EarningsAnalysis
             // 
             this.EarningsAnalysis.Name = "EarningsAnalysis";
-            this.EarningsAnalysis.Size = new System.Drawing.Size(199, 22);
+            this.EarningsAnalysis.Size = new System.Drawing.Size(197, 22);
             this.EarningsAnalysis.Text = "Tutor Earnings Analysis";
             // 
             // exitToolStripMenuItem

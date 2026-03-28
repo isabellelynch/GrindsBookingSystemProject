@@ -1,5 +1,4 @@
-﻿using Oracle.ManagedDataAccess.Client;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -9,13 +8,12 @@ namespace GrindsBookingSystem
     {
         List<ComboBox> comboBoxes;
         private bool updating = false;
+        Tutor t = new Tutor();
         public frmUpdateTutor()
         {
             InitializeComponent();
             Reset(this.Controls);
         }
-
-
 
         public void ComboBoxChange(object sender, EventArgs e)
         {
@@ -45,64 +43,42 @@ namespace GrindsBookingSystem
                 return;
             }
 
-            Tutor t = Tutor.GetTutor(Convert.ToInt32(cboTutorID.Items[0]));
+            int id = Convert.ToInt32(cboTutorID.Items[0]);
+
+            t = Tutor.GetTutor(id);
+
+            t.SetID(id.ToString());
 
             cboRates.Text = t.RateCode;
             txtEmail.Text = t.Email;
             txtPhone.Text = t.Phone;
 
             ControlFunctions.DisableBoxes(cboNames, cboSurnames, cboTutorID);
-            
         }
 
         private void btnUpdateTutor_Click(object sender, EventArgs e)
         {
-            Tutor t = new Tutor(cboNames.Text, 
-                                cboSurnames.Text, 
-                                txtEmail.Text, 
-                                txtPhone.Text, 
-                                cboRates.Text.Substring(0, 3));
-
-            t.SetID(cboTutorID.Text);
-
+            t.Email = txtEmail.Text;
+            t.Phone = txtPhone.Text;
+            t.RateCode = cboRates.Text.Substring(0,3);
 
             if (t.IsValid() != "Valid")
             {
                 ErrorMessage(t.IsValid());
                 return;
             }
-
-            Tutor t2 = Tutor.GetTutor(Convert.ToInt32(t.PersonID));
-            t2.SetID(t.PersonID);
-
-            if (t2 == null) 
-            { 
-                return; 
-            }
-            else if (t == t2) 
+            try
             {
-                SuccessMessage("No Details Changed, Goodbye");
-                return; 
+                t.Update();
+                SuccessMessage("The selected Tutor has been updated and their details are now as follows\n\n" + t.ToString());
             }
-            else
+            catch (Exception ex)
             {
-                    t2.RateCode = t.RateCode;
-                    t2.Email = t.Email;
-                    t2.Phone = t.Phone;
-                    t2.SetID(t.PersonID);
-                try
-                {
-                    t2.Update();
-                    SuccessMessage("The selected Tutor has been updated and their details are now as follows\n\n" + t2.ToString());
-                }
-                catch (Exception ex)
-                {
-                    ErrorMessage(ex.Message);
-                }
-                    
+                ErrorMessage(ex.Message);
             }
-
+            
             Reset(this.Controls);
+                    
         }
 
         protected override void Reset(Control.ControlCollection controls)
@@ -117,6 +93,7 @@ namespace GrindsBookingSystem
             ControlFunctions.FillBoxes("Tutors", cboTutorID, cboNames, cboSurnames);
             
             comboBoxes = ControlFunctions.CreateComboList(cboTutorID, cboNames, cboSurnames);
+
             foreach (var c in comboBoxes)
             {
                 c.SelectedIndexChanged -= ComboBoxChange;

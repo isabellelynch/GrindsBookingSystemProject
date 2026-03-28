@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Runtime.CompilerServices;
-using System.Runtime.Remoting;
 using System.Windows.Forms;
 
 namespace GrindsBookingSystem
@@ -122,9 +120,11 @@ namespace GrindsBookingSystem
         public static string GetCurrentSemester()
         {
             string sem = DateTime.Now.Year.ToString();
+
             sem = sem.Substring(sem.Length - 2);
 
             int month = DateTime.Now.Month;
+
             if (month <= 6)
             {
                 sem = sem + "1";
@@ -179,8 +179,9 @@ namespace GrindsBookingSystem
 
         public string GetClassSubject()
         {
-            string sql = "SELECT Description FROM Subjects " +
-                "WHERE SubjectID = " + this.SubjectID;
+            string sql = "SELECT Description " +
+                         "FROM Subjects " +
+                         "WHERE SubjectID = " + this.SubjectID;
             string sub = "";
             try
             {
@@ -202,9 +203,10 @@ namespace GrindsBookingSystem
         public bool IsClassFull()
         {
             bool full = false;
+
             string sql = "SELECT Capacity " +
-                        "FROM Rooms " +
-                        "WHERE RoomNo = " + this.RoomNo;
+                         "FROM Rooms " +
+                         "WHERE RoomNo = " + this.RoomNo;
 
             OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
             if (dr.Read())
@@ -231,5 +233,7 @@ namespace GrindsBookingSystem
 
             Database.ExecuteNonQuery(sql);
         }
+
+        
     }
 }

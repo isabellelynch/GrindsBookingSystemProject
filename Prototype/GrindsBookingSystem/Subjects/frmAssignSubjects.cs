@@ -2,7 +2,6 @@
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Windows.Forms;
 
 namespace GrindsBookingSystem
@@ -22,6 +21,7 @@ namespace GrindsBookingSystem
             base.Reset(controls);
 
             grpSubjects.Visible = false;
+
             ControlFunctions.EnableBoxes(cboTutorID, cboFirstName, cboSurname);
 
             ControlFunctions.FillBoxes("Tutors", cboTutorID, cboFirstName, cboSurname);
@@ -34,9 +34,7 @@ namespace GrindsBookingSystem
                 cb.SelectedIndexChanged += ComboBoxChange;
             }
 
-            string sql = "SELECT DISTINCT Description FROM Subjects";
-            DataSet ds = Database.ExecuteMultiRowQuery(sql);
-            dgvSubjects.DataSource = ds.Tables[0];
+            dgvSubjects.DataSource = Subject.GetSubjectDescriptions();
 
             GridViews.Default(dgvSubjects);
         }
@@ -60,22 +58,10 @@ namespace GrindsBookingSystem
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (cboTutorID.Items.Count > 1)
-            {
-                ErrorMessage("Please select a single tutor in order to assign a subject to them.");
-            }
-            else
-            {
-                grpSubjects.Visible = true;
-                ControlFunctions.DisableBoxes(cboTutorID, cboFirstName, cboSurname);
-            }
-        }
-
         private void btnAssignSubject_Click(object sender, EventArgs e)
         {
             String sub = dgvSubjects.CurrentCell.Value.ToString();
+
             if(!radioJunior.Checked && !radioLeaving.Checked)
             {
                 ErrorMessage("Please select Leaving or Junior Certificate to continue.");
@@ -94,9 +80,9 @@ namespace GrindsBookingSystem
             else
             {
                 string tutorID = cboTutorID.Text;
-                string subID = "";
                 string level = "HL";
                 string cert = "LC";
+
                 if (radioOrdinary.Checked)
                 {
                     level = "OL";
@@ -120,6 +106,7 @@ namespace GrindsBookingSystem
                 {
                     DialogResult result = MessageBox.Show("No matching SubjectID found. Would you like to add this subject to the system ?", "Subject Not Found"
                         , MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
                     if (result == DialogResult.Yes) 
                     {
                         Form f = new frmAddSubject();
@@ -135,18 +122,38 @@ namespace GrindsBookingSystem
                 }
                 else
                 {
-                    subID = dr.GetInt32(0).ToString();
-                    sql = "INSERT INTO Tutor_Subjects (TutorID, SubjectID) VALUES ('" + tutorID + "','" + subID + "')";
-                    Database.ExecuteNonQuery(sql);
-                    SuccessMessage(sub + " successfully assigned to tutor " + cboFirstName.Text + " " + cboSurname.Text);
-                }
+                    string subID = dr.GetInt32(0).ToString();
+                    dr.Close();
 
-                dr.Close();
+                    try
+                    {
+                        Subject.AddToTutorSubjectTable(tutorID, subID);
+
+                        SuccessMessage(sub + " successfully assigned to tutor " + cboFirstName.Text + " " + cboSurname.Text);
+                    }
+                    catch (Exception) 
+                    {
+                        ErrorMessage("Unable to assign subject to this tutor.");
+                    }
+                    
+                }
 
                 Reset(this.Controls);
 
+            }
+        }
 
+        private void btnSelectTutor_Click(object sender, EventArgs e)
+        {
+            if (cboTutorID.Items.Count > 1)
+            {
+                ErrorMessage("Please select a single tutor in order to assign a subject to them.");
+            }
+            else
+            {
+                grpSubjects.Visible = true;
 
+                ControlFunctions.DisableBoxes(cboTutorID, cboFirstName, cboSurname);
             }
         }
     }

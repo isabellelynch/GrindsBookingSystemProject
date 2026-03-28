@@ -63,10 +63,10 @@ namespace GrindsBookingSystem
         private void frmAddClass_Load(object sender, EventArgs e)
         {
             btnClass.Text = "Add Class";
-            SetClassDay(Day, cboDays);
-            SetClassTime(Time, cboTime);
-            SetAttendance(txtAttendance, Room);
-            SetRoom(cboRooms, Room);
+            SetClassDay(Day);
+            SetClassTime(Time);
+            SetAttendance(Room);
+            SetRoom(Room);
         }
     }
 }

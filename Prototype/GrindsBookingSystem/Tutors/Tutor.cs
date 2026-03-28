@@ -23,7 +23,8 @@ namespace GrindsBookingSystem
 
         public override string ToString()
         {
-            return base.ToString() + "\nRate Code : " + RateCode;
+            return base.ToString() + 
+                   "\nRate Code : " + RateCode;
         }
 
         public void Create()
@@ -178,6 +179,37 @@ namespace GrindsBookingSystem
             }
             
             return "Valid";
+        }
+
+        public static DataTable GetTutorsSubjects(string id)
+        {
+            string sql = "SELECT s.Description, s.SubjectLevel, s.SubjectCategory " +
+                         "FROM Subjects s " +
+                         "JOIN Tutor_Subjects ts ON s.SubjectID = ts.SubjectID" +
+                         " WHERE ts.TutorID = '" + id + "'";
+
+            DataSet ds = Database.ExecuteMultiRowQuery(sql);
+
+            return ds.Tables[0];
+        } 
+
+        public static int GetTutorID(string name, string surname)
+        {
+            string sql = "SELECT TutorID FROM Tutors WHERE FirstName = '" + name +
+                "' AND Surname = '" + surname + "'";
+
+            int id = 0;
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+
+            if (dr.Read())
+            {
+                 id = dr.GetInt32(0);
+            }
+
+            dr.Close();
+
+            return id;
         }
 
 

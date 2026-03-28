@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace GrindsBookingSystem
 {
@@ -40,6 +32,7 @@ namespace GrindsBookingSystem
             {
                 string level = "HL";
                 string cert = "LC";
+
                 if (radioOrdinary.Checked)
                 {
                     level = "OL";
@@ -50,6 +43,7 @@ namespace GrindsBookingSystem
                 }
 
                 Subject s = new Subject(cert, level, txtSubjectName.Text);
+
                 try
                 {
                     s.Create();

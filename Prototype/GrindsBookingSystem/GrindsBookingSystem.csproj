@@ -84,6 +84,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HelperClasses\DayConversions.cs" />
     <Compile Include="Inheritance\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +102,7 @@
     <Compile Include="Bookings\frmAddBooking.Designer.cs">
       <DependentUpon>frmAddBooking.cs</DependentUpon>
     </Compile>
+    <Compile Include="Rooms.cs" />
     <Compile Include="Subjects\frmAddSubject.cs">
       <SubType>Form</SubType>
     </Compile>
