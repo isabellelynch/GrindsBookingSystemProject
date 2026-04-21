@@ -1,8 +1,6 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System.Data;
 
-
-
 namespace GrindsBookingSystem
 {
     class Database
@@ -42,6 +40,15 @@ namespace GrindsBookingSystem
             OracleCommand cmd = new OracleCommand(query, conn);
             cmd.ExecuteNonQuery();
             conn.Close();
+        }
+
+        public static void ExecuteNonQueryCommand(OracleCommand cmd)
+        {
+            using (OracleConnection conn = OpenConnection())
+            {
+                cmd.Connection = conn;
+                cmd.ExecuteNonQuery();
+            }
         }
     }
 }

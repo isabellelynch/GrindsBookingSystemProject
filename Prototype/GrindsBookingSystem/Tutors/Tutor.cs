@@ -8,8 +8,6 @@ namespace GrindsBookingSystem
     public class Tutor : Person, InterfaceCRUD
     {
         public string RateCode { get; set; }
-
-
         public Tutor(string name, string sname, string emailAddress, string phoneNo, string rate) 
             : base(name, sname, emailAddress, phoneNo)
         {
@@ -29,16 +27,19 @@ namespace GrindsBookingSystem
 
         public void Create()
         {
-            string sql = "INSERT INTO Tutors (FirstName, Surname," +
-                "Email, PhoneNo, RateCode, Status) VALUES ('" +
-                FirstName + "','" +
-                Surname + "','" +
-                Email + "','" +
-                Phone + "','" +
-                RateCode + "'," +
-                "'A')";
+            string sql = "INSERT INTO Students (FirstName, Surname, Email, PhoneNo, RateCode, Status) " +
+                "VALUES (:FirstName, :Surname, :Email, :Phone, :RateCode, :Status)";
 
-            Database.ExecuteNonQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":FirstName", FirstName);
+            cmd.Parameters.Add(":Surname", Surname);
+            cmd.Parameters.Add(":Email", Email);
+            cmd.Parameters.Add(":Phone", Phone);
+            cmd.Parameters.Add(":RateCode", RateCode);
+            cmd.Parameters.Add(":Status", 'A');
+
+            Database.ExecuteNonQueryCommand(cmd);
         }
 
 
@@ -53,40 +54,40 @@ namespace GrindsBookingSystem
         public void Update()
         {
             string sql = "UPDATE Tutors SET " +
-                         "Email = '" + Email + "', " +
-                         "PhoneNo = '" + Phone + "', " +
-                         "RateCode = '" + RateCode +
-                         "' WHERE TutorID = '" + this.PersonID + "'";
-            try
-            {
-                Database.ExecuteNonQuery(sql);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+                         "Email = :Email, " +
+                         "PhoneNo = :PhoneNo, " +
+                         "RateCode = :RateCode " +
+                         "WHERE TutorID = :ID";
+
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":Email", Email);
+            cmd.Parameters.Add(":Phone", Phone);
+            cmd.Parameters.Add(":RateCode", RateCode);
+            cmd.Parameters.Add(":ID", this.PersonID);
+
+            Database.ExecuteNonQueryCommand(cmd);
         }
 
         public void Delete() 
         {
-            string sql = "UPDATE Tutors SET Status = 'I'" +
-                " WHERE TutorID = '" + this.PersonID + "'";
-            try
-            {
-                Database.ExecuteNonQuery(sql);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            string sql = "UPDATE Tutors SET " +
+                         "Status = :S " +
+                         "WHERE TutorID = :ID";
+
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":S", 'I');
+            cmd.Parameters.Add(":ID", this.PersonID);
+
+            Database.ExecuteNonQueryCommand(cmd);
         }
-
-        
-
-        
         public static DataSet RetrieveAll()
         {
-            string sql = "SELECT * FROM Tutors WHERE Status = 'A' ORDER BY TutorID";
+            string sql = "SELECT * " +
+                         "FROM Tutors " +
+                         "WHERE Status = 'A' " +
+                         "ORDER BY TutorID";
             return Database.ExecuteMultiRowQuery(sql);
         }
 
@@ -105,9 +106,9 @@ namespace GrindsBookingSystem
             }
 
             string sql = "SELECT TutorID, FirstName, Surname " +
-                "FROM Tutors " +
-                "WHERE TutorID IN (" + idList + ") " +
-                "ORDER BY TutorID";
+                         "FROM Tutors " +
+                         "WHERE TutorID IN (" + idList + ") " +
+                         "ORDER BY TutorID";
 
             return Database.ExecuteMultiRowQuery(sql);
         }

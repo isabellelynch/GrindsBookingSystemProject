@@ -12,20 +12,17 @@ namespace GrindsBookingSystem
         {
             ClearCombos(cb);
 
-            String sql = "";
             DataSet ds = null;
 
             if (location == "Tutors")
             {
-                sql = "SELECT * FROM Tutors WHERE Status = 'A' ORDER BY TutorID";
-                ds = Database.ExecuteMultiRowQuery(sql);
+                ds = Tutor.RetrieveAll();
             }
             else if (location == "Students")
             {
-                sql = "SELECT * FROM Students WHERE Status = 'A' ORDER BY StudentID";
-                ds = Database.ExecuteMultiRowQuery(sql);
+                ds = Student.RetrieveAll();
             }
-            if (string.IsNullOrEmpty(sql) || ds == null) { return; }
+            if (ds == null) { return; }
 
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {

@@ -1,6 +1,7 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Windows.Forms;
 
@@ -22,18 +23,18 @@ namespace GrindsBookingSystem
         }
         public void Create()
         {
-            Debug.WriteLine(this);
+            string sql = "INSERT INTO Students (FirstName, Surname, Email, PhoneNo, Status) " +
+                "VALUES (:FirstName, :Surname, :Email, :Phone, :Status)";
 
-            string sql = "INSERT INTO Students (FirstName, Surname" +
-                ",Email, PhoneNo, Status) VALUES ('" +
-                FirstName + "','" +
-                Surname + "','" +
-                Email + "','" +
-                Phone + "'," +
-                "'A')";
+            var cmd = new OracleCommand(sql);
 
+            cmd.Parameters.Add(":FirstName", FirstName);
+            cmd.Parameters.Add(":Surname", Surname);
+            cmd.Parameters.Add(":Email", Email);
+            cmd.Parameters.Add(":Phone", Phone);
+            cmd.Parameters.Add(":Status", 'A');
 
-            Database.ExecuteNonQuery(sql);
+            Database.ExecuteNonQueryCommand(cmd);
         }
         
         public string Read()
@@ -46,36 +47,47 @@ namespace GrindsBookingSystem
         public void Update()
         {
             string sql = "UPDATE Students SET " +
-                         "Email = '" + Email + "', " +
-                         "PhoneNo = '" + Phone + 
-                         "' WHERE StudentID = " + this.PersonID;
-            try
-            {
-                Database.ExecuteNonQuery(sql);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+                         "Email = :Email, " +
+                         "PhoneNo = :PhoneNo, " +
+                         "WHERE StudentID = :ID";
 
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":Email", Email);
+            cmd.Parameters.Add(":Phone", Phone);
+            cmd.Parameters.Add(":ID", this.PersonID);
+
+            Database.ExecuteNonQueryCommand(cmd);
         }
 
         public void Delete() 
         {
-            string sql = "UPDATE Students SET Status = 'I'" +
-                " WHERE StudentID = '" + this.PersonID + "'";
-            try
-            {
-                Database.ExecuteNonQuery(sql);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            string sql = "UPDATE Students SET " +
+                         "Status = :S " +
+                         "WHERE StudentID = :ID";
+
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":S", 'I');
+            cmd.Parameters.Add(":ID", this.PersonID);
+
+            Database.ExecuteNonQueryCommand(cmd);
+        }
+        public static DataSet RetrieveAllDetails()
+        {
+            string sql = "SELECT StudentID, FirstName, Surname " +
+                         "FROM Students " +
+                         "WHERE Status = 'A' " +
+                         "ORDER BY StudentID";
+
+            return Database.ExecuteMultiRowQuery(sql);
         }
         public static DataSet RetrieveAll()
         {
-            string sql = "SELECT StudentID, FirstName, Surname FROM Students WHERE Status = 'A' ORDER BY StudentID";
+            string sql = "SELECT * " +
+                         "FROM Students " +
+                         "WHERE Status = 'A' " +
+                         "ORDER BY StudentID";
             return Database.ExecuteMultiRowQuery(sql);
         }
 
@@ -134,9 +146,9 @@ namespace GrindsBookingSystem
             }
 
             string sql = "SELECT StudentID, FirstName, Surname " +
-                "FROM Students " +
-                "WHERE StudentID IN (" + idList + ") " +
-                "ORDER BY StudentID";
+                         "FROM Students " +
+                         "WHERE StudentID IN (" + idList + ") " +
+                         "ORDER BY StudentID";
 
             return Database.ExecuteMultiRowQuery(sql);
         }

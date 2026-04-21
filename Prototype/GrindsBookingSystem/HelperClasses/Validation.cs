@@ -16,7 +16,7 @@ namespace GrindsBookingSystem
 
             foreach (char c in n)
             {
-                if (!char.IsLetter(c))
+                if (!char.IsLetter(c) && c != '\'')
                 {
                     return false;
                 }
@@ -142,6 +142,16 @@ namespace GrindsBookingSystem
                 return false;
             }
             return true;
+        }
+
+        public static string CheckApostrophe(string s)
+        {
+            if (s.Contains("'"))
+            {
+                s.Replace("'", "''");
+            }
+
+            return s;
         }
 
         

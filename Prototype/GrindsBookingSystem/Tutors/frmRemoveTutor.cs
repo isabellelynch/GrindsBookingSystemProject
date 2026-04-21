@@ -54,7 +54,7 @@ namespace GrindsBookingSystem
             }
             else
             {
-                ErrorMessage("A tutor must be selected in order to be removed");
+                ErrorMessage("A unique tutor must be chosen to remove him/her from the Grinds Booking System, please select a single tutor before continuing.");
             }
         }
 

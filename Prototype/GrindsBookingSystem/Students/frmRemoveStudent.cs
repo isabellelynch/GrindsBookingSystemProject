@@ -75,7 +75,7 @@ namespace GrindsBookingSystem
 
             GridViews.Default(dgvRemoveStudent);
 
-            dgvRemoveStudent.DataSource = Student.RetrieveAll().Tables[0];
+            dgvRemoveStudent.DataSource = Student.RetrieveAllDetails().Tables[0];
 
             comboBoxes = ControlFunctions.CreateComboList(cboStudentID, cboFirstName, cboSurname);
 
