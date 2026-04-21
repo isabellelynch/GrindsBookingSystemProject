@@ -23,15 +23,18 @@ namespace GrindsBookingSystem
             txtTotalBookings.Text = GenerateTotalAnnualBookings().ToString();
             txtActiveStudents.Text = GetActive("Students").ToString();
             txtActiveTutors.Text = GetActive("Tutors").ToString();
-            txtWorstTutor.Text = Tutor.WorstPerformingTutor();
-            txtLeastBooked.Text = LeastBookedClass();
-            foreach(var h in headings)
+            txtWorstTutor.Text = Tutor.PerformingTutor("ASC");
+            txtBestTutor.Text = Tutor.PerformingTutor("DESC");
+            foreach (var h in headings)
             {
                 cboCharts.Items.Add(h.ToString());
             }
+
+            ControlFunctions.ReadOnly(this.Controls);
+            
             Charts.Visible = false;
         }
-
+        
         private int GenerateTotalAnnualRevenue()
         {
             string sql = "SELECT SUM(tr.HourlyRate) " +
@@ -100,29 +103,7 @@ namespace GrindsBookingSystem
 
         
 
-        private string LeastBookedClass()
-        {
-            string sql = "SELECT s.Description, COUNT(*) AS BookingCount " +
-                         "FROM Classes c " +
-                         "LEFT JOIN Bookings b ON c.ClassID = b.ClassID " +
-                         "JOIN Subjects s ON c.SubjectID = s.SubjectID " +
-                         "GROUP BY s.Description " +
-                         "ORDER BY BookingCount ASC " +
-                         "FETCH FIRST 1 ROW WITH TIES";
-
-            string result = "";
-
-            DataSet ds = Database.ExecuteMultiRowQuery(sql);
-
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                if (ds.Tables[0].Rows.Count == 1)
-                {
-                    result = ds.Tables[0].Rows[0]["Description"].ToString();
-                }
-            }
-            return result;
-        }
+        
 
         private void GetTutorEarningsChart()
         {
@@ -167,8 +148,8 @@ namespace GrindsBookingSystem
         private void GetRevenueChart()
         {
             string sql = "SELECT " +
-                             "TO_CHAR(b.BookingDate, 'YYYY-MM') AS Month," +
-                             "SUM(tr.HourlyRate) AS Revenue " +
+                         "TO_CHAR(b.BookingDate, 'YYYY-MM') AS Month," +
+                         "SUM(tr.HourlyRate) AS Revenue " +
                          "FROM Bookings b " +
                          "JOIN Classes c ON b.ClassID = c.ClassID " +
                          "JOIN Tutors t ON c.TutorID = t.TutorID " +

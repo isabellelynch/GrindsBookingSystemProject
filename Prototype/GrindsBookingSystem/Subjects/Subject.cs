@@ -71,10 +71,9 @@ namespace GrindsBookingSystem
                          " AND SubjectLevel = '" + level + "'" +
                          " AND Description = '" + description + "'";
 
-
             OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
 
-            if(dr != null && dr.Read())
+            if(dr.Read())
             {
                 return dr.GetInt32(0).ToString();
             }

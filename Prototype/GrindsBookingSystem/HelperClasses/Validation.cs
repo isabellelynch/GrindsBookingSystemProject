@@ -16,7 +16,7 @@ namespace GrindsBookingSystem
 
             foreach (char c in n)
             {
-                if (!char.IsLetter(c) && c != '\'')
+                if (!char.IsLetter(c) && c != '\'' && c.ToString() != " ")
                 {
                     return false;
                 }

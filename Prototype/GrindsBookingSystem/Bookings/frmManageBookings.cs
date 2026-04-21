@@ -85,6 +85,15 @@ namespace GrindsBookingSystem
 
                 grpCancelBooking.Visible = true;
             }
+            else
+            {
+                MessageBox.Show("Student currently has no bookings made",
+                                "No Bookings",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+
+                Reset(this.Controls);
+            }
         }
 
         private void btnCancelBooking_Click(object sender, EventArgs e)

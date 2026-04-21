@@ -44,15 +44,9 @@ namespace GrindsBookingSystem
                 RoomNo + "','" +
                 Semester + "','" +
                 SubjectID + "')";
-            try
-            {
-                Database.ExecuteNonQuery(sql);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            
+            Database.ExecuteNonQuery(sql);
+           
         }
         public string Read()
         {
@@ -176,6 +170,8 @@ namespace GrindsBookingSystem
             return id;
 
         }
+
+        
 
         public string GetClassSubject()
         {

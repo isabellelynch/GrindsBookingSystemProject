@@ -27,7 +27,7 @@ namespace GrindsBookingSystem
 
         public void Create()
         {
-            string sql = "INSERT INTO Students (FirstName, Surname, Email, PhoneNo, RateCode, Status) " +
+            string sql = "INSERT INTO Tutors (FirstName, Surname, Email, PhoneNo, RateCode, Status) " +
                 "VALUES (:FirstName, :Surname, :Email, :Phone, :RateCode, :Status)";
 
             var cmd = new OracleCommand(sql);
@@ -130,7 +130,7 @@ namespace GrindsBookingSystem
             return t;
         }
 
-        public static string WorstPerformingTutor()
+        public static string PerformingTutor(string order)
         {
             string sql = "SELECT t.FirstName, t.Surname, NVL(SUM(tr.HourlyRate), 0) AS TotalEarnings " +
                         "FROM Tutors t " +
@@ -139,7 +139,7 @@ namespace GrindsBookingSystem
                         "LEFT JOIN Bookings b ON c.ClassID = b.ClassID " +
                         "AND EXTRACT(YEAR FROM b.BookingDate) = EXTRACT(YEAR FROM SYSDATE) " +
                         "GROUP BY t.TutorID, t.FirstName, t.Surname " +
-                        "ORDER BY TotalEarnings ASC " +
+                        "ORDER BY TotalEarnings " + order + " " +
                         "FETCH FIRST 1 ROW WITH TIES";
 
             string result = "";
@@ -155,6 +155,8 @@ namespace GrindsBookingSystem
 
             return result;
         }
+
+        
 
         public String IsValid()
         {
@@ -212,7 +214,47 @@ namespace GrindsBookingSystem
 
             return id;
         }
+        public static bool IsTutorFree(int day, int time, string id)
+        {
+            int classID = 0;
 
+            string sql = "SELECT ClassID FROM Classes " +
+                         "WHERE Day = " + day + " " +
+                         "AND Time = " + time + " " +
+                         "AND RoomNo = '" + id + "' " +
+                         "AND SemesterNo = '" + Class.GetCurrentSemester() + "'";
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+
+            if (dr.Read())
+            {
+                classID = dr.GetInt32(0);
+                dr.Close();
+            }
+            if (classID == 0)
+            {
+                return true;
+            }
+            return false;
+
+        }
+
+        public static int HoursWorked(string tutorID)
+        {
+            int hours = 0;
+            string sql = "SELECT COUNT(*) AS Hours " +
+                         "FROM Classes " +
+                         "WHERE TutorID = " + tutorID +
+                         " AND SemesterNo = '" + Class.GetCurrentSemester() + "'";
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            if (dr.Read())
+            {
+                hours = dr.GetInt32(0);
+                dr.Close();
+            }
+            return hours;
+        }
 
     } 
 }

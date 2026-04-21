@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace GrindsBookingSystem
 {
@@ -44,16 +45,26 @@ namespace GrindsBookingSystem
 
                 Subject s = new Subject(cert, level, txtSubjectName.Text);
 
-                try
-                {
-                    s.Create();
-                    SuccessMessage("Subject Added Successfully.");
+                string subID = Subject.GetSubjectID(level, cert, txtSubjectName.Text);
+  
+
+                if (subID == null || subID == "") 
+                { 
+                    try
+                    {
+                        s.Create();
+                        SuccessMessage("Subject Added Successfully.");
+                    }
+                    catch (Exception ex)
+                    {
+                        ErrorMessage(ex.ToString());
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    ErrorMessage(ex.ToString());
+                    ErrorMessage("Subject is already on the system.");
                 }
-                
+
                 Reset(this.Controls);
 
             }

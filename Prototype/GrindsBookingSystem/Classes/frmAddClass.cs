@@ -39,25 +39,46 @@ namespace GrindsBookingSystem
 
             string cat = sub.Substring(0, 2);
             string level = sub.Substring(3, 2);
-            string description = sub.Substring(5);
+            string description = sub.Substring(6);
 
-            string subID = Subject.GetSubjectID(cat, level, description);
+            string subID = Subject.GetSubjectID(level,cat,description);
 
-            Class c = new Class(Day, Time, tutorID, 0, Room, Class.GetCurrentSemester(), subID);
-
-            try
+            if (subID == null || subID == "") 
             {
-                c.Create();
-            }
-            catch (Exception ex)
-            {
-                ErrorMessage(ex.Message);
+                ErrorMessage("The chosen subject is not available on the system.");
                 return;
             }
+            if(Tutor.IsTutorFree(Day, Time, tutorID))
+            {
+                if(Tutor.HoursWorked(tutorID) < 20)
+                {
+                    Class c = new Class(Day, Time, tutorID, 0, Room, Class.GetCurrentSemester(), subID);
 
-            SuccessMessage("Your Class has been sucessfully added to the Schedule");
+                    try
+                    {
+                        c.Create();
+                    }
+                    catch (Exception ex)
+                    {
+                        ErrorMessage(ex.Message);
+                        return;
+                    }
 
-            GoHome();
+                    SuccessMessage("Your Class has been sucessfully added to the Schedule");
+
+                    GoHome();
+                }
+                else
+                {
+                    ErrorMessage("The chosen tutor cannot be booked as he/she has reached their working hours quota");
+                }
+                
+            }
+            else
+            {
+                ErrorMessage("Chosen tutor is not avaialable at the chosen day and time");
+            }
+            
         }
 
         private void frmAddClass_Load(object sender, EventArgs e)

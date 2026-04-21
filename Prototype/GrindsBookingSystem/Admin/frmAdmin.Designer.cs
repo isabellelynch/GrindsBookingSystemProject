@@ -46,7 +46,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.cboCharts = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtLeastBooked = new System.Windows.Forms.TextBox();
+            this.txtBestTutor = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txtWorstTutor = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -194,7 +194,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.txtLeastBooked);
+            this.groupBox1.Controls.Add(this.txtBestTutor);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.txtWorstTutor);
             this.groupBox1.Controls.Add(this.label6);
@@ -203,35 +203,35 @@
             this.groupBox1.Size = new System.Drawing.Size(535, 117);
             this.groupBox1.TabIndex = 48;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Concerns";
+            this.groupBox1.Text = "Tutors";
             // 
-            // txtLeastBooked
+            // txtBestTutor
             // 
-            this.txtLeastBooked.Location = new System.Drawing.Point(156, 58);
-            this.txtLeastBooked.Name = "txtLeastBooked";
-            this.txtLeastBooked.Size = new System.Drawing.Size(100, 20);
-            this.txtLeastBooked.TabIndex = 52;
+            this.txtBestTutor.Location = new System.Drawing.Point(218, 58);
+            this.txtBestTutor.Name = "txtBestTutor";
+            this.txtBestTutor.Size = new System.Drawing.Size(248, 20);
+            this.txtBestTutor.TabIndex = 52;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(21, 61);
+            this.label7.Location = new System.Drawing.Point(51, 65);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(101, 13);
+            this.label7.Size = new System.Drawing.Size(109, 13);
             this.label7.TabIndex = 51;
-            this.label7.Text = "Least Booked Class";
+            this.label7.Text = "Best Performing Tutor";
             // 
             // txtWorstTutor
             // 
-            this.txtWorstTutor.Location = new System.Drawing.Point(156, 22);
+            this.txtWorstTutor.Location = new System.Drawing.Point(218, 25);
             this.txtWorstTutor.Name = "txtWorstTutor";
-            this.txtWorstTutor.Size = new System.Drawing.Size(100, 20);
+            this.txtWorstTutor.Size = new System.Drawing.Size(248, 20);
             this.txtWorstTutor.TabIndex = 50;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(21, 25);
+            this.label6.Location = new System.Drawing.Point(51, 32);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(119, 13);
             this.label6.TabIndex = 46;
@@ -278,7 +278,7 @@
         private System.Windows.Forms.ComboBox cboCharts;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox txtLeastBooked;
+        private System.Windows.Forms.TextBox txtBestTutor;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtWorstTutor;
         private System.Windows.Forms.Label label6;

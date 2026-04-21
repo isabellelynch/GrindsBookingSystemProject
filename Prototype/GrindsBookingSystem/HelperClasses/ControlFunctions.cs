@@ -179,6 +179,20 @@ namespace GrindsBookingSystem
             }
             return list;
         }
-
+        public static void ReadOnly(Control.ControlCollection controls)
+        {
+            foreach (Control c in controls)
+            {
+                if (c is TextBox t)
+                {
+                    t.ReadOnly = true;
+                }
+                if (c.HasChildren)
+                {
+                    Control.ControlCollection cons = c.Controls;
+                    ReadOnly(cons);
+                }
+            }
+        }
     }
 }
