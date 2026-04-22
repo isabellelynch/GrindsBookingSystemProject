@@ -38,9 +38,6 @@
             this.AssignSubjects = new System.Windows.Forms.ToolStripMenuItem();
             this.subjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AddSubject = new System.Windows.Forms.ToolStripMenuItem();
-            this.RemoveSubject = new System.Windows.Forms.ToolStripMenuItem();
-            this.UpdateSubject = new System.Windows.Forms.ToolStripMenuItem();
-            this.ViewSubjects = new System.Windows.Forms.ToolStripMenuItem();
             this.studentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AddStudent = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveStudent = new System.Windows.Forms.ToolStripMenuItem();
@@ -124,10 +121,7 @@
             // subjectsToolStripMenuItem
             // 
             this.subjectsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.AddSubject,
-            this.RemoveSubject,
-            this.UpdateSubject,
-            this.ViewSubjects});
+            this.AddSubject});
             this.subjectsToolStripMenuItem.Name = "subjectsToolStripMenuItem";
             this.subjectsToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
             this.subjectsToolStripMenuItem.Text = "Subjects";
@@ -138,24 +132,6 @@
             this.AddSubject.Size = new System.Drawing.Size(180, 22);
             this.AddSubject.Text = "Add Subjecst";
             this.AddSubject.Click += new System.EventHandler(this.AddSubject_Click);
-            // 
-            // RemoveSubject
-            // 
-            this.RemoveSubject.Name = "RemoveSubject";
-            this.RemoveSubject.Size = new System.Drawing.Size(180, 22);
-            this.RemoveSubject.Text = "Remove Subject";
-            // 
-            // UpdateSubject
-            // 
-            this.UpdateSubject.Name = "UpdateSubject";
-            this.UpdateSubject.Size = new System.Drawing.Size(180, 22);
-            this.UpdateSubject.Text = "Update Subjects";
-            // 
-            // ViewSubjects
-            // 
-            this.ViewSubjects.Name = "ViewSubjects";
-            this.ViewSubjects.Size = new System.Drawing.Size(180, 22);
-            this.ViewSubjects.Text = "View Subjects";
             // 
             // studentsToolStripMenuItem
             // 
@@ -215,14 +191,14 @@
             // MakeBooking
             // 
             this.MakeBooking.Name = "MakeBooking";
-            this.MakeBooking.Size = new System.Drawing.Size(180, 22);
+            this.MakeBooking.Size = new System.Drawing.Size(169, 22);
             this.MakeBooking.Text = "Make Booking";
             this.MakeBooking.Click += new System.EventHandler(this.MakeBooking_Click);
             // 
             // CancelBooking
             // 
             this.CancelBooking.Name = "CancelBooking";
-            this.CancelBooking.Size = new System.Drawing.Size(180, 22);
+            this.CancelBooking.Size = new System.Drawing.Size(169, 22);
             this.CancelBooking.Text = "Manage Bookings";
             this.CancelBooking.Click += new System.EventHandler(this.CancelBooking_Click);
             // 
@@ -237,7 +213,7 @@
             // YearlyRevenue
             // 
             this.YearlyRevenue.Name = "YearlyRevenue";
-            this.YearlyRevenue.Size = new System.Drawing.Size(180, 22);
+            this.YearlyRevenue.Size = new System.Drawing.Size(120, 22);
             this.YearlyRevenue.Text = "Statistics";
             this.YearlyRevenue.Click += new System.EventHandler(this.YearlyRevenue_Click);
             // 
@@ -302,9 +278,6 @@
         private System.Windows.Forms.ToolStripMenuItem subjectsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AddSubject;
         private System.Windows.Forms.ToolStripMenuItem AssignSubjects;
-        private System.Windows.Forms.ToolStripMenuItem RemoveSubject;
-        private System.Windows.Forms.ToolStripMenuItem UpdateSubject;
-        private System.Windows.Forms.ToolStripMenuItem ViewSubjects;
     }
 }
 

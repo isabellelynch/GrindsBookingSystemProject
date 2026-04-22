@@ -36,17 +36,19 @@ namespace GrindsBookingSystem
         public void Create()
         {
             string sql = "INSERT INTO Classes (Day, Time, TutorID, CurrentEnrollment, RoomNo, SemesterNo, SubjectID)" +
-                "VALUES (" +
-                Day + "," +
-                Time + "," +
-                TutorID + "," +
-                CurrentEnrollment + ",'" +
-                RoomNo + "','" +
-                Semester + "','" +
-                SubjectID + "')";
-            
-            Database.ExecuteNonQuery(sql);
-           
+                         "VALUES (:d, :t, :id, :ce, :r, :s, :sub)";
+
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":d", this.Day);
+            cmd.Parameters.Add(":t", this.Time);
+            cmd.Parameters.Add(":id", this.TutorID);
+            cmd.Parameters.Add(":ce", this.CurrentEnrollment);
+            cmd.Parameters.Add(":r", this.RoomNo);
+            cmd.Parameters.Add(":s", this.Semester);
+            cmd.Parameters.Add(":sub", this.SubjectID);
+
+            Database.ExecuteNonQueryCommand(cmd);
         }
         public string Read()
         {
@@ -57,15 +59,27 @@ namespace GrindsBookingSystem
         public void Update()
         {
             string sql = "UPDATE Classes SET " +
-                         "Day = " + this.Day + "," +
-                         "Time = " + this.Time + "," +
-                         "TutorID = " + this.TutorID + "," +
-                         "CurrentEnrollment = " + this.CurrentEnrollment + "," +
-                         "RoomNo = '" + this.RoomNo + "'," +
-                         "SemesterNo = '" + this.Semester + "'," +
-                         "SubjectID = " + this.SubjectID +
-                         " WHERE ClassID = " + this.ClassID;
-            Database.ExecuteNonQuery(sql);
+                         "Day = :d," +
+                         "Time = :t," +
+                         "TutorID = :id," +
+                         "CurrentEnrollment = :ce," +
+                         "RoomNo = :r," +
+                         "SemesterNo = :s," +
+                         "SubjectID = :sub " +
+                         " WHERE ClassID = :cid";
+
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":d", this.Day);
+            cmd.Parameters.Add(":t", this.Time);
+            cmd.Parameters.Add(":id", this.TutorID);
+            cmd.Parameters.Add(":ce", this.CurrentEnrollment);
+            cmd.Parameters.Add(":r", this.RoomNo);
+            cmd.Parameters.Add(":s", this.Semester);
+            cmd.Parameters.Add(":sub", this.SubjectID);
+            cmd.Parameters.Add(":cid", this.ClassID);
+
+            Database.ExecuteNonQueryCommand(cmd);
         }
         public void Delete()
         {

@@ -155,32 +155,20 @@ namespace GrindsBookingSystem
                 {
                     if (b.HasStudentAlreadyBooked() == false)
                     {
-                        int amount = Booking.GetAmount(c.TutorID);
-
-                        DialogResult d = MessageBox.Show("Please confirm that the student has paid the €" + amount + " due before continuing to book","Payment", 
-                            MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                        if (d == DialogResult.Yes)
+                        //NOTE:it is to be assumed that payment will be made in cash on arrival to the class
+                        try
                         {
-                            try
-                            {
-                                b.Create();
-                                SuccessMessage("Class Booked!");
-                                //have written the appropriate code for sending the confirmation email however,
-                                //I have left it commented out because I was unable to test within the college network due to firewalls and 
-                                //do not have a pc to test with at home
-                                //SendBookingConfirmation();
-                            }
-                            catch (Exception ex)
-                            {
-                                ErrorMessage(ex.Message);
-                            } 
+                            b.Create();
+                            SuccessMessage("Class Booked!");
+                            //have written the appropriate code for sending the confirmation email however,
+                            //I have left it commented out because I was unable to test within the college network due to firewalls and 
+                            //do not have a pc to test with at home
+                            //SendBookingConfirmation();
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            ErrorMessage("The student must provide payment before continuing");
-                            return;
-                        }
+                            ErrorMessage(ex.Message);
+                        } 
                     }
                     else
                     {

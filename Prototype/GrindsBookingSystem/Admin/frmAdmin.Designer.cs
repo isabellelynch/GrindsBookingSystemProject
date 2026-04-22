@@ -41,17 +41,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.grpCharts = new System.Windows.Forms.GroupBox();
             this.Charts = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cboCharts = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtBestTutor = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txtWorstTutor = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.grpKPIs.SuspendLayout();
-            this.grpCharts.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Charts)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -146,51 +142,21 @@
             this.label2.TabIndex = 46;
             this.label2.Text = "Active Tutors";
             // 
-            // grpCharts
-            // 
-            this.grpCharts.Controls.Add(this.Charts);
-            this.grpCharts.Controls.Add(this.label5);
-            this.grpCharts.Controls.Add(this.cboCharts);
-            this.grpCharts.Location = new System.Drawing.Point(12, 167);
-            this.grpCharts.Name = "grpCharts";
-            this.grpCharts.Size = new System.Drawing.Size(535, 266);
-            this.grpCharts.TabIndex = 47;
-            this.grpCharts.TabStop = false;
-            this.grpCharts.Text = "Charts";
-            // 
             // Charts
             // 
             chartArea1.Name = "ChartArea1";
             this.Charts.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.Charts.Legends.Add(legend1);
-            this.Charts.Location = new System.Drawing.Point(9, 41);
+            this.Charts.Location = new System.Drawing.Point(12, 156);
             this.Charts.Name = "Charts";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.Charts.Series.Add(series1);
-            this.Charts.Size = new System.Drawing.Size(520, 219);
+            this.Charts.Size = new System.Drawing.Size(535, 288);
             this.Charts.TabIndex = 50;
             this.Charts.Text = "charts";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 22);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(94, 13);
-            this.label5.TabIndex = 49;
-            this.label5.Text = "Choose chart data";
-            // 
-            // cboCharts
-            // 
-            this.cboCharts.FormattingEnabled = true;
-            this.cboCharts.Location = new System.Drawing.Point(106, 14);
-            this.cboCharts.Name = "cboCharts";
-            this.cboCharts.Size = new System.Drawing.Size(121, 21);
-            this.cboCharts.TabIndex = 0;
-            this.cboCharts.SelectedIndexChanged += new System.EventHandler(this.cboCharts_SelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -242,19 +208,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(561, 583);
+            this.Controls.Add(this.Charts);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.grpCharts);
             this.Controls.Add(this.grpKPIs);
             this.Name = "frmAdmin";
             this.Text = "frmAdmin";
             this.Load += new System.EventHandler(this.frmAdmin_Load);
             this.Controls.SetChildIndex(this.grpKPIs, 0);
-            this.Controls.SetChildIndex(this.grpCharts, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);
+            this.Controls.SetChildIndex(this.Charts, 0);
             this.grpKPIs.ResumeLayout(false);
             this.grpKPIs.PerformLayout();
-            this.grpCharts.ResumeLayout(false);
-            this.grpCharts.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Charts)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -273,9 +237,6 @@
         private System.Windows.Forms.TextBox txtActiveTutors;
         private System.Windows.Forms.TextBox txtTotalBookings;
         private System.Windows.Forms.TextBox txtRevenue;
-        private System.Windows.Forms.GroupBox grpCharts;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox cboCharts;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtBestTutor;

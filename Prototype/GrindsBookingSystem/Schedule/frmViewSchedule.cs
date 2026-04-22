@@ -9,7 +9,8 @@ namespace GrindsBookingSystem
         int day;
         int time;
         string room;
-
+        //NOTE:For Scheduling the schedule does not change, it runs weekly, you are automatically considered booked in until you cancel yourself or do not
+        //show up, cash payment is made on arrival
         public frmViewSchedule()
         {
             InitializeComponent();

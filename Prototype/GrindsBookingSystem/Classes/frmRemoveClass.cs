@@ -11,6 +11,8 @@ namespace GrindsBookingSystem
         {
             InitializeComponent();
             deletingClass = c;
+            int id = Class.GetClassID(deletingClass.Day, deletingClass.Time, deletingClass.RoomNo);
+            deletingClass.SetID(id);
             Reset(this.Controls);
         }
 

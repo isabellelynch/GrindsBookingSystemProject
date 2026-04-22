@@ -21,6 +21,7 @@ namespace GrindsBookingSystem
             
             FillTutorDetails();
             FillTimes();
+            FillDays();
 
             cboSubjects.Enabled = false;
             RefreshButton.Visible = false;
@@ -93,6 +94,16 @@ namespace GrindsBookingSystem
                 {
                     cboTime.Items.Add(i.ToString() + ":00");
                 }
+            }
+        }
+
+        protected void FillDays()
+        {
+            cboDays.Items.Clear();
+            string[] days = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
+            foreach (string day in days)
+            {
+                cboDays.Items.Add(day);
             }
         }
         protected int GetTutorID()

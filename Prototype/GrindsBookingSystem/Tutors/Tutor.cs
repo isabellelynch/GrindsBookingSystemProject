@@ -100,15 +100,18 @@ namespace GrindsBookingSystem
 
         public void RefundClasses()
         {
+            int amount = Booking.GetAmount(this.PersonID);
+
             string sql = "INSERT INTO Refunds(BookingID, StudentID, Amount) " +
-                         "SELECT b.BookingID, b.StudentID, 50.00 " +
-                         "FROM Bookings b " +
+                         "SELECT b.BookingID, b.StudentID, :A " +
+                         " FROM Bookings b " +
                          "JOIN Classes c ON b.ClassID = c.ClassID " +
                          "WHERE c.TutorID = :tutorID";
 
             var cmd = new OracleCommand(sql);
 
             cmd.Parameters.Add(":tutorID", this.PersonID);
+            cmd.Parameters.Add(":A", amount);
 
             Database.ExecuteNonQueryCommand(cmd);
 
@@ -118,9 +121,7 @@ namespace GrindsBookingSystem
         {
             string sql = "UPDATE Bookings " +
                          "SET Status = :S " +
-                         "WHERE ClassID IN (" +
-                         "SELECT ClassID FROM Classes WHERE TutorID = :tutorID" +
-                         ");";
+                         "WHERE ClassID IN (SELECT ClassID FROM Classes WHERE TutorID = :tutorID)";
 
             var cmd = new OracleCommand(sql);
             cmd.Parameters.Add(":S", 'C');
@@ -304,20 +305,13 @@ namespace GrindsBookingSystem
 
         public static bool DoesTutorExist(string email)
         {
-            bool exists = false;
-
-            string sql = "SELECT COUNT(*) " +
+            string sql = "SELECT 1 " +
                          "FROM Tutors " +
-                         "WHERE Email = " + email;
+                         "WHERE Email = '" + email + "'";
 
             OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
 
-            if (dr.Read() && dr.GetInt32(0) > 0) 
-            {
-                exists = true;
-            }
-
-            return exists;
+            return dr.Read();
         }
 
     } 

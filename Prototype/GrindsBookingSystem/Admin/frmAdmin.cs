@@ -10,7 +10,6 @@ namespace GrindsBookingSystem
 {
     public partial class frmAdmin : BaseForm
     {
-        string[] headings = { "Tutor Earnings" , "Monthly Revenue Analysis" };
         public frmAdmin()
         {
             InitializeComponent();
@@ -25,14 +24,10 @@ namespace GrindsBookingSystem
             txtActiveTutors.Text = GetActive("Tutors").ToString();
             txtWorstTutor.Text = Tutor.PerformingTutor("ASC");
             txtBestTutor.Text = Tutor.PerformingTutor("DESC");
-            foreach (var h in headings)
-            {
-                cboCharts.Items.Add(h.ToString());
-            }
-
+            GetTutorEarningsChart();
+            Charts.MouseDown -= Charts_MouseDownTutors;
+            Charts.MouseDown += Charts_MouseDownTutors;
             ControlFunctions.ReadOnly(this.Controls);
-            
-            Charts.Visible = false;
         }
         
         private int GenerateTotalAnnualRevenue()
@@ -101,20 +96,20 @@ namespace GrindsBookingSystem
             return count;
         }
 
-        
-
-        
-
         private void GetTutorEarningsChart()
         {
-            string sql = "SELECT t.TutorID, NVL(SUM(tr.HourlyRate), 0) AS TotalEarnings " +
-            "FROM Tutors t " +
-            "JOIN TutorRates tr ON t.RateCode = tr.RateCode " +
-            "LEFT JOIN Classes c ON t.TutorID = c.TutorID " +
-            "LEFT JOIN Bookings b ON c.ClassID = b.ClassID " +
-            "AND EXTRACT(YEAR FROM b.BookingDate) = EXTRACT(YEAR FROM SYSDATE) " +
-            "GROUP BY t.TutorID, t.FirstName, t.Surname " +
-            "ORDER BY TotalEarnings DESC";
+            Charts.Series.Clear();
+            Charts.ChartAreas.Clear();
+
+            string sql = "SELECT t.TutorID," +
+                         "NVL(COUNT(b.BookingID) * tr.HourlyRate, 0) AS TotalEarnings " +
+                         "FROM Tutors t " +
+                         "JOIN TutorRates tr ON t.RateCode = tr.RateCode " +
+                         "LEFT JOIN Classes c ON t.TutorID = c.TutorID " +
+                         "LEFT JOIN Bookings b ON c.ClassID = b.ClassID " +
+                         "AND EXTRACT(YEAR FROM b.BookingDate) = EXTRACT(YEAR FROM SYSDATE) " +
+                         "GROUP BY t.TutorID, tr.HourlyRate " +
+                         "ORDER BY TotalEarnings DESC";
 
             DataTable dt =  Database.ExecuteMultiRowQuery(sql).Tables[0];
 
@@ -130,7 +125,7 @@ namespace GrindsBookingSystem
 
             Series series = new Series
             {
-                Name = "Tutors",
+                Name = "Tutor Earnings Analysis",
                 ChartType = SeriesChartType.Column,
                 IsValueShownAsLabel = true,
             };
@@ -139,82 +134,20 @@ namespace GrindsBookingSystem
 
             foreach (DataRow row in dt.Rows)
             {
-                Charts.Series["Tutors"].Points.AddXY(
+                if(Convert.ToDecimal(row["TotalEarnings"]) <= 0)
+                {
+                    break;
+                }
+                Charts.Series["Tutor Earnings Analysis"].Points.AddXY(
                     row["TutorID"].ToString(),
                     Convert.ToDecimal(row["TotalEarnings"])
                 );
             }
         }
-        private void GetRevenueChart()
-        {
-            string sql = "SELECT " +
-                         "TO_CHAR(b.BookingDate, 'YYYY-MM') AS Month," +
-                         "SUM(tr.HourlyRate) AS Revenue " +
-                         "FROM Bookings b " +
-                         "JOIN Classes c ON b.ClassID = c.ClassID " +
-                         "JOIN Tutors t ON c.TutorID = t.TutorID " +
-                         "JOIN TutorRates tr ON t.RateCode = tr.RateCode " +
-                         "GROUP BY TO_CHAR(b.BookingDate, 'YYYY-MM') " +
-                         "ORDER BY Month";
-
-            DataTable dt = Database.ExecuteMultiRowQuery(sql).Tables[0];
-
-            ChartArea area = new ChartArea();
-
-            area.AxisX.MajorGrid.Enabled = false;
-            area.AxisY.MajorGrid.Enabled = false;
-            area.AxisX.Interval = 1;
-            area.AxisX.Title = "Month";
-            area.AxisY.Title = "Revenue";
-
-            Charts.ChartAreas.Add(area);
-
-            Series series = new Series
-            {
-                Name = "Revenue",
-                ChartType = SeriesChartType.Column,
-                IsValueShownAsLabel = true,
-            };
-
-            Charts.Series.Add(series);
-
-            foreach (DataRow row in dt.Rows)
-            {
-                Charts.Series["Revenue"].Points.AddXY(
-                    row["Month"].ToString(),
-                    Convert.ToDecimal(row["Revenue"])
-                );
-            }
-        }
-
-        
-
-        private void cboCharts_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Charts.Series.Clear();
-            Charts.ChartAreas.Clear();
-            Charts.Visible = true;
-
-            if (cboCharts.Text == "Tutor Earnings")
-            {
-                GetTutorEarningsChart();
-                Charts.MouseDown -= Charts_MouseDownTutors;
-                Charts.MouseDown += Charts_MouseDownTutors;
-            }
-            if(cboCharts.Text == "Monthly Revenue Analysis")
-            {
-                GetRevenueChart();
-            }
-            
-        }
-
-
-
-
+       
         private void Charts_MouseDownTutors(object sender, MouseEventArgs e)
         {
             HitTestResult result = Charts.HitTest(e.X, e.Y);
-
 
             if (result.ChartElementType != ChartElementType.DataPoint)
                 return;
