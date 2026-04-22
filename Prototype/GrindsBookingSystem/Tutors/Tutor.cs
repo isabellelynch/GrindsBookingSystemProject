@@ -1,5 +1,6 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -79,6 +80,51 @@ namespace GrindsBookingSystem
 
             cmd.Parameters.Add(":S", 'I');
             cmd.Parameters.Add(":ID", this.PersonID);
+
+            Database.ExecuteNonQueryCommand(cmd);
+        }
+
+        public void CancelTutorsClasses()
+        {
+            string sql = "UPDATE Classes SET " +
+                         "Status = :S " +
+                         "WHERE TutorID = :ID";
+
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":S", 'C');
+            cmd.Parameters.Add(":ID", this.PersonID);
+
+            Database.ExecuteNonQueryCommand(cmd);
+        }
+
+        public void RefundClasses()
+        {
+            string sql = "INSERT INTO Refunds(BookingID, StudentID, Amount) " +
+                         "SELECT b.BookingID, b.StudentID, 50.00 " +
+                         "FROM Bookings b " +
+                         "JOIN Classes c ON b.ClassID = c.ClassID " +
+                         "WHERE c.TutorID = :tutorID";
+
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":tutorID", this.PersonID);
+
+            Database.ExecuteNonQueryCommand(cmd);
+
+        }
+
+        public void DeleteBookingsAfterRefund()
+        {
+            string sql = "UPDATE Bookings " +
+                         "SET Status = :S " +
+                         "WHERE ClassID IN (" +
+                         "SELECT ClassID FROM Classes WHERE TutorID = :tutorID" +
+                         ");";
+
+            var cmd = new OracleCommand(sql);
+            cmd.Parameters.Add(":S", 'C');
+            cmd.Parameters.Add(":tutorID", this.PersonID);
 
             Database.ExecuteNonQueryCommand(cmd);
         }
@@ -254,6 +300,24 @@ namespace GrindsBookingSystem
                 dr.Close();
             }
             return hours;
+        }
+
+        public static bool DoesTutorExist(string email)
+        {
+            bool exists = false;
+
+            string sql = "SELECT COUNT(*) " +
+                         "FROM Tutors " +
+                         "WHERE Email = " + email;
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+
+            if (dr.Read() && dr.GetInt32(0) > 0) 
+            {
+                exists = true;
+            }
+
+            return exists;
         }
 
     } 

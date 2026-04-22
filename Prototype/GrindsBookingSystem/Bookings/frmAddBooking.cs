@@ -162,12 +162,13 @@ namespace GrindsBookingSystem
 
                         if (d == DialogResult.Yes)
                         {
-                            b.IncrementCurrentEnrollment(c.CurrentEnrollment);
-
                             try
                             {
                                 b.Create();
                                 SuccessMessage("Class Booked!");
+                                //have written the appropriate code for sending the confirmation email however,
+                                //I have left it commented out because I was unable to test within the college network due to firewalls and 
+                                //do not have a pc to test with at home
                                 //SendBookingConfirmation();
                             }
                             catch (Exception ex)

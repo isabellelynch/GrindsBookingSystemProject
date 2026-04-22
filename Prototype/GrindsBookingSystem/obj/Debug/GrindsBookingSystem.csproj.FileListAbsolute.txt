@@ -531,7 +531,6 @@ C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProjec\Prototype\G
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProjec\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmUpdateClass.resources
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProjec\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmViewSchedule.resources
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProjec\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmShowBookings.resources
-C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProjec\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmTutorReport.resources
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProjec\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmUpdateTutor.resources
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProjec\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmUpdateStudent.resources
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProjec\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmHome.resources

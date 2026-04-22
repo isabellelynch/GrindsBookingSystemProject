@@ -24,22 +24,37 @@ namespace GrindsBookingSystem
 
             if(t.IsValid() == "Valid")
             {
-                t.Create();
-
-                SuccessMessage("Tutor " + txtTutorName.Text + " " + txtTutorSurname.Text + " has been succesfully added to the system.");
-
-                DialogResult addAnother = MessageBox.Show("Would you like to add another Tutor?",
-                                                    "Please Confirm",
-                                                    MessageBoxButtons.YesNo,
-                                                    MessageBoxIcon.Question);
-                if (addAnother == DialogResult.Yes)
+                if (Tutor.DoesTutorExist(t.Email) == false) 
                 {
-                    Reset(this.Controls);
+                    try
+                    {
+                        t.Create();
+
+                        SuccessMessage("Tutor " + txtTutorName.Text + " " + txtTutorSurname.Text + " has been succesfully added to the system.");
+
+                        DialogResult addAnother = MessageBox.Show("Would you like to add another Tutor?",
+                                                            "Please Confirm",
+                                                            MessageBoxButtons.YesNo,
+                                                            MessageBoxIcon.Question);
+                        if (addAnother == DialogResult.Yes)
+                        {
+                            Reset(this.Controls);
+                        }
+                        else
+                        {
+                            GoHome();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ErrorMessage(ex.Message);
+                    }   
                 }
                 else
                 {
-                    GoHome();
+                    ErrorMessage("Tutor with the email " + t.Email + " already exists on the system.");
                 }
+                
             }
             else
             {

@@ -44,13 +44,23 @@ namespace GrindsBookingSystem
 
                 int id = Convert.ToInt32(row.Cells[0].Value);
 
-                Tutor t = Tutor.GetTutor(id);
+                try
+                {
+                    Tutor t = Tutor.GetTutor(id);
 
-                t.Delete();
+                    t.CancelTutorsClasses();
+                    t.RefundClasses();
+                    t.DeleteBookingsAfterRefund();
+                    t.Delete();
 
-                SuccessMessage("The chosen tutor has been successfully removed");
+                    SuccessMessage("The chosen tutor has been successfully removed");
 
-                Reset(this.Controls);
+                    Reset(this.Controls);
+                }
+                catch (Exception ex) 
+                {
+                    ErrorMessage(ex.Message);
+                }
             }
             else
             {

@@ -3,6 +3,7 @@ using System;
 using System.Data;
 
 
+
 namespace GrindsBookingSystem
 {
     public class Booking : InterfaceCRUD
@@ -28,14 +29,14 @@ namespace GrindsBookingSystem
         public void Create()
         {
             string sql = "INSERT INTO Bookings (StudentID, ClassID) " +
-                                    "VALUES (" + this.StudentID.ToString() + " , " + this.ClassID.ToString() + ")";
+                         "VALUES (:StudentID, :ClassID)";
 
-            Database.ExecuteNonQuery(sql);
+            var cmd = new OracleCommand(sql);
 
-            sql = "INSERT INTO Student_Classes (StudentID, ClassID) " +
-                "VALUES (" + this.StudentID.ToString() + " , " + this.ClassID.ToString() + ")";
+            cmd.Parameters.Add(":StudentID", this.StudentID);
+            cmd.Parameters.Add(":ClassID", this.ClassID);
 
-            Database.ExecuteNonQuery(sql);
+            Database.ExecuteNonQueryCommand(cmd);
         }
         public string Read() 
         { 
@@ -44,10 +45,15 @@ namespace GrindsBookingSystem
         public void Update() 
         { 
             string sql = "UPDATE Bookings SET " +
-                         "StudentID = " + this.StudentID + " AND " +
-                         "ClassID = " + this.ClassID;
+                         "StudentID = :StudentID AND " +
+                         "ClassID = :ClassID";
 
-            Database.ExecuteNonQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":StudentID", this.StudentID);
+            cmd.Parameters.Add(":ClassID", this.ClassID);
+
+            Database.ExecuteNonQueryCommand(cmd);
         }
         public void Delete() 
         {
@@ -55,35 +61,26 @@ namespace GrindsBookingSystem
 
             string sql = "DELETE FROM " +
                          "Bookings " +
-                         "WHERE BookingID = " + id;
+                         "WHERE BookingID = :ID";
 
-            Database.ExecuteNonQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":ID", id);
+
+            Database.ExecuteNonQueryCommand(cmd);
         }
 
-        public void IncrementCurrentEnrollment(int current)
-        {
-            current++;
-
-            string sql = "UPDATE Classes SET CurrentEnrollment = " + current +
-                  " WHERE ClassID = " + this.ClassID;
-            try
-            {
-                Database.ExecuteNonQuery(sql);
-            }
-            catch (Exception ex)
-            {
-                BaseForm.ErrorMessage(ex.Message);
-            }
-        }
+        
 
         public static int GetAmount(string id)
         {
             string sql = "SELECT tr.HourlyRate " +
-                                "FROM Tutors t " +
-                                "JOIN TutorRates tr ON t.RateCode = tr.RateCode " +
-                                "WHERE t.TutorID = " + id;
+                         "FROM Tutors t " +
+                         "JOIN TutorRates tr ON t.RateCode = tr.RateCode " +
+                         "WHERE t.TutorID = " + id;
 
             OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+
             if (dr.Read())
             {
                 return dr.GetInt32(0);
@@ -201,26 +198,11 @@ namespace GrindsBookingSystem
         }
 
 
-        public static void RemoveFromStudentClassesTable(string ClassID, string StudentID)
-        {
-            string sql = "DELETE FROM Student_Classes " +
-                         "WHERE ClassID = " + ClassID + " " +
-                         "AND StudentID = " + StudentID;
-
-            Database.ExecuteNonQuery(sql);
-        }
-
         public static void CancelBooking(string bookingID, string studentID)
         {
             int classID = GetClassID(bookingID);
 
-            Class c = Class.GetClass(classID);
-
-            Class.DecrementCurrentEnrollment(c);
-
             string tutorID = GetTutorIDFromClassID(classID.ToString()).ToString();
-
-            RemoveFromStudentClassesTable(classID.ToString(), studentID);
 
             string amount = GetAmount(tutorID).ToString();
 

@@ -14,33 +14,41 @@ namespace GrindsBookingSystem
         {
             Student s = new Student(txtStudentName.Text, txtStudentSurname.Text, txtStudentEmail.Text, txtStudentPhone.Text);
 
-            if (s.IsValid() != "Valid")
+            if (s.IsValid() == "Valid")
             {
-                ErrorMessage(s.IsValid() + "\nPlease make the necessary changes to the information and try again");
-                return;
-            }
+                if (Student.DoesStudentExist(s.Email) == false)
+                { 
+                    try
+                    {
+                        s.Create();
 
-            try
-            {
-                s.Create();
-
-                SuccessMessage("Student " + txtStudentName.Text + " " + txtStudentSurname.Text + "has been succesfully added to the system.");
+                        SuccessMessage("Student " + txtStudentName.Text + " " + txtStudentSurname.Text + "has been succesfully added to the system.");
                     
-                DialogResult addAnother = MessageBox.Show("Would you like to add another Student?",
-                                                    "Please Confirm",
-                                                    MessageBoxButtons.YesNo,
-                                                    MessageBoxIcon.Question);
-                if (addAnother == DialogResult.No)
+                        DialogResult addAnother = MessageBox.Show("Would you like to add another Student?",
+                                                            "Please Confirm",
+                                                            MessageBoxButtons.YesNo,
+                                                            MessageBoxIcon.Question);
+                        if (addAnother == DialogResult.No)
+                        {
+                            GoHome();
+                        }
+                    }
+                    catch(Exception ex)
+                    {
+                        ErrorMessage(ex.Message);
+                    }
+
+                    Reset(this.Controls);
+                }
+                else
                 {
-                    GoHome();
+                    ErrorMessage("Student with the email " + s.Email + " already exists on the system.");
                 }
             }
-            catch(Exception ex)
+            else
             {
-                ErrorMessage(ex.Message);
+                ErrorMessage(s.IsValid() + "\nPlease make the necessary changes to the information and try again");
             }
-
-            Reset(this.Controls);
         }
     }
 }

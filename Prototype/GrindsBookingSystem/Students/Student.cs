@@ -153,6 +153,24 @@ namespace GrindsBookingSystem
             return Database.ExecuteMultiRowQuery(sql);
         }
 
-        
+        public static bool DoesStudentExist(string email)
+        {
+            bool exists = false;
+
+            string sql = "SELECT COUNT(*) " +
+                         "FROM Students " +
+                         "WHERE Email = " + email;
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+
+            if (dr.Read() && dr.GetInt32(0) > 0)
+            {
+                exists = true;
+            }
+
+            return exists;
+        }
+
+
     }
 }

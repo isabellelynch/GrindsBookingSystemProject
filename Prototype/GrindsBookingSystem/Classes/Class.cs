@@ -65,31 +65,27 @@ namespace GrindsBookingSystem
                          "SemesterNo = '" + this.Semester + "'," +
                          "SubjectID = " + this.SubjectID +
                          " WHERE ClassID = " + this.ClassID;
-
-            try
-            {
-                Database.ExecuteNonQuery(sql);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
+            Database.ExecuteNonQuery(sql);
         }
         public void Delete()
         {
-            string sql = "DELETE FROM Classes WHERE Day = " + Day +
-                " AND Time = " + Time + " AND TutorID = " + TutorID;
+            string sql = "UPDATE Classes SET " +
+                         "Status = :S " +
+                         "WHERE ClassID = :ID";
 
-            Database.ExecuteNonQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":S", 'C');
+            cmd.Parameters.Add(":ID", this.ClassID);
+
+            Database.ExecuteNonQueryCommand(cmd);
         }
 
         public static List<Class> ClassList(String room, string sem)
         {
             List<Class> list = new List<Class>();
 
-            string sql = "SELECT * FROM Classes WHERE SemesterNo =  " + sem + " AND RoomNo = '" + room + "'";
+            string sql = "SELECT * FROM Classes WHERE SemesterNo =  " + sem + " AND RoomNo = '" + room + "' AND Status = 'A'";
 
             DataSet ds = Database.ExecuteMultiRowQuery(sql);
 
@@ -133,7 +129,7 @@ namespace GrindsBookingSystem
 
         public static Class GetClass(int id)
         {
-            string sql = "SELECT * FROM Classes WHERE ClassID = " + id;
+            string sql = "SELECT * FROM Classes WHERE ClassID = " + id + " AND Status = 'A'";
 
             OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
 
@@ -158,7 +154,8 @@ namespace GrindsBookingSystem
                          "WHERE Day = " + day + " " +
                          "AND Time = " + time + " " +
                          "AND RoomNo = '" + room + "' " +
-                         "AND SemesterNo = '" + GetCurrentSemester() + "'";
+                         "AND SemesterNo = '" + GetCurrentSemester() + "' " +
+                         "AND Status = 'A'";
 
             OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
 
@@ -220,15 +217,7 @@ namespace GrindsBookingSystem
 
         }
 
-        public static void DecrementCurrentEnrollment(Class c)
-        {
-            int ce = c.CurrentEnrollment - 1;
-
-            string sql = "UPDATE Classes " +
-                         "SET CurrentEnrollment = " + ce;
-
-            Database.ExecuteNonQuery(sql);
-        }
+       
 
         
     }
