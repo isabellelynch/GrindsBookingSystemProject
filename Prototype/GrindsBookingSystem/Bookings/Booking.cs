@@ -143,10 +143,15 @@ namespace GrindsBookingSystem
         {
             string sql = "SELECT * " +
                          "FROM Bookings " +
-                         "WHERE ClassID = " + this.ClassID +
-                         " AND StudentID = " + this.StudentID;
+                         "WHERE ClassID = :class" +
+                         " AND StudentID = :student";
 
-            DataSet ds = Database.ExecuteMultiRowQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":class", this.ClassID);
+            cmd.Parameters.Add(":student", this.StudentID);
+
+            DataSet ds = Database.ExecuteMultiRowQuery(cmd);
 
             if (ds.Tables[0].Rows.Count == 0)
             {
@@ -176,23 +181,31 @@ namespace GrindsBookingSystem
                          "FROM Classes c JOIN Subjects s " +
                          "ON c.SubjectID = s.SubjectID " +
                          "JOIN Rooms r ON c.RoomNo = r.RoomNo " +
-                         "WHERE c.SemesterNo = " + Class.GetCurrentSemester() + edit +
+                         "WHERE c.SemesterNo = :semester :edit" +
                          "ORDER BY s.Description, c.Day";
 
-            DataSet ds = Database.ExecuteMultiRowQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":semester", Class.GetCurrentSemester());
+            cmd.Parameters.Add(":edit", edit);
+
+            DataSet ds = Database.ExecuteMultiRowQuery(cmd);
 
             return ds.Tables[0];
         }
 
         public static int GetClassID(string bookingID)
         {
+            int id = 0;
             string sql = "SELECT ClassID " +
                          "FROM Bookings " +
-                         "WHERE BookingID = " + bookingID;
+                         "WHERE BookingID = :booking";
 
-            int id = 0;
+            var cmd = new OracleCommand(sql);
 
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            cmd.Parameters.Add(":booking", bookingID);
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);
 
             if (dr.Read())
             {
@@ -236,34 +249,44 @@ namespace GrindsBookingSystem
 
         public static int GetTutorIDFromClassID(string classID)
         {
+            int id = 0;
             string sql = "SELECT t.TutorID FROM Bookings b JOIN Classes c ON " +
                                 "b.ClassID = c.ClassID JOIN Tutors t " +
                                 "ON c.TutorID = t.TutorID " +
-                                "WHERE b.ClassID = " + classID;
+                                "WHERE b.ClassID = :class";
 
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":class", classID);
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);
+
             if (dr.Read())
             {
-                return dr.GetInt32(0);
+                id = dr.GetInt32(0);
             }
-            else
-            {
-                return 0;
-            }
+            return id;
         }
 
         public int GetBookingID()
         {
+            int id = 0;
             string sql = "SELECT BookingID " +
                          "FROM Bookings " +
-                         "WHERE StudentID = " + this.StudentID +
-                         " AND ClassID = " + this.ClassID;
-            
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
-            
-            dr.Read();
+                         "WHERE StudentID = :student" +
+                         " AND ClassID = :class";
 
-            int id = dr.GetInt32(0);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":student", this.StudentID);
+            cmd.Parameters.Add(":class", this.ClassID);
+            
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);
+
+            if (dr.Read())
+            {
+                id = dr.GetInt32(0);
+            }
 
             dr.Close();
 
@@ -272,18 +295,23 @@ namespace GrindsBookingSystem
 
         public static Booking GetBooking(string bookingID)
         {
+            Booking b = new Booking();
+
             string sql = "SELECT ClassID, StudentID " +
                          "FROM Bookings " +
-                         "WHERE BookingID = " + bookingID;
+                         "WHERE BookingID = :booking";
 
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            var cmd = new OracleCommand(sql);
 
-            dr.Read();
+            cmd.Parameters.Add(":booking", bookingID);
 
-            Booking b = new Booking();
-            b.ClassID = dr.GetInt32(0);
-            b.StudentID = dr.GetInt32(1);
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);
 
+            if (dr.Read())
+            {
+                b.ClassID = dr.GetInt32(0);
+                b.StudentID = dr.GetInt32(1);
+            }
             dr.Close();
 
             return b;

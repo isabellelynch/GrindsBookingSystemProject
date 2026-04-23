@@ -64,9 +64,7 @@ namespace GrindsBookingSystem
 
             if (updatingClass != null)
             {
-                string sql = "SELECT * FROM Classes WHERE SemesterNo = " + Class.GetCurrentSemester().ToString();
-
-                DataSet ds = Database.ExecuteMultiRowQuery(sql);
+                DataSet ds = Class.GetAllClasses();
 
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
@@ -75,18 +73,9 @@ namespace GrindsBookingSystem
                     string ID = r[3].ToString();
                     string Room = r[5].ToString();
 
-                    string capacity = "";
-
-                    sql = "SELECT Capacity FROM Rooms WHERE RoomNo = '" + room + "'";
-
-                    OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
-
-                    if (dr != null && dr.Read()) 
-                    {
-                        capacity = dr.GetString(0);
-                    }
+                    string capacity = Class.GetRoomCapacity(Room);
                     
-                    if(dr.GetInt32(0) == updatingClass.ClassID)
+                    if(capacity == updatingClass.ClassID.ToString())
                     {
                         continue;
                     }
@@ -127,5 +116,9 @@ namespace GrindsBookingSystem
                   
             }
         }
+
+      
+
+        
     }
 }

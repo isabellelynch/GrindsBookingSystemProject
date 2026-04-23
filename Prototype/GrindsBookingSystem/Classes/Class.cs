@@ -99,9 +99,19 @@ namespace GrindsBookingSystem
         {
             List<Class> list = new List<Class>();
 
-            string sql = "SELECT * FROM Classes WHERE SemesterNo =  " + sem + " AND RoomNo = '" + room + "' AND Status = 'A'";
+            string sql = "SELECT * " +
+                         "FROM Classes " +
+                         "WHERE SemesterNo =  :semester " +
+                         "AND RoomNo = :room " + 
+                         "AND Status = :status";
 
-            DataSet ds = Database.ExecuteMultiRowQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":semester", sem);
+            cmd.Parameters.Add(":room", room);
+            cmd.Parameters.Add(":status", 'A');
+
+            DataSet ds = Database.ExecuteMultiRowQuery(cmd);
 
             foreach (DataRow r in ds.Tables[0].Rows)
             {
@@ -120,6 +130,41 @@ namespace GrindsBookingSystem
             }
             return list;
         }
+        public static DataSet GetAllClasses()
+        {
+            string sql = "SELECT * " +
+                             "FROM Classes " +
+                             "WHERE SemesterNo = :semester";
+
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":semester", Class.GetCurrentSemester());
+
+            return Database.ExecuteMultiRowQuery(cmd);
+        }
+
+        public static string GetRoomCapacity(string room)
+        {
+            string capacity = "";
+
+            string sql = "SELECT Capacity " +
+                         "FROM Rooms " +
+                         "WHERE RoomNo = :room";
+
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":room", room);
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);
+
+            if (dr != null && dr.Read())
+            {
+                capacity = dr.GetString(0);
+            }
+
+            return capacity;
+        }
+
 
         public static string GetCurrentSemester()
         {
@@ -143,9 +188,17 @@ namespace GrindsBookingSystem
 
         public static Class GetClass(int id)
         {
-            string sql = "SELECT * FROM Classes WHERE ClassID = " + id + " AND Status = 'A'";
+            string sql = "SELECT * " +
+                         "FROM Classes " +
+                         "WHERE ClassID = :id " +
+                         "AND Status = :status";
 
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add("id", id);
+            cmd.Parameters.Add(":status", 'A');
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);
 
             if (dr.Read())
             {
@@ -165,13 +218,21 @@ namespace GrindsBookingSystem
         {
             int id = 0;
             string sql = "SELECT ClassID FROM Classes " +
-                         "WHERE Day = " + day + " " +
-                         "AND Time = " + time + " " +
-                         "AND RoomNo = '" + room + "' " +
-                         "AND SemesterNo = '" + GetCurrentSemester() + "' " +
-                         "AND Status = 'A'";
+                         "WHERE Day = :day " +
+                         "AND Time = :time " +
+                         "AND RoomNo = :room " +
+                         "AND SemesterNo = :semester " +
+                         "AND Status = :status";
 
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":day", day);
+            cmd.Parameters.Add(":time", time);
+            cmd.Parameters.Add(":room", room);
+            cmd.Parameters.Add(":semester", GetCurrentSemester());
+            cmd.Parameters.Add(":status", 'A');
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);
 
             if (dr.Read())
             {
@@ -179,30 +240,28 @@ namespace GrindsBookingSystem
                 dr.Close();
             }
             return id;
-
         }
 
         
 
         public string GetClassSubject()
         {
+            string sub = "";
             string sql = "SELECT Description " +
                          "FROM Subjects " +
-                         "WHERE SubjectID = " + this.SubjectID;
-            string sub = "";
-            try
+                         "WHERE SubjectID = :subject";
+            
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":subject", this.SubjectID);
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);
+
+            if (dr.Read())
             {
-                OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
-                if (dr.Read())
-                {
-                    sub = dr.GetString(0);
-                    dr.Close(); 
-                }
+                sub = dr.GetString(0);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            dr.Close(); 
 
             return sub;
         }
@@ -213,9 +272,14 @@ namespace GrindsBookingSystem
 
             string sql = "SELECT Capacity " +
                          "FROM Rooms " +
-                         "WHERE RoomNo = " + this.RoomNo;
+                         "WHERE RoomNo = :room";
 
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":room", this.RoomNo);
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);
+
             if (dr.Read())
             {
                 int max = dr.GetInt32(0);
@@ -224,9 +288,9 @@ namespace GrindsBookingSystem
                 if (current == max)
                 {
                     full = true;
-                    dr.Close();
                 }
             }
+            dr.Close();
             return full;
 
         }

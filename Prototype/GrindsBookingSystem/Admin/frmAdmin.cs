@@ -32,6 +32,7 @@ namespace GrindsBookingSystem
         
         private int GenerateTotalAnnualRevenue()
         {
+            int total = 0;
             string sql = "SELECT SUM(tr.HourlyRate) " +
                          "FROM Bookings b " +
                          "JOIN Classes c ON c.ClassID = b.ClassID " +
@@ -39,9 +40,9 @@ namespace GrindsBookingSystem
                          "JOIN TutorRates tr ON t.RateCode = tr.RateCode " +
                          "WHERE EXTRACT(YEAR FROM b.BookingDate) = EXTRACT(YEAR FROM SYSDATE)";
             
-            int total = 0;
+            var cmd = new OracleCommand(sql);
             
-            OracleDataReader dr =  Database.ExecuteSingleRowQuery(sql);
+            OracleDataReader dr =  Database.ExecuteSingleRowQuery(cmd);
 
             if (dr != null && dr.Read()) 
             {
@@ -58,13 +59,15 @@ namespace GrindsBookingSystem
 
         private int GenerateTotalAnnualBookings()
         {
+            int total = 0;
             string sql = "SELECT COUNT(*) " +
                          "FROM Bookings b " +
                          "WHERE EXTRACT(YEAR FROM b.BookingDate) = EXTRACT(YEAR FROM SYSDATE)";
 
-            int total = 0;
 
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);
 
             if (dr.Read())
             {
@@ -78,13 +81,18 @@ namespace GrindsBookingSystem
 
         private int GetActive(string table)
         {
-            string sql = "SELECT COUNT(*) " +
-                         "FROM " + table + " " +
-                         "WHERE Status = 'A'";
-
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
-
             int count = 0;
+
+            string sql = "SELECT COUNT(*) " +
+                         "FROM :table " +
+                         "WHERE Status = :status";
+
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":table", table);
+            cmd.Parameters.Add(":status", 'A');
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);
 
             if (dr.Read())
             {
@@ -111,7 +119,9 @@ namespace GrindsBookingSystem
                          "GROUP BY t.TutorID, tr.HourlyRate " +
                          "ORDER BY TotalEarnings DESC";
 
-            DataTable dt =  Database.ExecuteMultiRowQuery(sql).Tables[0];
+            var cmd = new OracleCommand(sql);
+
+            DataTable dt =  Database.ExecuteMultiRowQuery(cmd).Tables[0];
 
             ChartArea area = new ChartArea();
 
