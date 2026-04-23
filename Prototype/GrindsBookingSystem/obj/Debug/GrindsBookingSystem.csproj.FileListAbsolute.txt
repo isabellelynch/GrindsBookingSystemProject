@@ -519,7 +519,6 @@ C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProjec\Prototype\G
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProjec\Prototype\GrindsBookingSystem\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProjec\Prototype\GrindsBookingSystem\bin\Debug\System.ValueTuple.xml
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProjec\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.csproj.AssemblyReference.cache
-C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProjec\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.exe.config
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProjec\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.BaseForm.resources
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProjec\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.ClassBaseForm.resources
 C:\Users\StudentIsabelleLynch\Source\Repos\GrindsBookingSystemProjec\Prototype\GrindsBookingSystem\obj\Debug\GrindsBookingSystem.frmAddBooking.resources

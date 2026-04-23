@@ -24,7 +24,20 @@ namespace GrindsBookingSystem
             conn.Close();
             return ds;
         }
+        public static DataSet ExecuteMultiRowQuery(OracleCommand cmd)
+        {
+            using (OracleConnection conn = OpenConnection())
+            {
+                cmd.Connection = conn;
 
+                using (OracleDataAdapter da = new OracleDataAdapter(cmd))
+                {
+                    DataSet ds = new DataSet();
+                    da.Fill(ds);
+                    return ds;
+                }
+            }
+        }
 
         public static OracleDataReader ExecuteSingleRowQuery(string query)
         {
@@ -33,16 +46,15 @@ namespace GrindsBookingSystem
             OracleDataReader dr = cmd.ExecuteReader();
             return dr;
         }
-
-        public static void ExecuteNonQuery(string query)
+        public static OracleDataReader ExecuteSingleRowQuery(OracleCommand cmd)
         {
             OracleConnection conn = OpenConnection();
-            OracleCommand cmd = new OracleCommand(query, conn);
-            cmd.ExecuteNonQuery();
-            conn.Close();
+            cmd.Connection = conn;
+
+            return cmd.ExecuteReader(CommandBehavior.CloseConnection);
         }
 
-        public static void ExecuteNonQueryCommand(OracleCommand cmd)
+        public static void ExecuteNonQuery(OracleCommand cmd)
         {
             using (OracleConnection conn = OpenConnection())
             {

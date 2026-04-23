@@ -34,7 +34,7 @@ namespace GrindsBookingSystem
             cmd.Parameters.Add(":Phone", Phone);
             cmd.Parameters.Add(":Status", 'A');
 
-            Database.ExecuteNonQueryCommand(cmd);
+            Database.ExecuteNonQuery(cmd);
         }
         
         public string Read()
@@ -57,7 +57,7 @@ namespace GrindsBookingSystem
             cmd.Parameters.Add(":Phone", Phone);
             cmd.Parameters.Add(":ID", this.PersonID);
 
-            Database.ExecuteNonQueryCommand(cmd);
+            Database.ExecuteNonQuery(cmd);
         }
 
         public void Delete() 
@@ -71,41 +71,57 @@ namespace GrindsBookingSystem
             cmd.Parameters.Add(":S", 'I');
             cmd.Parameters.Add(":ID", this.PersonID);
 
-            Database.ExecuteNonQueryCommand(cmd);
+            Database.ExecuteNonQuery(cmd);
         }
         public static DataSet RetrieveAllDetails()
         {
             string sql = "SELECT StudentID, FirstName, Surname " +
                          "FROM Students " +
-                         "WHERE Status = 'A' " +
+                         "WHERE Status = :s " +
                          "ORDER BY StudentID";
 
-            return Database.ExecuteMultiRowQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":s", 'A');
+
+            return Database.ExecuteMultiRowQuery(cmd);
         }
         public static DataSet RetrieveAll()
         {
             string sql = "SELECT * " +
                          "FROM Students " +
-                         "WHERE Status = 'A' " +
+                         "WHERE Status = :s " +
                          "ORDER BY StudentID";
-            return Database.ExecuteMultiRowQuery(sql);
+
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":s", 'A');
+
+            return Database.ExecuteMultiRowQuery(cmd);
         }
 
 
         public static Student GetStudent(int id)
         {
-            string sql = "SELECT * FROM Students WHERE StudentID = '" + id + "'";
+            Student s = new Student();
 
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            string sql = "SELECT * " +
+                         "FROM Students " +
+                         "WHERE StudentID = :id";
 
-            dr.Read();
+            var cmd = new OracleCommand(sql);
 
-            Student s = new Student(dr.GetString(1), dr.GetString(2), dr.GetString(3), dr.GetString(4));
+            cmd.Parameters.Add(":id", id);
 
-            s.SetID(id.ToString());
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);
 
+            if (dr.Read())
+            {
+                s = new Student(dr.GetString(1), dr.GetString(2), dr.GetString(3), dr.GetString(4));
+
+                s.SetID(id.ToString());  
+            }
             dr.Close();
-
             return s;
         }
 
@@ -147,28 +163,29 @@ namespace GrindsBookingSystem
 
             string sql = "SELECT StudentID, FirstName, Surname " +
                          "FROM Students " +
-                         "WHERE StudentID IN (" + idList + ") " +
+                         "WHERE StudentID IN (:list) " +
                          "ORDER BY StudentID";
 
-            return Database.ExecuteMultiRowQuery(sql);
+            var cmd = new OracleCommand(sql);
+            
+            cmd.Parameters.Add(":list", idList);
+
+            return Database.ExecuteMultiRowQuery(cmd);
         }
 
         public static bool DoesStudentExist(string email)
         {
-            bool exists = false;
-
-            string sql = "SELECT COUNT(*) " +
+            string sql = "SELECT 1 " +
                          "FROM Students " +
-                         "WHERE Email = " + email;
+                         "WHERE Email = :email";
 
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            var cmd = new OracleCommand(sql);
 
-            if (dr.Read() && dr.GetInt32(0) > 0)
-            {
-                exists = true;
-            }
+            cmd.Parameters.Add(":email", email);
 
-            return exists;
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);
+
+            return dr.Read();
         }
 
 

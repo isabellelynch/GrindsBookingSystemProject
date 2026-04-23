@@ -48,7 +48,7 @@ namespace GrindsBookingSystem
             cmd.Parameters.Add(":s", this.Semester);
             cmd.Parameters.Add(":sub", this.SubjectID);
 
-            Database.ExecuteNonQueryCommand(cmd);
+            Database.ExecuteNonQuery(cmd);
         }
         public string Read()
         {
@@ -79,7 +79,7 @@ namespace GrindsBookingSystem
             cmd.Parameters.Add(":sub", this.SubjectID);
             cmd.Parameters.Add(":cid", this.ClassID);
 
-            Database.ExecuteNonQueryCommand(cmd);
+            Database.ExecuteNonQuery(cmd);
         }
         public void Delete()
         {
@@ -92,7 +92,7 @@ namespace GrindsBookingSystem
             cmd.Parameters.Add(":S", 'C');
             cmd.Parameters.Add(":ID", this.ClassID);
 
-            Database.ExecuteNonQueryCommand(cmd);
+            Database.ExecuteNonQuery(cmd);
         }
 
         public static List<Class> ClassList(String room, string sem)

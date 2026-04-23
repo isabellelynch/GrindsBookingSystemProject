@@ -36,7 +36,7 @@ namespace GrindsBookingSystem
             cmd.Parameters.Add(":StudentID", this.StudentID);
             cmd.Parameters.Add(":ClassID", this.ClassID);
 
-            Database.ExecuteNonQueryCommand(cmd);
+            Database.ExecuteNonQuery(cmd);
         }
         public string Read() 
         { 
@@ -53,7 +53,7 @@ namespace GrindsBookingSystem
             cmd.Parameters.Add(":StudentID", this.StudentID);
             cmd.Parameters.Add(":ClassID", this.ClassID);
 
-            Database.ExecuteNonQueryCommand(cmd);
+            Database.ExecuteNonQuery(cmd);
         }
         public void Delete() 
         {
@@ -67,28 +67,31 @@ namespace GrindsBookingSystem
 
             cmd.Parameters.Add(":ID", id);
 
-            Database.ExecuteNonQueryCommand(cmd);
+            Database.ExecuteNonQuery(cmd);
         }
 
         
 
         public static int GetAmount(string id)
         {
+            int amount = 0;
             string sql = "SELECT tr.HourlyRate " +
                          "FROM Tutors t " +
                          "JOIN TutorRates tr ON t.RateCode = tr.RateCode " +
-                         "WHERE t.TutorID = " + id;
+                         "WHERE t.TutorID = :id";
 
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":id", id);
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);
 
             if (dr.Read())
             {
-                return dr.GetInt32(0);
+                amount = dr.GetInt32(0);
             }
-            else
-            {
-                return 0;
-            }
+            dr.Close();
+            return amount;
 
         }
 
@@ -100,9 +103,13 @@ namespace GrindsBookingSystem
                          "JOIN Subjects s ON c.SubjectID = s.SubjectID " +
                          "JOIN Tutors t ON c.TutorID = t.TutorID " +
                          "JOIN TutorRates tr ON t.RateCode = tr.RateCode " +
-                         "WHERE b.StudentID = " + id;
+                         "WHERE b.StudentID = :id";
 
-            return Database.ExecuteMultiRowQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":id", id);
+
+            return Database.ExecuteMultiRowQuery(cmd);
         }
 
         public void SendBookingConfirmation()
@@ -110,9 +117,15 @@ namespace GrindsBookingSystem
             string senderEmail = "isabellemarielynch@gmail.com";
             string appPassword = "***REMOVED***";
 
-            string sql = "SELECT Email FROM Students WHERE StudentID = " + this.StudentID;
+            string sql = "SELECT Email " +
+                         "FROM Students " +
+                         "WHERE StudentID = :id";
 
-            OracleDataReader odr = Database.ExecuteSingleRowQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":id", this.StudentID);
+
+            OracleDataReader odr = Database.ExecuteSingleRowQuery(cmd);
 
             if (odr.Read())
             {
@@ -128,8 +141,10 @@ namespace GrindsBookingSystem
 
         public bool HasStudentAlreadyBooked()
         {
-            string sql = "SELECT * FROM Bookings WHERE ClassID = " + this.ClassID +
-                        " AND StudentID = " + this.StudentID;
+            string sql = "SELECT * " +
+                         "FROM Bookings " +
+                         "WHERE ClassID = " + this.ClassID +
+                         " AND StudentID = " + this.StudentID;
 
             DataSet ds = Database.ExecuteMultiRowQuery(sql);
 
@@ -192,9 +207,15 @@ namespace GrindsBookingSystem
         public static void ProcessRefund(string id, string student, string amount)
         {
             string sql = "INSERT INTO Refunds (BookingID, StudentID, Amount) " +
-                         "VALUES(" + id + "," + student + "," + amount + ")";
+                         "VALUES (:id, :student, :amount)";
 
-            Database.ExecuteNonQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":id", id);
+            cmd.Parameters.Add(":student", student);
+            cmd.Parameters.Add(":amount", amount);
+
+            Database.ExecuteNonQuery(cmd);
         }
 
 

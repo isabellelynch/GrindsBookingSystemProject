@@ -34,12 +34,15 @@ namespace GrindsBookingSystem
         public void Create() 
         {
             string sql = "INSERT INTO Subjects (SubjectLevel, SubjectCategory, Description) " +
-                "VALUES ('" +
-                Level + "','" +
-                Category + "','" +
-                Description + "')";
+                         "VALUES (:level, :category, :description)";
 
-            Database.ExecuteNonQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":level", this.Level);
+            cmd.Parameters.Add(":category", this.Category);
+            cmd.Parameters.Add(":description", this.Description);
+
+            Database.ExecuteNonQuery(cmd);
         }
         public string Read() 
         {
@@ -49,38 +52,52 @@ namespace GrindsBookingSystem
         }
 
         public static Subject GetSubject(string id)
-        {
-            string sql = "SELECT * FROM Subjects WHERE SubjectID = '" + id + "'";
+        { 
+            Subject s = new Subject();
 
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            string sql = "SELECT * " +
+                         "FROM Subjects " +
+                         "WHERE SubjectID = :id";
 
-            dr.Read();
+            var cmd = new OracleCommand(sql);
 
-            Subject s = new Subject(dr.GetString(1), dr.GetString(2), dr.GetString(3));
+            cmd.Parameters.Add(":id", id);
 
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);
+
+            if (dr.Read())
+            {
+                s = new Subject(dr.GetString(1), dr.GetString(2), dr.GetString(3));
+            }
             dr.Close();
-
             return s;
         }
 
         public static string GetSubjectID(string level, string cat, string description)
         {
+            string id = "";
+
             string sql = "SELECT SubjectID " +
                          "FROM Subjects " +
-                         "WHERE SubjectCategory = '" + cat + "'" +
-                         " AND SubjectLevel = '" + level + "'" +
-                         " AND Description = '" + description + "'";
+                         "WHERE SubjectCategory = :cat" +
+                         " AND SubjectLevel = :level" +
+                         " AND Description = :description";
 
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":cat", cat);
+            cmd.Parameters.Add(":level", level);
+            cmd.Parameters.Add(":description", description);
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);
 
             if(dr.Read())
             {
-                return dr.GetInt32(0).ToString();
+                id = dr.GetInt32(0).ToString();
             }
-            else
-            {
-                return "";
-            }
+            
+            dr.Close();
+            return id;
         }
 
         public override string ToString()
@@ -94,20 +111,31 @@ namespace GrindsBookingSystem
         public void Update() 
         {
             string sql = "Update Subjects " +
-                         "SET SubjectCategory = '" + this.Category + "' AND " +
-                         "SubjectLevel = '" + this.Level + "' AND " +
-                         "Description = '" + this.Description + 
-                         "' WHERE SubjectID = " + this.SubjectID;
+                         "SET SubjectCategory = :category AND " +
+                         "SubjectLevel = :level AND " +
+                         "Description = :description " + 
+                         "WHERE SubjectID = :subject";
 
-            Database.ExecuteNonQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":level", this.Level);
+            cmd.Parameters.Add(":category", this.Category);
+            cmd.Parameters.Add(":description", this.Description);
+            cmd.Parameters.Add(":subject", this.SubjectID);
+
+            Database.ExecuteNonQuery(cmd);
         }
 
         public void Delete() 
         {
-            string sql = "DELETE FROM Subjects" +
-                         " WHERE SubjectID = " + this.SubjectID;
+            string sql = "DELETE FROM Subjects " +
+                         "WHERE SubjectID = :sub";
 
-            Database.ExecuteNonQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":sub", this.SubjectID);
+
+            Database.ExecuteNonQuery(cmd);
         }
 
         public static string GetSubjectDetails(string subID)
@@ -118,33 +146,47 @@ namespace GrindsBookingSystem
         
         public static DataTable GetSubjectDescriptions()
         {
-            string sql = "SELECT DISTINCT Description FROM Subjects";
-            DataSet ds = Database.ExecuteMultiRowQuery(sql);
+            string sql = "SELECT DISTINCT " +
+                         "Description FROM Subjects";
+
+            var cmd = new OracleCommand(sql);
+
+            DataSet ds = Database.ExecuteMultiRowQuery(cmd);
+
             return ds.Tables[0];
         }
 
         public static void AddToTutorSubjectTable(string tutorID, string subjectID)
         {
             string sql = "INSERT INTO Tutor_Subjects (TutorID, SubjectID) " +
-                          "VALUES ('" + tutorID + "','" + subjectID + "')";
+                          "VALUES (:t,:s)";
 
-            Database.ExecuteNonQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":t", tutorID);
+            cmd.Parameters.Add(":s", subjectID);
+
+            Database.ExecuteNonQuery(cmd);
         }
 
         public static string GetDescription(string id)
         {
+            string sub = "";
             string sql = "SELECT Description " +
                          "FROM Subjects " +
-                         "WHERE SubjectID = '" + id + "'";
+                         "WHERE SubjectID = :id";
 
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            var cmd = new OracleCommand(sql);
 
-            dr.Read();
+            cmd.Parameters.Add(":id", id);
 
-            string sub = dr.GetString(0);
-
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);
+            if (dr.Read())
+            {
+                sub = dr.GetString(0);
+            }
+            
             dr.Close();
-
             return sub;
         }
 

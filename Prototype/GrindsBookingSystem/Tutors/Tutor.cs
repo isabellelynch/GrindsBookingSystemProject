@@ -40,7 +40,7 @@ namespace GrindsBookingSystem
             cmd.Parameters.Add(":RateCode", RateCode);
             cmd.Parameters.Add(":Status", 'A');
 
-            Database.ExecuteNonQueryCommand(cmd);
+            Database.ExecuteNonQuery(cmd);
         }
 
 
@@ -67,7 +67,7 @@ namespace GrindsBookingSystem
             cmd.Parameters.Add(":RateCode", RateCode);
             cmd.Parameters.Add(":ID", this.PersonID);
 
-            Database.ExecuteNonQueryCommand(cmd);
+            Database.ExecuteNonQuery(cmd);
         }
 
         public void Delete() 
@@ -81,7 +81,7 @@ namespace GrindsBookingSystem
             cmd.Parameters.Add(":S", 'I');
             cmd.Parameters.Add(":ID", this.PersonID);
 
-            Database.ExecuteNonQueryCommand(cmd);
+            Database.ExecuteNonQuery(cmd);
         }
 
         public void CancelTutorsClasses()
@@ -95,7 +95,7 @@ namespace GrindsBookingSystem
             cmd.Parameters.Add(":S", 'C');
             cmd.Parameters.Add(":ID", this.PersonID);
 
-            Database.ExecuteNonQueryCommand(cmd);
+            Database.ExecuteNonQuery(cmd);
         }
 
         public void RefundClasses()
@@ -113,8 +113,7 @@ namespace GrindsBookingSystem
             cmd.Parameters.Add(":tutorID", this.PersonID);
             cmd.Parameters.Add(":A", amount);
 
-            Database.ExecuteNonQueryCommand(cmd);
-
+            Database.ExecuteNonQuery(cmd);
         }
 
         public void DeleteBookingsAfterRefund()
@@ -127,7 +126,7 @@ namespace GrindsBookingSystem
             cmd.Parameters.Add(":S", 'C');
             cmd.Parameters.Add(":tutorID", this.PersonID);
 
-            Database.ExecuteNonQueryCommand(cmd);
+            Database.ExecuteNonQuery(cmd);
         }
         public static DataSet RetrieveAll()
         {
