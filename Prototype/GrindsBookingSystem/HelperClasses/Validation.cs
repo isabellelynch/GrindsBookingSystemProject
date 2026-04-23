@@ -133,27 +133,6 @@ namespace GrindsBookingSystem
             }
 
             return true;
-        }
-
-        public static bool ComboSelected(ComboBox c)
-        {
-            if(c.SelectedIndex == -1)
-            {
-                return false;
-            }
-            return true;
-        }
-
-        public static string CheckApostrophe(string s)
-        {
-            if (s.Contains("'"))
-            {
-                s.Replace("'", "''");
-            }
-
-            return s;
-        }
-
-        
+        }    
     }
 }

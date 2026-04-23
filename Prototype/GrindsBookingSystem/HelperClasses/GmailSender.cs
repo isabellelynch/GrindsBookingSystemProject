@@ -45,7 +45,6 @@ namespace GrindsBookingSystem
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Error sending email: {ex.Message}");
-                    // Consider more robust error handling, e.g., logging
                 }
             }
         }
