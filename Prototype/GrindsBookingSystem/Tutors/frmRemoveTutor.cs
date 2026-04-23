@@ -49,8 +49,7 @@ namespace GrindsBookingSystem
                     Tutor t = Tutor.GetTutor(id);
 
                     t.CancelTutorsClasses();
-                    t.RefundClasses();
-                    t.DeleteBookingsAfterRefund();
+                    t.DeleteBookings();
                     t.Delete();
 
                     SuccessMessage("The chosen tutor has been successfully removed");
@@ -76,7 +75,7 @@ namespace GrindsBookingSystem
             
             GridViews.Default(dgvRemoveTutors);
             
-            dgvRemoveTutors.DataSource = Tutor.GetTutorList(cboTutorID).Tables[0];
+            dgvRemoveTutors.DataSource = Tutor.RetrieveAllDetails().Tables[0];
 
             comboBoxes = ControlFunctions.CreateComboList(cboTutorID, cboFirstName, cboSurname);
 

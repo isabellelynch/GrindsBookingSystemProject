@@ -79,15 +79,15 @@ namespace GrindsBookingSystem
 
             string sql = "SELECT SubjectID " +
                          "FROM Subjects " +
-                         "WHERE SubjectCategory = :cat" +
-                         " AND SubjectLevel = :level" +
-                         " AND Description = :description";
-
+                         "WHERE SubjectCategory = :c " +
+                         "AND SubjectLevel = :l " +
+                         "AND Description = :d";
+            
             var cmd = new OracleCommand(sql);
 
-            cmd.Parameters.Add(":cat", cat);
-            cmd.Parameters.Add(":level", level);
-            cmd.Parameters.Add(":description", description);
+            cmd.Parameters.Add(":c", cat);
+            cmd.Parameters.Add(":l", level);
+            cmd.Parameters.Add(":d", description);
 
             OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);
 
@@ -146,10 +146,7 @@ namespace GrindsBookingSystem
         
         public static DataTable GetSubjectDescriptions()
         {
-            string sql = "SELECT DISTINCT " +
-                         "Description FROM Subjects";
-
-            var cmd = new OracleCommand(sql);
+            var cmd = new OracleCommand("SELECT DISTINCT Description FROM Subjects");
 
             DataSet ds = Database.ExecuteMultiRowQuery(cmd);
 

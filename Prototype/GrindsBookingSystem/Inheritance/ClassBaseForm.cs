@@ -44,7 +44,7 @@ namespace GrindsBookingSystem
 
         public void SetAttendance(string room)
         {
-            txtAttendance.Text = Rooms.GetRoomCapacity(room).ToString();
+            txtAttendance.Text = Rooms.GetRoomCapacity(room);
         }
 
         protected void SetTutor(string id)

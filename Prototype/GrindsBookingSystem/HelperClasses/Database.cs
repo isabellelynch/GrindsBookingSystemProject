@@ -14,16 +14,6 @@ namespace GrindsBookingSystem
             return conn;
         }
 
-        public static DataSet ExecuteMultiRowQuery(string query)
-        {
-            OracleConnection conn = OpenConnection();
-            OracleCommand cmd = new OracleCommand(query, conn);
-            OracleDataAdapter da = new OracleDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            conn.Close();
-            return ds;
-        }
         public static DataSet ExecuteMultiRowQuery(OracleCommand cmd)
         {
             using (OracleConnection conn = OpenConnection())
@@ -37,14 +27,6 @@ namespace GrindsBookingSystem
                     return ds;
                 }
             }
-        }
-
-        public static OracleDataReader ExecuteSingleRowQuery(string query)
-        {
-            OracleConnection conn = OpenConnection();
-            OracleCommand cmd = new OracleCommand(query, conn);
-            OracleDataReader dr = cmd.ExecuteReader();
-            return dr;
         }
         public static OracleDataReader ExecuteSingleRowQuery(OracleCommand cmd)
         {

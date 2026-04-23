@@ -162,32 +162,53 @@ namespace GrindsBookingSystem
 
         public static DataTable GetBookingDetails(string text)
         {
-            string edit = "";
+            string sql = "";
+            var cmd = new OracleCommand();
 
-            if (text.Length > 0)
+            if (text == "")
             {
-                edit = " AND s.Description = '" + text + "' ";
-            }
-
-            string sql = "SELECT s.Description, s.SubjectLevel, s.SubjectCategory, " +
+                sql = "SELECT s.Description, s.SubjectLevel, s.SubjectCategory, " +
                          "CASE c.Day " +
-                                "WHEN 1 THEN 'Monday'" +
-                                "WHEN 2 THEN 'Tuesday'" +
-                                "WHEN 3 THEN 'Wednesday'" +
-                                "WHEN 4 THEN 'Thursday'" +
-                                "WHEN 5 THEN 'Friday'" +
+                                "WHEN 1 THEN 'Monday' " +
+                                "WHEN 2 THEN 'Tuesday' " +
+                                "WHEN 3 THEN 'Wednesday' " +
+                                "WHEN 4 THEN 'Thursday' " +
+                                "WHEN 5 THEN 'Friday' " +
                                 "END AS DayName, " +
                          "c.Time, c.RoomNo, c.CurrentEnrollment, r.Capacity " +
                          "FROM Classes c JOIN Subjects s " +
                          "ON c.SubjectID = s.SubjectID " +
                          "JOIN Rooms r ON c.RoomNo = r.RoomNo " +
-                         "WHERE c.SemesterNo = :semester :edit" +
+                         "WHERE c.SemesterNo = :semester " +
                          "ORDER BY s.Description, c.Day";
 
-            var cmd = new OracleCommand(sql);
+                cmd.CommandText = sql;
 
-            cmd.Parameters.Add(":semester", Class.GetCurrentSemester());
-            cmd.Parameters.Add(":edit", edit);
+                cmd.Parameters.Add(":semester", Class.GetCurrentSemester());
+            }
+            else
+            {
+                sql = "SELECT s.Description, s.SubjectLevel, s.SubjectCategory, " +
+                         "CASE c.Day " +
+                                "WHEN 1 THEN 'Monday' " +
+                                "WHEN 2 THEN 'Tuesday' " +
+                                "WHEN 3 THEN 'Wednesday' " +
+                                "WHEN 4 THEN 'Thursday' " +
+                                "WHEN 5 THEN 'Friday' " +
+                                "END AS DayName, " +
+                         "c.Time, c.RoomNo, c.CurrentEnrollment, r.Capacity " +
+                         "FROM Classes c JOIN Subjects s " +
+                         "ON c.SubjectID = s.SubjectID " +
+                         "JOIN Rooms r ON c.RoomNo = r.RoomNo " +
+                         "WHERE c.SemesterNo = :semester " +
+                         "AND s.Description = :text " +
+                         "ORDER BY s.Description, c.Day";
+
+                cmd.CommandText = sql;
+
+                cmd.Parameters.Add(":semester", Class.GetCurrentSemester());
+                cmd.Parameters.Add(":text", text);
+            }
 
             DataSet ds = Database.ExecuteMultiRowQuery(cmd);
 

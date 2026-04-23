@@ -22,8 +22,8 @@ namespace GrindsBookingSystem
             txtTotalBookings.Text = GenerateTotalAnnualBookings().ToString();
             txtActiveStudents.Text = GetActive("Students").ToString();
             txtActiveTutors.Text = GetActive("Tutors").ToString();
-            txtWorstTutor.Text = Tutor.PerformingTutor("ASC");
-            txtBestTutor.Text = Tutor.PerformingTutor("DESC");
+            txtWorstTutor.Text = Tutor.WorstPerformingTutor();
+            txtBestTutor.Text = Tutor.BestPerformingTutor();
             GetTutorEarningsChart();
             Charts.MouseDown -= Charts_MouseDownTutors;
             Charts.MouseDown += Charts_MouseDownTutors;
@@ -83,13 +83,12 @@ namespace GrindsBookingSystem
         {
             int count = 0;
 
-            string sql = "SELECT COUNT(*) " +
-                         "FROM :table " +
-                         "WHERE Status = :status";
+            string sql = $@"SELECT COUNT(*) 
+                         FROM {table} 
+                         WHERE Status = :status";
 
             var cmd = new OracleCommand(sql);
 
-            cmd.Parameters.Add(":table", table);
             cmd.Parameters.Add(":status", 'A');
 
             OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);

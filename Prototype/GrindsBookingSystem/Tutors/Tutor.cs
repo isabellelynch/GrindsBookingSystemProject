@@ -97,26 +97,7 @@ namespace GrindsBookingSystem
 
             Database.ExecuteNonQuery(cmd);
         }
-
-        public void RefundClasses()
-        {
-            int amount = Booking.GetAmount(this.PersonID);
-
-            string sql = "INSERT INTO Refunds(BookingID, StudentID, Amount) " +
-                         "SELECT b.BookingID, b.StudentID, :A " +
-                         " FROM Bookings b " +
-                         "JOIN Classes c ON b.ClassID = c.ClassID " +
-                         "WHERE c.TutorID = :tutorID";
-
-            var cmd = new OracleCommand(sql);
-
-            cmd.Parameters.Add(":tutorID", this.PersonID);
-            cmd.Parameters.Add(":A", amount);
-
-            Database.ExecuteNonQuery(cmd);
-        }
-
-        public void DeleteBookingsAfterRefund()
+        public void DeleteBookings()
         {
             string sql = "UPDATE Bookings " +
                          "SET Status = :S " +
@@ -132,9 +113,14 @@ namespace GrindsBookingSystem
         {
             string sql = "SELECT * " +
                          "FROM Tutors " +
-                         "WHERE Status = 'A' " +
+                         "WHERE Status = :status " +
                          "ORDER BY TutorID";
-            return Database.ExecuteMultiRowQuery(sql);
+
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":status", 'A');
+
+            return Database.ExecuteMultiRowQuery(cmd);
         }
 
         public static DataSet GetTutorList(ComboBox cb)
@@ -153,31 +139,57 @@ namespace GrindsBookingSystem
 
             string sql = "SELECT TutorID, FirstName, Surname " +
                          "FROM Tutors " +
-                         "WHERE TutorID IN (" + idList + ") " +
+                         "WHERE TutorID IN (:list) " +
                          "ORDER BY TutorID";
 
-            return Database.ExecuteMultiRowQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":list", idList);
+
+            return Database.ExecuteMultiRowQuery(cmd);
+        }
+
+        public static DataSet RetrieveAllDetails()
+        {
+            string sql = "SELECT TutorID, FirstName, Surname " +
+                         "FROM Tutors " +
+                         "WHERE Status = :s " +
+                         "ORDER BY TutorID";
+
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":s", 'A');
+
+            return Database.ExecuteMultiRowQuery(cmd);
         }
 
         public static Tutor GetTutor(int id)
         {
-            string sql = "SELECT * FROM Tutors WHERE TutorID = '" + id + "'";
+            Tutor t = new Tutor();
 
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            string sql = "SELECT * " +
+                         "FROM Tutors " +
+                         "WHERE TutorID = :id";
 
-            dr.Read();
+            var cmd = new OracleCommand(sql);
 
-            Tutor t = new Tutor(dr.GetString(1), dr.GetString(2), dr.GetString(3), dr.GetString(4), dr.GetString(5));
+            cmd.Parameters.Add(":id", id);
 
-            t.SetID(id.ToString());
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);
 
+            if (dr.Read())
+            {
+                t = new Tutor(dr.GetString(1), dr.GetString(2), dr.GetString(3), dr.GetString(4), dr.GetString(5));
+                t.SetID(id.ToString());
+            }
+           
             dr.Close();
-
             return t;
         }
 
-        public static string PerformingTutor(string order)
+        public static string BestPerformingTutor()
         {
+            string result = "";
             string sql = "SELECT t.FirstName, t.Surname, NVL(SUM(tr.HourlyRate), 0) AS TotalEarnings " +
                         "FROM Tutors t " +
                         "JOIN TutorRates tr ON t.RateCode = tr.RateCode " +
@@ -185,12 +197,12 @@ namespace GrindsBookingSystem
                         "LEFT JOIN Bookings b ON c.ClassID = b.ClassID " +
                         "AND EXTRACT(YEAR FROM b.BookingDate) = EXTRACT(YEAR FROM SYSDATE) " +
                         "GROUP BY t.TutorID, t.FirstName, t.Surname " +
-                        "ORDER BY TotalEarnings " + order + " " +
+                        "ORDER BY TotalEarnings DESC " +
                         "FETCH FIRST 1 ROW WITH TIES";
 
-            string result = "";
-
-            DataSet ds = Database.ExecuteMultiRowQuery(sql);
+            var cmd = new OracleCommand(sql);
+            
+            DataSet ds = Database.ExecuteMultiRowQuery(cmd);
 
             if (ds.Tables[0].Rows.Count > 0)
             {
@@ -202,7 +214,34 @@ namespace GrindsBookingSystem
             return result;
         }
 
-        
+        public static string WorstPerformingTutor()
+        {
+            string result = "";
+            string sql = "SELECT t.FirstName, t.Surname, NVL(SUM(tr.HourlyRate), 0) AS TotalEarnings " +
+                        "FROM Tutors t " +
+                        "JOIN TutorRates tr ON t.RateCode = tr.RateCode " +
+                        "LEFT JOIN Classes c ON t.TutorID = c.TutorID " +
+                        "LEFT JOIN Bookings b ON c.ClassID = b.ClassID " +
+                        "AND EXTRACT(YEAR FROM b.BookingDate) = EXTRACT(YEAR FROM SYSDATE) " +
+                        "GROUP BY t.TutorID, t.FirstName, t.Surname " +
+                        "ORDER BY TotalEarnings ASC " +
+                        "FETCH FIRST 1 ROW WITH TIES";
+
+            var cmd = new OracleCommand(sql);
+
+            DataSet ds = Database.ExecuteMultiRowQuery(cmd);
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                result = ds.Tables[0].Rows[0]["FirstName"].ToString() + " " +
+                         ds.Tables[0].Rows[0]["Surname"].ToString() + " €" +
+                         ds.Tables[0].Rows[0]["TotalEarnings"].ToString();
+            }
+
+            return result;
+        }
+
+
 
         public String IsValid()
         {
@@ -235,21 +274,31 @@ namespace GrindsBookingSystem
             string sql = "SELECT s.Description, s.SubjectLevel, s.SubjectCategory " +
                          "FROM Subjects s " +
                          "JOIN Tutor_Subjects ts ON s.SubjectID = ts.SubjectID" +
-                         " WHERE ts.TutorID = '" + id + "'";
+                         " WHERE ts.TutorID = :id";
 
-            DataSet ds = Database.ExecuteMultiRowQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add("id", id);
+
+            DataSet ds = Database.ExecuteMultiRowQuery(cmd);
 
             return ds.Tables[0];
         } 
 
         public static int GetTutorID(string name, string surname)
         {
-            string sql = "SELECT TutorID FROM Tutors WHERE FirstName = '" + name +
-                "' AND Surname = '" + surname + "'";
-
             int id = 0;
+            string sql = "SELECT TutorID " +
+                         "FROM Tutors " +
+                         "WHERE FirstName = :firtname " +
+                         "AND Surname = :surname";
 
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":firstname", name);
+            cmd.Parameters.Add(":surname", surname);
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);
 
             if (dr.Read())
             {
@@ -260,23 +309,30 @@ namespace GrindsBookingSystem
 
             return id;
         }
-        public static bool IsTutorFree(int day, int time, string id)
+        public static bool IsTutorFree(int day, int time, string room)
         {
             int classID = 0;
 
             string sql = "SELECT ClassID FROM Classes " +
-                         "WHERE Day = " + day + " " +
-                         "AND Time = " + time + " " +
-                         "AND RoomNo = '" + id + "' " +
-                         "AND SemesterNo = '" + Class.GetCurrentSemester() + "'";
+                         "WHERE Day = :day " +
+                         "AND Time = :time " + 
+                         "AND RoomNo = :room " + 
+                         "AND SemesterNo = :semester";
 
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":day", day);
+            cmd.Parameters.Add(":time", time);
+            cmd.Parameters.Add(":room", room);
+            cmd.Parameters.Add(":semester", Class.GetCurrentSemester());
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);
 
             if (dr.Read())
             {
                 classID = dr.GetInt32(0);
-                dr.Close();
             }
+            dr.Close();
             if (classID == 0)
             {
                 return true;
@@ -290,15 +346,20 @@ namespace GrindsBookingSystem
             int hours = 0;
             string sql = "SELECT COUNT(*) AS Hours " +
                          "FROM Classes " +
-                         "WHERE TutorID = " + tutorID +
-                         " AND SemesterNo = '" + Class.GetCurrentSemester() + "'";
+                         "WHERE TutorID = :id " +
+                         "AND SemesterNo = :semester";
 
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":id", tutorID);
+            cmd.Parameters.Add(":semester", Class.GetCurrentSemester());
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);
             if (dr.Read())
             {
                 hours = dr.GetInt32(0);
-                dr.Close();
             }
+            dr.Close();
             return hours;
         }
 
@@ -306,9 +367,13 @@ namespace GrindsBookingSystem
         {
             string sql = "SELECT 1 " +
                          "FROM Tutors " +
-                         "WHERE Email = '" + email + "'";
+                         "WHERE Email = :email";
 
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":email", email);
+
+            OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);
 
             return dr.Read();
         }

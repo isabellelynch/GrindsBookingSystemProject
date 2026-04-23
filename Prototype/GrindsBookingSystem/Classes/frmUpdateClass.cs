@@ -73,7 +73,7 @@ namespace GrindsBookingSystem
                     string ID = r[3].ToString();
                     string Room = r[5].ToString();
 
-                    string capacity = Class.GetRoomCapacity(Room);
+                    string capacity = Rooms.GetRoomCapacity(Room);
                     
                     if(capacity == updatingClass.ClassID.ToString())
                     {

@@ -31,20 +31,27 @@ namespace GrindsBookingSystem
         {
             int id = Convert.ToInt32(cboStudentID.Items[0]);
 
-            Student s = Student.GetStudent(id);
-
-            String details = s.Read();
-
-            if (details != null)
+            try
             {
-                MessageBox.Show("The selected Students details are \n\n" + details,
-                    "Student Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Student s = Student.GetStudent(id);
+
+                String details = s.Read();
+                if (details != null)
+                {
+                    MessageBox.Show("The selected Students details are \n\n" + details,
+                        "Student Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("The selected Student could not be found.",
+                        "Student Details", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("The selected Student could not be found.",
-                    "Student Details", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ErrorMessage(ex.Message);
             }
+
             Reset(this.Controls);
         }
 

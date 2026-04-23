@@ -102,7 +102,7 @@
     <Compile Include="Bookings\frmAddBooking.Designer.cs">
       <DependentUpon>frmAddBooking.cs</DependentUpon>
     </Compile>
-    <Compile Include="Rooms.cs" />
+    <Compile Include="HelperClasses\Rooms.cs" />
     <Compile Include="Subjects\frmAddSubject.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,12 +150,6 @@
     </Compile>
     <Compile Include="Schedule\frmViewSchedule.Designer.cs">
       <DependentUpon>frmViewSchedule.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Bookings\frmShowBookings.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Bookings\frmShowBookings.Designer.cs">
-      <DependentUpon>frmShowBookings.cs</DependentUpon>
     </Compile>
     <Compile Include="Students\frmViewStudentDetails.cs">
       <SubType>Form</SubType>
@@ -255,9 +249,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Schedule\frmViewSchedule.resx">
       <DependentUpon>frmViewSchedule.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Bookings\frmShowBookings.resx">
-      <DependentUpon>frmShowBookings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tutors\frmUpdateTutor.resx">
       <DependentUpon>frmUpdateTutor.cs</DependentUpon>

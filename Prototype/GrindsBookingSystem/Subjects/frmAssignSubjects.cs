@@ -92,19 +92,11 @@ namespace GrindsBookingSystem
                     cert = "JC";
                 }
 
-                
+                string id = Subject.GetSubjectID(level, cert, sub);
 
-                string sql = "SELECT SubjectID " +
-                            "FROM Subjects " +
-                            "WHERE Description = '" + sub +
-                            "' AND SubjectLevel = '" + level +
-                            "' AND SubjectCategory = '" + cert + "'";
-
-                OracleDataReader dr = Database.ExecuteSingleRowQuery(sql);
-
-                if (!dr.Read()) 
+                if (id == "") 
                 {
-                    DialogResult result = MessageBox.Show("No matching SubjectID found. Would you like to add this subject to the system ?", "Subject Not Found"
+                    DialogResult result = MessageBox.Show("No matching Subject found. Would you like to add this subject to the system ?", "Subject Not Found"
                         , MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                     if (result == DialogResult.Yes) 
@@ -122,12 +114,9 @@ namespace GrindsBookingSystem
                 }
                 else
                 {
-                    string subID = dr.GetInt32(0).ToString();
-                    dr.Close();
-
                     try
                     {
-                        Subject.AddToTutorSubjectTable(tutorID, subID);
+                        Subject.AddToTutorSubjectTable(tutorID, id);
 
                         SuccessMessage(sub + " successfully assigned to tutor " + cboFirstName.Text + " " + cboSurname.Text);
                     }

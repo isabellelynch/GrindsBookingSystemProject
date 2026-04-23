@@ -24,7 +24,7 @@ namespace GrindsBookingSystem
         public void Create()
         {
             string sql = "INSERT INTO Students (FirstName, Surname, Email, PhoneNo, Status) " +
-                "VALUES (:FirstName, :Surname, :Email, :Phone, :Status)";
+                         "VALUES (:FirstName, :Surname, :Email, :Phone, :Status)";
 
             var cmd = new OracleCommand(sql);
 

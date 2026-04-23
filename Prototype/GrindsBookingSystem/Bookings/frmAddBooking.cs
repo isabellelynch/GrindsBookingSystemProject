@@ -101,6 +101,7 @@ namespace GrindsBookingSystem
             try
             {
                 DataTable dt = Booking.GetBookingDetails(cboSubjects.Text);
+
                 foreach (DataRow dr in dt.Rows)
                 {
                     dgvMakeBooking.Rows.Add(

@@ -40,12 +40,12 @@ namespace GrindsBookingSystem
         {
             if (dgvRemoveStudent.SelectedRows.Count == 1)
             {
-                try
-                {
+                
                     DataGridViewRow row = dgvRemoveStudent.SelectedRows[0];
 
                     int id = Convert.ToInt32(row.Cells[0].Value);
-
+                try
+                {
                     Student s = Student.GetStudent(id);
 
                     s.SetID(id.ToString());

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
@@ -40,9 +41,9 @@ namespace GrindsBookingSystem
         {
             c.Items.Clear();
 
-            string sql = "SELECT RoomNo, Description FROM Rooms";
+            var cmd = new OracleCommand("SELECT RoomNo, Description FROM Rooms");
 
-            DataSet ds = Database.ExecuteMultiRowQuery(sql);
+            DataSet ds = Database.ExecuteMultiRowQuery(cmd);
 
             foreach (DataRow r in ds.Tables[0].Rows)
             {
@@ -56,9 +57,9 @@ namespace GrindsBookingSystem
         {
             ClearCombos(cb);
 
-            String sql = "SELECT RateCode, Description FROM TutorRates ORDER BY RateCode";
+            var cmd = new OracleCommand("SELECT RateCode, Description FROM TutorRates ORDER BY RateCode");
 
-            DataSet ds = Database.ExecuteMultiRowQuery(sql);
+            DataSet ds = Database.ExecuteMultiRowQuery(cmd);
 
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
@@ -70,19 +71,18 @@ namespace GrindsBookingSystem
 
         public static void ApplyFilters(String value, String column, String location, params ComboBox[] cb)
         {
-            String sql = "";
-            DataSet ds = null;
+            string sql = $@"
+                            SELECT * 
+                            FROM {location} 
+                            WHERE {column} = :value 
+                            AND Status = :status";
 
-            if(location == "Tutors")
-            {
-                sql = "SELECT * FROM Tutors WHERE " + column + " = " + value + " AND Status = 'A'";
-                ds = Database.ExecuteMultiRowQuery(sql);
-            }
-            else if(location == "Students")
-            {
-                sql = "SELECT * FROM Students WHERE " + column + " = " + value + " AND Status = 'A'";
-                ds = Database.ExecuteMultiRowQuery(sql);
-            }
+            var cmd = new OracleCommand(sql);
+
+            cmd.Parameters.Add(":value", value);
+            cmd.Parameters.Add(":status", 'A');
+
+            DataSet ds = Database.ExecuteMultiRowQuery(cmd);
 
             if (string.IsNullOrEmpty(sql) || ds == null) { return; }
 
@@ -125,15 +125,15 @@ namespace GrindsBookingSystem
         {
             if (send == cbo1)
             {
-                ApplyFilters("'" + cbo1.Text + "'", location + "ID", location + "s", cbo1, cbo2, cbo3);
+                ApplyFilters(cbo1.Text, location + "ID", location + "s", cbo1, cbo2, cbo3);
             }
             else if (send == cbo2)
             {
-                ApplyFilters("'" + cbo2.Text + "'", "FirstName", location + "s", cbo1, cbo2, cbo3);
+                ApplyFilters(cbo2.Text, "FirstName", location + "s", cbo1, cbo2, cbo3);
             }
             else if (send == cbo3)
             {
-                ApplyFilters("'" + cbo3.Text + "'", "Surname", location + "s", cbo1, cbo2, cbo3);
+                ApplyFilters(cbo3.Text, "Surname", location + "s", cbo1, cbo2, cbo3);
             }
         }
         public static void DeselectAll(params ComboBox[] cb)
