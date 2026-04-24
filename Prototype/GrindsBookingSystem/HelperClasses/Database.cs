@@ -5,7 +5,7 @@ namespace GrindsBookingSystem
 {
     class Database
     {
-        public const string connectionString = "Data Source = studentoracle:1521/orcl; User Id = t00264026; Password = Qfkqedm!uqy9;";
+        public const string connectionString = "Data Source = studentoracle:1521/orcl; User Id = ; Password = ;";
 
         public static OracleConnection OpenConnection()
         {
