@@ -84,28 +84,28 @@
             // 
             this.txtStudentName.Location = new System.Drawing.Point(246, 43);
             this.txtStudentName.Name = "txtStudentName";
-            this.txtStudentName.Size = new System.Drawing.Size(100, 20);
+            this.txtStudentName.Size = new System.Drawing.Size(245, 20);
             this.txtStudentName.TabIndex = 4;
             // 
             // txtStudentSurname
             // 
             this.txtStudentSurname.Location = new System.Drawing.Point(246, 93);
             this.txtStudentSurname.Name = "txtStudentSurname";
-            this.txtStudentSurname.Size = new System.Drawing.Size(100, 20);
+            this.txtStudentSurname.Size = new System.Drawing.Size(245, 20);
             this.txtStudentSurname.TabIndex = 5;
             // 
             // txtStudentEmail
             // 
             this.txtStudentEmail.Location = new System.Drawing.Point(246, 143);
             this.txtStudentEmail.Name = "txtStudentEmail";
-            this.txtStudentEmail.Size = new System.Drawing.Size(100, 20);
+            this.txtStudentEmail.Size = new System.Drawing.Size(245, 20);
             this.txtStudentEmail.TabIndex = 6;
             // 
             // txtStudentPhone
             // 
             this.txtStudentPhone.Location = new System.Drawing.Point(246, 193);
             this.txtStudentPhone.Name = "txtStudentPhone";
-            this.txtStudentPhone.Size = new System.Drawing.Size(100, 20);
+            this.txtStudentPhone.Size = new System.Drawing.Size(245, 20);
             this.txtStudentPhone.TabIndex = 7;
             // 
             // grpAddStudent
@@ -119,7 +119,7 @@
             this.grpAddStudent.Controls.Add(this.label3);
             this.grpAddStudent.Controls.Add(this.label2);
             this.grpAddStudent.Controls.Add(this.label1);
-            this.grpAddStudent.Location = new System.Drawing.Point(140, 60);
+            this.grpAddStudent.Location = new System.Drawing.Point(27, 59);
             this.grpAddStudent.Name = "grpAddStudent";
             this.grpAddStudent.Size = new System.Drawing.Size(497, 316);
             this.grpAddStudent.TabIndex = 8;
@@ -154,7 +154,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(563, 450);
             this.Controls.Add(this.grpAddStudent);
             this.Name = "frmAddStudent";
             this.Text = "Top Mark Tutors - Add Student";

@@ -1,9 +1,5 @@
-﻿
-
-using Oracle.ManagedDataAccess.Client;
-using System;
+﻿using Oracle.ManagedDataAccess.Client;
 using System.Data;
-using System.Windows.Forms;
 
 namespace GrindsBookingSystem
 {
@@ -34,13 +30,13 @@ namespace GrindsBookingSystem
         public void Create() 
         {
             string sql = "INSERT INTO Subjects (SubjectLevel, SubjectCategory, Description) " +
-                         "VALUES (:level, :category, :description)";
+                         "VALUES (:l, :c, :d)";
 
             var cmd = new OracleCommand(sql);
 
-            cmd.Parameters.Add(":level", this.Level);
-            cmd.Parameters.Add(":category", this.Category);
-            cmd.Parameters.Add(":description", this.Description);
+            cmd.Parameters.Add(":l", this.Level);
+            cmd.Parameters.Add(":c", this.Category);
+            cmd.Parameters.Add(":d", this.Description);
 
             Database.ExecuteNonQuery(cmd);
         }

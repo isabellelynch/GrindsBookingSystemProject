@@ -1,5 +1,4 @@
 ﻿using GrindsBookingSystem.HelperClasses;
-using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -100,7 +99,9 @@ namespace GrindsBookingSystem
         protected void FillDays()
         {
             cboDays.Items.Clear();
+
             string[] days = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
+
             foreach (string day in days)
             {
                 cboDays.Items.Add(day);

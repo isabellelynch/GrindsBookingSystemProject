@@ -1,5 +1,4 @@
 ﻿using GrindsBookingSystem;
-using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -21,14 +20,14 @@ public class CustomDialogMessageBox : Form
         ForeColor = Color.MidnightBlue;
         MaximizeBox = false;
         MinimizeBox = false;
-        
+        Font = new Font("Arial", 12, FontStyle.Bold);
+
 
         lblMessage = new Label()
         {
             Text = message,
             Dock = DockStyle.Fill,
             TextAlign = ContentAlignment.MiddleCenter,
-            Font = new Font("Arial", 12, FontStyle.Bold),
             ForeColor = Color.MidnightBlue
         };
 

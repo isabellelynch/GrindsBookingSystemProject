@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Windows.Forms;
-
 
 namespace GrindsBookingSystem
 {
@@ -11,7 +9,9 @@ namespace GrindsBookingSystem
         private string Room {  get; set; }
         public frmAddClass(int day, int time, string room)
         {
-            InitializeComponent();
+            InitializeComponent(); 
+
+            btnClass.Text = "Add Class";
 
             Day = day;
             Time = time;
@@ -71,19 +71,16 @@ namespace GrindsBookingSystem
                 else
                 {
                     ErrorMessage("The chosen tutor cannot be booked as he/she has reached their working hours quota");
-                }
-                
+                } 
             }
             else
             {
                 ErrorMessage("Chosen tutor is not avaialable at the chosen day and time");
             }
-            
         }
 
         private void frmAddClass_Load(object sender, EventArgs e)
         {
-            btnClass.Text = "Add Class";
             SetClassDay(Day);
             SetClassTime(Time);
             SetAttendance(Room);

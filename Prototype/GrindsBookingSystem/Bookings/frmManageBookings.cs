@@ -1,5 +1,4 @@
 ﻿using GrindsBookingSystem.HelperClasses;
-using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,7 +14,9 @@ namespace GrindsBookingSystem
         public frmManageBookings()
         {
             InitializeComponent();
+
             Reset(this.Controls);
+
             GridViews.Default(dgvCancelBooking);
         }
         protected override void Reset(Control.ControlCollection controls)
@@ -52,8 +53,6 @@ namespace GrindsBookingSystem
             updating = true;
 
             ControlFunctions.Filters("Student", cbo, cboStudentID, cboName, cboSName);
-
-            
 
             updating = false;
 
@@ -103,7 +102,10 @@ namespace GrindsBookingSystem
 
                 try
                 {
-                    Booking.CancelBooking(bookingID, cboStudentID.Text);
+                    Booking b = Booking.GetBooking(bookingID);
+
+                    b.Delete();
+
                     SuccessMessage("Booking Cancelled");
 
                 }

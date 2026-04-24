@@ -37,8 +37,6 @@ namespace GrindsBookingSystem
 
         private void btnFindTutor_Click(object sender, EventArgs e)
         {
-            
-
             if (cboTutorID.Items.Count > 1) 
             {
                 ErrorMessage("Please select a Tutor to continue");

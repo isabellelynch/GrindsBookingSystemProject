@@ -1,7 +1,4 @@
-﻿using Oracle.ManagedDataAccess.Client;
-using System;
-
-namespace GrindsBookingSystem
+﻿namespace GrindsBookingSystem
 {
     public abstract class Person
     {

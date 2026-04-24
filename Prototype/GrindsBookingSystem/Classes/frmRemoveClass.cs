@@ -10,9 +10,15 @@ namespace GrindsBookingSystem
         public frmRemoveClass(Class c)
         {
             InitializeComponent();
+
+            btnClass.Text = "Remove Class";
+
             deletingClass = c;
+
             int id = Class.GetClassID(deletingClass.Day, deletingClass.Time, deletingClass.RoomNo);
+
             deletingClass.SetID(id);
+
             Reset(this.Controls);
         }
 
@@ -25,8 +31,6 @@ namespace GrindsBookingSystem
 
         private void frmRemoveClass_Load(object sender, System.EventArgs e)
         {
-            btnClass.Text = "Remove Class";
-
             SetClassDay(deletingClass.Day);
             SetClassTime(deletingClass.Time);
             SetAttendance(deletingClass.RoomNo);

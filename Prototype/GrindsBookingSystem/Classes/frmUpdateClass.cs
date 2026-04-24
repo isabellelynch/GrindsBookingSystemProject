@@ -1,5 +1,4 @@
 ﻿using GrindsBookingSystem.HelperClasses;
-using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -13,7 +12,8 @@ namespace GrindsBookingSystem
         public frmUpdateClass(Class c)
         {
             InitializeComponent();
-            
+
+            btnClass.Text = "Alter Class";
             updatingClass = c;
             updatingClass.SetID(c.ClassID);
 
@@ -22,7 +22,6 @@ namespace GrindsBookingSystem
 
         private void frmUpdateClass_Load(object sender, EventArgs e)
         { 
-            btnClass.Text = "Alter Class";
             ControlFunctions.EnableBoxes(cboDays, cboTime, cboRooms);
 
             SetClassDay(updatingClass.Day);

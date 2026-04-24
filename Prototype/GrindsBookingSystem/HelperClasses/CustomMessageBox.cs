@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
 namespace GrindsBookingSystem.HelperClasses
 {
     public class CustomMessageBox: Form
@@ -23,6 +17,7 @@ namespace GrindsBookingSystem.HelperClasses
             ForeColor = Color.Goldenrod;
             MaximizeBox = false;
             MinimizeBox = false;
+            Font = new Font("Arial", 12, FontStyle.Bold);
 
             lblMessage = new Label()
             {

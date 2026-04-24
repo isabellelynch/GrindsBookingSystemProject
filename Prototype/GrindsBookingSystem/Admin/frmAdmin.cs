@@ -21,14 +21,22 @@ namespace GrindsBookingSystem
         private void frmAdmin_Load(object sender, EventArgs e)
         {
             txtRevenue.Text = GenerateTotalAnnualRevenue().ToString();
+
             txtTotalBookings.Text = GenerateTotalAnnualBookings().ToString();
+
             txtActiveStudents.Text = GetActive("Students").ToString();
+
             txtActiveTutors.Text = GetActive("Tutors").ToString();
+
             txtWorstTutor.Text = Tutor.WorstPerformingTutor();
+
             txtBestTutor.Text = Tutor.BestPerformingTutor();
+
             GetTutorEarningsChart();
+
             Charts.MouseDown -= Charts_MouseDownTutors;
             Charts.MouseDown += Charts_MouseDownTutors;
+
             ControlFunctions.ReadOnly(this.Controls);
         }
         

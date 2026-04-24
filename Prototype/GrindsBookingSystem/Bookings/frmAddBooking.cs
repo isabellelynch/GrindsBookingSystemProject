@@ -143,7 +143,9 @@ namespace GrindsBookingSystem
                 DataGridViewRow r = dgvMakeBooking.CurrentRow;
 
                 int day = DayConversions.GetDayNumber(r.Cells[1].Value.ToString());
+
                 string time = r.Cells[2].Value.ToString().Substring(0,r.Cells[2].Value.ToString().IndexOf(":"));
+
                 string room = r.Cells[3].Value.ToString();
 
                 int ClassID = Class.GetClassID(day, Convert.ToInt32(time), room);

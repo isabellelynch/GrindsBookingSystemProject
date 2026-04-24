@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Windows.Forms;
 
 namespace GrindsBookingSystem
 {
@@ -134,17 +133,16 @@ namespace GrindsBookingSystem
         {
             string sql = "SELECT * " +
                              "FROM Classes " +
-                             "WHERE SemesterNo = :semester";
+                             "WHERE SemesterNo = :semester " +
+                             "AND Status = :status";
 
             var cmd = new OracleCommand(sql);
 
             cmd.Parameters.Add(":semester", Class.GetCurrentSemester());
+            cmd.Parameters.Add(":status", 'A');
 
             return Database.ExecuteMultiRowQuery(cmd);
         }
-
-        
-
 
         public static string GetCurrentSemester()
         {

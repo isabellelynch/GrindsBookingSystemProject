@@ -1,6 +1,5 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -276,30 +275,6 @@ namespace GrindsBookingSystem
             return ds.Tables[0];
         } 
 
-        public static int GetTutorID(string name, string surname)
-        {
-            int id = 0;
-            string sql = "SELECT TutorID " +
-                         "FROM Tutors " +
-                         "WHERE FirstName = :firtname " +
-                         "AND Surname = :surname";
-
-            var cmd = new OracleCommand(sql);
-
-            cmd.Parameters.Add(":firstname", name);
-            cmd.Parameters.Add(":surname", surname);
-
-            OracleDataReader dr = Database.ExecuteSingleRowQuery(cmd);
-
-            if (dr.Read())
-            {
-                 id = dr.GetInt32(0);
-            }
-
-            dr.Close();
-
-            return id;
-        }
         public static bool IsTutorFree(int day, int time, string room)
         {
             int classID = 0;

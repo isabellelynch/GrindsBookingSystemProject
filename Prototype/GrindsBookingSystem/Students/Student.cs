@@ -1,8 +1,6 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Data;
-using System.Data.SqlClient;
-using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace GrindsBookingSystem

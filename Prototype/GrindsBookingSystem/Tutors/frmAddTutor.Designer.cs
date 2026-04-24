@@ -46,7 +46,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(43, 55);
+            this.label1.Location = new System.Drawing.Point(14, 55);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 13);
             this.label1.TabIndex = 0;
@@ -55,7 +55,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(43, 105);
+            this.label2.Location = new System.Drawing.Point(14, 105);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 1;
@@ -64,7 +64,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(42, 251);
+            this.label3.Location = new System.Drawing.Point(14, 251);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 2;
@@ -73,7 +73,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(43, 155);
+            this.label5.Location = new System.Drawing.Point(14, 154);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(32, 13);
             this.label5.TabIndex = 4;
@@ -82,7 +82,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(43, 205);
+            this.label6.Location = new System.Drawing.Point(14, 205);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(78, 13);
             this.label6.TabIndex = 5;
@@ -92,28 +92,28 @@
             // 
             this.txtTutorName.Location = new System.Drawing.Point(143, 48);
             this.txtTutorName.Name = "txtTutorName";
-            this.txtTutorName.Size = new System.Drawing.Size(121, 20);
+            this.txtTutorName.Size = new System.Drawing.Size(195, 20);
             this.txtTutorName.TabIndex = 6;
             // 
             // txtTutorSurname
             // 
             this.txtTutorSurname.Location = new System.Drawing.Point(143, 98);
             this.txtTutorSurname.Name = "txtTutorSurname";
-            this.txtTutorSurname.Size = new System.Drawing.Size(121, 20);
+            this.txtTutorSurname.Size = new System.Drawing.Size(195, 20);
             this.txtTutorSurname.TabIndex = 7;
             // 
             // txtTutorEmail
             // 
             this.txtTutorEmail.Location = new System.Drawing.Point(143, 147);
             this.txtTutorEmail.Name = "txtTutorEmail";
-            this.txtTutorEmail.Size = new System.Drawing.Size(121, 20);
+            this.txtTutorEmail.Size = new System.Drawing.Size(195, 20);
             this.txtTutorEmail.TabIndex = 8;
             // 
             // txtTutorPhone
             // 
             this.txtTutorPhone.Location = new System.Drawing.Point(143, 198);
             this.txtTutorPhone.Name = "txtTutorPhone";
-            this.txtTutorPhone.Size = new System.Drawing.Size(121, 20);
+            this.txtTutorPhone.Size = new System.Drawing.Size(195, 20);
             this.txtTutorPhone.TabIndex = 9;
             // 
             // cboTutorRates
@@ -121,7 +121,7 @@
             this.cboTutorRates.FormattingEnabled = true;
             this.cboTutorRates.Location = new System.Drawing.Point(143, 243);
             this.cboTutorRates.Name = "cboTutorRates";
-            this.cboTutorRates.Size = new System.Drawing.Size(121, 21);
+            this.cboTutorRates.Size = new System.Drawing.Size(195, 21);
             this.cboTutorRates.TabIndex = 10;
             // 
             // grpAddTutor
@@ -160,6 +160,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(474, 450);
             this.Controls.Add(this.grpAddTutor);
+            this.ForeColor = System.Drawing.Color.MidnightBlue;
             this.Name = "frmAddTutor";
             this.Text = "Top Mark Tutors - Add a new Tutor";
             this.Controls.SetChildIndex(this.grpAddTutor, 0);

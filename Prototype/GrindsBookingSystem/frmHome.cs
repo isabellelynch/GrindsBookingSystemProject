@@ -79,8 +79,6 @@ namespace GrindsBookingSystem
             NewPage(new frmAdmin());
         }
 
-
-        
         private void scheduleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             NewPage(new frmViewSchedule());

@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Button = System.Windows.Forms.Button;
 using ComboBox = System.Windows.Forms.ComboBox;
 using TextBox = System.Windows.Forms.TextBox;
@@ -59,13 +58,13 @@ namespace GrindsBookingSystem
         {
             foreach (Control c in parent.Controls)
             {
+                c.Font = new Font("Arial", 12);
                 if (c is Button btn)
                 {
                     btn.BackColor = Color.MidnightBlue;
                     btn.ForeColor = Color.AliceBlue;
                     btn.FlatStyle = FlatStyle.Flat;
                     btn.FlatAppearance.BorderSize = 0;
-                    btn.Font = new Font("Arial", 12);
                     btn.AutoSize = true;
                     btn.AutoSizeMode = AutoSizeMode.GrowAndShrink;
                     btn.Padding = new Padding(5);
@@ -76,14 +75,6 @@ namespace GrindsBookingSystem
                     cb.BackColor = Color.White;
                     cb.ForeColor = Color.MidnightBlue;
                     cb.FlatStyle = FlatStyle.Popup;
-                }
-                if(c is Label lb)
-                {
-                    lb.Font = new Font("Arial", 12);
-                }
-                if(c is GroupBox gp)
-                {
-                    gp.Font = new Font("Arial", 12);
                 }
                 if (c.HasChildren)
                     Style(c);

@@ -47,7 +47,7 @@
             // cboSurname
             // 
             this.cboSurname.FormattingEnabled = true;
-            this.cboSurname.Location = new System.Drawing.Point(316, 111);
+            this.cboSurname.Location = new System.Drawing.Point(318, 129);
             this.cboSurname.Name = "cboSurname";
             this.cboSurname.Size = new System.Drawing.Size(121, 21);
             this.cboSurname.TabIndex = 28;
@@ -55,7 +55,7 @@
             // cboFirstName
             // 
             this.cboFirstName.FormattingEnabled = true;
-            this.cboFirstName.Location = new System.Drawing.Point(316, 76);
+            this.cboFirstName.Location = new System.Drawing.Point(318, 94);
             this.cboFirstName.Name = "cboFirstName";
             this.cboFirstName.Size = new System.Drawing.Size(121, 21);
             this.cboFirstName.TabIndex = 27;
@@ -63,7 +63,7 @@
             // cboStudentID
             // 
             this.cboStudentID.FormattingEnabled = true;
-            this.cboStudentID.Location = new System.Drawing.Point(316, 45);
+            this.cboStudentID.Location = new System.Drawing.Point(318, 63);
             this.cboStudentID.Name = "cboStudentID";
             this.cboStudentID.Size = new System.Drawing.Size(121, 21);
             this.cboStudentID.TabIndex = 26;
@@ -71,7 +71,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(206, 119);
+            this.label3.Location = new System.Drawing.Point(208, 137);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 25;
@@ -80,7 +80,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(206, 84);
+            this.label2.Location = new System.Drawing.Point(208, 102);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 13);
             this.label2.TabIndex = 24;
@@ -89,7 +89,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(206, 53);
+            this.label1.Location = new System.Drawing.Point(208, 71);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 23;
@@ -97,7 +97,7 @@
             // 
             // btnContinue
             // 
-            this.btnContinue.Location = new System.Drawing.Point(254, 149);
+            this.btnContinue.Location = new System.Drawing.Point(258, 193);
             this.btnContinue.Name = "btnContinue";
             this.btnContinue.Size = new System.Drawing.Size(130, 23);
             this.btnContinue.TabIndex = 30;
@@ -121,7 +121,7 @@
             this.grpMakeBooking.Controls.Add(this.cboSubjects);
             this.grpMakeBooking.Controls.Add(this.dgvMakeBooking);
             this.grpMakeBooking.Controls.Add(this.btnMakeBooking);
-            this.grpMakeBooking.Location = new System.Drawing.Point(7, 181);
+            this.grpMakeBooking.Location = new System.Drawing.Point(7, 255);
             this.grpMakeBooking.Name = "grpMakeBooking";
             this.grpMakeBooking.Size = new System.Drawing.Size(659, 394);
             this.grpMakeBooking.TabIndex = 34;
@@ -158,7 +158,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(678, 584);
+            this.ClientSize = new System.Drawing.Size(678, 698);
             this.Controls.Add(this.grpMakeBooking);
             this.Controls.Add(this.btnContinue);
             this.Controls.Add(this.cboSurname);
