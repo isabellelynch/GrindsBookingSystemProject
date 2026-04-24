@@ -215,7 +215,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "frmUpdateStudent";
-            this.Text = "Grinds Booking System - Update Student Details";
+            this.Text = "Top Mark Tutors - Update Student Details";
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.label3, 0);

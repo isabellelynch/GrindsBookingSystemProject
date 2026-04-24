@@ -228,7 +228,7 @@
             this.Controls.Add(this.cboTutorID);
             this.Controls.Add(this.label1);
             this.Name = "frmAssignSubjects";
-            this.Text = "frmAssignSubjects";
+            this.Text = "Top Mark Tutors - Assign Subjects to Tutors";
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.cboTutorID, 0);
             this.Controls.SetChildIndex(this.label2, 0);

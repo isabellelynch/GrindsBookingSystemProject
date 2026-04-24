@@ -1,6 +1,7 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -140,6 +141,8 @@ namespace GrindsBookingSystem
             };
 
             Charts.Series.Add(series);
+
+            Charts.Series["Tutor Earnings Analysis"].Color = Color.MidnightBlue;
 
             foreach (DataRow row in dt.Rows)
             {

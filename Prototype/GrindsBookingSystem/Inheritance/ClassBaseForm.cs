@@ -106,17 +106,6 @@ namespace GrindsBookingSystem
                 cboDays.Items.Add(day);
             }
         }
-        protected int GetTutorID()
-        {
-            string[] nameParts = cboTutors.Text.Split('-')[0].Split(' ');
-
-            string name = nameParts[0].Trim();
-            string surname = nameParts[1].Trim();
-
-            int id = Tutor.GetTutorID(name, surname);
-
-            return id;
-        }
 
         private void cboTutors_SelectedIndexChanged(object sender, EventArgs e)
         {

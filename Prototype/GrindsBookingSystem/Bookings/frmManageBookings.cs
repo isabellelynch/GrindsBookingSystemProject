@@ -87,10 +87,7 @@ namespace GrindsBookingSystem
             }
             else
             {
-                MessageBox.Show("Student currently has no bookings made",
-                                "No Bookings",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
+                CustomMessageBox.Show("Student currently has no bookings made", "No Bookings");
 
                 Reset(this.Controls);
             }

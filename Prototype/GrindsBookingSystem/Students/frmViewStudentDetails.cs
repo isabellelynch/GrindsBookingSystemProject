@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GrindsBookingSystem.HelperClasses;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -38,13 +39,12 @@ namespace GrindsBookingSystem
                 String details = s.Read();
                 if (details != null)
                 {
-                    MessageBox.Show("The selected Students details are \n\n" + details,
-                        "Student Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CustomMessageBox.ShowDetails("The selected Students details are \n\n" + details,
+                                                 "Student Details");
                 }
                 else
                 {
-                    MessageBox.Show("The selected Student could not be found.",
-                        "Student Details", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ErrorMessage("The selected Student could not be found.");
                 }
             }
             catch (Exception ex)

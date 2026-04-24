@@ -31,18 +31,15 @@
             this.btnRemoveClass = new System.Windows.Forms.Button();
             this.btnAddClass = new System.Windows.Forms.Button();
             this.dgvSchedule = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-
             this.cboRooms = new System.Windows.Forms.ComboBox();
             this.labelRooms = new System.Windows.Forms.Label();
             this.btnAlterClass = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSchedule)).BeginInit();
-
             this.SuspendLayout();
             // 
             // btnRemoveClass
             // 
-            this.btnRemoveClass.Location = new System.Drawing.Point(338, 388);
+            this.btnRemoveClass.Location = new System.Drawing.Point(514, 487);
             this.btnRemoveClass.Name = "btnRemoveClass";
             this.btnRemoveClass.Size = new System.Drawing.Size(115, 23);
             this.btnRemoveClass.TabIndex = 21;
@@ -52,7 +49,7 @@
             // 
             // btnAddClass
             // 
-            this.btnAddClass.Location = new System.Drawing.Point(167, 388);
+            this.btnAddClass.Location = new System.Drawing.Point(282, 487);
             this.btnAddClass.Name = "btnAddClass";
             this.btnAddClass.Size = new System.Drawing.Size(110, 23);
             this.btnAddClass.TabIndex = 20;
@@ -63,43 +60,33 @@
             // dgvSchedule
             // 
             this.dgvSchedule.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSchedule.Location = new System.Drawing.Point(12, 112);
+            this.dgvSchedule.Location = new System.Drawing.Point(71, 78);
             this.dgvSchedule.Name = "dgvSchedule";
-            this.dgvSchedule.Size = new System.Drawing.Size(765, 242);
+            this.dgvSchedule.Size = new System.Drawing.Size(998, 380);
             this.dgvSchedule.TabIndex = 19;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.label1.Location = new System.Drawing.Point(161, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(433, 31);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "Grinds Booking System - Schedule";
-            // 
-          
             // 
             // cboRooms
             // 
+            this.cboRooms.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.cboRooms.FormattingEnabled = true;
-            this.cboRooms.Location = new System.Drawing.Point(497, 72);
+            this.cboRooms.Location = new System.Drawing.Point(453, 38);
             this.cboRooms.Name = "cboRooms";
-            this.cboRooms.Size = new System.Drawing.Size(121, 21);
+            this.cboRooms.Size = new System.Drawing.Size(408, 28);
             this.cboRooms.TabIndex = 22;
             // 
             // labelRooms
             // 
             this.labelRooms.AutoSize = true;
-            this.labelRooms.Location = new System.Drawing.Point(164, 75);
+            this.labelRooms.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.labelRooms.Location = new System.Drawing.Point(278, 46);
             this.labelRooms.Name = "labelRooms";
-            this.labelRooms.Size = new System.Drawing.Size(327, 13);
+            this.labelRooms.Size = new System.Drawing.Size(114, 20);
             this.labelRooms.TabIndex = 23;
-            this.labelRooms.Text = "Please select the room that you would like to view the schedule for :";
+            this.labelRooms.Text = "Select a Room";
             // 
             // btnAlterClass
             // 
-            this.btnAlterClass.Location = new System.Drawing.Point(503, 388);
+            this.btnAlterClass.Location = new System.Drawing.Point(746, 487);
             this.btnAlterClass.Name = "btnAlterClass";
             this.btnAlterClass.Size = new System.Drawing.Size(115, 23);
             this.btnAlterClass.TabIndex = 24;
@@ -111,27 +98,28 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1119, 544);
             this.Controls.Add(this.btnAlterClass);
             this.Controls.Add(this.labelRooms);
             this.Controls.Add(this.cboRooms);
             this.Controls.Add(this.btnRemoveClass);
             this.Controls.Add(this.btnAddClass);
             this.Controls.Add(this.dgvSchedule);
-            this.Controls.Add(this.label1);
-
             this.Name = "frmViewSchedule";
-            this.Text = "Grinds Booking System - Schedule";
+            this.Text = "Top Mark Tutors - Schedule";
+            this.Controls.SetChildIndex(this.dgvSchedule, 0);
+            this.Controls.SetChildIndex(this.btnAddClass, 0);
+            this.Controls.SetChildIndex(this.btnRemoveClass, 0);
+            this.Controls.SetChildIndex(this.cboRooms, 0);
+            this.Controls.SetChildIndex(this.labelRooms, 0);
+            this.Controls.SetChildIndex(this.btnAlterClass, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSchedule)).EndInit();
-
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvSchedule;
         private System.Windows.Forms.Button btnAddClass;
         private System.Windows.Forms.Button btnRemoveClass;

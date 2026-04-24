@@ -134,7 +134,7 @@
             this.Controls.Add(this.cboTutorID);
             this.Controls.Add(this.label1);
             this.Name = "frmRemoveTutor";
-            this.Text = "Grinds Booking System - Remove Tutor";
+            this.Text = "Top Mark Tutors  - Remove Tutor";
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.cboTutorID, 0);
             this.Controls.SetChildIndex(this.label2, 0);

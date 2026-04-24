@@ -136,9 +136,6 @@
             this.btnAddStudent.UseVisualStyleBackColor = true;
             this.btnAddStudent.Click += new System.EventHandler(this.btnAddStudent_Click);
             // 
-            // menuStrip1
-            // 
-            // 
             // exitBtnAddStudent
             // 
             this.exitBtnAddStudent.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -153,9 +150,6 @@
             this.backBtnAddStudent.Size = new System.Drawing.Size(44, 20);
             this.backBtnAddStudent.Text = "Back";
             // 
-            // btnRefresh
-            // 
-            // 
             // frmAddStudent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -163,7 +157,8 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.grpAddStudent);
             this.Name = "frmAddStudent";
-            this.Text = "Grinds Booking System - Add Student";
+            this.Text = "Top Mark Tutors - Add Student";
+            this.Controls.SetChildIndex(this.grpAddStudent, 0);
             this.grpAddStudent.ResumeLayout(false);
             this.grpAddStudent.PerformLayout();
             this.ResumeLayout(false);

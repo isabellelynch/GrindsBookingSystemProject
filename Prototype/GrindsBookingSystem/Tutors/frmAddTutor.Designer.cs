@@ -161,7 +161,7 @@
             this.ClientSize = new System.Drawing.Size(474, 450);
             this.Controls.Add(this.grpAddTutor);
             this.Name = "frmAddTutor";
-            this.Text = "Grinds Booking System - Add Tutor";
+            this.Text = "Top Mark Tutors - Add a new Tutor";
             this.Controls.SetChildIndex(this.grpAddTutor, 0);
             this.grpAddTutor.ResumeLayout(false);
             this.grpAddTutor.PerformLayout();

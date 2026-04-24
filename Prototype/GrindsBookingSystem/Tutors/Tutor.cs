@@ -46,9 +46,7 @@ namespace GrindsBookingSystem
 
         public string Read()
         {
-            Tutor t = GetTutor(Convert.ToInt32(this.PersonID));
-
-            return t.ToString();
+            return this.ToString();
         }
 
 
@@ -137,30 +135,23 @@ namespace GrindsBookingSystem
                 idList += v.ToString() + ",";
             }
 
-            string sql = "SELECT TutorID, FirstName, Surname " +
-                         "FROM Tutors " +
-                         "WHERE TutorID IN (:list) " +
-                         "ORDER BY TutorID";
+            string sql = $@"SELECT * 
+                         FROM Tutors 
+                         WHERE TutorID IN ({idList}) 
+                         ORDER BY TutorID";
 
             var cmd = new OracleCommand(sql);
-
-            cmd.Parameters.Add(":list", idList);
 
             return Database.ExecuteMultiRowQuery(cmd);
         }
 
-        public static DataSet RetrieveAllDetails()
+        public static void FillTutorDataTable(DataGridView dgv, ComboBox cb)
         {
-            string sql = "SELECT TutorID, FirstName, Surname " +
-                         "FROM Tutors " +
-                         "WHERE Status = :s " +
-                         "ORDER BY TutorID";
+            DataTable dt = GetTutorList(cb).Tables[0];
 
-            var cmd = new OracleCommand(sql);
+            dt.Columns.RemoveAt(dt.Columns.Count - 1);
 
-            cmd.Parameters.Add(":s", 'A');
-
-            return Database.ExecuteMultiRowQuery(cmd);
+            dgv.DataSource = dt;
         }
 
         public static Tutor GetTutor(int id)

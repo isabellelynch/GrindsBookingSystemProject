@@ -96,8 +96,7 @@ namespace GrindsBookingSystem
 
                 if (id == "") 
                 {
-                    DialogResult result = MessageBox.Show("No matching Subject found. Would you like to add this subject to the system ?", "Subject Not Found"
-                        , MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult result = CustomDialogMessageBox.Show("No matching Subject found. Would you like to add this subject to the system ?", "Subject Not Found");
 
                     if (result == DialogResult.Yes) 
                     {

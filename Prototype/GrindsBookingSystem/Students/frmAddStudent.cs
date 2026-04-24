@@ -24,10 +24,7 @@ namespace GrindsBookingSystem
 
                         SuccessMessage("Student " + txtStudentName.Text + " " + txtStudentSurname.Text + "has been succesfully added to the system.");
                     
-                        DialogResult addAnother = MessageBox.Show("Would you like to add another Student?",
-                                                            "Please Confirm",
-                                                            MessageBoxButtons.YesNo,
-                                                            MessageBoxIcon.Question);
+                        DialogResult addAnother = CustomDialogMessageBox.Show("Would you like to add another Student?");
                         if (addAnother == DialogResult.No)
                         {
                             GoHome();

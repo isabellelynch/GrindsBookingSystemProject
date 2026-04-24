@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GrindsBookingSystem.HelperClasses;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -44,8 +45,8 @@ namespace GrindsBookingSystem
 
             if (details != null)
             {
-                MessageBox.Show("The selected Tutors details are \n\n" + details,
-                    "Tutor Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CustomMessageBox.ShowDetails("The selected Tutors details are \n\n" + details,
+                                             "Tutor Details");
             }
             else
             {

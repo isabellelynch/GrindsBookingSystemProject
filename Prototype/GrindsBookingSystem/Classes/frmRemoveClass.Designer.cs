@@ -44,7 +44,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(442, 426);
             this.Name = "frmRemoveClass";
-            this.Text = "frmAddGrind";
+            this.Text = "Top Mark Tutors - Remove a Class";
             this.Load += new System.EventHandler(this.frmRemoveClass_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

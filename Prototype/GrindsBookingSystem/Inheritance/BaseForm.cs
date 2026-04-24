@@ -1,4 +1,10 @@
-﻿using System.Windows.Forms;
+﻿using GrindsBookingSystem.HelperClasses;
+using System.Drawing;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Button = System.Windows.Forms.Button;
+using ComboBox = System.Windows.Forms.ComboBox;
+using TextBox = System.Windows.Forms.TextBox;
 namespace GrindsBookingSystem
 {
     public class BaseForm : Form
@@ -47,12 +53,32 @@ namespace GrindsBookingSystem
                 }
             }
         }
+
+        protected void Style(Control parent)
+        {
+            foreach (Control c in parent.Controls)
+            {
+                if (c is Button btn)
+                {
+                    btn.BackColor = Color.MidnightBlue;
+                    btn.ForeColor = Color.AliceBlue;
+                    btn.FlatStyle = FlatStyle.Flat;
+                    btn.FlatAppearance.BorderSize = 0;
+                }
+                if(c is ComboBox cb)
+                {
+                    cb.BackColor = Color.White;
+                    cb.ForeColor = Color.MidnightBlue;
+                    cb.FlatStyle = FlatStyle.Popup;
+                }
+                if (c.HasChildren)
+                    Style(c);
+            }
+        }
         protected void Exit()
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to exit ?",
-                                                    "Please Confirm",
-                                                    MessageBoxButtons.YesNo,
-                                                    MessageBoxIcon.Question);
+            DialogResult result = CustomDialogMessageBox.Show("Are you sure you want to exit ?");
+
             if (result == DialogResult.Yes)
             {
                 Application.Exit();
@@ -60,12 +86,12 @@ namespace GrindsBookingSystem
         }
         public static void ErrorMessage(string message)
         {
-            MessageBox.Show(message,"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            CustomMessageBox.ErrorMessage(message);
         }
 
         public static void SuccessMessage(string message)
         {
-            MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            CustomMessageBox.SuccessMessage(message);
         }
         protected void ExitButton_Click(object sender, System.EventArgs e)
         {
@@ -84,6 +110,7 @@ namespace GrindsBookingSystem
 
         protected void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseForm));
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.ExitButton = new System.Windows.Forms.ToolStripMenuItem();
             this.BackButton = new System.Windows.Forms.ToolStripMenuItem();
@@ -93,46 +120,55 @@ namespace GrindsBookingSystem
             // 
             // menuStrip2
             // 
+            this.menuStrip2.BackColor = System.Drawing.Color.MidnightBlue;
+            this.menuStrip2.Font = new System.Drawing.Font("Stencil", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ExitButton,
             this.BackButton,
             this.RefreshButton});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(206, 24);
+            this.menuStrip2.Size = new System.Drawing.Size(206, 27);
             this.menuStrip2.TabIndex = 0;
             this.menuStrip2.Text = "menuStrip2";
             // 
             // ExitButton
             // 
             this.ExitButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.ExitButton.ForeColor = System.Drawing.Color.Goldenrod;
             this.ExitButton.Name = "ExitButton";
-            this.ExitButton.Size = new System.Drawing.Size(37, 20);
+            this.ExitButton.Size = new System.Drawing.Size(56, 23);
             this.ExitButton.Text = "Exit";
             this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
             // BackButton
             // 
             this.BackButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.BackButton.ForeColor = System.Drawing.Color.Goldenrod;
             this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(44, 20);
+            this.BackButton.Size = new System.Drawing.Size(63, 23);
             this.BackButton.Text = "Back";
             this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
             // RefreshButton
             // 
             this.RefreshButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.RefreshButton.ForeColor = System.Drawing.Color.Goldenrod;
             this.RefreshButton.Name = "RefreshButton";
-            this.RefreshButton.Size = new System.Drawing.Size(58, 20);
+            this.RefreshButton.Size = new System.Drawing.Size(91, 23);
             this.RefreshButton.Text = "Refresh";
             this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
             // BaseForm
             // 
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(206, 147);
             this.Controls.Add(this.menuStrip2);
+            this.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip2;
             this.Name = "BaseForm";
+            this.Load += new System.EventHandler(this.BaseForm_Load);
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
             this.ResumeLayout(false);
@@ -140,7 +176,10 @@ namespace GrindsBookingSystem
 
         }
 
-        
+        private void BaseForm_Load(object sender, System.EventArgs e)
+        {
+            Style(this);
+        }
     }
     
         

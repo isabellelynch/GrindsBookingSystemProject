@@ -40,7 +40,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(430, 450);
             this.Name = "frmUpdateClass";
-            this.Text = "frmUpdateClass";
+            this.Text = "Top Mark Tutors - Update a Class";
             this.Load += new System.EventHandler(this.frmUpdateClass_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -131,7 +131,7 @@
             this.btnShowBookings.UseVisualStyleBackColor = true;
             this.btnShowBookings.Click += new System.EventHandler(this.btnShowBookings_Click);
             // 
-            // frmCancelBooking
+            // frmManageBookings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -144,8 +144,8 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Name = "frmCancelBooking";
-            this.Text = "frmCancelBooking";
+            this.Name = "frmManageBookings";
+            this.Text = "Top Mark Tutors - Manage Bookings";
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.label4, 0);

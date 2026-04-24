@@ -21,14 +21,14 @@ namespace GrindsBookingSystem
             }
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.EnableHeadersVisualStyles = false;
-            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.DarkCyan;
-            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgv.GridColor = Color.Gray;
+            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.MidnightBlue;
+            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.Goldenrod;
             dgv.ColumnHeadersDefaultCellStyle.SelectionBackColor = dgv.ColumnHeadersDefaultCellStyle.BackColor;
             dgv.RowsDefaultCellStyle.SelectionBackColor = dgv.ColumnHeadersDefaultCellStyle.BackColor;
             dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Bold);
             dgv.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(245, 245, 245);
             dgv.MultiSelect = false;
             dgv.ReadOnly = true;
         }
@@ -81,7 +81,7 @@ namespace GrindsBookingSystem
 
                 dgv.Rows[rowIndex].Cells[colIndex].Value = sub + " - " + t.FirstName + " " + t.Surname;
             }
-
+            
         }
         public static void Schedule(DataGridView dgv)
         {
@@ -90,6 +90,9 @@ namespace GrindsBookingSystem
             string[] h = { "Time", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
 
             Default(dgv, h);
+
+            dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+            dgv.RowTemplate.Height = (dgv.Height - dgv.ColumnHeadersHeight) / 9;
 
             for (int hour = 9; hour <= 17; hour++)
             {
@@ -108,6 +111,8 @@ namespace GrindsBookingSystem
 
             dgv.SelectionMode = DataGridViewSelectionMode.CellSelect;
             dgv.ScrollBars = ScrollBars.None;
+            dgv.BorderStyle = BorderStyle.None;
+            dgv.CellBorderStyle = DataGridViewCellBorderStyle.None;
         }
         public static void MakeBooking(DataGridView dgv)
         {

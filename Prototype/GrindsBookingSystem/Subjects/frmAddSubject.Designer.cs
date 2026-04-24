@@ -150,7 +150,7 @@
             this.Controls.Add(this.grpLevel);
             this.Controls.Add(this.grpCertificate);
             this.Name = "frmAddSubject";
-            this.Text = "frmAddSubject";
+            this.Text = "Top Mark Tutors - Add a Subject";
             this.Controls.SetChildIndex(this.grpCertificate, 0);
             this.Controls.SetChildIndex(this.grpLevel, 0);
             this.Controls.SetChildIndex(this.label1, 0);

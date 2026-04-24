@@ -73,19 +73,7 @@ namespace GrindsBookingSystem
 
             Database.ExecuteNonQuery(cmd);
         }
-        public static DataSet RetrieveAllDetails()
-        {
-            string sql = "SELECT StudentID, FirstName, Surname " +
-                         "FROM Students " +
-                         "WHERE Status = :s " +
-                         "ORDER BY StudentID";
 
-            var cmd = new OracleCommand(sql);
-
-            cmd.Parameters.Add(":s", 'A');
-
-            return Database.ExecuteMultiRowQuery(cmd);
-        }
         public static DataSet RetrieveAll()
         {
             string sql = "SELECT * " +
@@ -161,16 +149,25 @@ namespace GrindsBookingSystem
                 idList += v.ToString() + ",";
             }
 
-            string sql = "SELECT StudentID, FirstName, Surname " +
-                         "FROM Students " +
-                         "WHERE StudentID IN (:list) " +
-                         "ORDER BY StudentID";
+            string sql = $@"SELECT * 
+                         FROM Students 
+                         WHERE StudentID IN ({idList}) 
+                         ORDER BY StudentID";
 
             var cmd = new OracleCommand(sql);
             
             cmd.Parameters.Add(":list", idList);
 
             return Database.ExecuteMultiRowQuery(cmd);
+        }
+
+        public static void FillStudentDataTable(DataGridView dgv, ComboBox cb)
+        {
+            DataTable dt = GetStudentList(cb).Tables[0];
+
+            dt.Columns.RemoveAt(dt.Columns.Count - 1);
+
+            dgv.DataSource = dt;
         }
 
         public static bool DoesStudentExist(string email)

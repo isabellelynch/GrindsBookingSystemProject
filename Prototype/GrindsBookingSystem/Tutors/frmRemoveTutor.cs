@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace GrindsBookingSystem
@@ -30,7 +31,8 @@ namespace GrindsBookingSystem
 
             ControlFunctions.Filters("Tutor", cbo, cboTutorID, cboFirstName, cboSurname);
 
-            dgvRemoveTutors.DataSource = Tutor.GetTutorList(cboTutorID).Tables[0];
+
+            Tutor.FillTutorDataTable(dgvRemoveTutors, cboTutorID);
 
             updating = false;
 
@@ -74,8 +76,8 @@ namespace GrindsBookingSystem
             ControlFunctions.FillBoxes("Tutors", cboTutorID, cboFirstName, cboSurname);
             
             GridViews.Default(dgvRemoveTutors);
-            
-            dgvRemoveTutors.DataSource = Tutor.RetrieveAllDetails().Tables[0];
+
+            Tutor.FillTutorDataTable(dgvRemoveTutors, cboTutorID);
 
             comboBoxes = ControlFunctions.CreateComboList(cboTutorID, cboFirstName, cboSurname);
 
@@ -90,6 +92,8 @@ namespace GrindsBookingSystem
         {
             Reset(this.Controls);
         }
+
+        
 
     }
 

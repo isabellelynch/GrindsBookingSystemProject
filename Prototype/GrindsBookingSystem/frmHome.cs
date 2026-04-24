@@ -72,10 +72,8 @@ namespace GrindsBookingSystem
         }
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to exit ?",
-                                                    "Please Confirm",
-                                                    MessageBoxButtons.YesNo,
-                                                    MessageBoxIcon.Question);
+            DialogResult result = CustomDialogMessageBox.Show("Are you sure you want to exit ?",
+                                                              "Please Confirm");
             if (result == DialogResult.Yes)
             {
                 Application.Exit();

@@ -44,7 +44,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(442, 426);
             this.Name = "frmAddClass";
-            this.Text = "frmAddGrind";
+            this.Text = "Top Mark Tutors - Add a Class";
             this.Load += new System.EventHandler(this.frmAddClass_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

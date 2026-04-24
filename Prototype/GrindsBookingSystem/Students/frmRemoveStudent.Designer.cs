@@ -99,6 +99,7 @@
             this.btnResetFilters.TabIndex = 25;
             this.btnResetFilters.Text = "Reset Filters";
             this.btnResetFilters.UseVisualStyleBackColor = true;
+            this.btnResetFilters.Click += new System.EventHandler(this.btnResetFilters_Click);
             // 
             // btnRemoveStudent
             // 
@@ -133,7 +134,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "frmRemoveStudent";
-            this.Text = "Grinds Booking System - Remove Student";
+            this.Text = "Top Mark Tutors - Remove Student";
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.label3, 0);

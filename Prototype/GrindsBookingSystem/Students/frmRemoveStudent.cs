@@ -30,7 +30,7 @@ namespace GrindsBookingSystem
 
             ControlFunctions.Filters("Student", cbo, cboStudentID, cboFirstName, cboSurname);
 
-            dgvRemoveStudent.DataSource = Student.GetStudentList(cboStudentID).Tables[0];
+            Student.FillStudentDataTable(dgvRemoveStudent, cboStudentID);
 
             updating = false;
 
@@ -40,7 +40,6 @@ namespace GrindsBookingSystem
         {
             if (dgvRemoveStudent.SelectedRows.Count == 1)
             {
-                
                     DataGridViewRow row = dgvRemoveStudent.SelectedRows[0];
 
                     int id = Convert.ToInt32(row.Cells[0].Value);
@@ -75,7 +74,7 @@ namespace GrindsBookingSystem
 
             GridViews.Default(dgvRemoveStudent);
 
-            dgvRemoveStudent.DataSource = Student.RetrieveAllDetails().Tables[0];
+            Student.FillStudentDataTable(dgvRemoveStudent, cboStudentID);
 
             comboBoxes = ControlFunctions.CreateComboList(cboStudentID, cboFirstName, cboSurname);
 
@@ -84,6 +83,11 @@ namespace GrindsBookingSystem
                 cb.SelectedIndexChanged -= ComboBoxChange;
                 cb.SelectedIndexChanged += ComboBoxChange;
             }
+        }
+
+        private void btnResetFilters_Click(object sender, EventArgs e)
+        {
+            Reset(this.Controls);
         }
     }
 
