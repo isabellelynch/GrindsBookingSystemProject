@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GrindsBookingSystem.HelperClasses;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -18,18 +19,21 @@ namespace GrindsBookingSystem
         }
         private void btnFindStudent_Click(object sender, EventArgs e)
         {
-            grpStudentDetails.Visible = true;
-
+            
             if (cboStudentID.Items.Count > 1)
             {
+                ErrorMessage("Please select a Student to continue");
                 return;
             }
+            
+            grpStudentDetails.Visible = true;
+
 
             int id = Convert.ToInt32(cboStudentID.Items[0]);
 
             Student s = Student.GetStudent(id);
             
-            s.SetID(s.PersonID);
+            s.SetID(id.ToString());
 
             txtEmail.Text = s.Email;
             txtPhone.Text = s.Phone;
@@ -55,7 +59,7 @@ namespace GrindsBookingSystem
             {
                 s.Update();
 
-                SuccessMessage("The selected Student has been updated and their details are now as follows\n\n" + s.ToString());
+                CustomMessageBox.ShowDetails("The selected Student has been updated and their details are now as follows\n\n" + s.ToString());
             }
             catch (Exception ex)
             {

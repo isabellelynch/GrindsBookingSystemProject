@@ -48,13 +48,13 @@ namespace GrindsBookingSystem
         {
             string sql = "UPDATE Students SET " +
                          "Email = :Email, " +
-                         "PhoneNo = :PhoneNo, " +
+                         "PhoneNo = :PhoneNo " +
                          "WHERE StudentID = :ID";
 
             var cmd = new OracleCommand(sql);
 
             cmd.Parameters.Add(":Email", Email);
-            cmd.Parameters.Add(":Phone", Phone);
+            cmd.Parameters.Add(":PhoneNo", Phone);
             cmd.Parameters.Add(":ID", this.PersonID);
 
             Database.ExecuteNonQuery(cmd);

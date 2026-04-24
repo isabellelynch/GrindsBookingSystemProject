@@ -1,6 +1,21 @@
 ﻿using System;
 using System.Windows.Forms;
 
+//General References used throughout the project for learning purposes
+//
+//Books
+//
+//Gaddis, T. (2017) Starting Out with Visual C#. 5th edn. Boston: Pearson.
+//
+//Sells, C. (2006) Windows Forms Programming in C#. 2nd edn. Boston: Addison-Wesley.
+//
+//Microsoft Documentation
+//
+//Microsoft (n.d.) ADO.NET Overview. Available at: https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/
+//
+//Microsoft (n.d.) Windows Forms Overview. Available at: https://learn.microsoft.com/en-us/dotnet/desktop/winforms/
+
+
 namespace GrindsBookingSystem
 {
     public partial class frmHome : Form

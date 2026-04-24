@@ -1,4 +1,5 @@
-﻿using Oracle.ManagedDataAccess.Client;
+﻿using GrindsBookingSystem.HelperClasses;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Data;
 using System.Drawing;
@@ -175,10 +176,8 @@ namespace GrindsBookingSystem
 
                 Tutor t = Tutor.GetTutor(tutorID);
 
-                MessageBox.Show(t.ToString(),
-                                "Tutor Details",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
+                CustomMessageBox.ShowDetails(t.ToString(),
+                                             "Tutor Details");
             }
             catch (Exception ex)
             {

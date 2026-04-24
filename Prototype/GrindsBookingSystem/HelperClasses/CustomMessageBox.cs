@@ -41,7 +41,7 @@ namespace GrindsBookingSystem.HelperClasses
                 Dock = DockStyle.Bottom,
                 BackColor = Color.MidnightBlue,
                 ForeColor = Color.AliceBlue,
-                FlatStyle = FlatStyle.Flat
+                FlatStyle = FlatStyle.Flat,
             };
 
             btnOk.FlatAppearance.BorderSize = 0;

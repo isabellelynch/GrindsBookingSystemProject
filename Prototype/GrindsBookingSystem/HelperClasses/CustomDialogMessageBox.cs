@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GrindsBookingSystem;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -48,6 +49,8 @@ public class CustomDialogMessageBox : Form
             Close();
         };
 
+        BaseForm.MakeRounded(btnYes, 15);
+
         btnNo = new Button()
         {
             Text = "No",
@@ -64,6 +67,8 @@ public class CustomDialogMessageBox : Form
             Result = DialogResult.No;
             Close();
         };
+
+        BaseForm.MakeRounded(btnNo, 15);
 
         Panel panel = new Panel()
         {

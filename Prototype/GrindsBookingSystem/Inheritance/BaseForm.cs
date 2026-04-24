@@ -1,5 +1,6 @@
 ﻿using GrindsBookingSystem.HelperClasses;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Button = System.Windows.Forms.Button;
@@ -64,6 +65,11 @@ namespace GrindsBookingSystem
                     btn.ForeColor = Color.AliceBlue;
                     btn.FlatStyle = FlatStyle.Flat;
                     btn.FlatAppearance.BorderSize = 0;
+                    btn.Font = new Font("Arial", 12);
+                    btn.AutoSize = true;
+                    btn.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+                    btn.Padding = new Padding(5);
+                    MakeRounded(btn, 15);
                 }
                 if(c is ComboBox cb)
                 {
@@ -71,9 +77,19 @@ namespace GrindsBookingSystem
                     cb.ForeColor = Color.MidnightBlue;
                     cb.FlatStyle = FlatStyle.Popup;
                 }
+                if(c is Label lb)
+                {
+                    lb.Font = new Font("Arial", 12);
+                }
+                if(c is GroupBox gp)
+                {
+                    gp.Font = new Font("Arial", 12);
+                }
                 if (c.HasChildren)
                     Style(c);
             }
+
+            
         }
         protected void Exit()
         {
@@ -180,7 +196,29 @@ namespace GrindsBookingSystem
         {
             Style(this);
         }
-    }
+
+        //all styling and ui content
+        //Microsoft (n.d.) Windows Forms Controls – Button Class (styling and properties). Available at: https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.button
+        //Microsoft(n.d.) Windows Forms Visual Design Basics.Available at: https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/
+
+        public static void MakeRounded(Button btn, int radius)
+        {
+            GraphicsPath path = new GraphicsPath();
+
+            int diameter = radius * 2;
+
+            Rectangle rect = new Rectangle(0, 0, btn.Width, btn.Height);
+
+            path.AddArc(rect.X, rect.Y, diameter, diameter, 180, 90);
+            path.AddArc(rect.Right - diameter, rect.Y, diameter, diameter, 270, 90);
+            path.AddArc(rect.Right - diameter, rect.Bottom - diameter, diameter, diameter, 0, 90);
+            path.AddArc(rect.X, rect.Bottom - diameter, diameter, diameter, 90, 90);
+
+            path.CloseFigure();
+
+            btn.Region = new Region(path);
+        }
+}
     
         
 }

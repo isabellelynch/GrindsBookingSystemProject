@@ -119,16 +119,16 @@
             // 
             // txtLastName
             // 
-            this.txtLastName.Location = new System.Drawing.Point(211, 71);
+            this.txtLastName.Location = new System.Drawing.Point(188, 71);
             this.txtLastName.Name = "txtLastName";
-            this.txtLastName.Size = new System.Drawing.Size(121, 20);
+            this.txtLastName.Size = new System.Drawing.Size(235, 20);
             this.txtLastName.TabIndex = 34;
             // 
             // txtFirstName
             // 
-            this.txtFirstName.Location = new System.Drawing.Point(211, 29);
+            this.txtFirstName.Location = new System.Drawing.Point(188, 29);
             this.txtFirstName.Name = "txtFirstName";
-            this.txtFirstName.Size = new System.Drawing.Size(121, 20);
+            this.txtFirstName.Size = new System.Drawing.Size(235, 20);
             this.txtFirstName.TabIndex = 33;
             // 
             // label7
@@ -161,16 +161,16 @@
             // 
             // txtPhone
             // 
-            this.txtPhone.Location = new System.Drawing.Point(211, 147);
+            this.txtPhone.Location = new System.Drawing.Point(188, 147);
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(121, 20);
+            this.txtPhone.Size = new System.Drawing.Size(235, 20);
             this.txtPhone.TabIndex = 28;
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(211, 106);
+            this.txtEmail.Location = new System.Drawing.Point(188, 110);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(121, 20);
+            this.txtEmail.Size = new System.Drawing.Size(235, 20);
             this.txtEmail.TabIndex = 27;
             // 
             // label6

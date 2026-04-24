@@ -89,28 +89,28 @@
             // 
             // txtActiveStudents
             // 
-            this.txtActiveStudents.Location = new System.Drawing.Point(381, 25);
+            this.txtActiveStudents.Location = new System.Drawing.Point(406, 25);
             this.txtActiveStudents.Name = "txtActiveStudents";
             this.txtActiveStudents.Size = new System.Drawing.Size(100, 20);
             this.txtActiveStudents.TabIndex = 52;
             // 
             // txtActiveTutors
             // 
-            this.txtActiveTutors.Location = new System.Drawing.Point(381, 67);
+            this.txtActiveTutors.Location = new System.Drawing.Point(406, 67);
             this.txtActiveTutors.Name = "txtActiveTutors";
             this.txtActiveTutors.Size = new System.Drawing.Size(100, 20);
             this.txtActiveTutors.TabIndex = 51;
             // 
             // txtTotalBookings
             // 
-            this.txtTotalBookings.Location = new System.Drawing.Point(126, 71);
+            this.txtTotalBookings.Location = new System.Drawing.Point(138, 71);
             this.txtTotalBookings.Name = "txtTotalBookings";
             this.txtTotalBookings.Size = new System.Drawing.Size(100, 20);
             this.txtTotalBookings.TabIndex = 50;
             // 
             // txtRevenue
             // 
-            this.txtRevenue.Location = new System.Drawing.Point(122, 25);
+            this.txtRevenue.Location = new System.Drawing.Point(138, 25);
             this.txtRevenue.Name = "txtRevenue";
             this.txtRevenue.Size = new System.Drawing.Size(100, 20);
             this.txtRevenue.TabIndex = 49;
@@ -173,7 +173,7 @@
             // 
             // txtBestTutor
             // 
-            this.txtBestTutor.Location = new System.Drawing.Point(218, 58);
+            this.txtBestTutor.Location = new System.Drawing.Point(272, 58);
             this.txtBestTutor.Name = "txtBestTutor";
             this.txtBestTutor.Size = new System.Drawing.Size(248, 20);
             this.txtBestTutor.TabIndex = 52;
@@ -189,7 +189,7 @@
             // 
             // txtWorstTutor
             // 
-            this.txtWorstTutor.Location = new System.Drawing.Point(218, 25);
+            this.txtWorstTutor.Location = new System.Drawing.Point(272, 25);
             this.txtWorstTutor.Name = "txtWorstTutor";
             this.txtWorstTutor.Size = new System.Drawing.Size(248, 20);
             this.txtWorstTutor.TabIndex = 50;

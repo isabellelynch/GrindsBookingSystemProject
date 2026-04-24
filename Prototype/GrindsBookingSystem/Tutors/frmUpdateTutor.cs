@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GrindsBookingSystem.HelperClasses;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -36,12 +37,15 @@ namespace GrindsBookingSystem
 
         private void btnFindTutor_Click(object sender, EventArgs e)
         {
-            grpTutorDetails.Visible = true;
+            
 
             if (cboTutorID.Items.Count > 1) 
             {
+                ErrorMessage("Please select a Tutor to continue");
                 return;
             }
+            
+            grpTutorDetails.Visible = true;
 
             int id = Convert.ToInt32(cboTutorID.Items[0]);
 
@@ -70,7 +74,7 @@ namespace GrindsBookingSystem
             try
             {
                 t.Update();
-                SuccessMessage("The selected Tutor has been updated and their details are now as follows\n\n" + t.ToString());
+                CustomMessageBox.ShowDetails("The selected Tutor has been updated and their details are now as follows\n\n" + t.ToString());
             }
             catch (Exception ex)
             {
