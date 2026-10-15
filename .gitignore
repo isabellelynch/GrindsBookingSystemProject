@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Local passwords for the Oracle database and Gmail (copy secrets.example.config to make one)
+secrets.config

@@ -1,0 +1,182 @@
+﻿using System;
+using System.Windows.Forms;
+
+
+namespace GrindsBookingSystem
+{
+    public partial class frmViewSchedule : BaseForm
+    {
+        int day;
+        int time;
+        string room;
+        //NOTE:For Scheduling the schedule does not change, it runs weekly, you are automatically considered booked in until you cancel yourself or do not
+        //show up, cash payment is made on arrival
+        public frmViewSchedule()
+        {
+            InitializeComponent();
+            Reset(this.Controls);
+        }
+
+        public void btnAddClass_Click(object sender, EventArgs e)
+        {
+            DataGridViewCell c = dgvSchedule.CurrentCell;
+
+            string msg = CheckSelected(c, btnAddClass);
+
+            if (msg != "")
+            {
+                ErrorMessage(msg);
+                return;
+            }
+
+            day = c.ColumnIndex;
+            time = c.RowIndex + 9;
+            room = cboRooms.Text.Substring(0, 1);
+
+            frmAddClass f = new frmAddClass(day, time, room);
+            f.FormClosing += FillSchedule;
+            f.ShowDialog();
+
+            Reset(this.Controls);
+        }
+
+        private string CheckSelected(DataGridViewCell c, Button btn)
+        {
+            // no cell selected, or no room chosen (cboRooms.Text.Substring would crash later)
+            if (c == null || cboRooms.Text == "")
+            {
+                return "A room and a timeslot must be chosen before continuing";
+            }
+
+            day = c.ColumnIndex;
+            time = c.RowIndex;
+            room = cboRooms.Text;
+
+            string msg = "";
+
+            if(btn == btnAddClass)
+            {
+                if (room == "")
+                {
+                    msg = "A room must be chosen before adding a new class";
+                }
+                else if (day == 0 || day > 5 || time < 0 || time > 8)
+                {
+                    msg = "An appropriate timeslot must be chosen before continuing";
+                }
+                else if(c.Value == null)
+                {
+                    return msg;
+                }
+                else if (c.Value.ToString().Length > 0)
+                {
+                    msg = "An empty timeslot must be chosen before adding a new class";
+                }
+            }
+            else if(btn == btnRemoveClass)
+            {
+                // an empty slot has a null Value, which used to crash on ToString()
+                if (day == 0 || day > 5 || time < 0 || time > 8 || c.Value == null || c.Value.ToString() == "")
+                {
+                    msg = "A class must be chosen in order to remove it.";
+                }
+            }
+            return msg;
+
+        }
+
+        protected override void Reset(Control.ControlCollection controls)
+        {
+            base.Reset(controls);
+
+            ControlFunctions.FillRooms(cboRooms);
+
+            cboRooms.SelectedIndexChanged -= FillSchedule;
+            cboRooms.SelectedIndexChanged += FillSchedule;
+
+            GridViews.Schedule(dgvSchedule);
+        }
+
+        private void FillSchedule(object sender, EventArgs e)
+        {
+            // Reset() clears the room list, which also fires this event with no room chosen
+            if (cboRooms.Text == "")
+            {
+                return;
+            }
+
+            GridViews.FillSchedule(dgvSchedule, cboRooms.Text.Substring(0, 1));
+        }
+
+        private void btnAlterClass_Click(object sender, EventArgs e)
+        {
+            DataGridViewCell c = dgvSchedule.CurrentCell;
+
+            string msg = CheckSelected(c, btnRemoveClass);
+            if (msg != "")
+            {
+                ErrorMessage(msg);
+                return;
+            }
+
+            day = c.ColumnIndex;
+            time = c.RowIndex + 9;
+            room = cboRooms.Text.Substring(0, 1);
+
+            try
+            {
+                int ClassID = Class.GetClassID(day, time, room);
+
+                Class c2 = Class.GetClass(ClassID);
+
+                if (c2 == null)
+                {
+                    ErrorMessage("The selected class could not be found.");
+                    return;
+                }
+
+                c2.SetID(ClassID);
+
+                frmUpdateClass f = new frmUpdateClass(c2);
+                f.FormClosing += FillSchedule;
+                f.ShowDialog();
+            }
+            catch(Exception ex)
+            {
+                ErrorMessage(ex.Message);
+                return;
+            }
+
+            Reset(this.Controls);
+        }
+
+        private void btnRemoveClass_Click(object sender, EventArgs e)
+        {
+            DataGridViewCell c = dgvSchedule.CurrentCell;
+
+            string msg = CheckSelected(c, btnRemoveClass);
+
+            if (msg != "")
+            {
+                ErrorMessage(msg);
+                return;
+            }
+            int ClassID = Class.GetClassID(c.ColumnIndex, c.RowIndex + 9, cboRooms.Text.Substring(0, 1));
+            Class c2 = Class.GetClass(ClassID);
+
+            if (c2 == null)
+            {
+                ErrorMessage("The selected class could not be found.");
+                return;
+            }
+
+            frmRemoveClass f = new frmRemoveClass(c2);
+            f.FormClosing += FillSchedule;
+            f.ShowDialog();
+
+            Reset(this.Controls);
+
+        }
+    }
+}
+    
